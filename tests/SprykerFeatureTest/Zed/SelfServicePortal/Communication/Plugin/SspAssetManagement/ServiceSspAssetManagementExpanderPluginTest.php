@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerFeatureTest\Zed\SelfServicePortal\Communication\Plugin\Sales;
+namespace SprykerFeatureTest\Zed\SelfServicePortal\Communication\Plugin\SspAssetManagement;
 
 use ArrayObject;
 use Codeception\Test\Unit;

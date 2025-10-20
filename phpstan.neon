@@ -7,4 +7,4 @@ parameters:
         - '#Parameter.+sspModelCollectionResponseTransfer of method#'
         - identifier: missingType.generics
     excludePaths:
-        - '%rootDir%/../../../vendor/spryker/spryker/Features/SelfServicePortal/src/SprykerFeature/Client/SelfServicePortal/Search/Query/SspAssetSearchQuery.php'
+        - '%rootDir%/../../../src/SprykerFeature/SelfServicePortal/src/SprykerFeature/Client/SelfServicePortal/Search/Query/SspAssetSearchQuery.php'

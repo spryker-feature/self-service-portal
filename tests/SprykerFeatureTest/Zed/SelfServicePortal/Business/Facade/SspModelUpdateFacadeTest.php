@@ -7,7 +7,7 @@
 
 declare(strict_types = 1);
 
-namespace SprykerFeatureTest\Zed\SelfServicePortal\Business;
+namespace SprykerFeatureTest\Zed\SelfServicePortal\Business\Facade;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ModelSspAssetAttachmentTransfer;
