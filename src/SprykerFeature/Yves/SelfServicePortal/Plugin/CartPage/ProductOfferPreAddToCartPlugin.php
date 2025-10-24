@@ -16,8 +16,6 @@ use SprykerShop\Yves\CartPageExtension\Dependency\Plugin\PreAddToCartPluginInter
  */
 class ProductOfferPreAddToCartPlugin extends AbstractPlugin implements PreAddToCartPluginInterface
 {
-    protected const PARAM_PRODUCT_OFFER_REFERENCE = 'product_offer_reference';
-
     /**
      * {@inheritDoc}
      * - Sets product offer reference to item transfer.
@@ -31,22 +29,8 @@ class ProductOfferPreAddToCartPlugin extends AbstractPlugin implements PreAddToC
      */
     public function preAddToCart(ItemTransfer $itemTransfer, array $params): ItemTransfer
     {
-         if (!isset($params[static::PARAM_PRODUCT_OFFER_REFERENCE])) {
-            return $itemTransfer;
-        }
-
-        $productOfferReference = $params[static::PARAM_PRODUCT_OFFER_REFERENCE] ?: null;
-
-        if (!$productOfferReference) {
-            return $itemTransfer;
-        }
-
-        $productOfferStorageTransfer = $this->getFactory()->getProductOfferStorageClient()->findProductOfferStorageByReference($productOfferReference);
-
-        if (!$productOfferStorageTransfer) {
-            return $itemTransfer;
-        }
-
-        return $itemTransfer->setProductOfferReference($productOfferReference);
+        return $this->getFactory()
+            ->createProductOfferExpander()
+            ->expandItemTransferWithProductOfferReference($itemTransfer, $params);
     }
 }
