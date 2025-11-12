@@ -32,66 +32,68 @@
 {% set ajaxTriggerAttribute = "data-#{config.name}-ajax-trigger" %}
 
 {% block servicePointSelector %}
-    {% set dynamicParams = {
-        'service-type-key': {
-            selector: ".#{config.name}__radio input:checked",
-            attribute: 'data-service-type-key',
-        },
-        'shipment-type-uuid': {
-            selector: ".#{config.name}__radio input:checked",
-            attribute: 'value',
-        },
-        'service-type-uuid': {
-            selector: ".#{config.name}__radio input:checked",
-            attribute: 'data-service-type-uuid',
-        },
-        sku: {
-            selector: ".#{config.name}",
-            attribute: 'data-service-point-product-sku',
-        },
-        quantity: {
-            selector: 'packaging-unit-quantity-selector select[name="quantity"]',
-            attribute: 'value',
-        },
-    } %}
-
-    {% block ajax %}
-        {% include molecule('ajax-provider') with {
-            class: ajaxProviderClass,
-            attributes: {
-                'fetch-on-load': true,
-                url: url('customer/ssp-service-point-widget-content'),
-                'dynamic-params': dynamicParams | json_encode,
+    {% if is_granted('ROLE_USER') %}
+        {% set dynamicParams = {
+            'service-type-key': {
+                selector: ".#{config.name}__radio input:checked",
+                attribute: 'data-service-type-key',
             },
-        } only %}
-
-        {% include molecule('ajax-loader') with {
-            attributes: {
-                'provider-class-name': ajaxProviderClass,
+            'shipment-type-uuid': {
+                selector: ".#{config.name}__radio input:checked",
+                attribute: 'value',
             },
-        } only %}
-
-        {% include molecule('ajax-renderer') with {
-            attributes: {
-                'provider-class-name': ajaxProviderClass,
-                'target-class-name': ajaxContainerClass,
-                'mount-after-render': true,
+            'service-type-uuid': {
+                selector: ".#{config.name}__radio input:checked",
+                attribute: 'data-service-type-uuid',
             },
-        } only %}
-
-        {% include molecule('ajax-form-submitter') with {
-            attributes: {
-                'provider-class-name': ajaxProviderClass,
-                'trigger-attribute': ajaxTriggerAttribute,
-                event: 'change',
-                'is-provider-trigger': 'true',
+            sku: {
+                selector: ".#{config.name}",
+                attribute: 'data-service-point-product-sku',
             },
-        } only %}
-    {% endblock %}
+            quantity: {
+                selector: 'packaging-unit-quantity-selector select[name="quantity"]',
+                attribute: 'value',
+            },
+        } %}
 
-    {% block render %}
-        <div class="{{ ajaxContainerClass }} spacing-bottom"></div>
-    {% endblock %}
+        {% block ajax %}
+            {% include molecule('ajax-provider') with {
+                class: ajaxProviderClass,
+                attributes: {
+                    'fetch-on-load': true,
+                    url: url('customer/ssp-service-point-widget-content'),
+                    'dynamic-params': dynamicParams | json_encode,
+                },
+            } only %}
+
+            {% include molecule('ajax-loader') with {
+                attributes: {
+                    'provider-class-name': ajaxProviderClass,
+                },
+            } only %}
+
+            {% include molecule('ajax-renderer') with {
+                attributes: {
+                    'provider-class-name': ajaxProviderClass,
+                    'target-class-name': ajaxContainerClass,
+                    'mount-after-render': true,
+                },
+            } only %}
+
+            {% include molecule('ajax-form-submitter') with {
+                attributes: {
+                    'provider-class-name': ajaxProviderClass,
+                    'trigger-attribute': ajaxTriggerAttribute,
+                    event: 'change',
+                    'is-provider-trigger': 'true',
+                },
+            } only %}
+        {% endblock %}
+
+        {% block render %}
+            <div class="{{ ajaxContainerClass }} spacing-bottom"></div>
+        {% endblock %}
+    {% endif %}
 {% endblock %}
 
 {% block datepicker %}
