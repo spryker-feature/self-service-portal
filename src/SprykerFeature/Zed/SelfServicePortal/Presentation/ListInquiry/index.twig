@@ -13,12 +13,12 @@
         {% block widget_content %}
             {{ form_start(sspInquiryFilterForm, { 'attr' : { 'class': 'form-filter' }}) }}
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         {{ form_row(sspInquiryFilterForm.type, {
                             attr: { class: 'js-form-submitter' }
                         }) }}
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         {{ form_row(sspInquiryFilterForm.status, {
                             attr: { class: 'js-form-submitter' }
                         }) }}

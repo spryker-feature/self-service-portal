@@ -1,6 +1,6 @@
 {{ form_start(sspModelForm, {'attr': {'enctype': 'multipart/form-data'}}) }}
     <div class="row">
-        <div class="col-xs-12 col-md-4">
+        <div class="col-sm-12 col-md-4">
             {% set sspModelImage = sspModelForm.children.model_image %}
             {% set fileInput = sspModelImage.children.file.vars %}
             {% set deleteInput = sspModelImage.children.delete.vars %}
@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-md-8">
+        <div class="col-sm-12 col-md-8">
             {{ form_widget(sspModelForm, {'exclude_children': ['externalImageUrl']}) }}
 
             <div class="form-group">

@@ -59,33 +59,14 @@ export class InternalGuardTabsState {
                     this.processTab();
                 }
             });
-
-            if (window.spryker?.isBootstrapVersionLatest) {
-                tab.addEventListener('shown.bs.tab', (event) => {
-                    this.fillInput(event.target);
-                });
-            }
         });
-
-        if (!window.spryker?.isBootstrapVersionLatest) {
-            $(this.tabUrls).on('shown.bs.tab', (e) => {
-                this.fillInput(e.target);
-            });
-        }
 
         this.fillInput();
     }
 
     showGuard() {
         const id = '#tabs-guard-popup';
-
-        if (window.spryker?.isBootstrapVersionLatest) {
-            const bootstrap = window.spryker.bootstrap;
-            const modal = bootstrap.Modal(document.getElementById(id));
-            modal.show();
-        } else {
-            $(id).modal('show');
-        }
+        $(id).modal('show');
     }
 
     setAcceptGuardTab() {
@@ -103,19 +84,6 @@ export class InternalGuardTabsState {
         instance.activateTab($(this.currentTab), this.currentTab.getAttribute('href'));
         this.currentTab = null;
         this.dirtyElements = [];
-    }
-
-    getChangedTables() {
-        const activeTab = Array.from(this.tabUrls)
-            .find((tab) => tab.closest('.active'))
-            .getAttribute('href');
-
-        return Array.from(document.querySelectorAll(`${activeTab} .js-selectable-table-skeleton[id]`)).reduce(
-            (acc, skeleton) => {
-                return $(skeleton).DataTable().data().any() ? [...acc, skeleton.id] : acc;
-            },
-            [],
-        );
     }
 
     fillInput(tab) {

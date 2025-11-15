@@ -14,17 +14,17 @@
         {% block widget_content %}
             {{ form_start(fileTableFilterForm, { 'attr' : { 'class': 'form-filter' }}) }}
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         {{ form_row(fileTableFilterForm.extension, {
                             attr: { class: 'js-form-submitter' }
                         }) }}
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         {{ form_row(fileTableFilterForm.dateFrom, {
                             attr: { class: 'js-form-submitter' }
                         }) }}
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         {{ form_row(fileTableFilterForm.dateTo, {
                             attr: { class: 'js-form-submitter' }
                         }) }}

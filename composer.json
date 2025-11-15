@@ -4,7 +4,7 @@
     "description": "SelfServicePortal module",
     "license": "proprietary",
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.3",
         "spryker-shop/cart-page-extension": "^1.0.0",
         "spryker-shop/customer-page": "^2.60.0",
         "spryker-shop/customer-page-extension": "^1.6.0",
@@ -28,7 +28,7 @@
         "spryker/glue-application": "^1.47.0",
         "spryker/glue-application-extension": "^1.0.0",
         "spryker/glue-json-api-convention-extension": "^1.0.0",
-        "spryker/gui": "^3.67.0",
+        "spryker/gui": "^4.0.0",
         "spryker/kernel": "^3.30.0",
         "spryker/locale": "^4.0.0",
         "spryker/log": "^3.16.0",

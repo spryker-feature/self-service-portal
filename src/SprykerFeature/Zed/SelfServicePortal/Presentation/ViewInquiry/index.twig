@@ -18,7 +18,7 @@
     {% embed '@Gui/Partials/widget.twig' with { widget_title: 'general' | trans } %}
         {% block widget_content %}
             <div class="row">
-                <div class="col-xs-6 col-md-3 col-lg-3">
+                <div class="col-sm-6 col-md-3 col-lg-3">
                     <dl>
                         <dt>{{ 'Inquiry reference' | trans }}</dt>
                         <dd>{{ sspInquiry.reference }}</dd>
@@ -32,7 +32,7 @@
                         <dd><span data-qa="ssp-inquiry-status" class="label {{ sspInquiryStatusClassMap[sspInquiry.status] | default('') }}">{{ sspInquiry.status | trans }}</span></dd>
                     </dl>
                 </div>
-                <div class="col-xs-6 col-md-9 col-lg-9">
+                <div class="col-sm-6 col-md-9 col-lg-9">
                     <dl>
                         <dt>{{ 'Customer' | trans }}</dt>
                         <dd>{{ sspInquiry.companyUser.customer.salutation }} {{ sspInquiry.companyUser.customer.firstName }} {{ sspInquiry.companyUser.customer.lastName }}</dd>
@@ -53,7 +53,7 @@
     {% embed '@Gui/Partials/widget.twig' with { widget_title: 'Inquiry Details' | trans } %}
         {% block widget_content %}
             <div class="row">
-                <div class="col-xs-12 col-md-3 col-lg-3">
+                <div class="col-sm-12 col-md-3 col-lg-3">
                     <dl>
                         <dt>{{ 'Type' | trans }}</dt>
                         <dd>{{ sspInquiry.type | trans }}</dd>
@@ -70,7 +70,7 @@
                         </dl>
                     {% endif %}
                 </div>
-                <div class="col-xs-12 col-md-6 col-lg-6">
+                <div class="col-sm-12 col-md-6 col-lg-6">
                     <dl>
                         <dt>{{ 'Description' | trans }}</dt>
                         <dd>{{ sspInquiry.description }}</dd>
@@ -83,7 +83,7 @@
     {% embed '@Gui/Partials/widget.twig' with { widget_title: 'Files' | trans } %}
         {% block widget_content %}
             <div class="row">
-                <div class="col-xs-12 col-md-12 col-lg-12">
+                <div class="col-sm-12 col-md-12 col-lg-12">
                     <table class="table table--expand">
                         <thead>
                             <tr>

@@ -23,8 +23,8 @@
         {{ form_widget(deleteFileForm) }}
 
         <button
-            data-toggle="modal"
-            data-target="#{{ deleteConfirmModel }}"
+            data-bs-toggle="modal"
+            data-bs-target="#{{ deleteConfirmModel }}"
             type="button"
             class="btn btn-sm btn-outline btn-remove"
         >
@@ -41,23 +41,23 @@
     {% embed '@Gui/Partials/widget.twig' with { widget_title: 'Details' | trans } %}
         {% block widget_content %}
             <div class="row form-group">
-                <div class="col-xs-2"><b>{{ 'File' | trans }}</b></div>
-                <div class="col-xs-10" data-qa="file-name">{{ file.fileName }}</div>
+                <div class="col-sm-2"><b>{{ 'File' | trans }}</b></div>
+                <div class="col-sm-10" data-qa="file-name">{{ file.fileName }}</div>
             </div>
 
             <div class="row form-group">
-                <div class="col-xs-2"><b>{{ 'Upload date' | trans }}</b></div>
-                <div class="col-xs-10" data-qa="uploaded-date">{{ file.fileInfo[0].createdAt | formatDateTime }}</div>
+                <div class="col-sm-2"><b>{{ 'Upload date' | trans }}</b></div>
+                <div class="col-sm-10" data-qa="uploaded-date">{{ file.fileInfo[0].createdAt | formatDateTime }}</div>
             </div>
 
             <div class="row form-group">
-                <div class="col-xs-2"><b>{{ 'Size' | trans }}</b></div>
-                <div class="col-xs-10" data-qa="file-size">{{ file.fileInfo[0].size | formatFileSize }}</div>
+                <div class="col-sm-2"><b>{{ 'Size' | trans }}</b></div>
+                <div class="col-sm-10" data-qa="file-size">{{ file.fileInfo[0].size | formatFileSize }}</div>
             </div>
 
             <div class="row form-group">
-                <div class="col-xs-2"><b>{{ 'Type' | trans }}</b></div>
-                <div class="col-xs-10" data-qa="file-type">{{ file.fileInfo[0].type }}</div>
+                <div class="col-sm-2"><b>{{ 'Type' | trans }}</b></div>
+                <div class="col-sm-10" data-qa="file-type">{{ file.fileInfo[0].type }}</div>
             </div>
         {% endblock %}
     {% endembed %}
@@ -79,17 +79,17 @@
         {% block widget_content %}
             {{ form_start(viewFileDetailTableFilterForm, { 'attr' : { 'class': 'form-filter' }}) }}
                 <div class="row" data-qa="linked-entities">
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         {{ form_row(viewFileDetailTableFilterForm.entityType, {
                             attr: { class: 'js-form-submitter' }
                         }) }}
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         {{ form_row(viewFileDetailTableFilterForm.dateFrom, {
                             attr: { class: 'js-form-submitter' }
                         }) }}
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         {{ form_row(viewFileDetailTableFilterForm.dateTo, {
                             attr: { class: 'js-form-submitter' }
                         }) }}

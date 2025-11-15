@@ -57,6 +57,22 @@
         <controller>list-file</controller>
         <action>index</action>
         <pages>
+            <self-service-portal-company-view-file>
+                <label>View File</label>
+                <title>View File</title>
+                <bundle>self-service-portal</bundle>
+                <controller>view-file</controller>
+                <action>index</action>
+                <visible>0</visible>
+            </self-service-portal-company-view-file>
+            <self-service-portal-company-add-file>
+                <label>Upload Files</label>
+                <title>Upload Files</title>
+                <bundle>self-service-portal</bundle>
+                <controller>add-file</controller>
+                <action>index</action>
+                <visible>0</visible>
+            </self-service-portal-company-add-file>
             <self-service-portal-company-file-attach>
                 <label>Attach File</label>
                 <title>Attach File</title>

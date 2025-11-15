@@ -1,39 +1,39 @@
 {% block content %}
     {% set fields = [
         {
-            class: 'col-xs-6',
+            class: 'col-sm-6',
             field: createOfferForm.isActive,
         },
         {
-            class: 'col-xs-6',
+            class: 'col-sm-6',
             field: createOfferForm.stores,
         },
         {
-            class: 'col-xs-6',
+            class: 'col-sm-6',
             field: createOfferForm.stockQuantity,
         },
         {
-            class: 'col-xs-6 spacing-top-big',
+            class: 'col-sm-6 spacing-top-big',
             field: createOfferForm.isNeverOutOfStock,
         },
         {
-            class: 'col-xs-12',
+            class: 'col-sm-12',
             field: createOfferForm.servicePoint,
         },
         {
-            class: 'col-xs-12',
+            class: 'col-sm-12',
             field: createOfferForm.servicePointServices,
         },
         {
-            class: 'col-xs-12',
+            class: 'col-sm-12',
             field: createOfferForm.shipmentTypes,
         },
         {
-            class: 'col-xs-6',
+            class: 'col-sm-6',
             field: createOfferForm.validFrom,
         },
         {
-            class: 'col-xs-6',
+            class: 'col-sm-6',
             field: createOfferForm.validTo,
         },
     ] %}
@@ -48,7 +48,7 @@
                         </div>
                     {% endfor %}
 
-                    <div class="col-xs-12">
+                    <div class="col-sm-12">
                         <div class="form-group">
                             <button class="btn btn-primary safe-submit">{{ 'Save'| trans }}</button>
                         </div>

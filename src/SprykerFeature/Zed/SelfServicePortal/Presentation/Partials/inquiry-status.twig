@@ -8,7 +8,7 @@
 
     {% block widget_content %}
         <div class="row">
-            <div class="col-xs-8">
+            <div class="col-sm-8">
                 {{ form(triggerEventForm, {
                     action: url('/self-service-portal/trigger-inquiry-state-machine', {'id-ssp-inquiry': sspInquiry.idSspInquiry}),
                     attr: {'class': 'horizontal-form'}
@@ -16,14 +16,14 @@
             </div>
 
             {% if sspInquiry.statusHistory | length %}
-                <div class="col-xs-4 clearfix">
-                    <a id="history-btn-{{ sspInquiry.idSspInquiry }}" class="pull-right btn btn-xs btn-outline more-history is-hidden" data-id="{{ sspInquiry.idSspInquiry }}" data-qa="show-ssp-inquiry-status-history">
+                <div class="col-sm-4 clearfix">
+                    <a id="history-btn-{{ sspInquiry.idSspInquiry }}" class="float-end btn btn-xs btn-outline more-history is-hidden" data-id="{{ sspInquiry.idSspInquiry }}" data-qa="show-ssp-inquiry-status-history">
                         <span class="show-more">{{ 'Show history' | trans }}</span>
                         <span class="show-less">{{ 'Hide history' | trans }}</span>
                     </a>
                 </div>
 
-                <div class="col-xs-12 hidden spacing-bottom" id="history_details_{{ sspInquiry.idSspInquiry }}">
+                <div class="col-sm-12 hidden spacing-bottom" id="history_details_{{ sspInquiry.idSspInquiry }}">
                     <table class="table table--expand dataTable" data-qa="history-details-table">
                         <thead>
                             <tr>
