@@ -281,10 +281,12 @@ class SalesDataHelper extends SprykerSalesDataHelper
 
         $paymentProviderEntity = $paymentMethodEntity->getSpyPaymentProvider();
         $salesPaymentMethodTypeEntity = $this->getSalesPaymentMethodTypeQuery()
-            ->findOneByPaymentProvider($paymentProviderEntity->getPaymentProviderKey());
+            ->filterByPaymentProvider($paymentProviderEntity->getPaymentProviderKey())
+            ->filterByPaymentMethod($paymentMethodEntity->getPaymentMethodKey())
+            ->findOneOrCreate();
 
-        if (!$salesPaymentMethodTypeEntity) {
-            return;
+        if ($salesPaymentMethodTypeEntity->isNew()) {
+            $salesPaymentMethodTypeEntity->save();
         }
 
         (new SpySalesPayment())
