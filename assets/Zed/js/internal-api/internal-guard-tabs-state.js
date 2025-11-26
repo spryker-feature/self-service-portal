@@ -22,7 +22,7 @@ export class InternalGuardTabsState {
 
         this.input = document.querySelector(tabs.getAttribute('data-input-selector'));
         this.tabUrls = document.querySelectorAll(
-            `${this.selector} .nav-tabs:not(.tab-content .nav-tabs) a[data-toggle="tab"]`,
+            `${this.selector} .nav-tabs:not(.tab-content .nav-tabs) li[data-bs-toggle="tab"]`,
         );
 
         this.setTabs();
@@ -59,6 +59,10 @@ export class InternalGuardTabsState {
                     this.processTab();
                 }
             });
+
+            tab.addEventListener('shown.bs.tab', (event) => {
+                this.fillInput(event.target);
+            });
         });
 
         this.fillInput();
@@ -66,7 +70,10 @@ export class InternalGuardTabsState {
 
     showGuard() {
         const id = '#tabs-guard-popup';
-        $(id).modal('show');
+
+        const bootstrap = window.spryker.bootstrap;
+        const modal = bootstrap.Modal(document.getElementById(id));
+        modal.show();
     }
 
     setAcceptGuardTab() {
@@ -81,7 +88,8 @@ export class InternalGuardTabsState {
 
     processTab() {
         const instance = this.currentTab.closest('.tabs-container').tabsInstance;
-        instance.activateTab($(this.currentTab), this.currentTab.getAttribute('href'));
+        const anchorElement = this.currentTab.querySelector('a');
+        instance.activateTab($(anchorElement), this.currentTab.getAttribute('data-bs-target'));
         this.currentTab = null;
         this.dirtyElements = [];
     }
@@ -91,7 +99,7 @@ export class InternalGuardTabsState {
 
         tab ??= Array.from(this.tabUrls).find((tab) => tab.closest('.active'));
 
-        const currentValue = tab.getAttribute('href')?.replace('#tab-content-', '');
+        const currentValue = tab.getAttribute('data-bs-target')?.replace('#tab-content-', '');
         this.input.value = currentValue;
     }
 }
