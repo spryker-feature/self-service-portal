@@ -34,7 +34,7 @@ class ProductClassProductConcreteAfterUpdatePlugin extends AbstractPlugin implem
     public function update(ProductConcreteTransfer $productConcreteTransfer): ProductConcreteTransfer
     {
         return $this->getBusinessFactory()
-            ->createProductClassSaver()
-            ->saveProductClassesForProductConcrete($productConcreteTransfer);
+            ->createProductClassUpdater()
+            ->updateProductClassesForProductConcrete($productConcreteTransfer);
     }
 }

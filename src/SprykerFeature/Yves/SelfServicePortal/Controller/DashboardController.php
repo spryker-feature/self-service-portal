@@ -9,9 +9,12 @@ namespace SprykerFeature\Yves\SelfServicePortal\Controller;
 
 use Generated\Shared\Transfer\DashboardRequestTransfer;
 use Generated\Shared\Transfer\PaginationTransfer;
+use Generated\Shared\Transfer\SspAssetConditionsTransfer;
+use Generated\Shared\Transfer\SspAssetCriteriaTransfer;
 use Spryker\Yves\Kernel\PermissionAwareTrait;
 use Spryker\Yves\Kernel\View\View;
 use SprykerFeature\Yves\SelfServicePortal\Plugin\Permission\ViewDashboardPermissionPlugin;
+use SprykerFeature\Yves\SelfServicePortal\SelfServicePortalConfig;
 use SprykerShop\Yves\ShopApplication\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -68,6 +71,11 @@ class DashboardController extends AbstractController
                     ->setMaxPerPage($this->getFactory()->getConfig()->getDefaultFileDashboardMaxPerPage())
                     ->setPage(static::DEFAULT_FILE_DASHBOARD_PAGE_NUMBER),
             )
+            ->setSspAssetCriteria(
+                (new SspAssetCriteriaTransfer())->setSspAssetConditions((new SspAssetConditionsTransfer())->setStatuses(
+                    $this->getStatusesByAllowedAction(SelfServicePortalConfig::ASSET_ACTION_VIEW),
+                )),
+            )
             ->setWithSspAssetCount(10)
             ->setWithServicesCount(10);
 
@@ -78,5 +86,23 @@ class DashboardController extends AbstractController
             'dashboard' => $dashboardResponseTransfer,
             'customer' => $customerTransfer,
         ];
+    }
+
+    /**
+     * @param string $allowedAction
+     *
+     * @return array<string>
+     */
+    protected function getStatusesByAllowedAction(string $allowedAction): array
+    {
+        $statuses = [];
+
+        foreach ($this->getFactory()->getConfig()->getSspStatusAllowedActionsMapping() as $status => $allowedActions) {
+            if (in_array($allowedAction, $allowedActions)) {
+                $statuses[] = $status;
+            }
+        }
+
+        return $statuses;
     }
 }

@@ -197,6 +197,8 @@ use SprykerFeature\Zed\SelfServicePortal\Business\Service\Saver\ProductShipmentT
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Saver\ProductShipmentTypeSaverInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Updater\OrderItemScheduleUpdater;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Updater\OrderItemScheduleUpdaterInterface;
+use SprykerFeature\Zed\SelfServicePortal\Business\Service\Updater\ProductClassUpdater;
+use SprykerFeature\Zed\SelfServicePortal\Business\Service\Updater\ProductClassUpdaterInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Utility\SkuExtractor;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Utility\SkuExtractorInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\ServicePointSearch\ServicePointSearchCoordinatesExpander;
@@ -1065,6 +1067,14 @@ class SelfServicePortalBusinessFactory extends AbstractBusinessFactory
             $this->getRepository(),
             $this->getProductPageSearchFacade(),
             $this->getProductStorageFacade(),
+        );
+    }
+
+    public function createProductClassUpdater(): ProductClassUpdaterInterface
+    {
+        return new ProductClassUpdater(
+            $this->getEntityManager(),
+            $this->createProductClassSaver(),
         );
     }
 

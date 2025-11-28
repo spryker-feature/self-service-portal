@@ -51,6 +51,8 @@ class SspModelWritePublisherPlugin extends AbstractPlugin implements PublisherPl
             SelfServicePortalConfig::ENTITY_SPY_SSP_MODEL_CREATE,
             SelfServicePortalConfig::ENTITY_SPY_SSP_MODEL_UPDATE,
             SelfServicePortalConfig::SSP_MODEL_PUBLISH,
+            SelfServicePortalConfig::ENTITY_SPY_SSP_MODEL_TO_PRODUCT_LIST_CREATE,
+            SelfServicePortalConfig::ENTITY_SPY_SSP_MODEL_TO_PRODUCT_LIST_DELETE,
         ];
     }
 }

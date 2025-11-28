@@ -7,6 +7,10 @@
         gap: 1.25rem;
         cursor: auto;
 
+        &:not(:last-child) {
+            border-bottom: 1px solid $setting-color-light;
+        }
+
         &:hover {
             background: none;
         }
@@ -19,18 +23,23 @@
 
         &__content {
             flex-grow: 1;
+            min-width: 1px;
         }
 
         &__name {
             display: block;
             word-wrap: break-word;
+            margin-bottom: 0.25rem;
         }
 
-        &__data {
-            display: flex;
-            gap: 1.25rem;
-            align-items: center;
-            flex-wrap: wrap;
+        &__serial {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: inline-block;
+            vertical-align: top;
+            max-width: 100%;
+            margin-bottom: 0.25rem;
         }
 
         &__scroll {

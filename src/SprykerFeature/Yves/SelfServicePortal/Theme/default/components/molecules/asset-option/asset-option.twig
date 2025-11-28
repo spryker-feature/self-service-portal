@@ -26,13 +26,15 @@
             {% block information %}
                 <span class="{{ config.name }}__content">
                     {% block name %}
-                        <strong class="{{ config.name }}__name">{{ data.asset.name }}</strong>
+                        <strong class="{{ config.name }}__name" title="{{ data.asset.name }}">{{ data.asset.name }}</strong>
                     {% endblock %}
 
                     {% block data %}
                         <span class="{{ config.name }}__data">
                             {% if data.asset.serial %}
-                                <span>{{ 'self_service_portal.asset.item.serial' | trans }}: {{ data.asset.serial }}</span>
+                                <span class="{{ config.name }}__serial">{{ 'self_service_portal.asset.item.serial' | trans }}:
+                                    <span title="{{ data.asset.serial }}">{{ data.asset.serial }}</span>
+                                </span>
                             {% endif %}
 
                             <span class="{{ config.name }}__status">{{ data.asset.compatibilityLabel | raw }}</span>

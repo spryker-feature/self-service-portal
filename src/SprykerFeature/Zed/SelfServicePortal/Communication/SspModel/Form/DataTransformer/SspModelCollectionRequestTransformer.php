@@ -36,7 +36,7 @@ class SspModelCollectionRequestTransformer implements DataTransformerInterface
     /**
      * @var string
      */
-    protected const FORM_FIELD_PRODUCT_LIST_IDS_TO_BE_UNATTACHED = 'productListIdsToBeUnttached';
+    protected const FORM_FIELD_PRODUCT_LIST_IDS_TO_BE_UNATTACHED = 'productListIdsToBeUnattached';
 
     public function __construct(protected SspModelTransfer $sspModelTransfer)
     {

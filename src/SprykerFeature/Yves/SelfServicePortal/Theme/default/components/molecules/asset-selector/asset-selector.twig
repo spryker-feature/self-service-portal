@@ -31,6 +31,12 @@
     'asset-link-base': false,
 } %}
 
+{% block component %}
+    {% if is_granted('ROLE_USER') %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
 {% block class %}{{ parent() }} {{ data.asset ? 'is-selected' }}{% endblock %}
 
 {% set popupTriggerClass = "js-#{config.name}__trigger-#{data.id}" %}

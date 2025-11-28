@@ -1,27 +1,48 @@
 {% extends '@Gui/Layout/layout.twig' %}
 
-{% set widget_title = 'Delete Model' | trans %}
-
-{% block head_title widget_title %}
-{% block section_title widget_title %}
+{% set title = 'Delete Model' | trans ~ ' "' ~ sspModel.name ~ '"' %}
+{% set hasRelations = sspModel.sspAssets.count > 0 or sspModel.productLists.count > 0 %}
+{% set widget_title = '"' ~ sspModel.name ~ '" ' ~ (hasRelations ? 'model cannot be deleted' | trans : '') %}
 
 {% block content %}
-
     {% embed '@Gui/Partials/widget.twig' %}
 
         {% block widget_content %}
+            {% if hasRelations %}
+                <div class="alert alert-warning">
+                    {{ 'This model is still used and cannot be deleted.' | trans }}
+                </div>
+                <p>It's currently assigned to:</p>
+                <div>
+                    {% if sspModel.sspAssets.count > 0 %}
+                        <div class="d-flex justify-content-between align-items-center bg-light rounded p-3 mb-2" style="max-width: 500px;">
+                            <span>{{ sspModel.sspAssets.count }} Assets</span>
+                            <a target="_blank" href="{{ url(attachModelRoute, {'id-ssp-model': sspModel.idSspModel}) }}#tab-content-asset" class="text-success fw-semibold">Detach</a>
+                        </div>
+                    {% endif %}
+                    {% if sspModel.productLists.count > 0 %}
+                        <div class="d-flex justify-content-between align-items-center bg-light rounded p-3 mb-2" style="max-width: 500px;">
+                            <span>{{ sspModel.productLists.count }} Product lists</span>
+                            <a target="_blank" href="{{ url(attachModelRoute, {'id-ssp-model': sspModel.idSspModel}) }}#tab-content-product-list" class="text-success fw-semibold">Detach</a>
+                        </div>
+                    {% endif %}
+                </div>
 
-            <div class="alert alert-info">
-                {{ 'Are you sure you want to delete this model?' | trans }}
-            </div>
+                <p>{{ 'To delete this model, detach these items and try again.' | trans }}</p>
 
-            {{ form_start(deleteForm, {'action': url(deleteModelRoute, {'id-ssp-model': sspModel.idSspModel})}) }}
-                {{ form_widget(deleteForm) }}
+                <a class="btn btn-outline-secondary" href="{{ backUrl }}">{{ 'OK' | trans }}</a>
+            {% else %}
+                <div class="alert alert-danger">
+                    {{ 'Are you sure you want to delete this model?' | trans }}
+                </div>
+                {{ form_start(deleteForm, {'action': url(deleteModelRoute, {'id-ssp-model': sspModel.idSspModel})}) }}
+                    {{ form_widget(deleteForm) }}
 
-                <input type="submit" class="btn btn-danger safe-submit" value="{{ 'Delete' | trans }}" />
-                <a class="btn btn-outline-secondary" href="{{ backUrl }}">{{ 'Cancel' | trans }}</a>
+                    <input type="submit" class="btn btn-danger safe-submit" value="{{ 'Delete' | trans }}" />
+                    <a class="btn btn-outline-secondary" href="{{ backUrl }}">{{ 'Cancel' | trans }}</a>
             {{ form_end(deleteForm) }}
 
+            {% endif %}
         {% endblock %}
 
     {% endembed %}

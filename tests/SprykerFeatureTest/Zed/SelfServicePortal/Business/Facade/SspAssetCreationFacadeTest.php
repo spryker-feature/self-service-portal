@@ -341,7 +341,13 @@ class SspAssetCreationFacadeTest extends Unit
         // Act
         $dashboardResponseTransfer = (new SspAssetDashboardDataExpanderPlugin())->provideDashboardData(
             (new DashboardResponseTransfer()),
-            (new DashboardRequestTransfer())->setCompanyUser($companyUserTransfer)->setWithSspAssetCount(10),
+            (new DashboardRequestTransfer())
+                ->setSspAssetCriteria(
+                    (new SspAssetCriteriaTransfer())->setSspAssetConditions((new SspAssetConditionsTransfer())->setStatuses(
+                        ['approved', 'pending'],
+                    )),
+                )
+                ->setCompanyUser($companyUserTransfer)->setWithSspAssetCount(10),
         );
 
         // Assert

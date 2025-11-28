@@ -62,12 +62,24 @@
     {% block content %}
         {% block search %}
             <div class="{{ config.name }}__search">
-                <input
-                    placeholder="{{ data.placeholder }}"
-                    class="input input--expand {{ config.jsName }}__search-field {{ config.jsName }}__search-field-{{ data.id }} {{ config.name }}__search-field"
-                    {% if data.isDisabled %}disabled{% endif %}
-                    {{ qa('asset-finder-input') }}
-                >
+                {% block searchIcon %}
+                    {% include atom('icon') with {
+                        modifiers: ['big'],
+                        class: config.name ~ '__search-icon',
+                        data: {
+                            name: 'search',
+                        },
+                    } only %}
+                {% endblock %}
+
+                {% block searchField %}
+                    <input
+                        placeholder="{{ data.placeholder }}"
+                        class="input input--expand {{ config.jsName }}__search-field {{ config.jsName }}__search-field-{{ data.id }} {{ config.name }}__search-field"
+                        {% if data.isDisabled %}disabled{% endif %}
+                        {{ qa('asset-finder-input') }}
+                    >
+                {% endblock %}
             </div>
         {% endblock %}
 

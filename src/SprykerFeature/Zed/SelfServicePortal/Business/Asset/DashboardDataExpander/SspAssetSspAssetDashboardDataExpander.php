@@ -50,7 +50,8 @@ class SspAssetSspAssetDashboardDataExpander implements SspAssetDashboardDataExpa
     ): DashboardResponseTransfer {
         $sspAssetCriteriaTransfer = (new SspAssetCriteriaTransfer())
             ->setSspAssetConditions(
-                (new SspAssetConditionsTransfer()),
+                (new SspAssetConditionsTransfer())
+                    ->setStatuses($dashboardRequestTransfer->getSspAssetCriteriaOrFail()->getSspAssetConditionsOrFail()->getStatuses()),
             )
             ->setInclude(
                 (new SspAssetIncludeTransfer())

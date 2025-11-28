@@ -21,29 +21,24 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class DeleteModelController extends AbstractController
 {
-    /**
-     * @var string
-     */
-    protected const MESSAGE_SUCCESS_SSP_MODEL_DELETE = 'Model successfully deleted';
+    protected const string MESSAGE_SUCCESS_SSP_MODEL_DELETE = 'Model successfully deleted';
 
-    /**
-     * @var string
-     */
-    protected const MESSAGE_ERROR_SSP_MODEL_DELETE = 'Model cannot be deleted';
+    protected const string MESSAGE_ERROR_SSP_MODEL_DELETE = 'Model cannot be deleted';
 
     /**
      * @uses \SprykerFeature\Zed\SelfServicePortal\Communication\Controller\ListModelController::indexAction()
-     *
-     * @var string
      */
-    protected const URL_REDIRECT_SSP_MODEL_PAGE = '/self-service-portal/list-model';
+    protected const string URL_REDIRECT_SSP_MODEL_PAGE = '/self-service-portal/list-model';
 
     /**
      * @uses \SprykerFeature\Zed\SelfServicePortal\Communication\Controller\DeleteModelController::deleteAction()
-     *
-     * @var string
      */
-    protected const ROUTE_DELETE_SSP_MODEL = '/self-service-portal/delete-model/delete';
+    protected const string ROUTE_DELETE_SSP_MODEL = '/self-service-portal/delete-model/delete';
+
+    /**
+     * @uses \SprykerFeature\Zed\SelfServicePortal\Communication\Controller\AttachModelController::indexAction()
+     */
+    protected const string ROUTE_ATTACH_MODEL = '/self-service-portal/attach-model';
 
     /**
      * @var string
@@ -62,7 +57,9 @@ class DeleteModelController extends AbstractController
         $sspModelCriteriaTransfer = (new SspModelCriteriaTransfer())
             ->setSspModelConditions(
                 (new SspModelConditionsTransfer())->setSspModelIds([$idSspModel]),
-            );
+            )
+            ->setWithSspAssets(true)
+            ->setWithProductLists(true);
 
         $sspModelCollectionTransfer = $this->getFacade()->getSspModelCollection($sspModelCriteriaTransfer);
 
@@ -82,6 +79,7 @@ class DeleteModelController extends AbstractController
             'deleteForm' => $deleteForm,
             'backUrl' => static::URL_REDIRECT_SSP_MODEL_PAGE,
             'deleteModelRoute' => static::ROUTE_DELETE_SSP_MODEL,
+            'attachModelRoute' => static::ROUTE_ATTACH_MODEL,
         ]);
     }
 
@@ -106,8 +104,7 @@ class DeleteModelController extends AbstractController
             ->setSspModelIds([$idSspModel])
             ->setIsTransactional(true);
 
-        $sspModelCollectionResponseTransfer = $this->getFacade()
-            ->deleteSspModelCollection($sspModelCollectionDeleteCriteriaTransfer);
+        $this->getFacade()->deleteSspModelCollection($sspModelCollectionDeleteCriteriaTransfer);
 
         $this->addSuccessMessage(static::MESSAGE_SUCCESS_SSP_MODEL_DELETE);
 

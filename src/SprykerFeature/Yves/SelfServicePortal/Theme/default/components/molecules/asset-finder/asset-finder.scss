@@ -18,7 +18,21 @@
         }
 
         &__search {
-            padding-bottom: 1.25rem;
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+
+        &__search-field {
+            padding-left: 2.5rem;
+        }
+
+        &__search-icon {
+            position: absolute;
+            left: 0.9rem;
+            top: 50%;
+            translate: 0 -50%;
+            width: 1.5rem;
+            height: 1.5rem;
         }
 
         @content;

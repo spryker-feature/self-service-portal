@@ -473,11 +473,16 @@ class SelfServicePortalEntityManager extends AbstractEntityManager implements Se
 
     public function deleteSspAssetToSspModelRelation(int $idSspAsset, int $idSspModel): void
     {
-        $this->getFactory()
+        $relations = $this->getFactory()
             ->createSspAssetToSspModelQuery()
             ->filterByFkSspAsset($idSspAsset)
             ->filterByFkSspModel($idSspModel)
-            ->delete();
+            ->find();
+
+        foreach ($relations as $relation) {
+            // to generate events
+            $relation->delete();
+        }
     }
 
     /**
@@ -554,11 +559,16 @@ class SelfServicePortalEntityManager extends AbstractEntityManager implements Se
 
     public function deleteSspModelToProductListAttachment(ModelProductListAttachmentTransfer $modelProductListAttachmentTransfer): void
     {
-        $this->getFactory()
+        $relations = $this->getFactory()
             ->createSspModelToProductListQuery()
             ->filterByFkSspModel($modelProductListAttachmentTransfer->getSspModelOrFail()->getIdSspModel())
             ->filterByFkProductList($modelProductListAttachmentTransfer->getProductListOrFail()->getIdProductList())
-            ->delete();
+            ->find();
+
+        foreach ($relations as $relation) {
+            // to generate events
+            $relation->delete();
+        }
     }
 
     /**
@@ -582,10 +592,15 @@ class SelfServicePortalEntityManager extends AbstractEntityManager implements Se
         }
 
         if ($sspModelIds) {
-            $this->getFactory()
+            $sspModelEntities = $this->getFactory()
                 ->createSspModelQuery()
                 ->filterByIdSspModel_In($sspModelIds)
-                ->delete();
+                ->find();
+
+            foreach ($sspModelEntities as $sspModelEntity) {
+                // to generate events
+                $sspModelEntity->delete();
+            }
         }
     }
 }

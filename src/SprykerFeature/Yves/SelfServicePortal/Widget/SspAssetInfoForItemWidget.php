@@ -28,12 +28,12 @@ class SspAssetInfoForItemWidget extends AbstractWidget
     /**
      * @var string
      */
-    protected const PARAMETER_ID_PRODUCT = 'idProduct';
+    protected const PARAMETER_SKU_PRODUCT = 'skuProduct';
 
     public function __construct(ItemTransfer $itemTransfer)
     {
         $this->addAssetParameter($itemTransfer);
-        $this->addIdProductParameter($itemTransfer);
+        $this->addSkuProductParameter($itemTransfer);
         $this->addIsCompatibilityVisibleParameter($itemTransfer);
     }
 
@@ -52,9 +52,9 @@ class SspAssetInfoForItemWidget extends AbstractWidget
         $this->addParameter(static::PARAMETER_ASSET, $itemTransfer->getSspAsset());
     }
 
-    protected function addIdProductParameter(ItemTransfer $itemTransfer): void
+    protected function addSkuProductParameter(ItemTransfer $itemTransfer): void
     {
-        $this->addParameter(static::PARAMETER_ID_PRODUCT, $itemTransfer->getId());
+        $this->addParameter(static::PARAMETER_SKU_PRODUCT, $itemTransfer->getSku());
     }
 
     protected function addIsCompatibilityVisibleParameter(ItemTransfer $itemTransfer): void
