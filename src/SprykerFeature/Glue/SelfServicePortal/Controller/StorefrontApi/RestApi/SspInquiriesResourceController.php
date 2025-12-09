@@ -68,6 +68,7 @@ class SspInquiriesResourceController extends AbstractController
      *         }],
      *         "responses": {
      *             "409": "Inquiry integrity error.",
+     *             "400": "Bad request.",
      *             "422": "Unprocessable inquiry.",
      *             "500": "Unexpected error."
      *         }

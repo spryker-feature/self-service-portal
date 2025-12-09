@@ -255,3 +255,4 @@ STATUS,STATUS
 "Manage Product List Relations","Manage Product List Relations"
 "Model attachments have been created successfully.","Model attachments have been created successfully."
 "Create model for the Asset","Create model for the Asset"
+"Service date must be in the future","Service date must be in the future"

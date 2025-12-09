@@ -25,10 +25,10 @@ interface SspAssetsResponseBuilderInterface
         GlueRequestTransfer $glueRequestTransfer
     ): GlueResponseTransfer;
 
-    public function createAssetNotFoundErrorResponse(string $localeName): GlueResponseTransfer;
+    public function createAssetNotFoundErrorResponse(?string $localeName): GlueResponseTransfer;
 
     public function createErrorResponseFromAssetCollectionResponse(
         SspAssetCollectionResponseTransfer $sspAssetCollectionResponseTransfer,
-        string $localeName
+        ?string $localeName
     ): GlueResponseTransfer;
 }

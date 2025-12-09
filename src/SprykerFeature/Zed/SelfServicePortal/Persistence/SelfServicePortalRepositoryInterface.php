@@ -53,13 +53,6 @@ interface SelfServicePortalRepositoryInterface
     ): SspInquiryCollectionTransfer;
 
     /**
-     * @param array<int> $salesOrderItemIds
-     *
-     * @return array<\Generated\Shared\Transfer\ItemTransfer>
-     */
-    public function getSalesOrderItemsByIds(array $salesOrderItemIds): array;
-
-    /**
      * @param array<int> $stateIds
      *
      * @return array<\Generated\Shared\Transfer\StateMachineItemTransfer>

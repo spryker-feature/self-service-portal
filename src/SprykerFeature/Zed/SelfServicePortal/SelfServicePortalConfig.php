@@ -1250,4 +1250,17 @@ class SelfServicePortalConfig extends AbstractBundleConfig
     {
         return 1024 * 1024;
     }
+
+    /**
+     * Specification:
+     * - Returns the list of service schedule non-changeable states.
+     *
+     * @api
+     *
+     * @return array<string>
+     */
+    public function getServiceNotReschedulableStates(): array
+    {
+        return $this->getSharedConfig()->getServiceNotReschedulableStates();
+    }
 }

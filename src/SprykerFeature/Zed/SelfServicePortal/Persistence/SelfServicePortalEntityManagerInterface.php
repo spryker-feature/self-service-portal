@@ -45,6 +45,13 @@ interface SelfServicePortalEntityManagerInterface
         FileAttachmentTransfer $fileAttachmentTransfer
     ): void;
 
+    /**
+     * @param array<int> $idsFile
+     *
+     * @return void
+     */
+    public function deleteAllFileAttachmentCollection(array $idsFile): void;
+
     public function saveFileAttachment(FileAttachmentTransfer $fileAttachmentTransfer): FileAttachmentTransfer;
 
     public function createSspInquiry(SspInquiryTransfer $sspInquiryTransfer): SspInquiryTransfer;

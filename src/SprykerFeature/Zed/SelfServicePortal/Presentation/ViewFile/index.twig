@@ -66,7 +66,7 @@
         {% block widget_header_content %}
             {{ form_start(unlinkFileForm, {
                 attr: { class: 'd-inline' },
-                action: url(urlPathUnlinkFile, {'id-file': file.idFile})
+                action: urlPathUnlinkFile ~ '?id-file=' ~ file.idFile ~ '&delete-all-attachments=1'
             }) }}
                 {{ form_widget(unlinkFileForm) }}
                 <button type="submit" class="btn btn-sm btn-outline safe-submit btn-remove">

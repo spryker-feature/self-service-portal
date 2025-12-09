@@ -14,7 +14,7 @@
     formFieldServicePointUuid: null,
     formFieldProductOfferReference: null,
     formFieldItemMetadataScheduledAt: null,
-            hasOnlyDeliveryLikeShipmentType: false,
+    hasOnlyDeliveryLikeShipmentType: false,
     isConcreteProduct: false,
     product: null,
 } %}
@@ -100,7 +100,7 @@
     {% if data.isServiceDateTimeFieldVisible %}
         <div class="spacing-bottom--big">
             <label class="label">{{'self_service_portal.service.product.service_date_time' | trans }}</label>
-            <input type="datetime-local" class="input input--expand"  name="{{ data.formFieldItemMetadataScheduledAt }}">
+            <input type="datetime-local" class="input input--expand" min="{{ 'now' | date('Y-m-d\\TH:i') }}" name="{{ data.formFieldItemMetadataScheduledAt }}">
         </div>
     {% endif %}
 {% endblock %}

@@ -36,7 +36,7 @@ class SspAssetsReader implements SspAssetsReaderInterface
         $sspAssetCollectionTransfer = $this->selfServicePortalFacade->getSspAssetCollection($sspAssetCriteriaTransfer);
 
         if ($sspAssetCollectionTransfer->getSspAssets()->count() === 0) {
-            return $this->sspAssetsResponseBuilder->createAssetNotFoundErrorResponse($glueRequestTransfer->getLocaleOrFail());
+            return $this->sspAssetsResponseBuilder->createAssetNotFoundErrorResponse($glueRequestTransfer->getLocale());
         }
 
         $sspAssetTransfer = $sspAssetCollectionTransfer->getSspAssets()->getIterator()->current();

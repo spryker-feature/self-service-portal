@@ -86,7 +86,7 @@
         "spryker/twig-extension": "^1.0.0",
         "spryker/user": "^3.27.0",
         "spryker/util-csv": "^1.1.0",
-        "spryker/util-date-time": "^1.1.0",
+        "spryker/util-date-time": "^1.6.0",
         "spryker/util-encoding": "^2.1.1",
         "spryker/util-text": "^1.0.0",
         "spryker/uuid-behavior": "^1.0.0",
@@ -143,7 +143,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-master": "18.0.x-dev"
         }
     },
     "config": {

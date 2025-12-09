@@ -18,13 +18,16 @@ use Generated\Shared\Transfer\SspInquiryCriteriaTransfer;
 use Generated\Shared\Transfer\SspInquiryIncludeTransfer;
 use Generated\Shared\Transfer\SspInquiryOwnerConditionGroupTransfer;
 use Generated\Shared\Transfer\SspInquiryTransfer;
+use Spryker\Client\Customer\CustomerClientInterface;
 use Spryker\Client\Store\StoreClientInterface;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class SspInquiriesMapper implements SspInquiriesMapperInterface
 {
-    public function __construct(protected StoreClientInterface $storeClient)
-    {
+    public function __construct(
+        protected StoreClientInterface $storeClient,
+        protected CustomerClientInterface $customerClient
+    ) {
     }
 
     public function mapRestRequestToSspInquiryCriteriaTransfer(
@@ -56,7 +59,8 @@ class SspInquiriesMapper implements SspInquiriesMapperInterface
         $sspInquiryCriteriaTransfer->setInclude(
             (new SspInquiryIncludeTransfer())
                 ->setWithSspAsset(true)
-                ->setWithOrder(true),
+                ->setWithOrder(true)
+                ->setWithManualEvents(true),
         );
 
         return $sspInquiryCriteriaTransfer;
@@ -73,11 +77,18 @@ class SspInquiriesMapper implements SspInquiriesMapperInterface
             ->setFkCompany($restUserTransfer->getIdCompany())
             ->setFkCompanyBusinessUnit($restUserTransfer->getIdCompanyBusinessUnit());
 
+        /** @var \Generated\Shared\Transfer\CustomerTransfer $customerTransfer */
+        $customerTransfer = $this->customerClient->getCustomer();
+
         $sspInquiryTransfer = (new SspInquiryTransfer())
             ->fromArray($restSspInquiriesAttributesTransfer->toArray(), true)
             ->setSspAsset((new SspAssetTransfer())->setReference($restSspInquiriesAttributesTransfer->getSspAssetReference()))
             ->setCompanyUser($companyUserTransfer)
-            ->setOrder((new OrderTransfer())->setOrderReference($restSspInquiriesAttributesTransfer->getOrderReference()));
+            ->setOrder(
+                (new OrderTransfer())
+                        ->setOrderReference($restSspInquiriesAttributesTransfer->getOrderReference())
+                        ->setCustomerReference($customerTransfer->getCustomerReferenceOrFail()),
+            );
 
         $sspInquiryCollectionRequestTransfer = (new SspInquiryCollectionRequestTransfer())->addSspInquiry($sspInquiryTransfer);
 

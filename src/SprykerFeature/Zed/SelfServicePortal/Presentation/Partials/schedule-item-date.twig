@@ -2,6 +2,6 @@
 {% if orderItem.metadata.scheduledAt %}
     <div class="variant-details">
         <h3>{{ "Scheduled At:" | trans }}</h3>
-        {{ orderItem.metadata.scheduledAt | date }}
+        {{ orderItem.metadata.scheduledAt | formatDateTime }}
     </div>
 {% endif %}

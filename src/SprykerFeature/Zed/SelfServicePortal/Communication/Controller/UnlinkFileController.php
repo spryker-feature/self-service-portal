@@ -34,20 +34,13 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class UnlinkFileController extends FileAbstractController
 {
-    /**
-     * @var string
-     */
-    protected const ERROR_MESSAGE_INVALID_ENTITY_TYPE = 'Invalid entity type.';
+    protected const string ERROR_MESSAGE_INVALID_ENTITY_TYPE = 'Invalid entity type.';
 
-    /**
-     * @var string
-     */
-    protected const SUCCESS_MESSAGE_FILE_ATTACHMENT_UNLINKED = 'File attachment successfully unlinked.';
+    protected const string SUCCESS_MESSAGE_FILE_ATTACHMENT_UNLINKED = 'File attachment successfully unlinked.';
 
-    /**
-     * @var string
-     */
-    protected const SUCCESS_MESSAGE_FILE_ATTACHMENTS_UNLINKED = 'File attachments successfully unlinked.';
+    protected const string SUCCESS_MESSAGE_FILE_ATTACHMENTS_UNLINKED = 'File attachments successfully unlinked.';
+
+    protected const string REQUEST_PARAM_DELETE_ALL_ATTACHMENTS = 'delete-all-attachments';
 
     public function indexAction(Request $request): RedirectResponse
     {
@@ -96,11 +89,15 @@ class UnlinkFileController extends FileAbstractController
      */
     protected function createDeleteCriteriaTransfer(Request $request): FileAttachmentCollectionRequestTransfer
     {
-        $entityId = $this->castId($request->query->getInt(static::REQUEST_PARAM_ENTITY_ID));
-
         $idFile = $this->castId($request->query->getInt(static::REQUEST_PARAM_ID_FILE));
 
+        if ($request->query->getBoolean(static::REQUEST_PARAM_DELETE_ALL_ATTACHMENTS)) {
+            return (new FileAttachmentCollectionRequestTransfer())->addFileIdToDeleteAttachments($idFile);
+        }
+
         $fileAttachmentTransfer = (new FileAttachmentTransfer())->setFile((new FileTransfer())->setIdFile($idFile));
+
+        $entityId = $this->castId($request->query->getInt(static::REQUEST_PARAM_ENTITY_ID));
 
         $fileAttachmentTransfer = match ($request->query->get(static::REQUEST_PARAM_ENTITY_TYPE)) {
             SelfServicePortalConfig::ENTITY_TYPE_COMPANY => $fileAttachmentTransfer->setCompanyCollection((new CompanyCollectionTransfer())->addCompany((new CompanyTransfer())->setIdCompany($entityId))),

@@ -18,15 +18,19 @@ use SprykerFeature\Shared\SelfServicePortal\Plugin\Permission\UnassignSspAssetPe
 use SprykerFeature\Shared\SelfServicePortal\Plugin\Permission\UpdateSspAssetPermissionPlugin;
 use SprykerFeature\Shared\SelfServicePortal\Plugin\Permission\ViewBusinessUnitSspAssetPermissionPlugin;
 use SprykerFeature\Shared\SelfServicePortal\Plugin\Permission\ViewCompanySspAssetPermissionPlugin;
+use SprykerFeature\Zed\SelfServicePortal\SelfServicePortalConfig;
 
 class SspAssetValidator implements SspAssetValidatorInterface
 {
     use PermissionAwareTrait;
 
-    /**
-     * @var string
-     */
-    protected const MESSAGE_ASSET_CREATION_ACCESS_DENIED = 'self_service_portal.asset.access.denied';
+    protected const string MESSAGE_ASSET_CREATION_ACCESS_DENIED = 'self_service_portal.asset.access.denied';
+
+    protected const string MESSAGE_ASSET_STATUS_NOT_VALID = 'self_service_portal.asset.validation.status.not_valid';
+
+    public function __construct(protected SelfServicePortalConfig $selfServicePortalConfig)
+    {
+    }
 
     public function isCompanyUserGrantedToApplyCriteria(SspAssetCriteriaTransfer $sspAssetCriteriaTransfer): bool
     {
@@ -78,6 +82,14 @@ class SspAssetValidator implements SspAssetValidatorInterface
         if (!$sspAssetTransfer->getCompanyBusinessUnit()) {
             $sspAssetCollectionResponseTransfer->addError(
                 (new ErrorTransfer())->setMessage('self_service_portal.asset.validation.company_business_unit.not_set'),
+            );
+
+            $isValid = false;
+        }
+
+        if ($sspAssetTransfer->getStatus() && !in_array($sspAssetTransfer->getStatus(), array_keys($this->selfServicePortalConfig->getAssetStatuses()))) {
+            $sspAssetCollectionResponseTransfer->addError(
+                (new ErrorTransfer())->setMessage('self_service_portal.asset.validation.status.not_valid'),
             );
 
             $isValid = false;

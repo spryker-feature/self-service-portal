@@ -19,6 +19,11 @@ use SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalRepository
 
 class OrderItemProductClassExpander implements OrderItemProductClassExpanderInterface
 {
+    /**
+     * @var array<string>
+     */
+    protected static array $productClassExpanderIsExecuted = [];
+
     public function __construct(
         protected ProductClassGrouperInterface $productClassGrouper,
         protected SelfServicePortalRepositoryInterface $selfServicePortalRepository,
@@ -30,13 +35,17 @@ class OrderItemProductClassExpander implements OrderItemProductClassExpanderInte
 
     public function expandOrderItemsWithProductClasses(OrderTransfer $orderTransfer): OrderTransfer
     {
-        $salesOrderItemIds = $this->salesOrderItemIdExtractor->extractSalesOrderItemIds($orderTransfer);
-
-        if (!$salesOrderItemIds) {
+        if (!$orderTransfer->getOrderReference()) {
             return $orderTransfer;
         }
 
-        $itemTransfers = $this->selfServicePortalRepository->getSalesOrderItemsByIds($salesOrderItemIds);
+        if (in_array($orderTransfer->getOrderReferenceOrFail(), static::$productClassExpanderIsExecuted)) {
+            return $orderTransfer;
+        }
+
+        static::$productClassExpanderIsExecuted[] = $orderTransfer->getOrderReferenceOrFail();
+
+        $itemTransfers = $orderTransfer->getItems()->getArrayCopy();
 
         if (!$itemTransfers) {
             return $orderTransfer;
@@ -47,9 +56,13 @@ class OrderItemProductClassExpander implements OrderItemProductClassExpanderInte
         if (!$skus) {
             return $orderTransfer;
         }
-        $productClassConditionsTransfer = (new ProductClassConditionsTransfer())->setSkus($skus);
-        $productClassCriteriaTransfer = (new ProductClassCriteriaTransfer())->setProductClassConditions($productClassConditionsTransfer);
-        $productClassCollectionTransfer = $this->selfServicePortalRepository->getProductClassCollection($productClassCriteriaTransfer);
+
+        $productClassCollectionTransfer = $this->selfServicePortalRepository->getProductClassCollection(
+            (new ProductClassCriteriaTransfer())
+            ->setProductClassConditions(
+                (new ProductClassConditionsTransfer())->setSkus($skus),
+            ),
+        );
 
         $productClassesBySkus = $this->productClassIndexer->getProductClassesIndexedBySku($productClassCollectionTransfer->getProductClasses()->getArrayCopy());
 

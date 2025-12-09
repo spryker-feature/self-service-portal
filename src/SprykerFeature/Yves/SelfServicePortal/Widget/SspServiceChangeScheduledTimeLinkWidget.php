@@ -62,7 +62,10 @@ class SspServiceChangeScheduledTimeLinkWidget extends AbstractWidget
         $isScheduled = $this->hasProductClassName($productClasses, $this->getConfig()->getScheduledProductClassName());
         $isService = $this->hasProductClassName($productClasses, $this->getConfig()->getServiceProductClassName());
 
-        $isVisible = $isService && $isScheduled;
+        $isVisible = $isService && $isScheduled && !in_array(
+            $itemTransfer->getState()?->getName(),
+            $this->getConfig()->getServiceNotReschedulableStates(),
+        );
 
         $this->addParameter(static::PARAMETER_IS_VISIBLE, $isVisible);
     }

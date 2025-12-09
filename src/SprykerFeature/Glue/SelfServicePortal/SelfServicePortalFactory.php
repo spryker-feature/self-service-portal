@@ -7,6 +7,7 @@
 
 namespace SprykerFeature\Glue\SelfServicePortal;
 
+use Spryker\Client\Customer\CustomerClientInterface;
 use Spryker\Client\GlossaryStorage\GlossaryStorageClientInterface;
 use Spryker\Client\Store\StoreClientInterface;
 use Spryker\Glue\Kernel\Backend\AbstractBackendApiFactory;
@@ -43,6 +44,8 @@ use SprykerFeature\Glue\SelfServicePortal\Processor\StorefrontApi\RestApi\Reader
 use SprykerFeature\Glue\SelfServicePortal\Processor\StorefrontApi\RestApi\Reader\SspInquiriesReaderInterface;
 use SprykerFeature\Glue\SelfServicePortal\Processor\StorefrontApi\RestApi\Reader\SspServicesReader;
 use SprykerFeature\Glue\SelfServicePortal\Processor\StorefrontApi\RestApi\Reader\SspServicesReaderInterface;
+use SprykerFeature\Glue\SelfServicePortal\Processor\StorefrontApi\RestApi\Validator\SspRequestValidator;
+use SprykerFeature\Glue\SelfServicePortal\Processor\StorefrontApi\RestApi\Validator\SspRequestValidatorInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\SelfServicePortalFacadeInterface;
 
 /**
@@ -65,6 +68,13 @@ class SelfServicePortalFactory extends AbstractBackendApiFactory
             $this->getSelfServicePortalClient(),
             $this->createAssetsMapper(),
             $this->createRestAssetsResponseBuilder(),
+        );
+    }
+
+    public function createSspRequestValidator(): SspRequestValidatorInterface
+    {
+        return new SspRequestValidator(
+            $this->getConfig(),
         );
     }
 
@@ -111,12 +121,16 @@ class SelfServicePortalFactory extends AbstractBackendApiFactory
             $this->getSelfServicePortalClient(),
             $this->createRestInquiriesResponseBuilder(),
             $this->createInquiriesMapper(),
+            $this->createSspRequestValidator(),
         );
     }
 
     public function createInquiriesMapper(): SspInquiriesMapperInterface
     {
-        return new SspInquiriesMapper($this->getStoreClient());
+        return new SspInquiriesMapper(
+            $this->getStoreClient(),
+            $this->getCustomerClient(),
+        );
     }
 
     public function createRestInquiriesResponseBuilder(): SspInquiriesResponseBuilderInterface
@@ -166,12 +180,18 @@ class SelfServicePortalFactory extends AbstractBackendApiFactory
             $this->getConfig(),
             $this->getGlossaryStorageClient(),
             $this->createSspAssetsMapper(),
+            $this->getStoreClient(),
         );
     }
 
     public function getSelfServicePortalFacade(): SelfServicePortalFacadeInterface
     {
         return $this->getProvidedDependency(SelfServicePortalDependencyProvider::FACADE_SELF_SERVICE_PORTAL);
+    }
+
+    public function getCustomerClient(): CustomerClientInterface
+    {
+        return $this->getProvidedDependency(SelfServicePortalDependencyProvider::CLIENT_CUSTOMER);
     }
 
     public function createServicesReader(): SspServicesReaderInterface

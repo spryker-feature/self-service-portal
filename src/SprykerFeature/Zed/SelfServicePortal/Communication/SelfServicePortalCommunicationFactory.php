@@ -210,7 +210,6 @@ use Symfony\Component\Form\FormTypeInterface;
  * @method \SprykerFeature\Zed\SelfServicePortal\SelfServicePortalConfig getConfig()
  * @method \SprykerFeature\Zed\SelfServicePortal\Business\SelfServicePortalFacadeInterface getFacade()
  * @method \SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalEntityManagerInterface getEntityManager()
- * @method \SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalRepositoryInterface getRepository()
  */
 class SelfServicePortalCommunicationFactory extends AbstractCommunicationFactory
 {
@@ -355,7 +354,9 @@ class SelfServicePortalCommunicationFactory extends AbstractCommunicationFactory
 
     public function createItemSchedulerFormDataProvider(): ItemSchedulerFormDataProvider
     {
-        return new ItemSchedulerFormDataProvider();
+        return new ItemSchedulerFormDataProvider(
+            $this->getUtilDateTimeService(),
+        );
     }
 
     public function createSalesOrderItemReader(): SalesOrderItemReaderInterface
@@ -582,6 +583,7 @@ class SelfServicePortalCommunicationFactory extends AbstractCommunicationFactory
     {
         return new FileTableFilterFormDataProvider(
             $this->getConfig(),
+            $this->getUtilDateTimeService(),
         );
     }
 

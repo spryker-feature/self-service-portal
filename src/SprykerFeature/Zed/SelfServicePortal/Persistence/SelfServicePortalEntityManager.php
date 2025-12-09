@@ -133,6 +133,30 @@ class SelfServicePortalEntityManager extends AbstractEntityManager implements Se
         $this->deleteSspModelFileAttachments($fileAttachmentTransfer);
     }
 
+    /**
+     * @param array<int> $idsFile
+     *
+     * @return void
+     */
+    public function deleteAllFileAttachmentCollection(array $idsFile): void
+    {
+        $this->getFactory()->createCompanyBusinessUnitFileQuery()
+            ->filterByFkFile_In($idsFile)
+            ->delete();
+
+        $this->getFactory()->createCompanyUserFileQuery()
+            ->filterByFkFile_In($idsFile)
+            ->delete();
+
+        $this->getFactory()->createSspAssetFileQuery()
+            ->filterByFkFile_In($idsFile)
+            ->delete();
+
+        $this->getFactory()->createSspModelToFileQuery()
+            ->filterByFkFile_In($idsFile)
+            ->delete();
+    }
+
     protected function deleteBusinessUnitFileAttachments(FileAttachmentTransfer $fileAttachmentTransfer): void
     {
         $businessUnitIds = array_map(

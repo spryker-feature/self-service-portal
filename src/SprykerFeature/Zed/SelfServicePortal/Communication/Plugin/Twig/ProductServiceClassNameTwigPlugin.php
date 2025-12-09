@@ -13,6 +13,8 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Twig\Environment;
 
 /**
+ * @deprecated Use {@link \SprykerFeature\Zed\SelfServicePortal\Communication\Plugin\Twig\SelfServicePortalTwigPlugin} instead.
+ *
  * @method \SprykerFeature\Zed\SelfServicePortal\Communication\SelfServicePortalCommunicationFactory getFactory()
  * @method \SprykerFeature\Zed\SelfServicePortal\Business\SelfServicePortalFacadeInterface getFacade()
  * @method \SprykerFeature\Zed\SelfServicePortal\SelfServicePortalConfig getConfig()

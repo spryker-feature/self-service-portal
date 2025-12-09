@@ -9,6 +9,9 @@ namespace SprykerFeature\Glue\SelfServicePortal;
 
 use Spryker\Glue\Kernel\AbstractBundleConfig;
 
+/**
+ * @method \SprykerFeature\Shared\SelfServicePortal\SelfServicePortalConfig getSharedConfig()
+ */
 class SelfServicePortalConfig extends AbstractBundleConfig
 {
     /**
@@ -40,4 +43,30 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * @var string
      */
     public const RESOURCE_SSP_SERVICES = 'booked-services';
+
+    /**
+     * Specification:
+     * - Defines the ssp asset inquiry type.
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getSspAssetInquiryType(): string
+    {
+        return $this->getSharedConfig()->getSspAssetInquirySource();
+    }
+
+    /**
+     * Specification:
+     * - Defines the order inquiry type.
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getOrderInquiryType(): string
+    {
+        return $this->getSharedConfig()->getOrderInquirySource();
+    }
 }

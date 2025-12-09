@@ -123,6 +123,7 @@ use SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Hooks\PostCreate\FileS
 use SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Hooks\PostCreate\OrderSspInquiryPostCreateHook;
 use SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Hooks\PostCreate\SspAssetSspInquiryPostCreateHook;
 use SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Hooks\PostCreate\SspInquiryPostCreateHookInterface;
+use SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Hooks\PostCreate\StateMachineCurrentStatusSspInquiryPostCreateHook;
 use SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Hooks\PostCreate\StateMachineSspInquiryPostCreateHook;
 use SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Hooks\PreCreate\FileSspInquiryPreCreateHook;
 use SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Hooks\PreCreate\OrderSspInquiryPreCreateHook;
@@ -151,6 +152,8 @@ use SprykerFeature\Zed\SelfServicePortal\Business\Service\Expander\OrderItemCanc
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Expander\OrderItemCancellableExpanderInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Expander\OrderItemProductClassExpander;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Expander\OrderItemProductClassExpanderInterface;
+use SprykerFeature\Zed\SelfServicePortal\Business\Service\Expander\OrderItemReschedulableExpander;
+use SprykerFeature\Zed\SelfServicePortal\Business\Service\Expander\OrderItemReschedulableExpanderInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Expander\OrderItemScheduleExpander;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Expander\OrderItemScheduleExpanderInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Expander\ProductClassExpander;
@@ -666,6 +669,7 @@ class SelfServicePortalBusinessFactory extends AbstractBusinessFactory
             $this->createFileSspInquiryPostCreateHook(),
             $this->createStateMachineSspInquiryPostCreateHook(),
             $this->createSspAssetSspInquiryPostCreateHook(),
+            $this->createStateMachineSetStatusSspInquiryPostCreateHook(),
         ];
     }
 
@@ -709,6 +713,14 @@ class SelfServicePortalBusinessFactory extends AbstractBusinessFactory
     {
         return new SspAssetSspInquiryPostCreateHook(
             $this->getEntityManager(),
+        );
+    }
+
+    public function createStateMachineSetStatusSspInquiryPostCreateHook(): SspInquiryPostCreateHookInterface
+    {
+        return new StateMachineCurrentStatusSspInquiryPostCreateHook(
+            $this->getConfig(),
+            $this->getStateMachineFacade(),
         );
     }
 
@@ -923,7 +935,9 @@ class SelfServicePortalBusinessFactory extends AbstractBusinessFactory
 
     public function createSspAssetValidator(): SspAssetValidatorInterface
     {
-        return new SspAssetValidator();
+        return new SspAssetValidator(
+            $this->getConfig(),
+        );
     }
 
     public function createOrderItemSspAssetExpander(): OrderItemSspAssetExpanderInterface
@@ -1094,6 +1108,14 @@ class SelfServicePortalBusinessFactory extends AbstractBusinessFactory
     {
         return new OrderItemCancellableExpander(
             $this->getOmsFacade(),
+        );
+    }
+
+    public function createOrderItemReschedulableExpander(): OrderItemReschedulableExpanderInterface
+    {
+        return new OrderItemReschedulableExpander(
+            $this->getConfig(),
+            $this->createOrderItemProductClassExpander(),
         );
     }
 

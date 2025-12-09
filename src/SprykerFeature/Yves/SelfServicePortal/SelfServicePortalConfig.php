@@ -740,4 +740,17 @@ class SelfServicePortalConfig extends AbstractBundleConfig
     {
         return $this->getSharedConfig()->getSspAssetSearchPaginationConfigTransfer();
     }
+
+    /**
+     * Specification:
+     * - Returns the list of service schedule non-changeable states.
+     *
+     * @api
+     *
+     * @return array<string>
+     */
+    public function getServiceNotReschedulableStates(): array
+    {
+        return $this->getSharedConfig()->getServiceNotReschedulableStates();
+    }
 }

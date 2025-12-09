@@ -14,46 +14,40 @@ use Twig\Environment;
 use Twig\TwigFilter;
 
 /**
- * @deprecated Use {@link \SprykerFeature\Zed\SelfServicePortal\Communication\Plugin\Twig\SelfServicePortalTwigPlugin} instead.
- *
  * @method \SprykerFeature\Zed\SelfServicePortal\Communication\SelfServicePortalCommunicationFactory getFactory()
  * @method \SprykerFeature\Zed\SelfServicePortal\SelfServicePortalConfig getConfig()
  * @method \SprykerFeature\Zed\SelfServicePortal\Business\SelfServicePortalFacadeInterface getFacade()
  */
-class FileSizeFormatterTwigPlugin extends AbstractPlugin implements TwigPluginInterface
+class SelfServicePortalTwigPlugin extends AbstractPlugin implements TwigPluginInterface
 {
-    /**
-     * @var string
-     */
-    protected const FILTER_NAME = 'formatFileSize';
+    protected const string FILTER_NAME_FORMAT_FILE_SIZE = 'formatFileSize';
 
-    /**
-     * @var int
-     */
-    protected const NUMBER_OF_DECIMALS = 2;
+    protected const int NUMBER_OF_DECIMALS = 2;
 
     /**
      * {@inheritDoc}
-     * - Formats the file size into a human-readable format.
+     * - Adds `formatFileSize` filter to format file size into a human-readable format.
      *
      * @api
-     *
-     * @param \Twig\Environment $twig
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Twig\Environment
      */
     public function extend(Environment $twig, ContainerInterface $container): Environment
     {
-        $twig->addFilter($this->createFilter());
+        $twig = $this->addFilters($twig);
 
         return $twig;
     }
 
-    protected function createFilter(): TwigFilter
+    protected function addFilters(Environment $twig): Environment
+    {
+        $twig->addFilter($this->createFormatFileSizeFilter());
+
+        return $twig;
+    }
+
+    protected function createFormatFileSizeFilter(): TwigFilter
     {
         return new TwigFilter(
-            static::FILTER_NAME,
+            static::FILTER_NAME_FORMAT_FILE_SIZE,
             function (int $fileSize, int $numberOfDecimals = self::NUMBER_OF_DECIMALS): string {
                 return $this->getFactory()->createFileSizeFormatter()->formatFileSize($fileSize, $numberOfDecimals);
             },

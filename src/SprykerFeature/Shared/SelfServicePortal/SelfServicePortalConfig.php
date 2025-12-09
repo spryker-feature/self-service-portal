@@ -726,4 +726,43 @@ class SelfServicePortalConfig extends AbstractSharedConfig
            ->setDefaultItemsPerPage(static::PAGINATION_DEFAULT_ITEMS_PER_PAGE)
            ->setMaxItemsPerPage(static::PAGINATION_MAX_ITEMS_PER_PAGE);
     }
+
+    /**
+     * Specification:
+     * - Returns the ssp asset inquiry source.
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getSspAssetInquirySource(): string
+    {
+        return static::SSP_ASSET_SSP_INQUIRY_SOURCE;
+    }
+
+    /**
+     * Specification:
+     * - Returns the order inquiry source.
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getOrderInquirySource(): string
+    {
+        return static::ORDER_SSP_INQUIRY_SOURCE;
+    }
+
+    /**
+     * Specification:
+     * - Returns the list of service schedule non-changeable states.
+     *
+     * @api
+     *
+     * @return array<string>
+     */
+    public function getServiceNotReschedulableStates(): array
+    {
+        return ['cancelled', 'closed'];
+    }
 }

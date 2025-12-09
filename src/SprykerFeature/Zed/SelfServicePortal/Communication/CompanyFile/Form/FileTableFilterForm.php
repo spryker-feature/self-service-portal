@@ -10,6 +10,7 @@ namespace SprykerFeature\Zed\SelfServicePortal\Communication\CompanyFile\Form;
 use DateTime;
 use Generated\Shared\Transfer\FileAttachmentTableCriteriaTransfer;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
+use SprykerFeature\Zed\SelfServicePortal\Communication\CompanyFile\Form\DataProvider\FileTableFilterFormDataProvider;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -81,6 +82,7 @@ class FileTableFilterForm extends AbstractType
 
         $resolver->setRequired([
             static::OPTION_EXTENSIONS,
+            FileTableFilterFormDataProvider::OPTION_CURRENT_TIMEZONE,
         ]);
 
         $resolver->setDefaults([
@@ -98,8 +100,8 @@ class FileTableFilterForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $this->addExtensionField($builder, $options)
-            ->addDateFromField($builder)
-            ->addDateToField($builder);
+            ->addDateFromField($builder, $options)
+            ->addDateToField($builder, $options);
 
         $builder->setMethod(Request::METHOD_GET);
     }
@@ -124,15 +126,17 @@ class FileTableFilterForm extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array<mixed> $options
      *
      * @return $this
      */
-    protected function addDateFromField(FormBuilderInterface $builder)
+    protected function addDateFromField(FormBuilderInterface $builder, array $options = [])
     {
         $builder->add(static::FIELD_DATE_FROM, DateTimeType::class, [
             'widget' => 'single_text',
             'required' => false,
             'label' => static::LABEL_DATE_FROM,
+            'view_timezone' => $options[FileTableFilterFormDataProvider::OPTION_CURRENT_TIMEZONE],
         ]);
 
         $builder->get(static::FIELD_DATE_FROM)
@@ -143,15 +147,17 @@ class FileTableFilterForm extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array<mixed> $options
      *
      * @return $this
      */
-    protected function addDateToField(FormBuilderInterface $builder)
+    protected function addDateToField(FormBuilderInterface $builder, array $options = [])
     {
         $builder->add(static::FIELD_DATE_TO, DateTimeType::class, [
             'widget' => 'single_text',
             'required' => false,
             'label' => static::LABEL_DATE_TO,
+            'view_timezone' => $options[FileTableFilterFormDataProvider::OPTION_CURRENT_TIMEZONE],
         ]);
 
         $builder->get(static::FIELD_DATE_TO)

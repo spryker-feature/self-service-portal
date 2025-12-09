@@ -8,13 +8,16 @@
 namespace SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form;
 
 use DateTime;
+use DateTimeZone;
 use Generated\Shared\Transfer\ItemMetadataTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
+use SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form\DataProvider\ItemSchedulerFormDataProvider;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\GreaterThan;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
@@ -25,15 +28,11 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 class ItemSchedulerForm extends AbstractType
 {
-    /**
-     * @var string
-     */
-    public const FIELD_SCHEDULED_AT = 'scheduledAt';
+    public const string FIELD_SCHEDULED_AT = 'scheduledAt';
 
-    /**
-     * @var string
-     */
-    protected const FIELD_LABEL_SCHEDULED_AT = 'Date and time';
+    protected const string FIELD_LABEL_SCHEDULED_AT = 'Date and time';
+
+    protected const string DATE_TIME_FORMAT_HTML5 = 'Y-m-d\TH:i';
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
@@ -43,11 +42,15 @@ class ItemSchedulerForm extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $this->addScheduledAtField($builder);
+        $this->addScheduledAtField($builder, $options);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        $resolver->setRequired([
+            ItemSchedulerFormDataProvider::OPTION_CURRENT_TIMEZONE,
+        ]);
+
         $resolver->setDefaults([
             'data_class' => ItemTransfer::class,
         ]);
@@ -55,17 +58,27 @@ class ItemSchedulerForm extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array<string, mixed> $options
      *
      * @return $this
      */
-    protected function addScheduledAtField(FormBuilderInterface $builder)
+    protected function addScheduledAtField(FormBuilderInterface $builder, array $options = [])
     {
         $builder->add(static::FIELD_SCHEDULED_AT, DateTimeType::class, [
             'label' => static::FIELD_LABEL_SCHEDULED_AT,
             'widget' => 'single_text',
             'required' => true,
+            'view_timezone' => $options[ItemSchedulerFormDataProvider::OPTION_CURRENT_TIMEZONE],
             'constraints' => [
                 new NotBlank(),
+                new GreaterThan([
+                    'value' => (new DateTime('now'))->format(DateTime::ISO8601),
+                    'message' => 'Service date must be in the future',
+                ]),
+            ],
+            'attr' => [
+                'min' => (new DateTime('now', new DateTimeZone($options[ItemSchedulerFormDataProvider::OPTION_CURRENT_TIMEZONE])))
+                    ->format(static::DATE_TIME_FORMAT_HTML5),
             ],
             'property_path' => ItemTransfer::METADATA . '.' . ItemMetadataTransfer::SCHEDULED_AT,
         ]);

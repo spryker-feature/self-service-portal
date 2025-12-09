@@ -9,9 +9,16 @@ namespace SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form\DataPr
 
 use Generated\Shared\Transfer\ItemMetadataTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
+use Spryker\Service\UtilDateTime\UtilDateTimeServiceInterface;
 
 class ItemSchedulerFormDataProvider
 {
+    public const string OPTION_CURRENT_TIMEZONE = 'current_timezone';
+
+    public function __construct(protected UtilDateTimeServiceInterface $utilDateTimeService)
+    {
+    }
+
     public function getData(ItemTransfer $itemTransfer): ItemTransfer
     {
         if (!$itemTransfer->getMetadata()) {
@@ -26,6 +33,8 @@ class ItemSchedulerFormDataProvider
      */
     public function getOptions(): array
     {
-        return [];
+        return [
+            static::OPTION_CURRENT_TIMEZONE => $this->utilDateTimeService->getTimezone(),
+        ];
     }
 }

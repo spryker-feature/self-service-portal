@@ -44,6 +44,12 @@ class FileAttachmentDeleter implements FileAttachmentDeleterInterface
         FileAttachmentCollectionRequestTransfer $fileAttachmentCollectionRequestTransfer
     ): FileAttachmentCollectionResponseTransfer {
         $this->getTransactionHandler()->handleTransaction(function () use ($fileAttachmentCollectionRequestTransfer): void {
+            if ($fileAttachmentCollectionRequestTransfer->getFileIdsToDeleteAttachments()) {
+                    $this->entityManager->deleteAllFileAttachmentCollection($fileAttachmentCollectionRequestTransfer->getFileIdsToDeleteAttachments());
+
+                return;
+            }
+
             foreach ($fileAttachmentCollectionRequestTransfer->getFileAttachmentsToDelete() as $fileAttachmentToDelete) {
                 $this->entityManager->deleteFileAttachmentCollection($fileAttachmentToDelete);
             }

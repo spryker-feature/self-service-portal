@@ -80,6 +80,7 @@ class ProductClassOrderExpanderPluginTest extends Unit
         $itemTransfer->setSku($productTransfer->getSkuOrFail());
 
         $orderTransfer->setItems(new ArrayObject([$itemTransfer]));
+        $orderTransfer->setOrderReference($saveOrderTransfer->getOrderReferenceOrFail());
 
         // Act
         $plugin = new ProductClassOrderExpanderPlugin();
@@ -152,7 +153,7 @@ class ProductClassOrderExpanderPluginTest extends Unit
 
         // Act
         $plugin = new ProductClassOrderExpanderPlugin();
-        $resultOrderTransfer = $plugin->hydrate($orderTransfer);
+        $resultOrderTransfer = $plugin->hydrate($orderTransfer->setOrderReference($saveOrderTransfer->getOrderReferenceOrFail()));
 
         // Assert
         $this->assertCount(1, $resultOrderTransfer->getItems());

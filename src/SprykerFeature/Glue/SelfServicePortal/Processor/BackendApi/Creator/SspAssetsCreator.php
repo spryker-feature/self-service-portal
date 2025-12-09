@@ -28,7 +28,7 @@ class SspAssetsCreator implements SspAssetsCreatorInterface
         $sspAssetCollectionResponseTransfer = $this->selfServicePortalFacade->createSspAssetCollection($sspAssetCollectionRequestTransfer);
 
         if ($sspAssetCollectionResponseTransfer->getErrors()->count() > 0) {
-            return $this->sspAssetsResponseBuilder->createErrorResponseFromAssetCollectionResponse($sspAssetCollectionResponseTransfer, $glueRequestTransfer->getLocaleOrFail());
+            return $this->sspAssetsResponseBuilder->createErrorResponseFromAssetCollectionResponse($sspAssetCollectionResponseTransfer, $glueRequestTransfer->getLocale());
         }
 
         $sspAssetTransfer = $sspAssetCollectionResponseTransfer->getSspAssets()->getIterator()->current();

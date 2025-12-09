@@ -346,28 +346,6 @@ class SelfServicePortalRepository extends AbstractRepository implements SelfServ
         return $query;
     }
 
-    /**
-     * @param array<int> $salesOrderItemIds
-     *
-     * @return array<\Generated\Shared\Transfer\ItemTransfer>
-     */
-    public function getSalesOrderItemsByIds(array $salesOrderItemIds): array
-    {
-        if (!$salesOrderItemIds) {
-            return [];
-        }
-
-        /** @var \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\Sales\Persistence\SpySalesOrderItem> $salesOrderItemEntities */
-        $salesOrderItemEntities = $this->getFactory()
-            ->getSalesOrderItemPropelQuery()
-            ->filterByIdSalesOrderItem_In($salesOrderItemIds)
-            ->find();
-
-        return $this->getFactory()
-            ->createSalesOrderItemMapper()
-            ->mapSalesOrderItemEntitiesToItemTransfers($salesOrderItemEntities);
-    }
-
     public function getFileAttachmentCollection(
         FileAttachmentCriteriaTransfer $fileAttachmentCriteriaTransfer
     ): FileAttachmentCollectionTransfer {

@@ -164,6 +164,7 @@
         <property name="groupKey" type="string"/>
         <property name="isSingleAddressPerShipmentType" type="bool"/>
         <property name="orderItemReference" type="string" strict="true"/>
+        <property name="isReschedulable" type="bool"/>
     </transfer>
 
     <transfer name="Service" strict="true">
@@ -616,6 +617,7 @@
     <transfer name="FileAttachmentCollectionRequest" strict="true">
         <property name="fileAttachmentsToAdd" type="FileAttachment[]" singular="fileAttachmentToAdd"/>
         <property name="fileAttachmentsToDelete" type="FileAttachment[]" singular="fileAttachmentToDelete"/>
+        <property name="fileIdsToDeleteAttachments" type="int[]" singular="fileIdToDeleteAttachments"/>
     </transfer>
 
     <transfer name="FileAttachmentCollectionResponse" strict="true">

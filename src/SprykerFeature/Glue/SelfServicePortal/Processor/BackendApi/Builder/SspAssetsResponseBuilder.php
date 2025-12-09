@@ -15,6 +15,7 @@ use Generated\Shared\Transfer\SspAssetCollectionResponseTransfer;
 use Generated\Shared\Transfer\SspAssetCollectionTransfer;
 use Generated\Shared\Transfer\SspAssetTransfer;
 use Spryker\Client\GlossaryStorage\GlossaryStorageClientInterface;
+use Spryker\Client\Store\StoreClientInterface;
 use Spryker\Glue\Kernel\AbstractBundleConfig;
 use SprykerFeature\Glue\SelfServicePortal\Processor\BackendApi\Mapper\SspAssetsMapperInterface;
 use SprykerFeature\Glue\SelfServicePortal\SelfServicePortalConfig;
@@ -66,7 +67,8 @@ class SspAssetsResponseBuilder implements SspAssetsResponseBuilderInterface
     public function __construct(
         protected AbstractBundleConfig $config,
         protected GlossaryStorageClientInterface $glossaryStorageClient,
-        protected SspAssetsMapperInterface $sspAssetsMapper
+        protected SspAssetsMapperInterface $sspAssetsMapper,
+        protected StoreClientInterface $storeClient
     ) {
     }
 
@@ -91,14 +93,15 @@ class SspAssetsResponseBuilder implements SspAssetsResponseBuilderInterface
             ->addResource($this->createSspAssetResource($sspAssetTransfer));
     }
 
-    public function createAssetNotFoundErrorResponse(string $localeName): GlueResponseTransfer
+    public function createAssetNotFoundErrorResponse(?string $localeName): GlueResponseTransfer
     {
+        $localeName = $localeName ?? $this->storeClient->getCurrentStore()->getDefaultLocaleIsoCode();
         $errorStatus = static::GLOSSARY_KEY_TO_ERROR_STATUS_MAPPING[static::GLOSSARY_KEY_ASSET_NOT_FOUND];
 
         $glueErrorTransfer = (new GlueErrorTransfer())
             ->setStatus($errorStatus)
             ->setCode(SelfServicePortalConfig::RESOURCE_SSP_ASSETS)
-            ->setMessage($this->glossaryStorageClient->translate(static::MESSAGE_ASSET_NOT_FOUND, $localeName));
+            ->setMessage($localeName ? $this->glossaryStorageClient->translate(static::MESSAGE_ASSET_NOT_FOUND, $localeName) : static::MESSAGE_ASSET_NOT_FOUND);
 
         return (new GlueResponseTransfer())
             ->addError($glueErrorTransfer)
@@ -107,8 +110,9 @@ class SspAssetsResponseBuilder implements SspAssetsResponseBuilderInterface
 
     public function createErrorResponseFromAssetCollectionResponse(
         SspAssetCollectionResponseTransfer $sspAssetCollectionResponseTransfer,
-        string $localeName
+        ?string $localeName
     ): GlueResponseTransfer {
+        $localeName = $localeName ?? $this->storeClient->getCurrentStore()->getDefaultLocaleIsoCode();
         $glueResponseTransfer = new GlueResponseTransfer();
 
         foreach ($sspAssetCollectionResponseTransfer->getErrors() as $errorTransfer) {
@@ -116,7 +120,7 @@ class SspAssetsResponseBuilder implements SspAssetsResponseBuilderInterface
 
             $glueErrorTransfer = (new GlueErrorTransfer())
                 ->setStatus($errorMessageStatus)
-                ->setMessage($this->glossaryStorageClient->translate($errorTransfer->getMessageOrFail(), $localeName));
+                ->setMessage($localeName ? $this->glossaryStorageClient->translate($errorTransfer->getMessageOrFail(), $localeName) : $errorTransfer->getMessageOrFail());
 
             $glueResponseTransfer->addError($glueErrorTransfer);
         }

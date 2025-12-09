@@ -15,25 +15,15 @@ use Spryker\Glue\Kernel\Backend\Container;
  */
 class SelfServicePortalDependencyProvider extends AbstractBundleDependencyProvider
 {
-    /**
-     * @var string
-     */
-    public const CLIENT_SELF_SERVICE_PORTAL = 'CLIENT_SELF_SERVICE_PORTAL';
+    public const string CLIENT_SELF_SERVICE_PORTAL = 'CLIENT_SELF_SERVICE_PORTAL';
 
-    /**
-     * @var string
-     */
-    public const CLIENT_GLOSSARY_STORAGE = 'CLIENT_GLOSSARY_STORAGE';
+    public const string CLIENT_GLOSSARY_STORAGE = 'CLIENT_GLOSSARY_STORAGE';
 
-    /**
-     * @var string
-     */
-    public const CLIENT_STORE = 'CLIENT_STORE';
+    public const string CLIENT_STORE = 'CLIENT_STORE';
 
-    /**
-     * @var string
-     */
-    public const FACADE_SELF_SERVICE_PORTAL = 'FACADE_SELF_SERVICE_PORTAL';
+    public const string FACADE_SELF_SERVICE_PORTAL = 'FACADE_SELF_SERVICE_PORTAL';
+
+    public const string CLIENT_CUSTOMER = 'CLIENT_CUSTOMER';
 
     public function provideBackendDependencies(Container $container): Container
     {
@@ -42,6 +32,7 @@ class SelfServicePortalDependencyProvider extends AbstractBundleDependencyProvid
         $container = $this->addGlossaryStorageClient($container);
         $container = $this->addStoreClient($container);
         $container = $this->addSelfServicePortalFacade($container);
+        $container = $this->addCustomerClient($container);
 
         return $container;
     }
@@ -77,6 +68,15 @@ class SelfServicePortalDependencyProvider extends AbstractBundleDependencyProvid
     {
         $container->set(static::FACADE_SELF_SERVICE_PORTAL, function (Container $container) {
             return $container->getLocator()->selfServicePortal()->facade();
+        });
+
+        return $container;
+    }
+
+    protected function addCustomerClient(Container $container): Container
+    {
+        $container->set(static::CLIENT_CUSTOMER, function (Container $container) {
+            return $container->getLocator()->customer()->client();
         });
 
         return $container;
