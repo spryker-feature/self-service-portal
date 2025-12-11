@@ -183,9 +183,10 @@ class SspShipmentTypeServicePointSelectorWidget extends AbstractWidget
      */
     protected function addShipmentTypeOptionsParameter(array $shipmentTypeStorageTransfers): void
     {
+        $shipmentTypeOptions = $this->getFactory()->createShipmentTypeOptionsProvider()->provideShipmentTypeOptions($shipmentTypeStorageTransfers);
         $this->addParameter(
             static::PARAMETER_SHIPMENT_TYPE_OPTIONS,
-            $this->getFactory()->createShipmentTypeOptionsProvider()->provideShipmentTypeOptions($shipmentTypeStorageTransfers),
+            $shipmentTypeOptions,
         );
     }
 

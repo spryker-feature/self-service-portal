@@ -15,8 +15,10 @@ use Spryker\Client\Customer\CustomerClientInterface;
 use Spryker\Client\GlossaryStorage\GlossaryStorageClientInterface;
 use Spryker\Client\Permission\PermissionClientInterface;
 use Spryker\Client\ProductOfferStorage\ProductOfferStorageClientInterface;
+use Spryker\Client\ProductStorage\ProductStorageClientInterface;
 use Spryker\Client\Sales\SalesClientInterface;
 use Spryker\Client\ServicePointSearch\ServicePointSearchClientInterface;
+use Spryker\Client\ServicePointStorage\ServicePointStorageClientInterface;
 use Spryker\Client\ShipmentTypeStorage\ShipmentTypeStorageClientInterface;
 use Spryker\Client\Store\StoreClientInterface;
 use Spryker\Shared\Twig\TwigExtension;
@@ -101,8 +103,12 @@ use SprykerFeature\Yves\SelfServicePortal\Service\Reader\OrderReader;
 use SprykerFeature\Yves\SelfServicePortal\Service\Reader\OrderReaderInterface;
 use SprykerFeature\Yves\SelfServicePortal\Service\Reader\ProductOfferReader;
 use SprykerFeature\Yves\SelfServicePortal\Service\Reader\ProductOfferReaderInterface;
+use SprykerFeature\Yves\SelfServicePortal\Service\Reader\ProductReader;
+use SprykerFeature\Yves\SelfServicePortal\Service\Reader\ProductReaderInterface;
 use SprykerFeature\Yves\SelfServicePortal\Service\Reader\ServicePointReader;
 use SprykerFeature\Yves\SelfServicePortal\Service\Reader\ServicePointReaderInterface;
+use SprykerFeature\Yves\SelfServicePortal\Service\Reader\ServiceTypeReader;
+use SprykerFeature\Yves\SelfServicePortal\Service\Reader\ServiceTypeReaderInterface;
 use SprykerFeature\Yves\SelfServicePortal\Service\Reader\ShipmentTypeReader;
 use SprykerFeature\Yves\SelfServicePortal\Service\Reader\ShipmentTypeReaderInterface;
 use SprykerFeature\Yves\SelfServicePortal\Service\Resolver\ShopContextResolver;
@@ -181,6 +187,13 @@ class SelfServicePortalFactory extends AbstractFactory
         return new ShipmentTypeReader(
             $this->getShipmentTypeStorageClient(),
             $this->getConfig(),
+        );
+    }
+
+    public function createServiceTypeReader(): ServiceTypeReaderInterface
+    {
+        return new ServiceTypeReader(
+            $this->getServicePointStorageClient(),
         );
     }
 
@@ -265,6 +278,7 @@ class SelfServicePortalFactory extends AbstractFactory
         return new ServicePointReader(
             $this->getServicePointSearchClient(),
             $this->getTwigEnvironment(),
+            $this->getServicePointStorageClient(),
         );
     }
 
@@ -295,6 +309,14 @@ class SelfServicePortalFactory extends AbstractFactory
         return new ProductOfferReader(
             $this->getProductOfferStorageClient(),
             $this->createShopContextResolver(),
+        );
+    }
+
+    public function createProductReader(): ProductReaderInterface
+    {
+        return new ProductReader(
+            $this->getProductStorageClient(),
+            $this->getProductOfferStorageClient(),
         );
     }
 
@@ -453,6 +475,11 @@ class SelfServicePortalFactory extends AbstractFactory
         return $this->getProvidedDependency(SelfServicePortalDependencyProvider::CLIENT_PRODUCT_OFFER_STORAGE);
     }
 
+    public function getProductStorageClient(): ProductStorageClientInterface
+    {
+        return $this->getProvidedDependency(SelfServicePortalDependencyProvider::CLIENT_PRODUCT_STORAGE);
+    }
+
     public function getStoreClient(): StoreClientInterface
     {
         return $this->getProvidedDependency(SelfServicePortalDependencyProvider::CLIENT_STORE);
@@ -461,6 +488,11 @@ class SelfServicePortalFactory extends AbstractFactory
     public function getServicePointSearchClient(): ServicePointSearchClientInterface
     {
         return $this->getProvidedDependency(SelfServicePortalDependencyProvider::CLIENT_SERVICE_POINT_SEARCH);
+    }
+
+    public function getServicePointStorageClient(): ServicePointStorageClientInterface
+    {
+        return $this->getProvidedDependency(SelfServicePortalDependencyProvider::CLIENT_SERVICE_POINT_STORAGE);
     }
 
     public function getTwigEnvironment(): Environment

@@ -30,7 +30,7 @@ use SprykerFeatureTest\Client\SelfServicePortal\SelfServicePortalClientTester;
  * @group SelfServicePortal
  * @group Plugin
  * @group AvailabilityStorage
- * @group ProductOfferServiceAvailabilityStorageStrategyPluginTest
+ * @group ProductServiceAvailabilityStorageStrategyPluginTest
  */
 class ProductServiceAvailabilityStorageStrategyPluginTest extends Unit
 {

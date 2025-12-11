@@ -74,9 +74,6 @@
         <property name="productOfferReference" type="string"/>
     </transfer>
 
-    <transfer name="ProductStorageCriteria">
-    </transfer>
-
     <transfer name="ShipmentTypeStorageCollection" strict="true">
         <property name="shipmentTypeStorages" type="ShipmentTypeStorage[]" singular="shipmentTypeStorage"/>
     </transfer>
@@ -541,6 +538,13 @@
 
     <transfer name="ProductOfferStorageCriteria">
         <property name="productConcreteSkus" type="string[]" singular="productConcreteSku"/>
+        <property name="shipmentTypeUuids" type="string[]" singular="shipmentTypeUuid" strict="true"/>
+        <property name="servicePointUuids" type="string[]" singular="servicePointUuid" strict="true"/>
+    </transfer> 
+    
+    <transfer name="ProductStorageCriteria">
+        <property name="shipmentTypeUuids" type="string[]" singular="shipmentTypeUuid" strict="true"/>
+        <property name="servicePointUuids" type="string[]" singular="servicePointUuid" strict="true"/>
     </transfer>
 
     <transfer name="ShopContext">
@@ -1365,6 +1369,31 @@
 
     <transfer name="ProductOfferAvailabilityStorage">
         <property name="isAvailable" type="bool"/>
+    </transfer>
+
+    <transfer name="ServicePointStorageCollection" strict="true">
+        <property name="servicePointStorages" type="ServicePointStorage[]" singular="servicePointStorage"/>
+    </transfer>
+
+    <transfer name="ServicePointStorageConditions" strict="true">
+        <property name="uuids" type="string[]" singular="uuid"/>
+        <property name="storeName" type="string"/>
+    </transfer>
+
+    <transfer name="ServicePointStorageCriteria" strict="true">
+        <property name="servicePointStorageConditions" type="ServicePointStorageConditions"/>
+    </transfer>
+
+    <transfer name="ServiceTypeStorageCollection" strict="true">
+        <property name="serviceTypeStorages" type="ServiceTypeStorage[]" singular="serviceTypeStorage"/>
+    </transfer>
+
+    <transfer name="ServiceTypeStorageConditions" strict="true">
+        <property name="uuids" type="string[]" singular="uuid"/>
+    </transfer>
+
+    <transfer name="ServiceTypeStorageCriteria" strict="true">
+        <property name="serviceTypeStorageConditions" type="ServiceTypeStorageConditions"/>
     </transfer>
     
 </transfers>

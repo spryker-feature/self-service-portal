@@ -49,7 +49,17 @@ class SelfServicePortalDependencyProvider extends AbstractBundleDependencyProvid
     /**
      * @var string
      */
+    public const CLIENT_PRODUCT_STORAGE = 'CLIENT_PRODUCT_STORAGE';
+
+    /**
+     * @var string
+     */
     public const CLIENT_SERVICE_POINT_SEARCH = 'CLIENT_SERVICE_POINT_SEARCH';
+
+    /**
+     * @var string
+     */
+    public const CLIENT_SERVICE_POINT_STORAGE = 'CLIENT_SERVICE_POINT_STORAGE';
 
     /**
      * @var string
@@ -106,7 +116,9 @@ class SelfServicePortalDependencyProvider extends AbstractBundleDependencyProvid
         $container = $this->addShipmentTypeStorageClient($container);
         $container = $this->addStoreClient($container);
         $container = $this->addProductOfferStorageClient($container);
+        $container = $this->addProductStorageClient($container);
         $container = $this->addServicePointSearchClient($container);
+        $container = $this->addServicePointStorageClient($container);
         $container = $this->addTwigService($container);
         $container = $this->addSalesClient($container);
         $container = $this->addGlossaryStorageClient($container);
@@ -172,10 +184,28 @@ class SelfServicePortalDependencyProvider extends AbstractBundleDependencyProvid
         return $container;
     }
 
+    protected function addProductStorageClient(Container $container): Container
+    {
+        $container->set(static::CLIENT_PRODUCT_STORAGE, function (Container $container) {
+            return $container->getLocator()->productStorage()->client();
+        });
+
+        return $container;
+    }
+
     protected function addServicePointSearchClient(Container $container): Container
     {
         $container->set(static::CLIENT_SERVICE_POINT_SEARCH, function (Container $container) {
             return $container->getLocator()->servicePointSearch()->client();
+        });
+
+        return $container;
+    }
+
+    protected function addServicePointStorageClient(Container $container): Container
+    {
+        $container->set(static::CLIENT_SERVICE_POINT_STORAGE, function (Container $container) {
+            return $container->getLocator()->servicePointStorage()->client();
         });
 
         return $container;

@@ -9,7 +9,11 @@ namespace SprykerFeature\Yves\SelfServicePortal\Service\Reader;
 
 use Generated\Shared\Transfer\ServicePointSearchCollectionTransfer;
 use Generated\Shared\Transfer\ServicePointSearchRequestTransfer;
+use Generated\Shared\Transfer\ServicePointStorageCollectionTransfer;
+use Generated\Shared\Transfer\ServicePointStorageConditionsTransfer;
+use Generated\Shared\Transfer\ServicePointStorageCriteriaTransfer;
 use Spryker\Client\ServicePointSearch\ServicePointSearchClientInterface;
+use Spryker\Client\ServicePointStorage\ServicePointStorageClientInterface;
 use SprykerFeature\Yves\SelfServicePortal\Controller\ServicePointSearchController;
 use SprykerFeature\Yves\SelfServicePortal\Plugin\Router\SelfServicePortalPageRouteProviderPlugin;
 use Twig\Environment;
@@ -18,7 +22,8 @@ class ServicePointReader implements ServicePointReaderInterface
 {
     public function __construct(
         protected ServicePointSearchClientInterface $servicePointSearchClient,
-        protected Environment $twigEnvironment
+        protected Environment $twigEnvironment,
+        protected ServicePointStorageClientInterface $servicePointStorageClient
     ) {
     }
 
@@ -49,5 +54,24 @@ class ServicePointReader implements ServicePointReaderInterface
                 'items' => $itemTransfers,
             ],
         );
+    }
+
+    /**
+     * @param list<string> $servicePointUuids
+     * @param string $storeName
+     *
+     * @return \Generated\Shared\Transfer\ServicePointStorageCollectionTransfer
+     */
+    public function getServicePointStorageCollection(array $servicePointUuids, string $storeName): ServicePointStorageCollectionTransfer
+    {
+        $servicePointStorageConditionsTransfer = (new ServicePointStorageConditionsTransfer())
+            ->setUuids($servicePointUuids)
+            ->setStoreName($storeName);
+
+        $servicePointStorageCriteriaTransfer = (new ServicePointStorageCriteriaTransfer())
+            ->setServicePointStorageConditions($servicePointStorageConditionsTransfer);
+
+        return $this->servicePointStorageClient
+            ->getServicePointStorageCollection($servicePointStorageCriteriaTransfer);
     }
 }

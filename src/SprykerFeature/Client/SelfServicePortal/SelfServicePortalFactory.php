@@ -42,6 +42,8 @@ use SprykerFeature\Client\SelfServicePortal\Permission\SspAssetPermissionChecker
 use SprykerFeature\Client\SelfServicePortal\Permission\SspAssetPermissionCheckerInterface;
 use SprykerFeature\Client\SelfServicePortal\ProductOffer\Checker\ProductServiceAvailabilityChecker;
 use SprykerFeature\Client\SelfServicePortal\ProductOffer\Checker\ProductServiceAvailabilityCheckerInterface;
+use SprykerFeature\Client\SelfServicePortal\ProductOffer\Filter\ProductOfferStorageFilter;
+use SprykerFeature\Client\SelfServicePortal\ProductOffer\Filter\ProductOfferStorageFilterInterface;
 use SprykerFeature\Client\SelfServicePortal\ProductOffer\Reader\ProductOfferServiceReader;
 use SprykerFeature\Client\SelfServicePortal\ProductOffer\Reader\ProductOfferServiceReaderInterface;
 use SprykerFeature\Client\SelfServicePortal\Search\Expander\SspAssetQueryExpander;
@@ -238,6 +240,11 @@ class SelfServicePortalFactory extends AbstractFactory
     public function createQuoteItemFinder(): QuoteItemFinderInterface
     {
         return new QuoteItemFinder();
+    }
+
+    public function createProductOfferStorageFilter(): ProductOfferStorageFilterInterface
+    {
+        return new ProductOfferStorageFilter();
     }
 
     public function getSearchClient(): SearchClientInterface

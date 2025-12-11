@@ -15,4 +15,11 @@ interface ShipmentTypeOptionsProviderInterface
      * @return array<int, array<string, mixed>>
      */
     public function provideShipmentTypeOptions(array $shipmentTypeStorageTransfers): array;
+
+    /**
+     * @param array<int, array<string, mixed>> $shipmentTypeOptions
+     *
+     * @return string|null
+     */
+    public function getDefaultSelectedShipmentTypeUuid(array $shipmentTypeOptions): ?string;
 }

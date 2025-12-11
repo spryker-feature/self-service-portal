@@ -8,8 +8,17 @@
 namespace SprykerFeature\Yves\SelfServicePortal\Service\Reader;
 
 use Generated\Shared\Transfer\ServicePointSearchRequestTransfer;
+use Generated\Shared\Transfer\ServicePointStorageCollectionTransfer;
 
 interface ServicePointReaderInterface
 {
     public function searchServicePoints(ServicePointSearchRequestTransfer $servicePointSearchRequestTransfer): string;
+
+    /**
+     * @param list<string> $servicePointUuids
+     * @param string $storeName
+     *
+     * @return \Generated\Shared\Transfer\ServicePointStorageCollectionTransfer
+     */
+    public function getServicePointStorageCollection(array $servicePointUuids, string $storeName): ServicePointStorageCollectionTransfer;
 }

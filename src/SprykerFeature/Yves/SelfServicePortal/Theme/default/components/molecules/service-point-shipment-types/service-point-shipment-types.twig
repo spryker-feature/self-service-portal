@@ -12,7 +12,6 @@
     isServiceDateTimeFieldVisible: false,
     hasOnlyServiceShipmentType: false,
     formFieldServicePointUuid: null,
-    formFieldProductOfferReference: null,
     formFieldItemMetadataScheduledAt: null,
     hasOnlyDeliveryLikeShipmentType: false,
     isConcreteProduct: false,
@@ -22,7 +21,8 @@
 {% define attributes = {
     'data-service-point-product-sku': null,
     'ajax-container-class': "js-#{config.name}-container",
-    'no-service-types': ((data.shipmentTypes | default([])) | filter(type => not type.serviceTypeKey) | reduce((acc, type) => acc | merge([type.value]), [])) | json_encode
+    'no-service-types': ((data.shipmentTypes | default([])) | filter(type => not type.serviceTypeKey) | reduce((acc, type) => acc | merge([type.value]), [])) | json_encode,
+    'service-point-uuid': "[name='#{data.formFieldServicePointUuid}']"
 } %}
 
 {% set requiredServicePoint = data.shipmentTypes | filter(shipmentTypeOption => shipmentTypeOption.isServicePointRequired) %}
@@ -46,12 +46,16 @@
                 selector: ".#{config.name}__radio input:checked",
                 attribute: 'data-service-type-uuid',
             },
-            sku: {
-                selector: ".#{config.name}",
-                attribute: 'data-service-point-product-sku',
-            },
             quantity: {
                 selector: 'packaging-unit-quantity-selector select[name="quantity"]',
+                attribute: 'value',
+            },
+            'id-product-concrete': {
+                selector: "[data-service-point-product-concrete-id-input]",
+                attribute: 'value',
+            },
+            'service-point-uuid': {
+                selector: '[data-service-point-uuid-input]',
                 attribute: 'value',
             },
         } %}
@@ -123,7 +127,7 @@
                                         label: shipmentType.label,
                                     },
                                     attributes: {
-                                        checked: shipmentType.serviceTypeKey and shipmentType.serviceTypeKey is not null,
+                                        checked: shipmentType.isDefaultSelected,
                                         name: data.formFieldShipmentTypeUuid,
                                         disabled: data.isSelectionDisabled,
                                         value: shipmentType.value,
@@ -146,7 +150,7 @@
             <input data-service-point-uuid-input type="hidden" name="{{ data.formFieldServicePointUuid }}" value="">
         {% endif %}
 
-         <input data-product-offer-reference-input type="hidden" name="{{ data.formFieldProductOfferReference }}" value="{{ data.product.productOfferReference }}">
+         <input data-service-point-product-concrete-id-input type="hidden" value="{{ data.product.idProductConcrete }}">
 
         {% if data.hasOnlyDeliveryLikeShipmentType %}
             {% set shipmentType = data.shipmentTypes | first %}

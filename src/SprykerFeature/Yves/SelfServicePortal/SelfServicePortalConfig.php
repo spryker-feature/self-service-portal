@@ -753,4 +753,18 @@ class SelfServicePortalConfig extends AbstractBundleConfig
     {
         return $this->getSharedConfig()->getServiceNotReschedulableStates();
     }
+
+    /**
+     * Specification:
+     * - Returns the default selected shipment type key.
+     * - This shipment type will be pre-selected in the shipment type options for the services.
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getDefaultSelectedShipmentTypeKey(): string
+    {
+        return static::SHIPMENT_TYPE_DELIVERY;
+    }
 }

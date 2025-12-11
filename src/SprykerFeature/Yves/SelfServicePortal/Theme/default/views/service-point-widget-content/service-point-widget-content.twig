@@ -2,25 +2,27 @@
 
 {% define data = {
     isServicePointRequired: isServicePointRequired | default(null),
-    serviceTypeKey: serviceTypeKey | default(null),
-    serviceTypeUuid: serviceTypeUuid | default(null),
     shipmentTypeUuid: shipmentTypeUuid | default(null),
     quantity: quantity | default(0),
-    sku: sku | default(''),
     items: items | default([]),
+    product: product | default(null),
+    servicePoint: servicePoint | default(null),
+    serviceType: serviceType | default(null),
+    serviceTypeUuid: serviceTypeUuid | default(null),
+    serviceTypeKey: serviceTypeKey | default(null),
 } %}
 
 {% block body %}
-    {% if isServicePointRequired %}
-        {% include molecule('ssp-service-point-selector', 'SelfServicePortal') with {
-            data: {
-                serviceTypeKey: data.serviceTypeKey,
-                serviceTypeUuid: data.serviceTypeUuid,
-                shipmentTypeUuid: data.shipmentTypeUuid,
-                quantity: data.quantity,
-                sku: data.sku,
-                items: data.items,
-            },
-        } only %}
-    {% endif %}
+    {% include molecule('ssp-service-point-selector', 'SelfServicePortal') with {
+        data: {
+            shipmentTypeUuid: data.shipmentTypeUuid,
+            quantity: data.quantity,
+            items: data.items,
+            product: data.product,
+            isServicePointRequired: data.isServicePointRequired,
+            servicePoint: data.servicePoint,
+            serviceTypeKey: data.serviceTypeKey,
+            serviceTypeUuid: data.serviceTypeUuid,
+        },
+    } only %}
 {% endblock %}

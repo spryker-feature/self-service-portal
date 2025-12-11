@@ -8,13 +8,16 @@
 } %}
 
 {% define data = {
-    serviceTypeKey: required,
-    serviceTypeUuid: required,
     shipmentTypeUuid: required,
     items: required,
-    sku: required,
     quantity: required,
     id: random(),
+    product: required,
+    isServicePointRequired: required,
+    servicePoint: null,
+    serviceType: required,
+    serviceTypeKey: required,
+    serviceTypeUuid: required,
 } %}
 
 {% define attributes = {
@@ -22,8 +25,9 @@
     'finder-class-name': 'js-' ~ config.name ~ '__finder-' ~ data.id,
     'toggle-class-name': 'is-hidden',
     'hidden-uuid-selector': '[data-service-point-uuid-input]',
-    'hidden-offer-reference-selector': '[data-product-offer-reference-input]',
-    'price-attribute': 'data-product-price-offer'
+    'offer-reference-input-selector': '[name="product_offer_reference"]',
+    'price-attribute': 'data-product-price-offer',
+    'shipment-type': 'js-service-point-shipment-types',
 } %}
 
 {% block locationsWidget %}
@@ -31,47 +35,94 @@
         data: {
             extraClassName: attributes['finder-class-name'],
             quantity: data.quantity,
-            sku: data.sku,
+            sku: data.product.sku,
         },
     } only %}
     {% endwidget %}
 {% endblock %}
 
 {% block body %}
-    {% block noLocation %}
-        <div class="{{ config.jsName }}__no-location">
-            <button type="button" class="button button--expand {{ attributes['trigger-class-name'] }}">
-                {{ 'service_point_widget.select_location_action' | trans }}
-            </button>
-        </div>
-    {% endblock %}
+    {% if data.isServicePointRequired %}
+        {% block noLocation %}
+            {% if not data.servicePoint %}
+                <div class="{{ config.jsName }}__no-location spacing-bottom--big">
+                    <button type="button" class="button button--expand {{ attributes['trigger-class-name'] }}">
+                        {{ 'service_point_widget.select_location_action' | trans }}
+                    </button>
+                </div>
+            {% endif %}
+        {% endblock %}
 
-    {% block selectedLocation %}
-        <div class="{{ config.jsName }}__location-container {{ attributes['toggle-class-name'] }}">
-            <strong>{{ 'service_point_widget.location_label' | trans }}</strong>
-            <span class="{{ config.jsName }}__location"></span>
+        {% block selectedLocation %}
+            <div class="{{ config.jsName }}__location-container {% if not data.servicePoint %}{{ attributes['toggle-class-name'] }}{% endif %} spacing-bottom--big">
+                <strong>{{ 'service_point_widget.location_label' | trans }}</strong>
+                <span class="{{ config.jsName }}__location">
+                    {% block address %}
+                        {% if data.servicePoint %}
+                            {% set address = data.servicePoint.address %}
+                            {% set formattedAddress = [address.address1, address.address2, address.address3] | filter(address => address) | join(' ') %}
+                            {% set fullAddress = formattedAddress ~ ', ' ~ address.zipCode ~ ' ' ~ address.city %}
 
-            <div>
-                <button type="button" class="button button--expand {{ attributes['trigger-class-name'] }}">
-                    {{ 'service_point_widget.change_action' | trans }}
-                </button>
+                            {{ fullAddress }}
+                        {% endif %}
+                    {% endblock %}
+                </span>
+
+                <div>
+                    <button type="button" class="button button--expand {{ attributes['trigger-class-name'] }}">
+                        {{ 'service_point_widget.change_action' | trans }}
+                    </button>
+                </div>
             </div>
-        </div>
-    {% endblock %}
+        {% endblock %}
 
-    {% block popup %}
-        {% include molecule('main-popup') with {
-            modifiers: ['spaceless', 'flex-content', 'wide'],
-            class: config.jsName ~ '__popup',
-            data: {
-                title: 'service_point_widget.select_your_store_title' | trans,
-                content: block('locationsWidget'),
-            },
-            attributes: {
-                'content-id': config.jsName ~ '__popup-content-',
-                'trigger-class-name': attributes['trigger-class-name'],
-                'has-content-mount': true,
-            },
-        } only %}
+        {% block popup %}
+            {% include molecule('main-popup') with {
+                modifiers: ['spaceless', 'flex-content', 'wide'],
+                class: config.jsName ~ '__popup',
+                data: {
+                    title: 'service_point_widget.select_your_store_title' | trans,
+                    content: block('locationsWidget'),
+                },
+                attributes: {
+                    'content-id': config.jsName ~ '__popup-content-',
+                    'trigger-class-name': attributes['trigger-class-name'],
+                    'has-content-mount': true,
+                },
+            } only %}
+        {% endblock %}
+    {% endif %}
+
+    {% block productOfferByMerchant %}
+        {% set merchantProductOfferWidget = findWidget('MerchantProductOfferWidget', [data.product, {'shipment_type_uuids': [data.shipmentTypeUuid], 'service_point_uuids': data.servicePoint ? [data.servicePoint.uuid] : []}]) %}
+        {% set productOffersCount = merchantProductOfferWidget ? merchantProductOfferWidget.productOffers | length : 0 %}
+        {% set isRadioButtonVisible = productOffersCount > 0  %}
+        {% set isChecked = merchantProductOfferWidget ? not merchantProductOfferWidget.productView.productOfferReference : true %}
+        {% set merchantProductWidget = findWidget('MerchantProductWidget', [
+            data.product,
+            isRadioButtonVisible,
+            isChecked,
+        ]) %}
+        {% set hasMerchantProduct = merchantProductWidget.merchantProductView is defined %}
+
+        {% block productOfferListByMerchant %}
+            {% widget merchantProductWidget %}{% endwidget %}
+            {% widget merchantProductOfferWidget with {
+                data: {
+                    isTitleVisible: not hasMerchantProduct,
+                    pageReload: false,
+                },
+                embed: {
+                    hasMerchantProduct: hasMerchantProduct,
+                    productOffersCount: merchantProductOfferWidget.productOffers | length,
+                },
+            } %}
+                {% block content %}
+                    {% set isRadioButtonVisible = embed.productOffersCount > 1 or embed.hasMerchantProduct %}
+
+                    {{ parent() }}
+                {% endblock %}
+            {% endwidget %}
+        {% endblock %}
     {% endblock %}
 {% endblock %}

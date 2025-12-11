@@ -4,6 +4,7 @@ import ServicePointFinder, {
     EVENT_SET_SERVICE_POINT,
     ServicePointEventDetail,
 } from 'ServicePointWidget/components/molecules/service-point-finder/service-point-finder';
+import { EVENT_SHIPMENT_TYPE_CHANGE } from '../service-point-shipment-types/service-point-shipment-types';
 
 export default class SspServicePointSelector extends Component {
     protected noLocationContainer: HTMLElement;
@@ -23,7 +24,17 @@ export default class SspServicePointSelector extends Component {
     }
 
     protected mapEvents(): void {
-        this.popup.addEventListener(EVENT_POPUP_OPENED, this.mapFinderSetServicePointEvent.bind(this));
+        this.popup?.addEventListener(EVENT_POPUP_OPENED, this.mapFinderSetServicePointEvent.bind(this));
+        this.changeOffer();
+        this.onShipmentTypeChange();
+    }
+
+    protected onShipmentTypeChange(): void {
+        document.addEventListener(EVENT_SHIPMENT_TYPE_CHANGE, () => {
+            document
+                .querySelector<HTMLInputElement>(`${this.offerReferenceSelector}:checked`)
+                ?.dispatchEvent(new Event('change', { bubbles: true }));
+        });
     }
 
     protected mapFinderSetServicePointEvent(): void {
@@ -45,32 +56,55 @@ export default class SspServicePointSelector extends Component {
         this.location.innerHTML = detail.address;
         this.toggleContainer();
         this.transferAttributes(detail);
-        this.changePriceVisibility(detail);
+        this.changePriceVisibility(detail.productOfferAvailability?.[0]?.productOfferReference);
+        this.triggerShipmentTypeChange();
     }
 
     protected transferAttributes(detail: ServicePointEventDetail): void {
         document.querySelector<HTMLInputElement>(this.hiddenUuidSelector).value =
             detail.productOfferAvailability?.[0]?.servicePointUuid;
-        document.querySelector<HTMLInputElement>(this.hiddenOfferReferenceSelector).value =
-            detail.productOfferAvailability?.[0]?.productOfferReference;
     }
 
-    protected changePriceVisibility(detail: ServicePointEventDetail): void {
+    protected toggleContainer(): void {
+        this.noLocationContainer?.classList.add(this.toggleClassName);
+        this.locationContainer.classList.remove(this.toggleClassName);
+    }
+
+    protected triggerShipmentTypeChange(): void {
+        const selectedShipmentType = document.querySelector<HTMLInputElement>(
+            `.${this.shipmentType}__radio input:checked`,
+        );
+
+        if (selectedShipmentType) {
+            selectedShipmentType.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+    }
+
+    protected changeOffer(): void {
+        document.addEventListener('change', (event: Event) => {
+            if ((event.target as HTMLElement)?.matches(this.offerReferenceSelector)) {
+                this.changePriceVisibility((event.target as HTMLInputElement).value);
+            }
+        });
+    }
+
+    protected changePriceVisibility(offer: string): void {
+        document
+            .querySelectorAll<HTMLInputElement>(`${this.offerReferenceSelector}[type="hidden"]`)
+            ?.forEach((input: HTMLInputElement) => {
+                input.value = offer;
+            });
+
         document.querySelectorAll(`[${this.productDataOfferAttribute}]`)?.forEach((element: HTMLElement) => {
             const value = element.getAttribute(this.productDataOfferAttribute);
 
-            if (value === detail.productOfferAvailability?.[0]?.productOfferReference) {
+            if (value === offer) {
                 element.classList.remove(this.toggleClassName);
                 return;
             }
 
             element.classList.add(this.toggleClassName);
         });
-    }
-
-    protected toggleContainer(): void {
-        this.noLocationContainer.classList.add(this.toggleClassName);
-        this.locationContainer.classList.remove(this.toggleClassName);
     }
 
     protected get finderClassName(): string {
@@ -85,11 +119,15 @@ export default class SspServicePointSelector extends Component {
         return this.getAttribute('hidden-uuid-selector');
     }
 
-    protected get hiddenOfferReferenceSelector(): string {
-        return this.getAttribute('hidden-offer-reference-selector');
+    protected get offerReferenceSelector(): string {
+        return this.getAttribute('offer-reference-input-selector');
     }
 
     protected get productDataOfferAttribute(): string {
         return this.getAttribute('price-attribute');
+    }
+
+    protected get shipmentType(): string {
+        return this.getAttribute('shipment-type');
     }
 }

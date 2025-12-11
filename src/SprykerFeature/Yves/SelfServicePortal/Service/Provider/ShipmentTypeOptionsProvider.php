@@ -42,6 +42,11 @@ class ShipmentTypeOptionsProvider implements ShipmentTypeOptionsProviderInterfac
      */
     protected const OPTION_SERVICE_TYPE_UUID = 'serviceTypeUuid';
 
+    /**
+     * @var string
+     */
+    protected const OPTION_IS_DEFAULT_SELECTED = 'isDefaultSelected';
+
     public function __construct(
         protected SelfServicePortalConfig $selfServicePortalConfig,
         protected ShipmentTypeGroupSorterInterface $shipmentTypeGroupSorter
@@ -57,19 +62,51 @@ class ShipmentTypeOptionsProvider implements ShipmentTypeOptionsProviderInterfac
     {
         $servicePointRequiredShipmentTypeKeys = $this->selfServicePortalConfig->getShipmentTypeKeysRequiringServicePoint();
         $isServicePointRequiredMap = array_combine($servicePointRequiredShipmentTypeKeys, $servicePointRequiredShipmentTypeKeys);
+        $defaultSelectedShipmentTypeKey = $this->selfServicePortalConfig->getDefaultSelectedShipmentTypeKey();
+        $hasSingleOption = count($shipmentTypeStorageTransfers) === 1;
 
         $options = [];
+        $hasDefaultSelectedKey = false;
         foreach ($shipmentTypeStorageTransfers as $shipmentTypeStorageTransfer) {
-            $options[$shipmentTypeStorageTransfer->getKeyOrFail()] = [
+            $shipmentTypeKey = $shipmentTypeStorageTransfer->getKeyOrFail();
+            $isDefaultSelected = $hasSingleOption || $shipmentTypeKey === $defaultSelectedShipmentTypeKey;
+            if ($isDefaultSelected) {
+                $hasDefaultSelectedKey = true;
+            }
+
+            $options[$shipmentTypeKey] = [
                 static::OPTION_LABEL => $shipmentTypeStorageTransfer->getNameOrFail(),
                 static::OPTION_VALUE => $shipmentTypeStorageTransfer->getUuidOrFail(),
                 static::OPTION_SHIPMENT_TYPE_UUID => $shipmentTypeStorageTransfer->getUuidOrFail(),
                 static::OPTION_SERVICE_TYPE_KEY => $shipmentTypeStorageTransfer->getServiceType()?->getKey(),
                 static::OPTION_SERVICE_TYPE_UUID => $shipmentTypeStorageTransfer->getServiceType()?->getUuid(),
-                static::OPTION_IS_SERVICE_POINT_REQUIRED => $isServicePointRequiredMap[$shipmentTypeStorageTransfer->getKeyOrFail()] ?? false,
+                static::OPTION_IS_SERVICE_POINT_REQUIRED => $isServicePointRequiredMap[$shipmentTypeKey] ?? false,
+                static::OPTION_IS_DEFAULT_SELECTED => $isDefaultSelected,
             ];
         }
 
-        return array_values($this->shipmentTypeGroupSorter->sortShipmentTypeGroups($options));
+        $sortedOptions = array_values($this->shipmentTypeGroupSorter->sortShipmentTypeGroups($options));
+
+        if (!$hasDefaultSelectedKey && !$hasSingleOption && count($sortedOptions) > 0) {
+            $sortedOptions[0][static::OPTION_IS_DEFAULT_SELECTED] = true;
+        }
+
+        return $sortedOptions;
+    }
+
+    /**
+     * @param array<int, array<string, mixed>> $shipmentTypeOptions
+     *
+     * @return string|null
+     */
+    public function getDefaultSelectedShipmentTypeUuid(array $shipmentTypeOptions): ?string
+    {
+        foreach ($shipmentTypeOptions as $option) {
+            if ($option[static::OPTION_IS_DEFAULT_SELECTED] ?? false) {
+                return $option[static::OPTION_VALUE];
+            }
+        }
+
+        return $shipmentTypeOptions[array_key_last($shipmentTypeOptions)][static::OPTION_VALUE] ?? null;
     }
 }
