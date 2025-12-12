@@ -26,6 +26,9 @@
                 form: data.form
             }
         } only %}
+            {% block fields %}
+                {{- form_row(embed.form) -}}
+            {% endblock %}
         {% endembed %}
     {% endif %}
 {% endblock %}

@@ -103,6 +103,7 @@
         <property name="name" type="string"/>
         <property name="idStore" type="int"/>
         <property name="timezone" type="string"/>
+        <property name="defaultLocaleIsoCode" type="string"/>
     </transfer>
 
     <transfer name="ItemMetadata">
