@@ -35,7 +35,7 @@ class SspModelProductListWriterStep implements DataImportStepInterface
             ->findOne();
 
         if (!$productListEntity) {
-            throw new EntityNotFoundException($productListKey);
+            throw new EntityNotFoundException(sprintf('Product list %s not found', $productListKey));
         }
 
         $sspModelToProductListEntity = SpySspModelToProductListQuery::create()

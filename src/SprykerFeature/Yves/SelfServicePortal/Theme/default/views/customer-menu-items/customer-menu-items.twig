@@ -7,7 +7,15 @@
 {% block body %}
     {% widget 'SspCompanyFilesMenuItemWidget' args [data.activePage] only %}{% endwidget %}
     {% widget 'SspInquiryMenuItemWidget' args [data.activePage] only %}{% endwidget %}
+
+    {% if can('ViewCompanySspAssetPermissionPlugin') or
+        can('ViewBusinessUnitSspAssetPermissionPlugin') or
+        can('UpdateSspAssetPermissionPlugin') or
+        can('UnassignSspAssetPermissionPlugin') or
+        can('CreateSspAssetPermissionPlugin')
+    %}
     {% widget 'SspAssetMenuItemWidget' args [data.activePage] only %}{% endwidget %}
+    {% endif %}
     {% widget 'DashboardMenuItemWidget' args [data.activePage] only %}{% endwidget %}
     {% widget 'SspServiceMenuItemWidget' args [data.activePage] only %}{% endwidget %}
 {% endblock %}
