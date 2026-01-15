@@ -21,7 +21,7 @@
 {% define attributes = {
     'data-service-point-product-sku': null,
     'ajax-container-class': "js-#{config.name}-container",
-    'no-service-types': ((data.shipmentTypes | default([])) | filter(type => not type.serviceTypeKey) | reduce((acc, type) => acc | merge([type.value]), [])) | json_encode,
+    'no-service-types': [] | json_encode,
     'service-point-uuid': "[name='#{data.formFieldServicePointUuid}']"
 } %}
 

@@ -26,6 +26,7 @@
     'toggle-class-name': 'is-hidden',
     'hidden-uuid-selector': '[data-service-point-uuid-input]',
     'offer-reference-input-selector': '[name="product_offer_reference"]',
+    'merchant-reference-input-selector': '[name="merchant_reference"]',
     'price-attribute': 'data-product-price-offer',
     'shipment-type': 'js-service-point-shipment-types',
 } %}
@@ -103,14 +104,23 @@
             isRadioButtonVisible,
             isChecked,
         ]) %}
-        {% set hasMerchantProduct = merchantProductWidget.merchantProductView is defined %}
+        {% set hasMerchantProduct = merchantProductWidget.merchantProductView %}
 
         {% block productOfferListByMerchant %}
-            {% widget merchantProductWidget %}{% endwidget %}
+            {% if data.isServicePointRequired is null %}
+                {% widget merchantProductWidget with {
+                    data: {
+                        pageReload: false,
+                    },
+                } %}{% endwidget %}
+            {% endif %}
+
             {% widget merchantProductOfferWidget with {
                 data: {
-                    isTitleVisible: not hasMerchantProduct,
+                    isTitleVisible: not hasMerchantProduct or data.isServicePointRequired,
                     pageReload: false,
+                    isSingleOffer: productOffersCount == 1,
+                    isDefaultOfferChecked: data.isServicePointRequired is not null,
                 },
                 embed: {
                     hasMerchantProduct: hasMerchantProduct,

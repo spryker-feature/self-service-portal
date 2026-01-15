@@ -12,7 +12,7 @@ export default class ServicePointShipmentTypes extends Component {
     }
 
     protected mapEvents(): void {
-        this.selectedType = this.querySelector<HTMLInputElement>(`.${this.jsName}__radio input:checked`).value;
+        this.selectedType = this.querySelector<HTMLInputElement>(`.${this.jsName}__radio input:checked`)?.value;
 
         for (const radio of Array.from(this.querySelectorAll(`.${this.jsName}__radio input`))) {
             radio.addEventListener('change', this.toggle.bind(this));
@@ -33,9 +33,13 @@ export default class ServicePointShipmentTypes extends Component {
             this.querySelector(`.${this.ajaxContainerClass}`).innerHTML = '';
         }
 
-        this.querySelector('ajax-provider').addEventListener(EVENT_FETCHED, () => {
-            this.dispatchCustomEvent(EVENT_SHIPMENT_TYPE_CHANGE, null, { bubbles: true });
-        });
+        this.querySelector('ajax-provider').addEventListener(
+            EVENT_FETCHED,
+            () => {
+                this.dispatchCustomEvent(EVENT_SHIPMENT_TYPE_CHANGE, null, { bubbles: true });
+            },
+            { once: true },
+        );
     }
 
     protected get ajaxContainerClass(): string {

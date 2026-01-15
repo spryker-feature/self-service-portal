@@ -30,11 +30,17 @@ export default class SspServicePointSelector extends Component {
     }
 
     protected onShipmentTypeChange(): void {
-        document.addEventListener(EVENT_SHIPMENT_TYPE_CHANGE, () => {
-            document
-                .querySelector<HTMLInputElement>(`${this.offerReferenceSelector}:checked`)
-                ?.dispatchEvent(new Event('change', { bubbles: true }));
-        });
+        document.addEventListener(
+            EVENT_SHIPMENT_TYPE_CHANGE,
+            () => {
+                const checkbox =
+                    document.querySelector<HTMLInputElement>(`${this.merchantReferenceSelector}:checked`) ??
+                    document.querySelector<HTMLInputElement>(`${this.offerReferenceSelector}:checked`);
+
+                checkbox?.dispatchEvent(new Event('change', { bubbles: true }));
+            },
+            { once: true },
+        );
     }
 
     protected mapFinderSetServicePointEvent(): void {
@@ -82,29 +88,55 @@ export default class SspServicePointSelector extends Component {
 
     protected changeOffer(): void {
         document.addEventListener('change', (event: Event) => {
-            if ((event.target as HTMLElement)?.matches(this.offerReferenceSelector)) {
+            const checker = (matcher: string) => (event.target as HTMLElement)?.matches(matcher);
+
+            if (checker(this.offerReferenceSelector) || checker(`${this.merchantReferenceSelector}`)) {
                 this.changePriceVisibility((event.target as HTMLInputElement).value);
             }
         });
     }
 
     protected changePriceVisibility(offer: string): void {
-        document
-            .querySelectorAll<HTMLInputElement>(`${this.offerReferenceSelector}[type="hidden"]`)
-            ?.forEach((input: HTMLInputElement) => {
-                input.value = offer;
-            });
+        this.querySelectorAll<HTMLInputElement>(
+            `${this.merchantReferenceSelector}[type="radio"], ${this.offerReferenceSelector}[type="radio"]`,
+        )?.forEach((input: HTMLInputElement) => {
+            input.checked = input.value === offer;
 
-        document.querySelectorAll(`[${this.productDataOfferAttribute}]`)?.forEach((element: HTMLElement) => {
+            if (input.value !== offer) {
+                input.removeAttribute('checked');
+            }
+        });
+
+        this.querySelectorAll<HTMLInputElement>(`${this.offerReferenceSelector}[type="hidden"]`)?.forEach(
+            (input: HTMLInputElement) => {
+                input.value = offer;
+            },
+        );
+
+        const elements = document.querySelectorAll(`[${this.productDataOfferAttribute}]`);
+        let offerFound = false;
+
+        elements?.forEach((element: HTMLElement) => {
             const value = element.getAttribute(this.productDataOfferAttribute);
 
             if (value === offer) {
                 element.classList.remove(this.toggleClassName);
+                offerFound = true;
                 return;
             }
 
             element.classList.add(this.toggleClassName);
         });
+
+        if (offerFound) {
+            return;
+        }
+
+        const emptyElement = document.querySelector(`[${this.productDataOfferAttribute}=""]`);
+
+        if (emptyElement) {
+            emptyElement.classList.remove(this.toggleClassName);
+        }
     }
 
     protected get finderClassName(): string {
@@ -121,6 +153,10 @@ export default class SspServicePointSelector extends Component {
 
     protected get offerReferenceSelector(): string {
         return this.getAttribute('offer-reference-input-selector');
+    }
+
+    protected get merchantReferenceSelector(): string {
+        return this.getAttribute('merchant-reference-input-selector');
     }
 
     protected get productDataOfferAttribute(): string {
