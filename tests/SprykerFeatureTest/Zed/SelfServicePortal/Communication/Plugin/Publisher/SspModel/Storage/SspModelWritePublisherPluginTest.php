@@ -87,12 +87,14 @@ class SspModelWritePublisherPluginTest extends Unit
     {
         parent::setUp();
 
-        $this->plugin = new SspModelWritePublisherPlugin();
         $this->tester->setDependency(QueueDependencyProvider::QUEUE_ADAPTERS, function (Container $container) {
             return [
                 $container->getLocator()->rabbitMq()->client()->createQueueAdapter(),
+                $container->getLocator()->symfonyMessenger()->client()->createQueueAdapter(),
             ];
         });
+
+        $this->plugin = new SspModelWritePublisherPlugin();
 
         $this->tester->clearSspModelData();
         $this->tester->clearSspModelStorageData();

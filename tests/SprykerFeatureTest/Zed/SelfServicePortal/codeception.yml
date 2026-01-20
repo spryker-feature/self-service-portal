@@ -52,7 +52,6 @@ suites:
                 - \SprykerTest\Zed\ProductList\Helper\ProductListHelper
                 - \SprykerTest\Shared\Customer\Helper\CustomerDataHelper
                 - \SprykerTest\Client\RabbitMq\Helper\RabbitMqHelper
-                - \SprykerTest\Client\Testify\Helper\ClientHelper
                 - \SprykerTest\Client\Testify\Helper\ConfigHelper
                 - \SprykerTest\Zed\CompanyBusinessUnit\Helper\CompanyBusinessUnitHelper
                 - \SprykerTest\Zed\Company\Helper\CompanyHelper
@@ -63,6 +62,7 @@ suites:
                 - \SprykerTest\Client\Testify\Helper\ClientHelper
                 - \SprykerFeatureTest\Shared\SelfServicePortal\Helper\SspModelHelper
                 - \SprykerTest\Client\Testify\Helper\ConfigHelper
+                - \SprykerTest\Client\Queue\Helper\QueueHelper
     Business:
         path: Business
         actor: SelfServicePortalBusinessTester
@@ -100,6 +100,8 @@ suites:
                 - \SprykerTest\Zed\CompanyRole\Helper\CompanyRoleHelper
                 - \SprykerFeatureTest\Shared\SelfServicePortal\Helper\SspModelHelper
                 - \SprykerTest\Shared\Quote\Helper\PersistentQuoteHelper
+                - \SprykerTest\Client\Testify\Helper\ClientHelper
+                - \SprykerTest\Client\Queue\Helper\QueueHelper
 
     Persistence:
         path: Persistence

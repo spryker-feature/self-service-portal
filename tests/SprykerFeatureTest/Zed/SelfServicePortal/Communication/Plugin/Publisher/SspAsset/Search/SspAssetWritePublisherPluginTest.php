@@ -54,6 +54,13 @@ class SspAssetWritePublisherPluginTest extends Unit
     {
         parent::setUp();
 
+        $this->tester->setDependency(QueueDependencyProvider::QUEUE_ADAPTERS, function (Container $container) {
+            return [
+                $container->getLocator()->rabbitMq()->client()->createQueueAdapter(),
+                $container->getLocator()->symfonyMessenger()->client()->createQueueAdapter(),
+            ];
+        });
+
          $storeTransferAT = $this->tester->haveStore([
             StoreTransfer::NAME => static::STORE_NAME_AT,
          ]);
@@ -71,15 +78,6 @@ class SspAssetWritePublisherPluginTest extends Unit
         $this->tester->setDependency(
             SelfServicePortalDependencyProvider::FACADE_STORE,
             $storeFacadeMock,
-        );
-
-        $this->tester->setDependency(
-            QueueDependencyProvider::QUEUE_ADAPTERS,
-            function (Container $container) {
-                return [
-                    $container->getLocator()->rabbitMq()->client()->createQueueAdapter(),
-                ];
-            },
         );
 
         $this->tester->setDependency(

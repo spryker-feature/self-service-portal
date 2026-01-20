@@ -71,12 +71,14 @@ class SspModelToProductListWritePublisherPluginTest extends Unit
     {
         parent::setUp();
 
-        $this->plugin = new SspModelToProductListWritePublisherPlugin();
         $this->tester->setDependency(QueueDependencyProvider::QUEUE_ADAPTERS, function (Container $container) {
             return [
                 $container->getLocator()->rabbitMq()->client()->createQueueAdapter(),
+                $container->getLocator()->symfonyMessenger()->client()->createQueueAdapter(),
             ];
         });
+
+        $this->plugin = new SspModelToProductListWritePublisherPlugin();
 
         $this->tester->clearSspModelStorageData();
         $this->tester->clearSspModelData();
