@@ -48,6 +48,8 @@ class SspAssetDataImportPluginTest extends Unit
      */
     protected const IMPORT_FILE_PATH_INVALID_URL = 'import/ssp_asset_invalid_url.csv';
 
+    protected const string IMPORT_TYPE = 'ssp-asset';
+
     /**
      * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
      */
@@ -71,6 +73,7 @@ class SspAssetDataImportPluginTest extends Unit
         $configurationTransfer->setFileName(codecept_data_dir() . static::IMPORT_FILE_PATH);
 
         $dataImporterConfigurationTransfer = (new DataImporterConfigurationTransfer())
+            ->setImportType(static::IMPORT_TYPE)
             ->setReaderConfiguration($configurationTransfer);
 
         $sspAssetDataImportPlugin = new SspAssetDataImportPlugin();
@@ -111,6 +114,7 @@ class SspAssetDataImportPluginTest extends Unit
         $configurationTransfer->setFileName(codecept_data_dir() . static::IMPORT_FILE_PATH_INVALID);
 
         $dataImporterConfigurationTransfer = (new DataImporterConfigurationTransfer())
+            ->setImportType(static::IMPORT_TYPE)
             ->setReaderConfiguration($configurationTransfer)
             ->setThrowException(true);
 
@@ -131,6 +135,7 @@ class SspAssetDataImportPluginTest extends Unit
         $configurationTransfer->setFileName(codecept_data_dir() . static::IMPORT_FILE_PATH_INVALID_URL);
 
         $dataImporterConfigurationTransfer = (new DataImporterConfigurationTransfer())
+            ->setImportType(static::IMPORT_TYPE)
             ->setReaderConfiguration($configurationTransfer)
             ->setThrowException(true);
 
@@ -153,7 +158,7 @@ class SspAssetDataImportPluginTest extends Unit
         $importType = $sspAssetDataImportPlugin->getImportType();
 
         // Assert
-        $this->assertSame('ssp-asset', $importType);
+        $this->assertSame(static::IMPORT_TYPE, $importType);
     }
 
     protected function overwriteConfig(SspAssetDataImportPlugin $sspAssetDataImportPlugin): SspAssetDataImportPlugin
