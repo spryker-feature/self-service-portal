@@ -41,7 +41,7 @@ class SspModelStorageReader implements SspModelStorageReaderInterface
             return new SspModelStorageCollectionTransfer();
         }
 
-        return $this->getSspModelStorageByModelIds($sspModelIds);
+        return $this->getSspModelStorageByModelIds(array_values($sspModelIds));
     }
 
      /**
@@ -63,7 +63,7 @@ class SspModelStorageReader implements SspModelStorageReaderInterface
             return [];
         }
 
-        return $sspModelStorageCollectionTransfer->getSspModelStorages()->getArrayCopy();
+        return array_values($sspModelStorageCollectionTransfer->getSspModelStorages()->getArrayCopy());
     }
 
     /**

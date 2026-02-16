@@ -594,7 +594,7 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      */
     public function getCompanyFileAllowedMimeTypes(): array
     {
-        return static::DEFAULT_COMPANY_FILE_ALLOWED_MIME_TYPES;
+        return array_values(static::DEFAULT_COMPANY_FILE_ALLOWED_MIME_TYPES);
     }
 
     /**
@@ -607,7 +607,7 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      */
     public function getCompanyFileAllowedFileExtensions(): array
     {
-        return static::DEFAULT_COMPANY_FILE_ALLOWED_FILE_EXTENSIONS;
+        return array_values(static::DEFAULT_COMPANY_FILE_ALLOWED_FILE_EXTENSIONS);
     }
 
     /**

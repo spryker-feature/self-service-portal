@@ -134,6 +134,6 @@ class SspAssetStorageEntityMapper implements SspAssetStorageEntityMapperInterfac
             $modelIds[] = $sspModelTransfer->getIdSspModelOrFail();
         }
 
-        return array_unique($modelIds);
+        return array_values(array_unique($modelIds));
     }
 }

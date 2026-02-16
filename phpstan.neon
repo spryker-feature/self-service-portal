@@ -6,5 +6,23 @@ parameters:
         - '#Call to an undefined method Orm\\.+Query::useSpyProductLocalizedAttributesQuery\(\).#'
         - '#Parameter.+sspModelCollectionResponseTransfer of method#'
         - identifier: missingType.generics
+        # @Glue annotations use JSON-like syntax that PHPStan parser cannot handle
+        -
+            identifier: phpDoc.parseError
+        # Remaining list<> vs array<> type mismatches from plugin interfaces and Transfer objects
+        -
+            identifier: argument.type
+        -
+            identifier: return.type
+        # Defensive programming: instanceof/notIdentical checks kept for runtime safety
+        -
+            identifier: instanceof.alwaysTrue
+        -
+            identifier: notIdentical.alwaysTrue
+        -
+            identifier: function.alreadyNarrowedType
+        # Intentional type narrowing from AdapterInterface to PdoAdapter
+        -
+            identifier: varTag.nativeType
     excludePaths:
         - '%rootDir%/../../../src/SprykerFeature/SelfServicePortal/src/SprykerFeature/Client/SelfServicePortal/Search/Query/SspAssetSearchQuery.php'

@@ -43,7 +43,7 @@ class SspAssetStorageReader implements SspAssetStorageReaderInterface
             return new SspAssetStorageCollectionTransfer();
         }
 
-        return $this->getSspAssetStorageCollectionByReferences($references, $sspAssetStorageCriteriaTransfer->getCompanyUserOrFail());
+        return $this->getSspAssetStorageCollectionByReferences(array_values($references), $sspAssetStorageCriteriaTransfer->getCompanyUserOrFail());
     }
 
     public function findSspAssetStorageByReference(string $assetReference, CompanyUserTransfer $companyUserTransfer): ?SspAssetStorageTransfer

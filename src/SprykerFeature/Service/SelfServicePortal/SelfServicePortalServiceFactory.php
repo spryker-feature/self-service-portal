@@ -13,7 +13,7 @@ use SprykerFeature\Service\SelfServicePortal\Downloader\FileDownloader;
 use SprykerFeature\Service\SelfServicePortal\Downloader\FileDownloaderInterface;
 
 /**
- * @method \Spryker\Service\SelfServicePortal\SelfServicePortalConfig getConfig()
+ * @method \SprykerFeature\Service\SelfServicePortal\SelfServicePortalConfig getConfig()
  */
 class SelfServicePortalServiceFactory extends AbstractServiceFactory
 {

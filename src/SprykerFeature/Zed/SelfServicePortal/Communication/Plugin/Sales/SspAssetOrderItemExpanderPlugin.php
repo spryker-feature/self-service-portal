@@ -32,6 +32,6 @@ class SspAssetOrderItemExpanderPlugin extends AbstractPlugin implements OrderIte
      */
     public function expand(array $itemTransfers): array
     {
-        return $this->getBusinessFactory()->createOrderItemSspAssetExpander()->expandItemsWithSspAssets($itemTransfers);
+        return $this->getBusinessFactory()->createOrderItemSspAssetExpander()->expandItemsWithSspAssets(array_values($itemTransfers));
     }
 }

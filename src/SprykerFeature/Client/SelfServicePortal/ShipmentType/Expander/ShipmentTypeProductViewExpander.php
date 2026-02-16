@@ -38,7 +38,7 @@ class ShipmentTypeProductViewExpander implements ShipmentTypeProductViewExpander
         }
 
         $shipmentTypeStorageCollectionTransfer = $this->shipmentTypeStorageReader->getShipmentTypeStorageCollection(
-            $productViewTransfer->getShipmentTypeUuids(),
+            array_values($productViewTransfer->getShipmentTypeUuids()),
         );
 
         return $productViewTransfer->setShipmentTypes(
