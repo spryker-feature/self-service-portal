@@ -41,6 +41,8 @@ class ProductToProductClassDataImportPluginTest extends Unit
      */
     protected const IMPORT_FILE_PATH_INVALID = 'import/product_to_product_class_invalid.csv';
 
+    protected const string IMPORT_TYPE = 'product-to-product-class';
+
     /**
      * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
      */
@@ -64,6 +66,7 @@ class ProductToProductClassDataImportPluginTest extends Unit
         $configurationTransfer->setFileName(codecept_data_dir() . static::IMPORT_FILE_PATH);
 
         $dataImporterConfigurationTransfer = (new DataImporterConfigurationTransfer())
+            ->setImportType(static::IMPORT_TYPE)
             ->setReaderConfiguration($configurationTransfer)
             ->setThrowException(true);
 
@@ -89,6 +92,7 @@ class ProductToProductClassDataImportPluginTest extends Unit
         $configurationTransfer->setFileName(codecept_data_dir() . static::IMPORT_FILE_PATH_INVALID);
 
         $dataImporterConfigurationTransfer = (new DataImporterConfigurationTransfer())
+            ->setImportType(static::IMPORT_TYPE)
             ->setReaderConfiguration($configurationTransfer)
             ->setThrowException(true);
 
@@ -109,7 +113,7 @@ class ProductToProductClassDataImportPluginTest extends Unit
         $importType = $productToProductClassDataImportPlugin->getImportType();
 
         // Assert
-        $this->assertSame('product-to-product-class', $importType);
+        $this->assertSame(static::IMPORT_TYPE, $importType);
     }
 
     protected function overwriteConfig(ProductToProductClassDataImportPlugin $productToProductClassDataImportPlugin): ProductToProductClassDataImportPlugin

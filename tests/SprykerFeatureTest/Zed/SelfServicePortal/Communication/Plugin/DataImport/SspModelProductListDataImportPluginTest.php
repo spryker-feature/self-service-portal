@@ -40,6 +40,8 @@ class SspModelProductListDataImportPluginTest extends Unit
      */
     protected const IMPORT_FILE_PATH = 'import/ssp_model_product_list.csv';
 
+    protected const string IMPORT_TYPE = 'ssp-model-product-list';
+
     /**
      * @var string
      */
@@ -112,6 +114,7 @@ class SspModelProductListDataImportPluginTest extends Unit
         $configurationTransfer->setFileName(codecept_data_dir() . static::IMPORT_FILE_PATH);
 
         $dataImporterConfigurationTransfer = (new DataImporterConfigurationTransfer())
+            ->setImportType(static::IMPORT_TYPE)
             ->setReaderConfiguration($configurationTransfer);
 
         $sspModelProductListDataImportPlugin = new SspModelProductListDataImportPlugin();
@@ -148,6 +151,7 @@ class SspModelProductListDataImportPluginTest extends Unit
         $configurationTransfer->setFileName(codecept_data_dir() . static::IMPORT_FILE_PATH_INVALID);
 
         $dataImporterConfigurationTransfer = (new DataImporterConfigurationTransfer())
+            ->setImportType(static::IMPORT_TYPE)
             ->setReaderConfiguration($configurationTransfer)
             ->setThrowException(true);
 
@@ -178,6 +182,7 @@ class SspModelProductListDataImportPluginTest extends Unit
         $configurationTransfer->setFileName(codecept_data_dir() . static::IMPORT_FILE_PATH_NONEXISTENT_MODEL);
 
         $dataImporterConfigurationTransfer = (new DataImporterConfigurationTransfer())
+            ->setImportType(static::IMPORT_TYPE)
             ->setReaderConfiguration($configurationTransfer)
             ->setThrowException(true);
 
@@ -196,6 +201,7 @@ class SspModelProductListDataImportPluginTest extends Unit
         $configurationTransfer->setFileName(codecept_data_dir() . static::IMPORT_FILE_PATH_NONEXISTENT_PRODUCT_LIST);
 
         $dataImporterConfigurationTransfer = (new DataImporterConfigurationTransfer())
+            ->setImportType(static::IMPORT_TYPE)
             ->setReaderConfiguration($configurationTransfer)
             ->setThrowException(true);
 
@@ -214,6 +220,7 @@ class SspModelProductListDataImportPluginTest extends Unit
         $configurationTransfer->setFileName(codecept_data_dir() . static::IMPORT_FILE_PATH_DUPLICATE);
 
         $dataImporterConfigurationTransfer = (new DataImporterConfigurationTransfer())
+            ->setImportType(static::IMPORT_TYPE)
             ->setReaderConfiguration($configurationTransfer);
 
         $sspModelProductListDataImportPlugin = new SspModelProductListDataImportPlugin();

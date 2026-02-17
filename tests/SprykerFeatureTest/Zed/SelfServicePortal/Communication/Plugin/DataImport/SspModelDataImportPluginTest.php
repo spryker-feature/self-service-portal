@@ -38,6 +38,8 @@ class SspModelDataImportPluginTest extends Unit
      */
     protected const IMPORT_FILE_PATH = 'import/ssp_model.csv';
 
+    protected const string IMPORT_TYPE = 'ssp-model';
+
     /**
      * @var string
      */
@@ -85,6 +87,7 @@ class SspModelDataImportPluginTest extends Unit
         // Act
         $dataImporterReportTransfer = $sspModelDataImportPlugin->import(
             (new DataImporterConfigurationTransfer())
+                ->setImportType(static::IMPORT_TYPE)
                 ->setReaderConfiguration(
                     (new DataImporterReaderConfigurationTransfer())
                     ->setFileName(codecept_data_dir() . static::IMPORT_FILE_PATH),
@@ -115,6 +118,7 @@ class SspModelDataImportPluginTest extends Unit
         $configurationTransfer->setFileName(codecept_data_dir() . static::IMPORT_FILE_PATH_INVALID);
 
         $dataImporterConfigurationTransfer = (new DataImporterConfigurationTransfer())
+            ->setImportType(static::IMPORT_TYPE)
             ->setReaderConfiguration($configurationTransfer)
             ->setThrowException(true);
 
