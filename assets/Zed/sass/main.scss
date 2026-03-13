@@ -1,16 +1,7 @@
 .nav-tabs-radio .nav-tabs:not(.tab-content .nav-tabs) {
-    border: none;
-    padding: 0 20px 10px;
-    border-bottom: 1px solid #e7eaec;
-
-    li.active > a,
-    li a {
-        border: none;
-        background: none;
-    }
-
     li a {
         position: relative;
+        padding-left: 1.5rem;
 
         &::before {
             content: '';
@@ -21,13 +12,13 @@
             width: 18px;
             height: 18px;
             border-radius: 50%;
-            border: 2px solid #b2b2b2;
+            border: 2px solid currentColor;
         }
     }
 
     li.active > a {
         &::before {
-            border-color: #11856e;
+            border-color: currentColor;
         }
 
         &::after {
@@ -39,23 +30,13 @@
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: #11856e;
+            background: currentColor;
         }
     }
 }
 
-.panel-body .panel-body {
-    padding-left: 0;
-    padding-right: 0;
-}
-
 .content-title {
-    padding: 10px 20px 10px;
-    background: #fff;
-    color: #121212;
-    font-weight: 600;
-    letter-spacing: 0.08px;
-    border-radius: 10px 10px 0 0;
+    margin-bottom: 1rem;
 
     h5 {
         font-size: 16px;
