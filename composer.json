@@ -65,7 +65,7 @@
         "spryker/quote-extension": "^1.2.0",
         "spryker/router": "^1.0.0",
         "spryker/sales": "^11.0.0",
-        "spryker/sales-extension": "^1.1.0",
+        "spryker/sales-extension": "^1.14.0",
         "spryker/search-extension": "^1.0.0",
         "spryker/sequence-number": "^3.0.0",
         "spryker/service-point": "^1.1.0",
