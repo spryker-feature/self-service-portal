@@ -48,14 +48,4 @@ interface SspInquiryDataSetInterface
      * @var string
      */
     public const STATUS = 'status';
-
-    /**
-     * @var string
-     */
-    public const STORE = 'store';
-
-    /**
-     * @var string
-     */
-    public const FK_STORE = 'fk_store';
 }

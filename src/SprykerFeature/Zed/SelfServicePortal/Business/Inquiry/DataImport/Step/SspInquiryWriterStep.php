@@ -48,9 +48,7 @@ class SspInquiryWriterStep implements DataImportStepInterface
             throw new DataImportException('Selectable Ssp Inquiry types are not allowed.');
         }
 
-        $sequenceNumberSetting = $this->getInquirySequenceNumberSettings(
-            $dataSet[SspInquiryDataSetInterface::STORE],
-        );
+        $sequenceNumberSetting = $this->getInquirySequenceNumberSettings();
         $this->sequenceNumberFacade->generate($sequenceNumberSetting);
 
          $sspInquiryEntity = SpySspInquiryQuery::create()
@@ -68,17 +66,16 @@ class SspInquiryWriterStep implements DataImportStepInterface
         $dataSet[SspInquiryDataSetInterface::ID_SSP_INQUIRY] = $sspInquiryEntity->getIdSspInquiry();
     }
 
-    protected function getInquirySequenceNumberSettings(string $storeName): SequenceNumberSettingsTransfer
+    protected function getInquirySequenceNumberSettings(): SequenceNumberSettingsTransfer
     {
         return (new SequenceNumberSettingsTransfer())
             ->setName(static::NAME_SSP_INQUIRY_REFERENCE)
-            ->setPrefix($this->createPrefix($storeName));
+            ->setPrefix($this->createPrefix());
     }
 
-    protected function createPrefix(string $storeName): string
+    protected function createPrefix(): string
     {
         $sequenceNumberPrefixParts = [];
-        $sequenceNumberPrefixParts[] = $storeName;
         $sequenceNumberPrefixParts[] = static::SSP_INQUIRY_REFERENCE_PREFIX;
 
         return sprintf('%s--', implode('-', $sequenceNumberPrefixParts));

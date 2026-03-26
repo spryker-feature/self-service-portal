@@ -541,8 +541,8 @@
         <property name="productConcreteSkus" type="string[]" singular="productConcreteSku"/>
         <property name="shipmentTypeUuids" type="string[]" singular="shipmentTypeUuid" strict="true"/>
         <property name="servicePointUuids" type="string[]" singular="servicePointUuid" strict="true"/>
-    </transfer> 
-    
+    </transfer>
+
     <transfer name="ProductStorageCriteria">
         <property name="shipmentTypeUuids" type="string[]" singular="shipmentTypeUuid" strict="true"/>
         <property name="servicePointUuids" type="string[]" singular="servicePointUuid" strict="true"/>
@@ -915,8 +915,10 @@
         <property name="references" type="string[]" singular="reference"/>
         <property name="sspInquiryOwnerConditionGroup" type="SspInquiryOwnerConditionGroup"/>
         <property name="status" type="string"/>
-        <property name="idStore" type="int"/>
-        <property name="storeName" type="string"/>
+        <!-- Deprecated: store-based filtering was removed; kept for BC only -->
+        <property name="idStore" type="int" deprecated="true"/>
+        <property name="storeName" type="string" deprecated="true"/>
+        <!-- /////////////////////////////////////////////////////////////// -->
         <property name="type" type="string"/>
         <property name="createdDateFrom" type="string"/>
         <property name="createdDateTo" type="string"/>
@@ -1396,5 +1398,5 @@
     <transfer name="ServiceTypeStorageCriteria" strict="true">
         <property name="serviceTypeStorageConditions" type="ServiceTypeStorageConditions"/>
     </transfer>
-    
+
 </transfers>

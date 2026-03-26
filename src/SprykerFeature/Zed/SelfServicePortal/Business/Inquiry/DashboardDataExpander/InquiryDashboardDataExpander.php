@@ -15,7 +15,6 @@ use Generated\Shared\Transfer\SortTransfer;
 use Generated\Shared\Transfer\SspInquiryConditionsTransfer;
 use Generated\Shared\Transfer\SspInquiryCriteriaTransfer;
 use Generated\Shared\Transfer\SspInquiryOwnerConditionGroupTransfer;
-use Generated\Shared\Transfer\StoreTransfer;
 use Spryker\Zed\Kernel\PermissionAwareTrait;
 use SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Reader\SspInquiryReaderInterface;
 use SprykerFeature\Zed\SelfServicePortal\SelfServicePortalConfig;
@@ -47,8 +46,6 @@ class InquiryDashboardDataExpander implements InquiryDashboardDataExpanderInterf
             ->setStatus($this->selfServicePortalConfig->getInquiryPendingStatus())
             ->setSspInquiryOwnerConditionGroup($sspInquiryOwnerConditionGroupTransfer);
 
-        $sspInquiryConditionsTransfer = $this->addStoreFilter($dashboardRequestTransfer->getStoreOrFail(), $sspInquiryConditionsTransfer);
-
         $sspInquiryCriteriaTransfer = (new SspInquiryCriteriaTransfer())
             ->setSspInquiryConditions($sspInquiryConditionsTransfer)
             ->setPagination(
@@ -72,14 +69,5 @@ class InquiryDashboardDataExpander implements InquiryDashboardDataExpanderInterf
             ->setPendingItems($pendingItemsCount);
 
         return $dashboardResponseTransfer->setDashboardComponentInquiry($dashboardComponentInquiryTransfer);
-    }
-
-    public function addStoreFilter(StoreTransfer $storeTransfer, SspInquiryConditionsTransfer $sspInquiryConditionsTransfer): SspInquiryConditionsTransfer
-    {
-        if ($storeTransfer->getIdStore()) {
-            return $sspInquiryConditionsTransfer->setIdStore($storeTransfer->getIdStoreOrFail());
-        }
-
-        return $sspInquiryConditionsTransfer->setStoreName($storeTransfer->getName());
     }
 }
