@@ -19,11 +19,8 @@ use Generated\Shared\Transfer\StoreTransfer;
 use Orm\Zed\SelfServicePortal\Persistence\SpySspAssetSearchQuery;
 use Spryker\Client\Kernel\Container;
 use Spryker\Client\Queue\QueueDependencyProvider;
-use Spryker\Zed\Store\Business\StoreFacadeInterface;
-use Spryker\Zed\Store\StoreDependencyProvider;
 use SprykerFeature\Shared\SelfServicePortal\SelfServicePortalConfig;
 use SprykerFeature\Zed\SelfServicePortal\Communication\Plugin\Publisher\SspAsset\Search\SspAssetToCompanyBusinessUnitWritePublisherPlugin;
-use SprykerFeature\Zed\SelfServicePortal\SelfServicePortalDependencyProvider;
 use SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester;
 
 /**
