@@ -74,29 +74,13 @@ class SspAssetToCompanyBusinessUnitWritePublisherPluginTest extends Unit
             ];
         });
 
-        $storeTransferAT = $this->tester->haveStore([
+        $this->tester->haveStore([
             StoreTransfer::NAME => static::STORE_NAME_AT,
         ]);
 
-        $storeTransferDE = $this->tester->haveStore([
+        $this->tester->haveStore([
             StoreTransfer::NAME => static::STORE_NAME_DE,
         ]);
-
-        $storeFacadeMock = $this->createMock(StoreFacadeInterface::class);
-        $storeFacadeMock->method('getAllStores')->willReturn([
-            $storeTransferAT,
-            $storeTransferDE,
-        ]);
-
-        $this->tester->setDependency(
-            SelfServicePortalDependencyProvider::FACADE_STORE,
-            $storeFacadeMock,
-        );
-
-        $this->tester->setDependency(
-            StoreDependencyProvider::SERVICE_STORE,
-            static::STORE_NAME_DE,
-        );
 
         $this->tester->ensureSspAssetRelatedTablesAreEmpty();
     }
