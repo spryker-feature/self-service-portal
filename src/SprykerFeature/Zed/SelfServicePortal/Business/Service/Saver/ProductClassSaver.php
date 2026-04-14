@@ -8,11 +8,12 @@
 namespace SprykerFeature\Zed\SelfServicePortal\Business\Service\Saver;
 
 use ArrayObject;
+use Generated\Shared\Transfer\EventEntityTransfer;
 use Generated\Shared\Transfer\ProductClassConditionsTransfer;
 use Generated\Shared\Transfer\ProductClassCriteriaTransfer;
 use Generated\Shared\Transfer\ProductConcreteTransfer;
-use Spryker\Zed\ProductPageSearch\Business\ProductPageSearchFacadeInterface;
-use Spryker\Zed\ProductStorage\Business\ProductStorageFacadeInterface;
+use Spryker\Zed\Event\Business\EventFacadeInterface;
+use Spryker\Zed\Product\Dependency\ProductEvents;
 use SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalEntityManagerInterface;
 use SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalRepositoryInterface;
 
@@ -21,8 +22,7 @@ class ProductClassSaver implements ProductClassSaverInterface
     public function __construct(
         protected SelfServicePortalEntityManagerInterface $selfServicePortalEntityManager,
         protected SelfServicePortalRepositoryInterface $selfServicePortalRepository,
-        protected ProductPageSearchFacadeInterface $productPageSearchFacade,
-        protected ProductStorageFacadeInterface $productStorageFacade
+        protected EventFacadeInterface $eventFacade
     ) {
     }
 
@@ -40,8 +40,10 @@ class ProductClassSaver implements ProductClassSaverInterface
 
         $idProductAbstract = $productConcreteTransfer->getFkProductAbstractOrFail();
 
-        $this->productPageSearchFacade->refresh([$idProductAbstract]);
-        $this->productStorageFacade->publishConcreteProducts([$idProductConcrete]);
+        $this->eventFacade->trigger(
+            ProductEvents::ENTITY_SPY_PRODUCT_ABSTRACT_UPDATE,
+            (new EventEntityTransfer())->setId($idProductAbstract),
+        );
 
         return $productConcreteTransfer;
     }

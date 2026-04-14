@@ -9,9 +9,7 @@ namespace SprykerFeatureTest\Zed\SelfServicePortal\Communication\Plugin\Product;
 
 use ArrayObject;
 use Codeception\Test\Unit;
-use Spryker\Zed\ProductStorage\Business\ProductStorageFacadeInterface;
 use SprykerFeature\Zed\SelfServicePortal\Communication\Plugin\Product\ProductClassProductConcretePostCreatePlugin;
-use SprykerFeature\Zed\SelfServicePortal\SelfServicePortalDependencyProvider;
 use SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester;
 
 /**
@@ -32,7 +30,6 @@ class ProductClassProductConcretePostCreatePluginTest extends Unit
 
     protected function _before(): void
     {
-        $this->tester->setDependency(SelfServicePortalDependencyProvider::FACADE_PRODUCT_STORAGE, $this->createMock(ProductStorageFacadeInterface::class));
     }
 
     public function testCreateSavesProductClassesForProductConcrete(): void

@@ -34,7 +34,6 @@ use Spryker\Zed\Messenger\Business\MessengerFacadeInterface;
 use Spryker\Zed\Oms\Business\OmsFacadeInterface;
 use Spryker\Zed\ProductOfferShipmentType\Business\ProductOfferShipmentTypeFacadeInterface;
 use Spryker\Zed\ProductPageSearch\Business\ProductPageSearchFacadeInterface;
-use Spryker\Zed\ProductStorage\Business\ProductStorageFacadeInterface;
 use Spryker\Zed\Quote\Business\QuoteFacadeInterface;
 use Spryker\Zed\Sales\Business\SalesFacadeInterface;
 use Spryker\Zed\SequenceNumber\Business\SequenceNumberFacadeInterface;
@@ -1069,18 +1068,12 @@ class SelfServicePortalBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(SelfServicePortalDependencyProvider::FACADE_PRODUCT_PAGE_SEARCH);
     }
 
-    public function getProductStorageFacade(): ProductStorageFacadeInterface
-    {
-        return $this->getProvidedDependency(SelfServicePortalDependencyProvider::FACADE_PRODUCT_STORAGE);
-    }
-
     public function createProductClassSaver(): ProductClassSaverInterface
     {
         return new ProductClassSaver(
             $this->getEntityManager(),
             $this->getRepository(),
-            $this->getProductPageSearchFacade(),
-            $this->getProductStorageFacade(),
+            $this->getEventFacade(),
         );
     }
 
