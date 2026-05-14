@@ -256,3 +256,5 @@ STATUS,STATUS
 "Model attachments have been created successfully.","Modell-Anhänge wurden erfolgreich erstellt."
 "Create model for the Asset","Modell für das Asset erstellen"
 "Service date must be in the future","Das Servicedatum muss in der Zukunft liegen"
+"Shipment type ""%s"" cannot be removed from this product variant because product offers are using it. Please remove the shipment type from those offers first.","Die Versandart ""%s"" kann nicht von dieser Produktvariante entfernt werden, da Produktangebote sie verwenden. Bitte entfernen Sie die Versandart zuerst aus diesen Angeboten."
+"Shipment type ""%s"" is not assigned to the product concrete for offer ""%s"". Assign it to the product concrete first.","Die Versandart ""%s"" ist dem konkreten Produkt für das Angebot ""%s"" nicht zugewiesen. Bitte weisen Sie sie zuerst dem konkreten Produkt zu."

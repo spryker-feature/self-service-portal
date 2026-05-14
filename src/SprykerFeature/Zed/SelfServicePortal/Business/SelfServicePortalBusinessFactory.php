@@ -142,6 +142,7 @@ use SprykerFeature\Zed\SelfServicePortal\Business\Service\DashboardDataExpander\
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\DashboardDataExpander\ServiceDashboardDataExpanderInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\DataImport\Step\ProductClassKeyToIdProductClassStep;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\DataImport\Step\ProductClassWriterStep;
+use SprykerFeature\Zed\SelfServicePortal\Business\Service\DataImport\Step\ProductOfferConcreteShipmentTypeValidatorStep;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\DataImport\Step\ProductShipmentTypeWriterStep;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\DataImport\Step\ProductSkuToIdProductStep;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\DataImport\Step\ProductToProductClassSkuToIdProductStep;
@@ -395,6 +396,11 @@ class SelfServicePortalBusinessFactory extends AbstractBusinessFactory
         return new ProductShipmentTypeWriterStep(
             $this->getProductShipmentTypeQuery(),
         );
+    }
+
+    public function createProductOfferConcreteShipmentTypeValidatorStep(): DataImportStepInterface
+    {
+        return new ProductOfferConcreteShipmentTypeValidatorStep();
     }
 
     public function createShipmentTypeItemExpander(): ShipmentTypeItemExpanderInterface

@@ -45,7 +45,7 @@ class ShipmentTypeProductConcreteForm extends AbstractType
      *
      * @var string
      */
-    protected const FIELD_ID_PRODUCT_CONCRETE = 'id_product';
+    public const FIELD_ID_PRODUCT_CONCRETE = 'id_product';
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder

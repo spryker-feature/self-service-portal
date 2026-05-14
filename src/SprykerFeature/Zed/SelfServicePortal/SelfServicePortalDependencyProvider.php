@@ -300,6 +300,7 @@ class SelfServicePortalDependencyProvider extends AbstractBundleDependencyProvid
         $container = $this->addServicePointFacade($container);
         $container = $this->addProductOfferFacade($container);
         $container = $this->addProductFacade($container);
+        $container = $this->addProductOfferShipmentTypeFacade($container);
         $container = $this->addMerchantFacade($container);
         $container = $this->addMerchantStockFacade($container);
         $container = $this->addProductPropelQuery($container);

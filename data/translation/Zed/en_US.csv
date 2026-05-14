@@ -256,3 +256,5 @@ STATUS,STATUS
 "Model attachments have been created successfully.","Model attachments have been created successfully."
 "Create model for the Asset","Create model for the Asset"
 "Service date must be in the future","Service date must be in the future"
+"Shipment type ""%s"" cannot be removed from this product variant because product offers are using it. Please remove the shipment type from those offers first.","Shipment type ""%s"" cannot be removed from this product variant because product offers are using it. Please remove the shipment type from those offers first."
+"Shipment type ""%s"" is not assigned to the product concrete for offer ""%s"". Assign it to the product concrete first.","Shipment type ""%s"" is not assigned to the product concrete for offer ""%s"". Assign it to the product concrete first."

@@ -41,6 +41,7 @@ suites:
                 - \SprykerTest\Service\Container\Helper\ContainerHelper
                 - \SprykerTest\Shared\Product\Helper\ProductDataHelper
                 - \SprykerTest\Shared\ShipmentType\Helper\ShipmentTypeHelper
+                - \SprykerTest\Zed\ProductOffer\Helper\ProductOfferHelper
                 - \SprykerFeatureTest\Shared\SelfServicePortal\Helper\SelfServicePortalHelper
                 - \SprykerFeatureTest\Shared\SelfServicePortal\Helper\SspModelHelper
                 - \SprykerTest\Shared\Sales\Helper\SalesHelper

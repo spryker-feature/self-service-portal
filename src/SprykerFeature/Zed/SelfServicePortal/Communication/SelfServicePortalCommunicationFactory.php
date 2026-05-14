@@ -45,6 +45,7 @@ use Spryker\Zed\Merchant\Business\MerchantFacadeInterface;
 use Spryker\Zed\MerchantStock\Business\MerchantStockFacadeInterface;
 use Spryker\Zed\Product\Business\ProductFacadeInterface;
 use Spryker\Zed\ProductOffer\Business\ProductOfferFacadeInterface;
+use Spryker\Zed\ProductOfferShipmentType\Business\ProductOfferShipmentTypeFacadeInterface;
 use Spryker\Zed\Sales\Business\SalesFacadeInterface;
 use Spryker\Zed\SequenceNumber\Business\SequenceNumberFacadeInterface;
 use Spryker\Zed\ServicePoint\Business\ServicePointFacadeInterface;
@@ -148,6 +149,7 @@ use SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form\DataTransfor
 use SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form\EditOfferForm;
 use SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form\EventListener\MerchantCreateOfferFormEventSubscriber;
 use SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form\EventListener\ServicePointEditOfferFormEventSubscriber;
+use SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form\EventListener\ShipmentTypeProductConcreteFormEventSubscriber;
 use SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form\EventListener\StockCreateOfferFormEventSubscriber;
 use SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form\EventListener\StockEditOfferFormEventSubscriber;
 use SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form\Expander\ShipmentTypeProductConcreteFormExpander;
@@ -369,6 +371,20 @@ class SelfServicePortalCommunicationFactory extends AbstractCommunicationFactory
         return new SalesOrderItemProductClassesSaver(
             $this->getEntityManager(),
         );
+    }
+
+    public function createShipmentTypeProductConcreteFormEventSubscriber(): ShipmentTypeProductConcreteFormEventSubscriber
+    {
+        return new ShipmentTypeProductConcreteFormEventSubscriber(
+            $this->getProductOfferShipmentTypeFacade(),
+            $this->getShipmentTypeFacade(),
+            $this->getProductFacade(),
+        );
+    }
+
+    public function getProductOfferShipmentTypeFacade(): ProductOfferShipmentTypeFacadeInterface
+    {
+        return $this->getProvidedDependency(SelfServicePortalDependencyProvider::FACADE_PRODUCT_OFFER_SHIPMENT_TYPE);
     }
 
     public function createShipmentTypeProductConcreteFormExpander(): ShipmentTypeProductConcreteFormExpanderInterface
