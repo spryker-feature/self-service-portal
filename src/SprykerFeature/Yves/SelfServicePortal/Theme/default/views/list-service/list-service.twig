@@ -54,7 +54,7 @@
                 ] %}
 
                 {% block filters %}
-                    {% include molecule('filters', 'SelfServicePortal') with {
+                    {% include molecule('form-filters') with {
                         data: {
                             filters: filters,
                         },
@@ -111,7 +111,7 @@
                 }) %}
 
                 {% block table %}
-                    {% include molecule('advanced-table', 'SelfServicePortal') with {
+                    {% include molecule('advanced-table') with {
                         data: {
                             columns: columns,
                             rows: rows,

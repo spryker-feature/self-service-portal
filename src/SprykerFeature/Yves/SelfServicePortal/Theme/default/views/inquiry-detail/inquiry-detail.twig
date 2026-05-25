@@ -192,7 +192,7 @@
                         <div><strong>{{ 'customer.self_service_portal.inquiry.details.files' | trans }}</strong></div>
 
                         {% block table %}
-                            {% include molecule('advanced-table', 'SelfServicePortal') with {
+                            {% include molecule('advanced-table') with {
                                 data: {
                                     columns: columns,
                                     rows: rows,

@@ -53,7 +53,7 @@
             %}
 
             {% block filters %}
-                {% include molecule('filters', 'SelfServicePortal') with {
+                {% include molecule('form-filters') with {
                     data: {
                         filters: filters,
                     },
@@ -62,10 +62,10 @@
         {% endblock %}
 
         {% block activeFilters %}
-            {% include molecule('active-filters', 'SelfServicePortal') with {
+            {% include molecule('form-active-filters') with {
                 class: 'spacing-bottom spacing-bottom--big',
                 data: {
-                    searchForm: data.searchForm,
+                    form: data.searchForm,
                     jsPrefix: jsPrefix,
                     formClass: formClass,
                 },
@@ -122,7 +122,7 @@
             }) %}
 
             {% block table %}
-                {% include molecule('advanced-table', 'SelfServicePortal') with {
+                {% include molecule('advanced-table') with {
                     data: {
                         columns: columns,
                         rows: rows,

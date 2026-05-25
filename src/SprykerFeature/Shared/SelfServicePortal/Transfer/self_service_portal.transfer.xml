@@ -565,6 +565,7 @@
     <transfer name="ProductOfferShipmentTypeConditions" strict="true">
         <property name="productOfferReferences" type="string[]" singular="productOfferReference"/>
         <property name="shipmentTypeNames" type="string[]" singular="shipmentTypeName"/>
+        <property name="productConcreteSkus" type="string[]" singular="productConcreteSku"/>
     </transfer>
 
     <transfer name="ProductOfferShipmentTypeCollection" strict="true">
