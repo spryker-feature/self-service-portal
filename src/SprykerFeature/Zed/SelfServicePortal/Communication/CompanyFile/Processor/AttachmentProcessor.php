@@ -144,6 +144,36 @@ class AttachmentProcessor implements AttachmentProcessorInterface
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
+    public function processAllScopesForm(array $formData, int $idFile, FileAttachmentTransfer $fileAttachmentTransfer): RedirectResponse
+    {
+        $businessUnitIdsToAttach = $this->formDataNormalizer->normalizeFormFieldArray($formData[AttachFileForm::FIELD_BUSINESS_UNIT_IDS_TO_BE_ATTACHED] ?? null);
+        $businessUnitIdsToUnattach = $this->formDataNormalizer->normalizeFormFieldArray($formData[AttachFileForm::FIELD_BUSINESS_UNIT_IDS_TO_BE_UNATTACHED] ?? null);
+
+        foreach ($this->formDataNormalizer->normalizeFormFieldArray($formData[AttachFileForm::FIELD_COMPANY_IDS_TO_BE_ATTACHED] ?? null) as $idCompany) {
+            $businessUnitIdsToAttach = array_merge($businessUnitIdsToAttach, $this->repository->getBusinessUnitIdsForCompanies([(int)$idCompany]));
+        }
+
+        foreach ($this->formDataNormalizer->normalizeFormFieldArray($formData[AttachFileForm::FIELD_COMPANY_IDS_TO_BE_UNATTACHED] ?? null) as $idCompany) {
+            $businessUnitIdsToUnattach = array_merge($businessUnitIdsToUnattach, $this->repository->getBusinessUnitIdsForCompanies([(int)$idCompany]));
+        }
+
+        $mergedFormData = [
+            AttachFileForm::FIELD_ASSET_IDS_TO_BE_ATTACHED => $this->formDataNormalizer->normalizeFormFieldArray($formData[AttachFileForm::FIELD_ASSET_IDS_TO_BE_ATTACHED] ?? null),
+            AttachFileForm::FIELD_ASSET_IDS_TO_BE_UNATTACHED => $this->formDataNormalizer->normalizeFormFieldArray($formData[AttachFileForm::FIELD_ASSET_IDS_TO_BE_UNATTACHED] ?? null),
+            AttachFileForm::FIELD_BUSINESS_UNIT_IDS_TO_BE_ATTACHED => array_values(array_unique($businessUnitIdsToAttach)),
+            AttachFileForm::FIELD_BUSINESS_UNIT_IDS_TO_BE_UNATTACHED => array_values(array_unique($businessUnitIdsToUnattach)),
+            AttachFileForm::FIELD_COMPANY_USER_IDS_TO_BE_ATTACHED => $this->formDataNormalizer->normalizeFormFieldArray($formData[AttachFileForm::FIELD_COMPANY_USER_IDS_TO_BE_ATTACHED] ?? null),
+            AttachFileForm::FIELD_COMPANY_USER_IDS_TO_BE_UNATTACHED => $this->formDataNormalizer->normalizeFormFieldArray($formData[AttachFileForm::FIELD_COMPANY_USER_IDS_TO_BE_UNATTACHED] ?? null),
+            AttachFileForm::FIELD_MODEL_IDS_TO_BE_ATTACHED => $this->formDataNormalizer->normalizeFormFieldArray($formData[AttachFileForm::FIELD_MODEL_IDS_TO_BE_ATTACHED] ?? null),
+            AttachFileForm::FIELD_MODEL_IDS_TO_BE_UNATTACHED => $this->formDataNormalizer->normalizeFormFieldArray($formData[AttachFileForm::FIELD_MODEL_IDS_TO_BE_UNATTACHED] ?? null),
+        ];
+
+        return $this->processAttachment($mergedFormData, $idFile, $fileAttachmentTransfer);
+    }
+
+    /**
+     * @param array<string, mixed> $formData
+     */
     protected function processAttachment(array $formData, int $idFile, FileAttachmentTransfer $fileAttachmentTransfer): RedirectResponse
     {
         $fileAttachmentCollectionRequestTransfer = $this->fileAttachmentMapper

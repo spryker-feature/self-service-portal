@@ -56,4 +56,13 @@ interface AttachmentProcessorInterface
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function processModelForm(array $formData, int $idFile, FileAttachmentTransfer $fileAttachmentTransfer): RedirectResponse;
+
+    /**
+     * @param array<string, mixed> $formData
+     * @param int $idFile
+     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentTransfer
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function processAllScopesForm(array $formData, int $idFile, FileAttachmentTransfer $fileAttachmentTransfer): RedirectResponse;
 }

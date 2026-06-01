@@ -33,36 +33,6 @@ class AttachFileController extends FileAbstractController
     /**
      * @var string
      */
-    protected const ATTACHMENT_SCOPE_ASSET = 'asset';
-
-    /**
-     * @var string
-     */
-    protected const ATTACHMENT_SCOPE_BUSINESS_UNIT = 'business-unit';
-
-    /**
-     * @var string
-     */
-    protected const ATTACHMENT_SCOPE_COMPANY_USER = 'company-user';
-
-    /**
-     * @var string
-     */
-    protected const ATTACHMENT_SCOPE_COMPANY = 'company';
-
-    /**
-     * @var string
-     */
-    protected const ATTACHMENT_SCOPE_MODEL = 'model';
-
-    /**
-     * @var string
-     */
-    protected const FORM_FIELD_ATTACHMENT_SCOPE = 'attachmentScope';
-
-    /**
-     * @var string
-     */
     protected const REQUEST_FIELD_FILE_ATTACHMENT = 'fileAttachment';
 
     /**
@@ -138,44 +108,9 @@ class AttachFileController extends FileAbstractController
             return $this->redirectToIndex($idFile);
         }
 
-        $strategyResolver = $this->getFactory()->createAttachmentScopeStrategyResolver();
-        $selectedScope = $attachFileForm->get(static::FORM_FIELD_ATTACHMENT_SCOPE)->getData() ?? static::ATTACHMENT_SCOPE_ASSET;
-
-        if ($strategyResolver->canProcessScope($selectedScope, $attachFileForm)) {
-            $formData = $strategyResolver->getFormDataForScope($selectedScope, $request);
-
-            if ($formData !== null) {
-                return $this->processAttachmentByScope($selectedScope, $formData, $idFile, $fileAttachmentTransfer);
-            }
-        }
-
-        return $this->redirectToIndex($idFile);
-    }
-
-    /**
-     * @param string $scopeType
-     * @param array<string, mixed> $formData
-     * @param int $idFile
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentTransfer
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    protected function processAttachmentByScope(
-        string $scopeType,
-        array $formData,
-        int $idFile,
-        FileAttachmentTransfer $fileAttachmentTransfer
-    ): RedirectResponse {
-        $attachmentProcessor = $this->getFactory()->createAttachmentProcessor();
-
-        $result = match ($scopeType) {
-            static::ATTACHMENT_SCOPE_ASSET => $attachmentProcessor->processAssetForm($formData, $idFile, $fileAttachmentTransfer),
-            static::ATTACHMENT_SCOPE_BUSINESS_UNIT => $attachmentProcessor->processBusinessUnitForm($formData, $idFile, $fileAttachmentTransfer),
-            static::ATTACHMENT_SCOPE_COMPANY_USER => $attachmentProcessor->processCompanyUserForm($formData, $idFile, $fileAttachmentTransfer),
-            static::ATTACHMENT_SCOPE_COMPANY => $attachmentProcessor->processCompanyForm($formData, $idFile, $fileAttachmentTransfer),
-            static::ATTACHMENT_SCOPE_MODEL => $attachmentProcessor->processModelForm($formData, $idFile, $fileAttachmentTransfer),
-            default => $this->redirectToIndex($idFile)
-        };
+        $formData = $request->get(static::REQUEST_FIELD_FILE_ATTACHMENT) ?? [];
+        $result = $this->getFactory()->createAttachmentProcessor()
+            ->processAllScopesForm($formData, $idFile, $fileAttachmentTransfer);
 
         if ($result instanceof RedirectResponse) {
             $this->addSuccessMessage(static::MESSAGE_FILE_ATTACHMENTS_CREATE_SUCCESS);
