@@ -1,0 +1,100 @@
+resource:
+    name: SspAssets
+    shortName: ssp-assets
+    description: 'Provides access to SSP assets for the authenticated company user.'
+    provider: SprykerFeature\Glue\SelfServicePortal\Api\Storefront\Provider\SspAssetsStorefrontProvider
+    processor: SprykerFeature\Glue\SelfServicePortal\Api\Storefront\Processor\SspAssetsStorefrontProcessor
+
+    securityBearerAuthRequired: true
+
+    paginationEnabled: true
+    paginationItemsPerPage: 10
+
+    operations:
+        - type: Get
+          name: getSspAsset
+          description: 'Retrieve an asset by reference.'
+          openapiContext:
+              responses:
+                  200:
+                      description: 'Asset returned.'
+                  401:
+                      description: 'Missing access token.'
+                  403:
+                      description: 'Forbidden.'
+                  404:
+                      description: 'Asset not found.'
+
+        - type: GetCollection
+          name: getSspAssetsCollection
+          description: 'Retrieve all assets for the authenticated company user.'
+          openapiContext:
+              responses:
+                  200:
+                      description: 'Assets collection returned.'
+                  401:
+                      description: 'Missing access token.'
+
+        - type: Post
+          name: createSspAsset
+          uriTemplate: '/ssp-assets'
+          description: 'Creates an asset.'
+          openapiContext:
+              responses:
+                  201:
+                      description: 'Asset created.'
+                  403:
+                      description: 'Forbidden.'
+                  422:
+                      description: 'Unprocessable asset.'
+
+    properties:
+        reference:
+            type: string
+            identifier: true
+            writable: false
+            readable: true
+            description: 'Unique reference of the asset.'
+            openapiContext:
+                example: 'SSP-001'
+
+        name:
+            type: string
+            writable: true
+            readable: true
+            required: true
+            description: 'Name of the asset.'
+            openapiContext:
+                example: 'My Asset'
+
+        serialNumber:
+            type: string
+            writable: true
+            readable: true
+            description: 'Serial number of the asset.'
+            openapiContext:
+                example: 'SN-12345'
+
+        note:
+            type: string
+            writable: true
+            readable: true
+            description: 'Note about the asset.'
+            openapiContext:
+                example: 'Some note'
+
+        externalImageUrl:
+            type: string
+            writable: true
+            readable: true
+            description: 'External image URL for the asset.'
+            openapiContext:
+                example: 'https://example.com/image.jpg'
+
+        pagination:
+            type: map
+            writable: false
+            readable: true
+            description: 'Pagination metadata for the collection.'
+            openapiContext:
+                example: { currentPage: 1, maxPage: 10, currentItemsPerPage: 10, numFound: 100 }

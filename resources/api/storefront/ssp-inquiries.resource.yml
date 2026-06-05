@@ -1,0 +1,124 @@
+resource:
+    name: SspInquiries
+    shortName: ssp-inquiries
+    description: 'Provides access to SSP inquiries for the authenticated company user.'
+    provider: SprykerFeature\Glue\SelfServicePortal\Api\Storefront\Provider\SspInquiriesStorefrontProvider
+    processor: SprykerFeature\Glue\SelfServicePortal\Api\Storefront\Processor\SspInquiriesStorefrontProcessor
+
+    securityBearerAuthRequired: true
+
+    paginationEnabled: true
+    paginationItemsPerPage: 10
+
+    operations:
+        - type: Get
+          name: getSspInquiry
+          description: 'Retrieve an inquiry by reference.'
+          openapiContext:
+              responses:
+                  200:
+                      description: 'Inquiry returned.'
+                  401:
+                      description: 'Missing access token.'
+                  404:
+                      description: 'Inquiry not found.'
+
+        - type: GetCollection
+          name: getSspInquiriesCollection
+          description: 'Retrieve all inquiries for the authenticated company user.'
+          openapiContext:
+              responses:
+                  200:
+                      description: 'Inquiries collection returned.'
+                  401:
+                      description: 'Missing access token.'
+
+        - type: Post
+          name: createSspInquiry
+          uriTemplate: '/ssp-inquiries'
+          description: 'Creates an inquiry.'
+          openapiContext:
+              responses:
+                  201:
+                      description: 'Inquiry created.'
+                  400:
+                      description: 'Bad request.'
+                  422:
+                      description: 'Unprocessable inquiry.'
+
+    properties:
+        reference:
+            type: string
+            identifier: true
+            writable: false
+            readable: true
+            description: 'Unique reference of the inquiry.'
+            openapiContext:
+                example: 'INQ-001'
+
+        sspAssetReference:
+            type: string
+            writable: true
+            readable: true
+            description: 'Reference of the related SSP asset.'
+            openapiContext:
+                example: 'SSP-001'
+
+        orderReference:
+            type: string
+            writable: true
+            readable: true
+            description: 'Reference of the related order.'
+            openapiContext:
+                example: 'DE--1'
+
+        type:
+            type: string
+            writable: true
+            readable: true
+            required: true
+            description: 'Type of the inquiry.'
+            openapiContext:
+                example: 'general'
+
+        status:
+            type: string
+            writable: false
+            readable: true
+            description: 'Current status of the inquiry.'
+            openapiContext:
+                example: 'pending'
+
+        subject:
+            type: string
+            writable: true
+            readable: true
+            required: true
+            description: 'Subject of the inquiry.'
+            openapiContext:
+                example: 'My inquiry subject'
+
+        description:
+            type: string
+            writable: true
+            readable: true
+            required: true
+            description: 'Description of the inquiry.'
+            openapiContext:
+                example: 'My inquiry description'
+
+        isCancellable:
+            type: boolean
+            writable: false
+            readable: true
+            description: 'Whether the inquiry can be cancelled.'
+            openapiContext:
+                example: true
+
+        pagination:
+            type: map
+            writable: false
+            readable: true
+            description: 'Pagination metadata for the collection.'
+            openapiContext:
+                example: { currentPage: 1, maxPage: 10, currentItemsPerPage: 10, numFound: 100 }

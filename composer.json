@@ -98,6 +98,7 @@
     },
     "require-dev": {
         "spryker-shop/service-point-widget": "*",
+        "spryker/api-platform": "*",
         "spryker/catalog": "*",
         "spryker/cms-block": "*",
         "spryker/code-sniffer": "*",
@@ -124,6 +125,7 @@
     },
     "suggest": {
         "spryker-shop/service-point-widget": "If you want to use the service point geo coordinates functionality, you need to install this module.",
+        "spryker/api-platform": "Required to expose SSP assets, inquiries, and booked services via the API Platform (storefront and backend REST endpoints).",
         "spryker/catalog": "If you want to use the product class catalog feature, you need to install this module.",
         "spryker/container": "Add this module when you want to use the Container."
     },

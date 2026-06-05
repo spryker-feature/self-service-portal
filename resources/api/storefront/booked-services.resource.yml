@@ -1,0 +1,79 @@
+resource:
+    name: BookedServices
+    shortName: booked-services
+    description: 'Provides access to booked services for the authenticated company user.'
+    provider: SprykerFeature\Glue\SelfServicePortal\Api\Storefront\Provider\BookedServicesStorefrontProvider
+
+    securityBearerAuthRequired: true
+
+    paginationEnabled: true
+    paginationItemsPerPage: 10
+
+    operations:
+        - type: GetCollection
+          name: getBookedServicesCollection
+          description: 'Retrieve all booked services for the authenticated company user.'
+          openapiContext:
+              responses:
+                  200:
+                      description: 'Booked services collection returned.'
+                  401:
+                      description: 'Missing access token.'
+
+    properties:
+        uuid:
+            type: string
+            identifier: true
+            writable: false
+            readable: true
+            description: 'UUID of the booked service.'
+            openapiContext:
+                example: 'a89df00a-3f3c-5a3a-9b6d-1234567890ab'
+
+        productName:
+            type: string
+            writable: false
+            readable: true
+            description: 'Name of the service product.'
+            openapiContext:
+                example: 'Installation Service'
+
+        scheduledAt:
+            type: string
+            writable: false
+            readable: true
+            description: 'Scheduled date and time of the service.'
+            openapiContext:
+                example: '2024-01-15T10:00:00+00:00'
+
+        createdAt:
+            type: string
+            writable: false
+            readable: true
+            description: 'Date and time the service was created.'
+            openapiContext:
+                example: '2024-01-01T10:00:00+00:00'
+
+        stateDisplayName:
+            type: string
+            writable: false
+            readable: true
+            description: 'Display name of the service state.'
+            openapiContext:
+                example: 'Confirmed'
+
+        stateName:
+            type: string
+            writable: false
+            readable: true
+            description: 'Technical name of the service state.'
+            openapiContext:
+                example: 'confirmed'
+
+        pagination:
+            type: map
+            writable: false
+            readable: true
+            description: 'Pagination metadata for the collection.'
+            openapiContext:
+                example: { currentPage: 1, maxPage: 10, currentItemsPerPage: 10, numFound: 100 }

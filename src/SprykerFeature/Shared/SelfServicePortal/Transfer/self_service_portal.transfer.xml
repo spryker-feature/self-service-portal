@@ -46,7 +46,6 @@
     </transfer>
 
     <transfer name="ShipmentTypeConditions" strict="true">
-        <property name="shipmentTypeIds" type="int[]" singular="idShipmentType"/>
         <property name="keys" type="string[]" singular="key"/>
         <property name="isActive" type="bool"/>
         <property name="storeNames" type="string[]" singular="storeName"/>
@@ -564,6 +563,7 @@
 
     <transfer name="ProductOfferShipmentTypeConditions" strict="true">
         <property name="productOfferReferences" type="string[]" singular="productOfferReference"/>
+        <property name="shipmentTypeIds" type="int[]" singular="idShipmentType"/>
         <property name="shipmentTypeNames" type="string[]" singular="shipmentTypeName"/>
         <property name="productConcreteSkus" type="string[]" singular="productConcreteSku"/>
     </transfer>
