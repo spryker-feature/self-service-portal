@@ -9,7 +9,6 @@ namespace SprykerFeature\Zed\SelfServicePortal\Communication\CompanyFile\Table;
 
 use Orm\Zed\Company\Persistence\Map\SpyCompanyTableMap;
 use Orm\Zed\Company\Persistence\SpyCompanyQuery;
-use Orm\Zed\CompanyBusinessUnit\Persistence\Map\SpyCompanyBusinessUnitTableMap;
 use Orm\Zed\SelfServicePortal\Persistence\Map\SpyCompanyBusinessUnitFileTableMap;
 use Spryker\Service\UtilText\Model\Url\Url;
 use Spryker\Zed\Gui\Communication\Table\AbstractTable;
@@ -107,9 +106,13 @@ class UnattachedCompanyAttachmentTable extends AbstractTable
         return $this->companyQuery
             ->join('CompanyBusinessUnit')
             ->leftJoin('CompanyBusinessUnit.SpyCompanyBusinessUnitFile')
-            ->where(SpyCompanyBusinessUnitFileTableMap::COL_FK_FILE . ' IS NULL OR ' . SpyCompanyBusinessUnitFileTableMap::COL_FK_FILE . ' = ?', $this->idFile)
+            ->addJoinCondition(
+                'SpyCompanyBusinessUnitFile',
+                SpyCompanyBusinessUnitFileTableMap::COL_FK_FILE . ' = ?',
+                $this->idFile,
+            )
+            ->where(SpyCompanyBusinessUnitFileTableMap::COL_FK_COMPANY_BUSINESS_UNIT . ' IS NULL')
             ->groupByIdCompany()
-            ->having('COUNT(DISTINCT ' . SpyCompanyBusinessUnitTableMap::COL_ID_COMPANY_BUSINESS_UNIT . ') > COUNT(DISTINCT ' . SpyCompanyBusinessUnitFileTableMap::COL_FK_COMPANY_BUSINESS_UNIT . ') OR COUNT(DISTINCT ' . SpyCompanyBusinessUnitFileTableMap::COL_FK_COMPANY_BUSINESS_UNIT . ') = 0')
             ->select([
                 SpyCompanyTableMap::COL_ID_COMPANY,
                 SpyCompanyTableMap::COL_NAME,
