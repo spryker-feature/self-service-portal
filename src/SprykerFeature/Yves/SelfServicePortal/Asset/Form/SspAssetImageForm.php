@@ -55,12 +55,15 @@ class SspAssetImageForm extends AbstractType
      */
     protected function addFileField(FormBuilderInterface $builder, array $options)
     {
+        $effectiveMaxSizeBytes = $this->getEffectiveMaxFileSizeInBytes();
+        $effectiveMaxSizeReadable = $this->convertToReadableSize($effectiveMaxSizeBytes);
+
         $builder->add(static::FIELD_FILE, FileType::class, [
             'label' => 'self_service_portal.asset.form.image',
             'required' => false,
             'constraints' => [
                 new File([
-                    'maxSize' => $this->getConfig()->getSspAssetImageFileMaxSize(),
+                    'maxSize' => $effectiveMaxSizeBytes,
                     'mimeTypes' => $this->getConfig()->getSspAssetAllowedFileMimeTypes(),
                     'mimeTypesMessage' => 'self_service_portal.asset.form.image.mime_type_error',
                 ]),
@@ -69,8 +72,8 @@ class SspAssetImageForm extends AbstractType
             'attr' => [
                 'accept' => implode(', ', $this->getConfig()->getSspAssetAllowedFileMimeTypes()),
                 'acceptExtensions' => implode(', ', $this->getConfig()->getSspInquiryAllowedFileExtensions()),
-                'maxSize' => $this->convertToReadableSize($this->normalizeBinaryFormat($this->getConfig()->getSspAssetImageFileMaxSize())),
-                'maxTotalSize' => $this->convertToReadableSize($this->normalizeBinaryFormat($this->getConfig()->getSspAssetImageFileMaxSize())),
+                'maxSize' => $effectiveMaxSizeReadable,
+                'maxTotalSize' => $effectiveMaxSizeReadable,
                 'descriptionMessage' => 'self_service_portal.asset.form.image.description',
                 'original-image-url' => $options[static::OPTION_ORIGINAL_IMAGE_URL] ?? null,
             ],
@@ -105,6 +108,30 @@ class SspAssetImageForm extends AbstractType
     public function getBlockPrefix(): string
     {
         return 'asset_image';
+    }
+
+    protected function getEffectiveMaxFileSizeInBytes(): int
+    {
+        $sizes = array_filter([
+            $this->normalizeBinaryFormat($this->getConfig()->getSspAssetImageFileMaxSize()),
+            $this->normalizePhpIniSize((string)ini_get('upload_max_filesize')),
+            $this->normalizePhpIniSize((string)ini_get('post_max_size')),
+        ]);
+
+        return $sizes ? min($sizes) : 0;
+    }
+
+    protected function normalizePhpIniSize(string $size): int
+    {
+        $unit = strtolower(substr(trim($size), -1));
+        $bytes = (int)$size;
+
+        return match ($unit) {
+            'g' => $bytes * 1024 * 1024 * 1024,
+            'm' => $bytes * 1024 * 1024,
+            'k' => $bytes * 1024,
+            default => $bytes,
+        };
     }
 
     protected function convertToReadableSize(int $size): string

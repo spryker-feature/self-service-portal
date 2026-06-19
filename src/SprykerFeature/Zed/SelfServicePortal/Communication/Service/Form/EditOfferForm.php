@@ -7,6 +7,7 @@
 
 namespace SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form;
 
+use Spryker\Zed\Gui\Communication\Form\Type\Select2ComboBoxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -36,6 +37,30 @@ class EditOfferForm extends CreateOfferForm
         parent::buildForm($builder, $options);
 
         $builder->add(static::FIELD_ID_PRODUCT_OFFER, HiddenType::class);
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array<string, mixed> $options
+     *
+     * @return $this
+     */
+    public function addIsActiveField(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add(
+            static::FIELD_IS_ACTIVE,
+            Select2ComboBoxType::class,
+            [
+                'label' => 'Is Active',
+                'required' => true,
+                'choices' => [
+                    'Yes' => 1,
+                    'No' => 0,
+                ],
+            ],
+        );
+
+        return $this;
     }
 
     /**

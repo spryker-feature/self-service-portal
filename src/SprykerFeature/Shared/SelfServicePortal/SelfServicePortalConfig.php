@@ -642,6 +642,9 @@ class SelfServicePortalConfig extends AbstractSharedConfig
     /**
      * Specification:
      * - Returns the default file max size for file uploads for ssp asset.
+     * - The effective upload limit is the minimum of this value, PHP ini `upload_max_filesize`, and `post_max_size`.
+     * - nginx `client_max_body_size` is not accessible from PHP and must be configured separately in deploy.yml
+     *   to be greater than or equal to the effective limit derived from the values above.
      *
      * @api
      *

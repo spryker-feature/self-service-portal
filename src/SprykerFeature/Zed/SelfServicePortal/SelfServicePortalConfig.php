@@ -626,6 +626,7 @@ class SelfServicePortalConfig extends AbstractBundleConfig
             static::ENTITY_TYPE_COMPANY,
             static::ENTITY_TYPE_COMPANY_BUSINESS_UNIT,
             static::ENTITY_TYPE_SSP_ASSET,
+            static::ENTITY_TYPE_SSP_MODEL,
         ];
     }
 

@@ -8,6 +8,7 @@
 namespace SprykerFeature\Zed\SelfServicePortal\Communication\CompanyFile\Table;
 
 use Generated\Shared\Transfer\FileAttachmentViewDetailTableCriteriaTransfer;
+use Orm\Zed\Company\Persistence\Map\SpyCompanyTableMap;
 use Orm\Zed\CompanyBusinessUnit\Persistence\Map\SpyCompanyBusinessUnitTableMap;
 use Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap;
 use Orm\Zed\FileManager\Persistence\Map\SpyFileTableMap;
@@ -232,6 +233,51 @@ class ViewFileDetailTable extends AbstractTable
         return implode(' ', $buttons);
     }
 
+    protected function prepareCompanyFileQuery(
+        FileAttachmentViewDetailTableCriteriaTransfer $fileAttachmentViewDetailTableCriteriaTransfer
+    ): SpyFileQuery {
+        $companyFileQuery = $this->fileQuery::create()
+            ->filterByIdFile($this->idFile)
+            ->withColumn(SpyFileTableMap::COL_ID_FILE, static::COL_ID_FILE)
+            ->useSpyCompanyBusinessUnitFileQuery(null, Criteria::LEFT_JOIN)
+                ->withColumn(SpyCompanyBusinessUnitFileTableMap::COL_CREATED_AT, static::COL_ATTACHED_AT)
+                    ->useCompanyBusinessUnitQuery()
+                        ->withColumn(SpyCompanyBusinessUnitTableMap::COL_FK_COMPANY, static::COL_ENTITY_ID)
+                            ->useCompanyQuery()
+                                ->withColumn(SpyCompanyTableMap::COL_NAME, static::COL_ENTITY_NAME)
+                                ->withColumn(static::COL_ENTITY_TYPE_COMPANY, static::COL_ENTITY_TYPE)
+                                ->filterByName_Like($this->getSearchString())
+                            ->endUse()
+                    ->endUse()
+            ->endUse()
+            ->select([
+                static::COL_ID_FILE,
+                static::COL_ATTACHED_AT,
+                static::COL_ENTITY_ID,
+                static::COL_ENTITY_NAME,
+                static::COL_ENTITY_TYPE,
+            ]);
+
+        if ($fileAttachmentViewDetailTableCriteriaTransfer->getDateFrom()) {
+            // @phpstan-ignore-next-line
+            $companyFileQuery
+                ->useSpyCompanyBusinessUnitFileQuery()
+                    ->filterByCreatedAt($this->timeZoneFormatter->formatToUTCFromLocalTimeZone($fileAttachmentViewDetailTableCriteriaTransfer->getDateFrom()), Criteria::GREATER_EQUAL)
+                ->endUse();
+        }
+
+        if ($fileAttachmentViewDetailTableCriteriaTransfer->getDateTo()) {
+            // @phpstan-ignore-next-line
+            $companyFileQuery
+                ->useSpyCompanyBusinessUnitFileQuery()
+                    ->filterByCreatedAt($this->timeZoneFormatter->formatToUTCFromLocalTimeZone($fileAttachmentViewDetailTableCriteriaTransfer->getDateTo()), Criteria::LESS_THAN)
+                ->endUse();
+        }
+
+        // @phpstan-ignore-next-line
+        return $companyFileQuery;
+    }
+
     protected function prepareCompanyBusinessUnitFileQuery(
         FileAttachmentViewDetailTableCriteriaTransfer $fileAttachmentViewDetailTableCriteriaTransfer
     ): SpyFileQuery {
@@ -409,6 +455,11 @@ class ViewFileDetailTable extends AbstractTable
         $modelFileParams = [];
         $unionParts = [];
 
+        if (!$fileAttachmentViewDetailTableCriteriaTransfer->getEntityType() || $fileAttachmentViewDetailTableCriteriaTransfer->getEntityType() === SelfServicePortalConfig::ENTITY_TYPE_COMPANY) {
+            $companyFileQuery = $this->prepareCompanyFileQuery($fileAttachmentViewDetailTableCriteriaTransfer);
+            $unionParts[] = $companyFileQuery->createSelectSql($companyFileParams);
+        }
+
         if (!$fileAttachmentViewDetailTableCriteriaTransfer->getEntityType() || $fileAttachmentViewDetailTableCriteriaTransfer->getEntityType() === SelfServicePortalConfig::ENTITY_TYPE_COMPANY_BUSINESS_UNIT) {
             $companyBusinessUnitFileQuery = $this->prepareCompanyBusinessUnitFileQuery($fileAttachmentViewDetailTableCriteriaTransfer);
             $unionParts[] = $companyBusinessUnitFileQuery->createSelectSql($companyBusinessUnitFileParams);
@@ -427,6 +478,20 @@ class ViewFileDetailTable extends AbstractTable
         if (!$fileAttachmentViewDetailTableCriteriaTransfer->getEntityType() || $fileAttachmentViewDetailTableCriteriaTransfer->getEntityType() === SelfServicePortalConfig::ENTITY_TYPE_SSP_MODEL) {
             $modelFileQuery = $this->prepareModelFileQuery($fileAttachmentViewDetailTableCriteriaTransfer);
             $unionParts[] = $modelFileQuery->createSelectSql($modelFileParams);
+        }
+
+        if (!$unionParts) {
+            return [
+                sprintf(
+                    'SELECT NULL AS %s, NULL AS %s, NULL AS %s, NULL AS %s, NULL AS %s WHERE FALSE',
+                    static::COL_ID_FILE,
+                    static::COL_ATTACHED_AT,
+                    static::COL_ENTITY_ID,
+                    static::COL_ENTITY_NAME,
+                    static::COL_ENTITY_TYPE,
+                ),
+                [],
+            ];
         }
 
         $unionSql = implode(' UNION ALL ', array_map(fn ($sql) => "($sql)", $unionParts));
