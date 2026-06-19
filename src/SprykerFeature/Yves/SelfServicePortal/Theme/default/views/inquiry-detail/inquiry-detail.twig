@@ -53,6 +53,12 @@
                                     title: 'customer.self_service_portal.inquiry.details.reference',
                                     value: data.inquiry.reference,
                                 },
+                                (data.inquiry.order and data.inquiry.order.orderReference
+                                    ? {
+                                        block: block('orderReference'),
+                                    }
+                                    : {}
+                                ),
                                 {
                                     title: 'customer.self_service_portal.inquiry.details.date',
                                     value: data.inquiry.createdDate | formatDateTime,
@@ -219,6 +225,13 @@
             },
         } only %}
     </li>
+{% endblock %}
+
+{% block orderReference %}
+    <span class="inquiry-information__info-title">{{ 'customer.self_service_portal.inquiry.details.order_reference' | trans }}:</span>
+    <a href="{{ path('customer/order/details', {'id': data.inquiry.order.idSalesOrder}) }}">
+        {{ data.inquiry.order.orderReference }}
+    </a>
 {% endblock %}
 
 {% block assetImage %}
