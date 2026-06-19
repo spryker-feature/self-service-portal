@@ -57,7 +57,7 @@ class StockEditOfferFormEventSubscriber implements EventSubscriberInterface
     {
         $productOfferTransfer = $event->getData();
 
-        if (!($productOfferTransfer instanceof ProductOfferTransfer)) {
+        if (!($productOfferTransfer instanceof ProductOfferTransfer) || !$productOfferTransfer->getProductOfferStocks()->count()) {
             return;
         }
 
