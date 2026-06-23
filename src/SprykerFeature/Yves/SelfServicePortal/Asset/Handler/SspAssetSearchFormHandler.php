@@ -61,7 +61,7 @@ class SspAssetSearchFormHandler implements SspAssetSearchFormHandlerInterface
         }
 
         $sspAssetCriteriaTransfer = $this->applySorting($sspAssetCriteriaTransfer, $formData);
-        $sspAssetCriteriaTransfer = $this->applyScopeFiltering($sspAssetCriteriaTransfer, $formData);
+        $sspAssetCriteriaTransfer = $this->applyScopeFiltering($sspAssetCriteriaTransfer, $sspAssetSearchForm);
         $sspAssetCriteriaTransfer = $this->applySearchTextFiltering($sspAssetCriteriaTransfer, $formData);
 
         return $sspAssetCriteriaTransfer;
@@ -121,22 +121,13 @@ class SspAssetSearchFormHandler implements SspAssetSearchFormHandlerInterface
         return $orderDirection === static::ORDER_DIRECTION_ASC;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\SspAssetCriteriaTransfer $sspAssetCriteriaTransfer
-     * @param array<string, mixed> $formData
-     *
-     * @return \Generated\Shared\Transfer\SspAssetCriteriaTransfer
-     */
     protected function applyScopeFiltering(
         SspAssetCriteriaTransfer $sspAssetCriteriaTransfer,
-        array $formData
+        FormInterface $sspAssetSearchForm,
     ): SspAssetCriteriaTransfer {
-        if (!$this->hasScopeFilter($formData)) {
-            return $sspAssetCriteriaTransfer;
-        }
+        $scopeValue = $sspAssetSearchForm->get(static::FIELD_FILTERS)->get(static::FIELD_SCOPE)->getData();
 
-        $scopeValue = $formData[static::FIELD_FILTERS][static::FIELD_SCOPE];
-        if ($scopeValue === static::SCOPE_FILTER_BY_COMPANY) {
+        if (!$scopeValue || $scopeValue === static::SCOPE_FILTER_BY_COMPANY) {
             return $sspAssetCriteriaTransfer;
         }
 
@@ -148,16 +139,6 @@ class SspAssetSearchFormHandler implements SspAssetSearchFormHandlerInterface
             ->setAssignedBusinessUnitId($scopeValue);
 
         return $sspAssetCriteriaTransfer;
-    }
-
-    /**
-     * @param array<string, mixed> $formData
-     *
-     * @return bool
-     */
-    protected function hasScopeFilter(array $formData): bool
-    {
-        return isset($formData[static::FIELD_FILTERS][static::FIELD_SCOPE]);
     }
 
     /**

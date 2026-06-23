@@ -44,7 +44,6 @@ class SspAssetSearchFormDataProvider
 
         return [
             SspAssetSearchFiltersForm::SCOPE_OPTIONS => $scopeOptions,
-            SspAssetSearchFiltersForm::SCOPE_DEFAULT_OPTION => $this->getDefaultScopeValue($scopeOptions),
         ];
     }
 
@@ -79,27 +78,5 @@ class SspAssetSearchFormDataProvider
         $scopeOptions[static::SCOPE_FILTER_BY_COMPANY_LABEL] = static::SCOPE_FILTER_BY_COMPANY;
 
         return $scopeOptions;
-    }
-
-    /**
-     * @param array<string, int|string> $scopeOptions
-     *
-     * @return string|int|null
-     */
-    protected function getDefaultScopeValue(array $scopeOptions): int|string|null
-    {
-        $companyUserTransfer = $this->companyUserClient->findCompanyUser();
-
-        if (!$companyUserTransfer || !$companyUserTransfer->getCompanyBusinessUnit()) {
-            return static::SCOPE_FILTER_BY_COMPANY;
-        }
-
-        $activeBusinessUnitId = $companyUserTransfer->getCompanyBusinessUnit()->getIdCompanyBusinessUnit();
-
-        if (!$activeBusinessUnitId || !in_array($activeBusinessUnitId, $scopeOptions, true)) {
-            return static::SCOPE_FILTER_BY_COMPANY;
-        }
-
-        return $activeBusinessUnitId;
     }
 }
