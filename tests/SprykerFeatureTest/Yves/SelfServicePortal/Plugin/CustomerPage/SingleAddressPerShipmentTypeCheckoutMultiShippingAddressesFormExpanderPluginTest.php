@@ -207,6 +207,7 @@ class SingleAddressPerShipmentTypeCheckoutMultiShippingAddressesFormExpanderPlug
 
         $handler = new SingleAddressPerShipmentTypePreSubmitHandler(
             new AddressFormChecker($configMock),
+            $configMock,
         );
 
         $eventData = [

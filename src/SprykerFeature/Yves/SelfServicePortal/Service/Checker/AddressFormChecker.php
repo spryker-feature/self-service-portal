@@ -34,7 +34,7 @@ class AddressFormChecker implements AddressFormCheckerInterface
             return false;
         }
 
-        $shipmentTypeKey = $itemTransfer->getShipmentType()?->getKey() ?? SelfServicePortalConfig::SHIPMENT_TYPE_DELIVERY;
+        $shipmentTypeKey = $itemTransfer->getShipmentType()?->getKey() ?? $this->selfServicePortalConfig->getDefaultFallbackShipmentTypeKey();
 
         if (!$shipmentTypeKey) {
             return false;

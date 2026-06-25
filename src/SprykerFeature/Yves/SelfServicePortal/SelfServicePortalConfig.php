@@ -770,4 +770,15 @@ class SelfServicePortalConfig extends AbstractBundleConfig
     {
         return static::SHIPMENT_TYPE_DELIVERY;
     }
+
+    /**
+     * Specification:
+     * - Returns the shipment type key to fall back to when a store has no shipment types assigned.
+     *
+     * @api
+     */
+    public function getDefaultFallbackShipmentTypeKey(): string
+    {
+        return static::SHIPMENT_TYPE_DELIVERY;
+    }
 }

@@ -8,6 +8,7 @@
 namespace SprykerFeature\Yves\SelfServicePortal\Service\Handler;
 
 use Generated\Shared\Transfer\ItemTransfer;
+use SprykerFeature\Yves\SelfServicePortal\SelfServicePortalConfig;
 use SprykerFeature\Yves\SelfServicePortal\Service\Checker\AddressFormCheckerInterface;
 use SprykerFeature\Yves\SelfServicePortal\Service\Form\SingleAddressPerShipmentTypeAddressStepForm;
 use Symfony\Component\Form\FormEvent;
@@ -35,7 +36,8 @@ class SingleAddressPerShipmentTypePreSubmitHandler implements SingleAddressPerSh
     protected const EXTRA_FIELD_SKIP_VALIDATION = 'skip_validation';
 
     public function __construct(
-        protected AddressFormCheckerInterface $addressFormChecker
+        protected AddressFormCheckerInterface $addressFormChecker,
+        protected SelfServicePortalConfig $selfServicePortalConfig
     ) {
     }
 
@@ -53,7 +55,8 @@ class SingleAddressPerShipmentTypePreSubmitHandler implements SingleAddressPerSh
             return;
         }
 
-        $currentShipmentTypeKey = $data[static::FIELD_SHIPMENT_TYPE][static::FIELD_SHIPMENT_TYPE_KEY];
+        $currentShipmentTypeKey = $data[static::FIELD_SHIPMENT_TYPE][static::FIELD_SHIPMENT_TYPE_KEY]
+            ?? $this->selfServicePortalConfig->getDefaultFallbackShipmentTypeKey();
 
         $checkoutMultiShippingAddressesForm = $form->getParent();
         if (!$checkoutMultiShippingAddressesForm) {
@@ -98,18 +101,18 @@ class SingleAddressPerShipmentTypePreSubmitHandler implements SingleAddressPerSh
             return false;
         }
 
-        if (!isset($data[static::FIELD_SHIPMENT_TYPE][static::FIELD_SHIPMENT_TYPE_KEY])) {
-            return false;
-        }
-
-        $shipmentTypeKey = $data[static::FIELD_SHIPMENT_TYPE][static::FIELD_SHIPMENT_TYPE_KEY];
+        $shipmentTypeKey = $data[static::FIELD_SHIPMENT_TYPE][static::FIELD_SHIPMENT_TYPE_KEY]
+            ?? $this->selfServicePortalConfig->getDefaultFallbackShipmentTypeKey();
 
         return $this->addressFormChecker->isApplicableShipmentType($shipmentTypeKey);
     }
 
     protected function isSameShipmentType(ItemTransfer $itemTransfer, string $currentShipmentTypeKey): bool
     {
-        return $itemTransfer->getShipmentType()?->getKey() === $currentShipmentTypeKey;
+        $itemShipmentTypeKey = $itemTransfer->getShipmentType()?->getKey()
+            ?? $this->selfServicePortalConfig->getDefaultFallbackShipmentTypeKey();
+
+        return $itemShipmentTypeKey === $currentShipmentTypeKey;
     }
 
     /**

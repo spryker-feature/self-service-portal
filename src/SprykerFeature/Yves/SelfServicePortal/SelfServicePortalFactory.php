@@ -666,7 +666,10 @@ class SelfServicePortalFactory extends AbstractFactory
 
     public function createSingleAddressPerShipmentTypePreSubmitHandler(): SingleAddressPerShipmentTypePreSubmitHandlerInterface
     {
-        return new SingleAddressPerShipmentTypePreSubmitHandler($this->createAddressFormChecker());
+        return new SingleAddressPerShipmentTypePreSubmitHandler(
+            $this->createAddressFormChecker(),
+            $this->getConfig(),
+        );
     }
 
     public function getSelfServicePortalClient(): SelfServicePortalClientInterface
