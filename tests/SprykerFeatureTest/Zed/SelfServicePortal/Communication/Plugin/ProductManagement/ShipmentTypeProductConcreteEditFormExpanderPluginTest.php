@@ -24,6 +24,7 @@ use SprykerFeature\Zed\SelfServicePortal\Communication\Plugin\ProductManagement\
 use SprykerFeature\Zed\SelfServicePortal\Communication\SelfServicePortalCommunicationFactory;
 use SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form\EventListener\ShipmentTypeProductConcreteFormEventSubscriber;
 use SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form\ShipmentTypeProductConcreteForm;
+use SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalRepositoryInterface;
 use SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormEvent;
@@ -112,7 +113,15 @@ class ShipmentTypeProductConcreteEditFormExpanderPluginTest extends Unit
         $productOfferShipmentTypeFacadeMock = $this->createMock(ProductOfferShipmentTypeFacadeInterface::class);
         $productOfferShipmentTypeFacadeMock->expects($this->never())->method('getProductOfferShipmentTypeCollection');
 
-        $eventSubscriber = $this->createEventSubscriber($productOfferShipmentTypeFacadeMock, $shipmentTypeFacadeMock, $productFacadeMock);
+        $selfServicePortalRepositoryMock = $this->createMock(SelfServicePortalRepositoryInterface::class);
+        $selfServicePortalRepositoryMock->expects($this->never())->method('getShipmentTypeIdsGroupedByIdProductConcrete');
+
+        $eventSubscriber = $this->createEventSubscriber(
+            $productOfferShipmentTypeFacadeMock,
+            $shipmentTypeFacadeMock,
+            $productFacadeMock,
+            $selfServicePortalRepositoryMock,
+        );
         $form = $this->createForm(null);
 
         // Act
@@ -128,12 +137,43 @@ class ShipmentTypeProductConcreteEditFormExpanderPluginTest extends Unit
         $shipmentTypeFacadeMock = $this->createMock(ShipmentTypeFacadeInterface::class);
         $shipmentTypeFacadeMock->expects($this->never())->method('getShipmentTypeCollection');
 
+        $selfServicePortalRepositoryMock = $this->createMock(SelfServicePortalRepositoryInterface::class);
+        $selfServicePortalRepositoryMock->expects($this->never())->method('getShipmentTypeIdsGroupedByIdProductConcrete');
+
         $eventSubscriber = $this->createEventSubscriber(
             $this->createMock(ProductOfferShipmentTypeFacadeInterface::class),
             $shipmentTypeFacadeMock,
             $this->createMock(ProductFacadeInterface::class),
+            $selfServicePortalRepositoryMock,
         );
         $form = $this->createForm([ShipmentTypeProductConcreteForm::FIELD_ID_PRODUCT_CONCRETE => null]);
+
+        // Act
+        $eventSubscriber->validateShipmentTypes(new FormEvent($form, null));
+
+        // Assert
+        $this->assertCount(0, $form->getErrors(true));
+    }
+
+    public function testValidateShipmentTypesDoesNothingWhenProductHasNoCurrentShipmentTypes(): void
+    {
+        // Arrange
+        $shipmentTypeFacadeMock = $this->createMock(ShipmentTypeFacadeInterface::class);
+        $shipmentTypeFacadeMock->expects($this->never())->method('getShipmentTypeCollection');
+
+        $eventSubscriber = $this->createEventSubscriber(
+            $this->createMock(ProductOfferShipmentTypeFacadeInterface::class),
+            $shipmentTypeFacadeMock,
+            $this->createMock(ProductFacadeInterface::class),
+            $this->createSelfServicePortalRepositoryMock([]),
+        );
+
+        $form = $this->createForm([
+            ShipmentTypeProductConcreteForm::FIELD_ID_PRODUCT_CONCRETE => static::ID_PRODUCT_CONCRETE,
+            ShipmentTypeProductConcreteForm::FIELD_SHIPMENT_TYPES => [
+                (new ShipmentTypeTransfer())->setIdShipmentType(static::ID_SHIPMENT_TYPE_DELIVERY),
+            ],
+        ]);
 
         // Act
         $eventSubscriber->validateShipmentTypes(new FormEvent($form, null));
@@ -163,7 +203,12 @@ class ShipmentTypeProductConcreteEditFormExpanderPluginTest extends Unit
             ->with($this->isInstanceOf(ProductOfferShipmentTypeCriteriaTransfer::class))
             ->willReturn(new ProductOfferShipmentTypeCollectionTransfer());
 
-        $eventSubscriber = $this->createEventSubscriber($productOfferShipmentTypeFacadeMock, $shipmentTypeFacadeMock, $productFacadeMock);
+        $eventSubscriber = $this->createEventSubscriber(
+            $productOfferShipmentTypeFacadeMock,
+            $shipmentTypeFacadeMock,
+            $productFacadeMock,
+            $this->createSelfServicePortalRepositoryMock([static::ID_SHIPMENT_TYPE_DELIVERY, static::ID_SHIPMENT_TYPE_PICKUP]),
+        );
 
         $form = $this->createForm([
             ShipmentTypeProductConcreteForm::FIELD_ID_PRODUCT_CONCRETE => static::ID_PRODUCT_CONCRETE,
@@ -198,7 +243,12 @@ class ShipmentTypeProductConcreteEditFormExpanderPluginTest extends Unit
             ->method('getProductOfferShipmentTypeCollection')
             ->willReturn($this->createProductOfferShipmentTypeCollectionWithPickup());
 
-        $eventSubscriber = $this->createEventSubscriber($productOfferShipmentTypeFacadeMock, $shipmentTypeFacadeMock, $productFacadeMock);
+        $eventSubscriber = $this->createEventSubscriber(
+            $productOfferShipmentTypeFacadeMock,
+            $shipmentTypeFacadeMock,
+            $productFacadeMock,
+            $this->createSelfServicePortalRepositoryMock([static::ID_SHIPMENT_TYPE_DELIVERY, static::ID_SHIPMENT_TYPE_PICKUP]),
+        );
 
         $form = $this->createForm([
             ShipmentTypeProductConcreteForm::FIELD_ID_PRODUCT_CONCRETE => static::ID_PRODUCT_CONCRETE,
@@ -235,7 +285,12 @@ class ShipmentTypeProductConcreteEditFormExpanderPluginTest extends Unit
             ->method('getProductOfferShipmentTypeCollection')
             ->willReturn($this->createProductOfferShipmentTypeCollectionWithDuplicatePickup());
 
-        $eventSubscriber = $this->createEventSubscriber($productOfferShipmentTypeFacadeMock, $shipmentTypeFacadeMock, $productFacadeMock);
+        $eventSubscriber = $this->createEventSubscriber(
+            $productOfferShipmentTypeFacadeMock,
+            $shipmentTypeFacadeMock,
+            $productFacadeMock,
+            $this->createSelfServicePortalRepositoryMock([static::ID_SHIPMENT_TYPE_DELIVERY, static::ID_SHIPMENT_TYPE_PICKUP]),
+        );
 
         $form = $this->createForm([
             ShipmentTypeProductConcreteForm::FIELD_ID_PRODUCT_CONCRETE => static::ID_PRODUCT_CONCRETE,
@@ -255,13 +310,29 @@ class ShipmentTypeProductConcreteEditFormExpanderPluginTest extends Unit
     protected function createEventSubscriber(
         ProductOfferShipmentTypeFacadeInterface $productOfferShipmentTypeFacade,
         ShipmentTypeFacadeInterface $shipmentTypeFacade,
-        ProductFacadeInterface $productFacade
+        ProductFacadeInterface $productFacade,
+        ?SelfServicePortalRepositoryInterface $selfServicePortalRepository = null
     ): ShipmentTypeProductConcreteFormEventSubscriber {
         return new ShipmentTypeProductConcreteFormEventSubscriber(
             $productOfferShipmentTypeFacade,
             $shipmentTypeFacade,
             $productFacade,
+            $selfServicePortalRepository ?? $this->createMock(SelfServicePortalRepositoryInterface::class),
         );
+    }
+
+    /**
+     * @param list<int> $shipmentTypeIds
+     */
+    protected function createSelfServicePortalRepositoryMock(array $shipmentTypeIds): SelfServicePortalRepositoryInterface
+    {
+        $selfServicePortalRepositoryMock = $this->createMock(SelfServicePortalRepositoryInterface::class);
+        $selfServicePortalRepositoryMock
+            ->method('getShipmentTypeIdsGroupedByIdProductConcrete')
+            ->with([static::ID_PRODUCT_CONCRETE])
+            ->willReturn($shipmentTypeIds === [] ? [] : [static::ID_PRODUCT_CONCRETE => $shipmentTypeIds]);
+
+        return $selfServicePortalRepositoryMock;
     }
 
     /**

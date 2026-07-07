@@ -12,11 +12,13 @@ namespace SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form\EventL
 use Generated\Shared\Transfer\ProductOfferShipmentTypeConditionsTransfer;
 use Generated\Shared\Transfer\ProductOfferShipmentTypeCriteriaTransfer;
 use Generated\Shared\Transfer\ShipmentTypeCollectionTransfer;
+use Generated\Shared\Transfer\ShipmentTypeConditionsTransfer;
 use Generated\Shared\Transfer\ShipmentTypeCriteriaTransfer;
 use Spryker\Zed\Product\Business\ProductFacadeInterface;
 use Spryker\Zed\ProductOfferShipmentType\Business\ProductOfferShipmentTypeFacadeInterface;
 use Spryker\Zed\ShipmentType\Business\ShipmentTypeFacadeInterface;
 use SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form\ShipmentTypeProductConcreteForm;
+use SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
@@ -31,6 +33,7 @@ class ShipmentTypeProductConcreteFormEventSubscriber implements EventSubscriberI
         protected ProductOfferShipmentTypeFacadeInterface $productOfferShipmentTypeFacade,
         protected ShipmentTypeFacadeInterface $shipmentTypeFacade,
         protected ProductFacadeInterface $productFacade,
+        protected SelfServicePortalRepositoryInterface $selfServicePortalRepository,
     ) {
     }
 
@@ -56,13 +59,24 @@ class ShipmentTypeProductConcreteFormEventSubscriber implements EventSubscriberI
             return;
         }
 
+        $currentShipmentTypeIds = $this->getCurrentProductShipmentTypeIds((int)$idProductConcrete);
+        if (!$currentShipmentTypeIds) {
+            return;
+        }
+
         $shipmentTypeCollectionTransfer = $this->shipmentTypeFacade->getShipmentTypeCollection(
-            (new ShipmentTypeCriteriaTransfer())->setShipmentTypeConditions(),
+            (new ShipmentTypeCriteriaTransfer())->setShipmentTypeConditions(
+                (new ShipmentTypeConditionsTransfer())->setShipmentTypeIds($currentShipmentTypeIds),
+            ),
         );
 
         $shipmentTypesIndexedById = $this->indexShipmentTypesById($shipmentTypeCollectionTransfer);
         $newShipmentTypeIds = $this->extractSubmittedShipmentTypeIds($formData);
         $removedShipmentTypeIds = array_diff(array_keys($shipmentTypesIndexedById), $newShipmentTypeIds);
+
+        if (!$removedShipmentTypeIds) {
+            return;
+        }
 
         $concreteSkus = $this->productFacade->getProductConcreteSkusByConcreteIds([(int)$idProductConcrete]);
         $productOfferShipmentTypeCollectionTransfer = $this->productOfferShipmentTypeFacade->getProductOfferShipmentTypeCollection(
@@ -158,5 +172,17 @@ class ShipmentTypeProductConcreteFormEventSubscriber implements EventSubscriberI
 
             $form->addError($formError);
         }
+    }
+
+    /**
+     * @param int $idProductConcrete
+     *
+     * @return list<int>
+     */
+    protected function getCurrentProductShipmentTypeIds(int $idProductConcrete): array
+    {
+        $shipmentTypeIdsGroupedByIdProductConcrete = $this->selfServicePortalRepository->getShipmentTypeIdsGroupedByIdProductConcrete([$idProductConcrete]);
+
+        return $shipmentTypeIdsGroupedByIdProductConcrete[$idProductConcrete] ?? [];
     }
 }
