@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace SprykerFeature\Glue\SelfServicePortal\Api\Storefront\Provider;
 
+use Generated\Api\Storefront\BookedServices\BookedServicesPaginationStorefrontObject;
 use Generated\Api\Storefront\BookedServicesStorefrontResource;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\SspServiceTransfer;
@@ -45,7 +46,7 @@ class BookedServicesStorefrontProvider extends AbstractStorefrontProvider
         $pagination = $sspServiceCollectionTransfer->getPagination();
 
         if ($pagination !== null && count($resources) > 0) {
-            $resources[0]->pagination = $this->calculatePagination($offset, $limit, $pagination->getNbResults() ?? 0);
+            $resources[0]->pagination = BookedServicesPaginationStorefrontObject::fromArray($this->calculatePagination($offset, $limit, $pagination->getNbResults() ?? 0));
         }
 
         return $resources;

@@ -92,9 +92,29 @@ resource:
                 example: 'https://example.com/image.jpg'
 
         pagination:
-            type: map
+            type: object
+            objectName: Pagination
             writable: false
             readable: true
             description: 'Pagination metadata for the collection.'
-            openapiContext:
-                example: { currentPage: 1, maxPage: 10, currentItemsPerPage: 10, numFound: 100 }
+            properties:
+                currentPage:
+                    type: integer
+                    description: 'Current page number.'
+                    openapiContext:
+                        example: 1
+                maxPage:
+                    type: integer
+                    description: 'Total number of pages.'
+                    openapiContext:
+                        example: 10
+                currentItemsPerPage:
+                    type: integer
+                    description: 'Number of items per page.'
+                    openapiContext:
+                        example: 10
+                numFound:
+                    type: integer
+                    description: 'Total number of items found.'
+                    openapiContext:
+                        example: 100

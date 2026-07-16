@@ -123,6 +123,9 @@
         "spryker/shipment": "*",
         "spryker/testify": "*"
     },
+    "conflict": {
+        "spryker/api-platform": "<1.23.0"
+    },
     "suggest": {
         "spryker-shop/service-point-widget": "If you want to use the service point geo coordinates functionality, you need to install this module.",
         "spryker/api-platform": "Required to expose SSP assets, inquiries, and booked services via the API Platform (storefront and backend REST endpoints).",

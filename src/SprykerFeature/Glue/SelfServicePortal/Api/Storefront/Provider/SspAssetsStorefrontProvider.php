@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace SprykerFeature\Glue\SelfServicePortal\Api\Storefront\Provider;
 
+use Generated\Api\Storefront\SspAssets\SspAssetsPaginationStorefrontObject;
 use Generated\Api\Storefront\SspAssetsStorefrontResource;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\SspAssetTransfer;
@@ -50,7 +51,7 @@ class SspAssetsStorefrontProvider extends AbstractStorefrontProvider
         $pagination = $sspAssetCollectionTransfer->getPagination();
 
         if ($pagination !== null && count($resources) > 0) {
-            $resources[0]->pagination = $this->calculatePagination($offset, $limit, $pagination->getNbResults() ?? 0);
+            $resources[0]->pagination = SspAssetsPaginationStorefrontObject::fromArray($this->calculatePagination($offset, $limit, $pagination->getNbResults() ?? 0));
         }
 
         return $resources;
