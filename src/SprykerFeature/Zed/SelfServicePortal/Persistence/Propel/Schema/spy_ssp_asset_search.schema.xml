@@ -4,7 +4,7 @@
     <table name="spy_ssp_asset_search" identifierQuoting="true">
         <column name="id_ssp_asset_search" type="BIGINT" autoIncrement="true" primaryKey="true"/>
         <column name="fk_ssp_asset" type="INTEGER" required="true"/>
-        <column name="structured_data" type="LONGVARCHAR" required="true" description="A JSON-encoded string containing structured data for an SSP asset, used for search indexing."/>
+        <column name="structured_data" type="CLOB" required="true" description="A JSON-encoded string containing structured data for an SSP asset, used for search indexing."/>
 
         <index name="spy_ssp_asset_search-fk_ssp_asset">
             <index-column name="fk_ssp_asset"/>
