@@ -17,6 +17,11 @@ class UpdateSspAssetPermissionPlugin extends AbstractPlugin implements Permissio
      */
     public const KEY = 'UpdateSspAssetPermissionPlugin';
 
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     */
     public function getKey(): string
     {
         return static::KEY;

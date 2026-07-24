@@ -260,6 +260,11 @@ class SelfServicePortalClient extends AbstractClient implements SelfServicePorta
             ->getSspAssetStorageCollection($sspAssetStorageCriteriaTransfer);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     */
     public function attachSspAssetToQuoteItem(SspAssetQuoteItemAttachmentRequestTransfer $sspAssetQuoteItemAttachmentRequestTransfer): QuoteResponseTransfer
     {
         return $this->getFactory()->getQuoteStorageStrategy()->attachSspAssetToQuoteItem($sspAssetQuoteItemAttachmentRequestTransfer);

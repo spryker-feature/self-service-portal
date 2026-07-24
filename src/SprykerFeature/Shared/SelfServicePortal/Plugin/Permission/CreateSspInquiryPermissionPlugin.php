@@ -17,6 +17,11 @@ class CreateSspInquiryPermissionPlugin extends AbstractPlugin implements Permiss
      */
     public const KEY = 'CreateSspInquiryPermissionPlugin';
 
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     */
     public function getKey(): string
     {
         return static::KEY;

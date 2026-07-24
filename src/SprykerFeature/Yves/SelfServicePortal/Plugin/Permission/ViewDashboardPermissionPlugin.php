@@ -17,6 +17,11 @@ class ViewDashboardPermissionPlugin extends AbstractPlugin implements Permission
      */
     public const KEY = 'ViewDashboardPermissionPlugin';
 
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     */
     public function getKey(): string
     {
         return static::KEY;

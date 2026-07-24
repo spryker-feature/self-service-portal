@@ -27,6 +27,11 @@ class UnassignSspAssetPermissionPlugin extends AbstractPlugin implements Executa
      */
     public const KEY = 'UnassignSspAssetPermissionPlugin';
 
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     */
     public function getKey(): string
     {
         return static::KEY;
@@ -71,6 +76,8 @@ class UnassignSspAssetPermissionPlugin extends AbstractPlugin implements Executa
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @return array<string>
      */
     public function getConfigurationSignature(): array

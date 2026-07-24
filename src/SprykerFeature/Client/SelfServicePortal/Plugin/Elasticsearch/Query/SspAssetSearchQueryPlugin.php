@@ -45,6 +45,11 @@ class SspAssetSearchQueryPlugin extends AbstractPlugin implements QueryInterface
      */
     protected ?SearchContextTransfer $searchContextTransfer = null;
 
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     */
     public function __construct()
     {
         $this->query = $this->createQuery();

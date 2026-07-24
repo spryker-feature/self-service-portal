@@ -27,6 +27,11 @@ class ViewBusinessUnitSspAssetPermissionPlugin extends AbstractPlugin implements
      */
     public const KEY = 'ViewBusinessUnitSspAssetPermissionPlugin';
 
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     */
     public function getKey(): string
     {
         return static::KEY;
@@ -71,6 +76,8 @@ class ViewBusinessUnitSspAssetPermissionPlugin extends AbstractPlugin implements
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @return array<string>
      */
     public function getConfigurationSignature(): array
