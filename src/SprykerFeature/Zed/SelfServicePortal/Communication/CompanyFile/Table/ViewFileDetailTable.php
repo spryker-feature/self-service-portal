@@ -236,7 +236,9 @@ class ViewFileDetailTable extends AbstractTable
     protected function prepareCompanyFileQuery(
         FileAttachmentViewDetailTableCriteriaTransfer $fileAttachmentViewDetailTableCriteriaTransfer
     ): SpyFileQuery {
-        $companyFileQuery = $this->fileQuery::create()
+        $companyFileQuery = $this->fileQuery::create();
+
+        $companyFileQuery
             ->filterByIdFile($this->idFile)
             ->withColumn(SpyFileTableMap::COL_ID_FILE, static::COL_ID_FILE)
             ->useSpyCompanyBusinessUnitFileQuery(null, Criteria::LEFT_JOIN)
@@ -259,7 +261,6 @@ class ViewFileDetailTable extends AbstractTable
             ]);
 
         if ($fileAttachmentViewDetailTableCriteriaTransfer->getDateFrom()) {
-            // @phpstan-ignore-next-line
             $companyFileQuery
                 ->useSpyCompanyBusinessUnitFileQuery()
                     ->filterByCreatedAt($this->timeZoneFormatter->formatToUTCFromLocalTimeZone($fileAttachmentViewDetailTableCriteriaTransfer->getDateFrom()), Criteria::GREATER_EQUAL)
@@ -267,21 +268,21 @@ class ViewFileDetailTable extends AbstractTable
         }
 
         if ($fileAttachmentViewDetailTableCriteriaTransfer->getDateTo()) {
-            // @phpstan-ignore-next-line
             $companyFileQuery
                 ->useSpyCompanyBusinessUnitFileQuery()
                     ->filterByCreatedAt($this->timeZoneFormatter->formatToUTCFromLocalTimeZone($fileAttachmentViewDetailTableCriteriaTransfer->getDateTo()), Criteria::LESS_THAN)
                 ->endUse();
         }
 
-        // @phpstan-ignore-next-line
         return $companyFileQuery;
     }
 
     protected function prepareCompanyBusinessUnitFileQuery(
         FileAttachmentViewDetailTableCriteriaTransfer $fileAttachmentViewDetailTableCriteriaTransfer
     ): SpyFileQuery {
-        $companyBusinessUnitFileQuery = $this->fileQuery::create()
+        $companyBusinessUnitFileQuery = $this->fileQuery::create();
+
+        $companyBusinessUnitFileQuery
             ->filterByIdFile($this->idFile)
             ->withColumn(SpyFileTableMap::COL_ID_FILE, static::COL_ID_FILE)
             ->useSpyCompanyBusinessUnitFileQuery(null, Criteria::LEFT_JOIN)
@@ -302,7 +303,6 @@ class ViewFileDetailTable extends AbstractTable
             ]);
 
         if ($fileAttachmentViewDetailTableCriteriaTransfer->getDateFrom()) {
-            // @phpstan-ignore-next-line
             $companyBusinessUnitFileQuery
                 ->useSpyCompanyBusinessUnitFileQuery()
                     ->filterByCreatedAt($this->timeZoneFormatter->formatToUTCFromLocalTimeZone($fileAttachmentViewDetailTableCriteriaTransfer->getDateFrom()), Criteria::GREATER_EQUAL)
@@ -310,21 +310,21 @@ class ViewFileDetailTable extends AbstractTable
         }
 
         if ($fileAttachmentViewDetailTableCriteriaTransfer->getDateTo()) {
-            // @phpstan-ignore-next-line
             $companyBusinessUnitFileQuery
                 ->useSpyCompanyBusinessUnitFileQuery()
                     ->filterByCreatedAt($this->timeZoneFormatter->formatToUTCFromLocalTimeZone($fileAttachmentViewDetailTableCriteriaTransfer->getDateTo()), Criteria::LESS_THAN)
                 ->endUse();
         }
 
-        // @phpstan-ignore-next-line
         return $companyBusinessUnitFileQuery;
     }
 
     protected function prepareCompanyUserFileQuery(
         FileAttachmentViewDetailTableCriteriaTransfer $fileAttachmentViewDetailTableCriteriaTransfer
     ): SpyFileQuery {
-        $companyUserFileQuery = $this->fileQuery::create()
+        $companyUserFileQuery = $this->fileQuery::create();
+
+        $companyUserFileQuery
             ->filterByIdFile($this->idFile)
             ->withColumn(SpyFileTableMap::COL_ID_FILE, static::COL_ID_FILE)
             ->useSpyCompanyUserFileQuery(null, Criteria::LEFT_JOIN)
@@ -352,7 +352,6 @@ class ViewFileDetailTable extends AbstractTable
             ]);
 
         if ($fileAttachmentViewDetailTableCriteriaTransfer->getDateFrom()) {
-            // @phpstan-ignore-next-line
             $companyUserFileQuery
                 ->useSpyCompanyUserFileQuery()
                     ->filterByCreatedAt($this->timeZoneFormatter->formatToUTCFromLocalTimeZone($fileAttachmentViewDetailTableCriteriaTransfer->getDateFrom()), Criteria::GREATER_EQUAL)
@@ -360,14 +359,12 @@ class ViewFileDetailTable extends AbstractTable
         }
 
         if ($fileAttachmentViewDetailTableCriteriaTransfer->getDateTo()) {
-            // @phpstan-ignore-next-line
             $companyUserFileQuery
                 ->useSpyCompanyUserFileQuery()
                     ->filterByCreatedAt($this->timeZoneFormatter->formatToUTCFromLocalTimeZone($fileAttachmentViewDetailTableCriteriaTransfer->getDateTo()), Criteria::LESS_THAN)
                 ->endUse();
         }
 
-        // @phpstan-ignore-next-line
         return $companyUserFileQuery;
     }
 
@@ -401,7 +398,9 @@ class ViewFileDetailTable extends AbstractTable
     protected function prepareModelFileQuery(
         FileAttachmentViewDetailTableCriteriaTransfer $fileAttachmentViewDetailTableCriteriaTransfer
     ): SpyFileQuery {
-        $modelFileQuery = $this->fileQuery::create()
+        $modelFileQuery = $this->fileQuery::create();
+
+        $modelFileQuery
             ->filterByIdFile($this->idFile)
             ->withColumn(SpyFileTableMap::COL_ID_FILE, static::COL_ID_FILE)
             ->useSpySspModelToFileQuery(null, Criteria::LEFT_JOIN)
@@ -422,7 +421,6 @@ class ViewFileDetailTable extends AbstractTable
             ]);
 
         if ($fileAttachmentViewDetailTableCriteriaTransfer->getDateFrom()) {
-            // @phpstan-ignore-next-line
             $modelFileQuery
                 ->useSpySspModelToFileQuery()
                     ->filterByCreatedAt($this->timeZoneFormatter->formatToUTCFromLocalTimeZone($fileAttachmentViewDetailTableCriteriaTransfer->getDateFrom()), Criteria::GREATER_EQUAL)
@@ -430,14 +428,12 @@ class ViewFileDetailTable extends AbstractTable
         }
 
         if ($fileAttachmentViewDetailTableCriteriaTransfer->getDateTo()) {
-            // @phpstan-ignore-next-line
             $modelFileQuery
                 ->useSpySspModelToFileQuery()
                     ->filterByCreatedAt($this->timeZoneFormatter->formatToUTCFromLocalTimeZone($fileAttachmentViewDetailTableCriteriaTransfer->getDateTo()), Criteria::LESS_THAN)
                 ->endUse();
         }
 
-        // @phpstan-ignore-next-line
         return $modelFileQuery;
     }
 
