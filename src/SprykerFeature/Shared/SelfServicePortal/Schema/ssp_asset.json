@@ -43,8 +43,7 @@
             ],
             "properties": {
                 "search-result-data": {
-                    "type": "object",
-                    "properties": {}
+                    "type": "object"
                 },
                 "type": {
                     "type": "keyword"
