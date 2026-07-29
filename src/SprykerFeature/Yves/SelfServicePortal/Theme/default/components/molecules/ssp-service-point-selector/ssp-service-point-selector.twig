@@ -95,44 +95,62 @@
     {% endif %}
 
     {% block productOfferByMerchant %}
-        {% set merchantProductOfferWidget = findWidget('MerchantProductOfferWidget', [data.product, {'shipment_type_uuids': [data.shipmentTypeUuid], 'service_point_uuids': data.servicePoint ? [data.servicePoint.uuid] : []}]) %}
-        {% set productOffersCount = merchantProductOfferWidget ? merchantProductOfferWidget.productOffers | length : 0 %}
-        {% set isRadioButtonVisible = productOffersCount > 0  %}
-        {% set isChecked = merchantProductOfferWidget ? not merchantProductOfferWidget.productView.productOfferReference : true %}
-        {% set merchantProductWidget = findWidget('MerchantProductWidget', [
-            data.product,
-            isRadioButtonVisible,
-            isChecked,
-        ]) %}
-        {% set hasMerchantProduct = merchantProductWidget.merchantProductView %}
+        {% set buyBoxWidget = findWidget('BuyBoxWidget', [data.product, app.request, {
+            'shipment_type_uuids': [data.shipmentTypeUuid],
+            'service_point_uuids': data.servicePoint ? [data.servicePoint.uuid] : [],
+            'is_merchant_product_loading_skipped':  data.isServicePointRequired is not null,
+        }]) %}
 
-        {% block productOfferListByMerchant %}
-            {% if data.isServicePointRequired is null %}
-                {% widget merchantProductWidget with {
+        {% if buyBoxWidget %}
+            {% set buyBoxProducts = buyBoxWidget.products | default([]) %}
+
+            {% if buyBoxProducts | length > 0 %}
+                {% widget buyBoxWidget with {
                     data: {
                         pageReload: false,
                     },
                 } %}{% endwidget %}
             {% endif %}
+        {% else %}
+            {% set merchantProductOfferWidget = findWidget('MerchantProductOfferWidget', [data.product, {'shipment_type_uuids': [data.shipmentTypeUuid], 'service_point_uuids': data.servicePoint ? [data.servicePoint.uuid] : []}]) %}
+            {% set productOffersCount = merchantProductOfferWidget ? merchantProductOfferWidget.productOffers | length : 0 %}
+            {% set isRadioButtonVisible = productOffersCount > 0  %}
+            {% set isChecked = merchantProductOfferWidget ? not merchantProductOfferWidget.productView.productOfferReference : true %}
+            {% set merchantProductWidget = findWidget('MerchantProductWidget', [
+                data.product,
+                isRadioButtonVisible,
+                isChecked,
+            ]) %}
+            {% set hasMerchantProduct = merchantProductWidget.merchantProductView %}
 
-            {% widget merchantProductOfferWidget with {
-                data: {
-                    isTitleVisible: not hasMerchantProduct or data.isServicePointRequired,
-                    pageReload: false,
-                    isSingleOffer: productOffersCount == 1,
-                    isDefaultOfferChecked: data.isServicePointRequired is not null,
-                },
-                embed: {
-                    hasMerchantProduct: hasMerchantProduct,
-                    productOffersCount: merchantProductOfferWidget.productOffers | length,
-                },
-            } %}
-                {% block content %}
-                    {% set isRadioButtonVisible = embed.productOffersCount > 1 or embed.hasMerchantProduct %}
+            {% block productOfferListByMerchant %}
+                {% if data.isServicePointRequired is null %}
+                    {% widget merchantProductWidget with {
+                        data: {
+                            pageReload: false,
+                        },
+                    } %}{% endwidget %}
+                {% endif %}
 
-                    {{ parent() }}
-                {% endblock %}
-            {% endwidget %}
-        {% endblock %}
+                {% widget merchantProductOfferWidget with {
+                    data: {
+                        isTitleVisible: not hasMerchantProduct or data.isServicePointRequired,
+                        pageReload: false,
+                        isSingleOffer: productOffersCount == 1,
+                        isDefaultOfferChecked: data.isServicePointRequired is not null,
+                    },
+                    embed: {
+                        hasMerchantProduct: hasMerchantProduct,
+                        productOffersCount: merchantProductOfferWidget.productOffers | length,
+                    },
+                } %}
+                    {% block content %}
+                        {% set isRadioButtonVisible = embed.productOffersCount > 1 or embed.hasMerchantProduct %}
+
+                        {{ parent() }}
+                    {% endblock %}
+                {% endwidget %}
+            {% endblock %}
+        {% endif %}
     {% endblock %}
 {% endblock %}

@@ -27,18 +27,21 @@ export default class SspServicePointSelector extends Component {
         this.popup?.addEventListener(EVENT_POPUP_OPENED, this.mapFinderSetServicePointEvent.bind(this));
         this.changeOffer();
         this.onShipmentTypeChange();
+        this.initPriceVisibility();
+    }
+
+    protected initPriceVisibility(): void {
+        const checkedInput = this.checkedReferenceInput;
+
+        if (checkedInput) {
+            this.changePriceVisibility(checkedInput.value);
+        }
     }
 
     protected onShipmentTypeChange(): void {
         document.addEventListener(
             EVENT_SHIPMENT_TYPE_CHANGE,
-            () => {
-                const checkbox =
-                    document.querySelector<HTMLInputElement>(`${this.merchantReferenceSelector}:checked`) ??
-                    document.querySelector<HTMLInputElement>(`${this.offerReferenceSelector}:checked`);
-
-                checkbox?.dispatchEvent(new Event('change', { bubbles: true }));
-            },
+            () => this.checkedReferenceInput?.dispatchEvent(new Event('change', { bubbles: true })),
             { once: true },
         );
     }
@@ -137,6 +140,13 @@ export default class SspServicePointSelector extends Component {
         if (emptyElement) {
             emptyElement.classList.remove(this.toggleClassName);
         }
+    }
+
+    protected get checkedReferenceInput(): HTMLInputElement | null {
+        return (
+            document.querySelector<HTMLInputElement>(`${this.offerReferenceSelector}:checked`) ??
+            document.querySelector<HTMLInputElement>(`${this.merchantReferenceSelector}:checked`)
+        );
     }
 
     protected get finderClassName(): string {
