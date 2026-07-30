@@ -24,9 +24,17 @@ use Generated\Shared\Transfer\ShipmentTypeTransfer;
 use Generated\Shared\Transfer\SspAssetCollectionTransfer;
 use Generated\Shared\Transfer\SspAssetTransfer;
 use Generated\Shared\Transfer\SspModelTransfer;
+use Orm\Zed\CompanyBusinessUnit\Persistence\SpyCompanyBusinessUnitQuery;
+use Orm\Zed\CompanyUser\Persistence\SpyCompanyUser;
+use Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery;
+use Orm\Zed\FileManager\Persistence\SpyFile;
+use Orm\Zed\FileManager\Persistence\SpyFileInfoQuery;
+use Orm\Zed\FileManager\Persistence\SpyFileQuery;
 use Orm\Zed\ProductList\Persistence\Base\SpyProductListQuery;
 use Orm\Zed\ProductList\Persistence\SpyProductList;
 use Orm\Zed\SelfServicePortal\Persistence\Map\SpyProductShipmentTypeTableMap;
+use Orm\Zed\SelfServicePortal\Persistence\SpyCompanyBusinessUnitFileQuery;
+use Orm\Zed\SelfServicePortal\Persistence\SpyCompanyUserFileQuery;
 use Orm\Zed\SelfServicePortal\Persistence\SpyProductClassQuery;
 use Orm\Zed\SelfServicePortal\Persistence\SpyProductShipmentTypeQuery;
 use Orm\Zed\SelfServicePortal\Persistence\SpyProductToProductClassQuery;
@@ -34,6 +42,8 @@ use Orm\Zed\SelfServicePortal\Persistence\SpySalesOrderItemProductClass;
 use Orm\Zed\SelfServicePortal\Persistence\SpySalesOrderItemProductClassQuery;
 use Orm\Zed\SelfServicePortal\Persistence\SpySalesOrderItemSspAsset;
 use Orm\Zed\SelfServicePortal\Persistence\SpySalesOrderItemSspAssetQuery;
+use Orm\Zed\SelfServicePortal\Persistence\SpySspAssetFileQuery;
+use Orm\Zed\SelfServicePortal\Persistence\SpySspAssetQuery;
 use Orm\Zed\SelfServicePortal\Persistence\SpySspAssetStorage;
 use Orm\Zed\SelfServicePortal\Persistence\SpySspAssetStorageQuery;
 use Orm\Zed\SelfServicePortal\Persistence\SpySspAssetToCompanyBusinessUnit;
@@ -42,6 +52,7 @@ use Orm\Zed\SelfServicePortal\Persistence\SpySspAssetToSspModelQuery;
 use Orm\Zed\SelfServicePortal\Persistence\SpySspModelQuery;
 use Orm\Zed\SelfServicePortal\Persistence\SpySspModelStorage;
 use Orm\Zed\SelfServicePortal\Persistence\SpySspModelStorageQuery;
+use Orm\Zed\SelfServicePortal\Persistence\SpySspModelToFileQuery;
 use Orm\Zed\SelfServicePortal\Persistence\SpySspModelToProductList;
 use Orm\Zed\SelfServicePortal\Persistence\SpySspModelToProductListQuery;
 
@@ -747,5 +758,105 @@ class SelfServicePortalCommunicationTester extends Actor
     public function ensureSspAssetToSspModelTableIsEmpty(): void
     {
         $this->getSspAssetToSspModelQuery()->deleteAll();
+    }
+
+    public function ensureFileAndFileAttachmentTablesAreEmpty(): void
+    {
+        SpyCompanyBusinessUnitFileQuery::create()->deleteAll();
+        SpyCompanyUserFileQuery::create()->deleteAll();
+        SpySspAssetFileQuery::create()->deleteAll();
+        SpySspModelToFileQuery::create()->deleteAll();
+        SpyFileQuery::create()->deleteAll();
+    }
+
+    public function deleteFileWithAttachmentsByIdFile(int $idFile): void
+    {
+        SpyCompanyBusinessUnitFileQuery::create()->filterByFkFile($idFile)->delete();
+        SpyCompanyUserFileQuery::create()->filterByFkFile($idFile)->delete();
+        SpySspAssetFileQuery::create()->filterByFkFile($idFile)->delete();
+        SpySspModelToFileQuery::create()->filterByFkFile($idFile)->delete();
+        SpyFileQuery::create()->filterByIdFile($idFile)->delete();
+    }
+
+    public function ensureFileAttachmentImportEntitiesDoNotExist(
+        string $companyUserKey,
+        string $businessUnitKey,
+        string $assetReference,
+        string $modelReference
+    ): void {
+        SpyCompanyUserQuery::create()->filterByKey($companyUserKey)->delete();
+        SpyCompanyBusinessUnitQuery::create()->filterByKey($businessUnitKey)->delete();
+        SpySspAssetQuery::create()->filterByReference($assetReference)->delete();
+        SpySspModelQuery::create()->filterByReference($modelReference)->delete();
+    }
+
+    public function haveFileEntity(array $seedData = []): SpyFile
+    {
+        $fileEntity = (new SpyFile())->fromArray($seedData);
+        $fileEntity->save();
+
+        return $fileEntity;
+    }
+
+    public function haveCompanyUserEntity(int $idCompany, int $idCustomer, string $companyUserKey): SpyCompanyUser
+    {
+        $companyUserEntity = (new SpyCompanyUser())
+            ->setFkCompany($idCompany)
+            ->setFkCustomer($idCustomer)
+            ->setKey($companyUserKey)
+            ->setIsActive(true);
+        $companyUserEntity->save();
+
+        return $companyUserEntity;
+    }
+
+    public function findFileEntityByFileReference(string $fileReference): ?SpyFile
+    {
+        return SpyFileQuery::create()->findOneByFileReference($fileReference);
+    }
+
+    public function getFileInfoCountByIdFile(int $idFile): int
+    {
+        return SpyFileInfoQuery::create()->filterByFkFile($idFile)->count();
+    }
+
+    public function isCompanyBusinessUnitFileAttachmentExists(int $idCompanyBusinessUnit, int $idFile): bool
+    {
+        return SpyCompanyBusinessUnitFileQuery::create()
+            ->filterByFkCompanyBusinessUnit($idCompanyBusinessUnit)
+            ->filterByFkFile($idFile)
+            ->exists();
+    }
+
+    public function isCompanyUserFileAttachmentExists(int $idCompanyUser, int $idFile): bool
+    {
+        return SpyCompanyUserFileQuery::create()
+            ->filterByFkCompanyUser($idCompanyUser)
+            ->filterByFkFile($idFile)
+            ->exists();
+    }
+
+    public function isSspAssetFileAttachmentExists(int $idSspAsset, int $idFile): bool
+    {
+        return SpySspAssetFileQuery::create()
+            ->filterByFkSspAsset($idSspAsset)
+            ->filterByFkFile($idFile)
+            ->exists();
+    }
+
+    public function isSspModelFileAttachmentExists(int $idSspModel, int $idFile): bool
+    {
+        return SpySspModelToFileQuery::create()
+            ->filterByFkSspModel($idSspModel)
+            ->filterByFkFile($idFile)
+            ->exists();
+    }
+
+    public function getFileAttachmentTotalCount(): int
+    {
+        return SpyCompanyBusinessUnitFileQuery::create()->count()
+            + SpyCompanyUserFileQuery::create()->count()
+            + SpySspAssetFileQuery::create()->count()
+            + SpySspModelToFileQuery::create()->count();
     }
 }

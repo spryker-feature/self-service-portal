@@ -1400,4 +1400,9 @@
         <property name="serviceTypeStorageConditions" type="ServiceTypeStorageConditions"/>
     </transfer>
 
+    <transfer name="FileSystemQuery">
+        <property name="fileSystemName" type="string"/>
+        <property name="path" type="string"/>
+    </transfer>
+
 </transfers>

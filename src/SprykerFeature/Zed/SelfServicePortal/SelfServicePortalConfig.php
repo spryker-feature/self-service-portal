@@ -105,6 +105,24 @@ class SelfServicePortalConfig extends AbstractBundleConfig
 
     /**
      * Specification:
+     * - Import type for files with content.
+     *
+     * @api
+     */
+    public const string IMPORT_TYPE_FILE = 'self-service-portal-file';
+
+    /**
+     * Specification:
+     * - Import type for file attachments to entities.
+     *
+     * @api
+     */
+    public const string IMPORT_TYPE_FILE_ATTACHMENT = 'self-service-portal-file-attachment';
+
+    protected const string DEFAULT_IMPORT_FILE_SYSTEM_NAME = 'import-files';
+
+    /**
+     * Specification:
      * - Entity type for company.
      * - Used as entity type indentificator in attachment modification requests.
      *
@@ -439,6 +457,50 @@ class SelfServicePortalConfig extends AbstractBundleConfig
         return (new DataImporterDataSourceConfigurationTransfer())
             ->setImportType(static::IMPORT_TYPE_SSP_MODEL_PRODUCT_LIST)
             ->setFileName('ssp_model_product_list.csv')
+            ->setModuleName(static::MODULE_NAME)
+            ->setDirectory('/data/data/import/common/common/');
+    }
+
+    /**
+     * Specification:
+     * - Returns the file system name used to read source files during file data import.
+     * - The file system must be configured in `FileSystemConstants::FILESYSTEM_SERVICE`.
+     *
+     * @api
+     */
+    public function getFileImportFileSystemName(): string
+    {
+        return $this->get(SelfServicePortalConstants::IMPORT_FILE_SYSTEM_NAME, static::DEFAULT_IMPORT_FILE_SYSTEM_NAME);
+    }
+
+    /**
+     * Specification:
+     * - Import configuration for files.
+     * - Returns data source configuration for importing files with content.
+     *
+     * @api
+     */
+    public function getFileDataImporterConfiguration(): DataImporterDataSourceConfigurationTransfer
+    {
+        return (new DataImporterDataSourceConfigurationTransfer())
+            ->setImportType(static::IMPORT_TYPE_FILE)
+            ->setFileName('file.csv')
+            ->setModuleName(static::MODULE_NAME)
+            ->setDirectory('/data/data/import/common/common/');
+    }
+
+    /**
+     * Specification:
+     * - Import configuration for file attachments.
+     * - Returns data source configuration for importing file attachments to entities.
+     *
+     * @api
+     */
+    public function getFileAttachmentDataImporterConfiguration(): DataImporterDataSourceConfigurationTransfer
+    {
+        return (new DataImporterDataSourceConfigurationTransfer())
+            ->setImportType(static::IMPORT_TYPE_FILE_ATTACHMENT)
+            ->setFileName('file_attachment.csv')
             ->setModuleName(static::MODULE_NAME)
             ->setDirectory('/data/data/import/common/common/');
     }

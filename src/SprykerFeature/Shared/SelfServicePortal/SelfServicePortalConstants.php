@@ -35,6 +35,16 @@ class SelfServicePortalConstants
 
     /**
      * Specification:
+     * - Defines the file system name used to read source files during file data import.
+     *
+     * @api
+     *
+     * @var string
+     */
+    public const IMPORT_FILE_SYSTEM_NAME = 'SELF_SERVICE_PORTAL:IMPORT_FILE_SYSTEM_NAME';
+
+    /**
+     * Specification:
      * - Defines the storage name for Self Service Portal inquiry files related data.
      *
      * @api

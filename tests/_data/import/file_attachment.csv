@@ -1,0 +1,5 @@
+file_reference,entity_type,entity_key
+FILE-ATTACH-1,company_business_unit,file-attach-import-bu
+FILE-ATTACH-1,company_user,file-attach-import-cu
+FILE-ATTACH-1,ssp_asset,FILE-ATTACH-ASSET--1
+FILE-ATTACH-1,ssp_model,FILE-ATTACH-MODEL--1

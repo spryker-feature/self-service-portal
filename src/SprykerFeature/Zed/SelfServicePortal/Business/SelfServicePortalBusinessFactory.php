@@ -15,6 +15,7 @@ use Orm\Zed\SelfServicePortal\Persistence\SpyProductClassQuery;
 use Orm\Zed\SelfServicePortal\Persistence\SpyProductShipmentTypeQuery;
 use Orm\Zed\SelfServicePortal\Persistence\SpyProductToProductClassQuery;
 use Orm\Zed\ShipmentType\Persistence\SpyShipmentTypeQuery;
+use Spryker\Service\FileSystem\FileSystemServiceInterface;
 use Spryker\Service\UtilEncoding\UtilEncodingServiceInterface;
 use Spryker\Zed\Comment\Business\CommentFacadeInterface;
 use Spryker\Zed\Company\Business\CompanyFacadeInterface;
@@ -85,6 +86,11 @@ use SprykerFeature\Zed\SelfServicePortal\Business\CompanyFile\Creator\FileAttach
 use SprykerFeature\Zed\SelfServicePortal\Business\CompanyFile\Creator\FileAttachmentCreatorInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\CompanyFile\DashboardDataExpander\FileDashboardDataExpander;
 use SprykerFeature\Zed\SelfServicePortal\Business\CompanyFile\DashboardDataExpander\FileDashboardDataExpanderInterface;
+use SprykerFeature\Zed\SelfServicePortal\Business\CompanyFile\DataImport\Step\FileAttachmentEntityKeyToIdEntityStep;
+use SprykerFeature\Zed\SelfServicePortal\Business\CompanyFile\DataImport\Step\FileAttachmentWriterStep;
+use SprykerFeature\Zed\SelfServicePortal\Business\CompanyFile\DataImport\Step\FileContentValidationStep;
+use SprykerFeature\Zed\SelfServicePortal\Business\CompanyFile\DataImport\Step\FileReferenceToIdFileStep;
+use SprykerFeature\Zed\SelfServicePortal\Business\CompanyFile\DataImport\Step\FileWriterStep;
 use SprykerFeature\Zed\SelfServicePortal\Business\CompanyFile\Deleter\FileAttachmentDeleter;
 use SprykerFeature\Zed\SelfServicePortal\Business\CompanyFile\Deleter\FileAttachmentDeleterInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\CompanyFile\Permission\FileAttachmentCriteriaPermissionExpander;
@@ -791,6 +797,84 @@ class SelfServicePortalBusinessFactory extends AbstractBusinessFactory
         $dataImporter->addDataSetStepBroker($dataSetStepBroker);
 
         return $dataImporter;
+    }
+
+    public function getFileDataImporter(?DataImporterConfigurationTransfer $dataImporterConfigurationTransfer = null): DataImporterInterface
+    {
+        /** @var \Spryker\Zed\DataImport\Business\Model\DataImporter $dataImporter */
+        $dataImporter = $this->getDataImporter(
+            $this->getConfig()->getFileDataImporterConfiguration(),
+            $dataImporterConfigurationTransfer,
+        );
+
+        $dataSetStepBroker = $this->createTransactionAwareDataSetStepBroker();
+        if ($dataSetStepBroker instanceof DataImportStepAwareInterface) {
+            $dataSetStepBroker
+                ->addStep($this->createFileContentValidationStep())
+                ->addStep($this->createFileWriterStep());
+        }
+
+        $dataImporter->addDataSetStepBroker($dataSetStepBroker);
+
+        return $dataImporter;
+    }
+
+    public function getFileAttachmentDataImporter(?DataImporterConfigurationTransfer $dataImporterConfigurationTransfer = null): DataImporterInterface
+    {
+        /** @var \Spryker\Zed\DataImport\Business\Model\DataImporter $dataImporter */
+        $dataImporter = $this->getDataImporter(
+            $this->getConfig()->getFileAttachmentDataImporterConfiguration(),
+            $dataImporterConfigurationTransfer,
+        );
+
+        $dataSetStepBroker = $this->createTransactionAwareDataSetStepBroker();
+        if ($dataSetStepBroker instanceof DataImportStepAwareInterface) {
+            $dataSetStepBroker
+                ->addStep($this->createFileReferenceToIdFileStep())
+                ->addStep($this->createFileAttachmentEntityKeyToIdEntityStep())
+                ->addStep($this->createFileAttachmentWriterStep());
+        }
+
+        $dataImporter->addDataSetStepBroker($dataSetStepBroker);
+
+        return $dataImporter;
+    }
+
+    public function createFileContentValidationStep(): DataImportStepInterface
+    {
+        return new FileContentValidationStep(
+            $this->getConfig(),
+            $this->getFileSystemService(),
+        );
+    }
+
+    public function getFileSystemService(): FileSystemServiceInterface
+    {
+        return $this->getProvidedDependency(SelfServicePortalDependencyProvider::SERVICE_FILE_SYSTEM);
+    }
+
+    public function createFileWriterStep(): DataImportStepInterface
+    {
+        return new FileWriterStep(
+            $this->getConfig(),
+            $this->getFileManagerFacade(),
+            $this->getSequenceNumberFacade(),
+        );
+    }
+
+    public function createFileReferenceToIdFileStep(): DataImportStepInterface
+    {
+        return new FileReferenceToIdFileStep();
+    }
+
+    public function createFileAttachmentEntityKeyToIdEntityStep(): DataImportStepInterface
+    {
+        return new FileAttachmentEntityKeyToIdEntityStep();
+    }
+
+    public function createFileAttachmentWriterStep(): DataImportStepInterface
+    {
+        return new FileAttachmentWriterStep();
     }
 
     public function createSspAssetBusinessUnitAssignmentStep(): DataImportStepInterface

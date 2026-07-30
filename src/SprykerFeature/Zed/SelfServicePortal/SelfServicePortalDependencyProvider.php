@@ -19,6 +19,7 @@ use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 use Orm\Zed\SelfServicePortal\Persistence\SpyProductShipmentTypeQuery;
 use Orm\Zed\ShipmentType\Persistence\SpyShipmentTypeQuery;
 use Orm\Zed\StateMachine\Persistence\SpyStateMachineItemStateQuery;
+use Spryker\Service\FileSystem\FileSystemServiceInterface;
 use Spryker\Service\UtilCsv\UtilCsvServiceInterface;
 use Spryker\Service\UtilEncoding\UtilEncodingServiceInterface;
 use Spryker\Zed\Comment\Business\CommentFacadeInterface;
@@ -290,6 +291,8 @@ class SelfServicePortalDependencyProvider extends AbstractBundleDependencyProvid
      */
     public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
 
+    public const string SERVICE_FILE_SYSTEM = 'SERVICE_FILE_SYSTEM';
+
     public function provideCommunicationLayerDependencies(Container $container): Container
     {
         $container = parent::provideCommunicationLayerDependencies($container);
@@ -361,6 +364,7 @@ class SelfServicePortalDependencyProvider extends AbstractBundleDependencyProvid
         $container = $this->addCustomerFacade($container);
         $container = $this->addEventBehaviorFacade($container);
         $container = $this->addUtilEncodingService($container);
+        $container = $this->addFileSystemService($container);
         $container = $this->addQuoteFacade($container);
         $container = $this->addCompanyBusinessUnitFacade($container);
         $container = $this->addCompanyFacade($container);
@@ -791,6 +795,15 @@ class SelfServicePortalDependencyProvider extends AbstractBundleDependencyProvid
     {
         $container->set(static::SERVICE_UTIL_ENCODING, function (Container $container): UtilEncodingServiceInterface {
             return $container->getLocator()->utilEncoding()->service();
+        });
+
+        return $container;
+    }
+
+    protected function addFileSystemService(Container $container): Container
+    {
+        $container->set(static::SERVICE_FILE_SYSTEM, static function (Container $container): FileSystemServiceInterface {
+            return $container->getLocator()->fileSystem()->service();
         });
 
         return $container;
