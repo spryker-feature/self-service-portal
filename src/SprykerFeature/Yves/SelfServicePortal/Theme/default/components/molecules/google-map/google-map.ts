@@ -20,7 +20,6 @@ export default class GoogleMap extends Component {
     protected markers: Record<string, GoogleMarkerInstance> = {};
     protected infoWindows: Record<string, GoogleInfoWindowInstance> = {};
 
-    protected readyCallback(): void {}
     protected init(): void {
         this.mapEvents();
     }

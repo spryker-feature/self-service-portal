@@ -1,8 +1,14 @@
+@use 'sass:meta';
+
 @mixin self-service-portal-ssp-service-point-finder($name: '.ssp-service-point-finder') {
     @include service-point-widget-service-point-finder(#{$name});
 
     #{$name} {
         min-height: 80vh;
+
+        @if meta.mixin-exists(self-service-portal-ssp-service-point-finder-base-hook) {
+            @include self-service-portal-ssp-service-point-finder-base-hook;
+        }
 
         &__container {
             display: flex;

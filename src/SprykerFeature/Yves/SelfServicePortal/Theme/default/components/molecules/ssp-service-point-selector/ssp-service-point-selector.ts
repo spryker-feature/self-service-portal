@@ -13,7 +13,6 @@ export default class SspServicePointSelector extends Component {
     protected finder: ServicePointFinder;
     protected popup: MainPopup;
 
-    protected readyCallback(): void {}
     protected init(): void {
         this.noLocationContainer = <HTMLElement>this.getElementsByClassName(`${this.jsName}__no-location`)[0];
         this.location = <HTMLElement>this.getElementsByClassName(`${this.jsName}__location`)[0];

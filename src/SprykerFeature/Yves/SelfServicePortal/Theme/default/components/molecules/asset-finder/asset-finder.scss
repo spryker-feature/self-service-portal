@@ -1,3 +1,6 @@
+@use 'sass:meta';
+@use 'sass:map';
+
 @mixin self-service-portal-asset-finder($name: '.asset-finder') {
     #{$name} {
         overflow: hidden;
@@ -6,7 +9,11 @@
         padding: 0 0.5rem;
         width: 80vw;
 
-        @include helper-breakpoint-media-min(helper-breakpoint-edge-min(map-get($setting-breakpoints, lg))) {
+        @if meta.mixin-exists(self-service-portal-asset-finder-base-hook) {
+            @include self-service-portal-asset-finder-base-hook;
+        }
+
+        @include helper-breakpoint-media-min(helper-breakpoint-edge-min(map.get($setting-breakpoints, lg))) {
             width: 36.25rem;
         }
 

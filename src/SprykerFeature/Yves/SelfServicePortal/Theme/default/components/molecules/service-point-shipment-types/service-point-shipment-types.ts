@@ -6,7 +6,6 @@ export const EVENT_SHIPMENT_TYPE_CHANGE = 'shipment-type-change';
 export default class ServicePointShipmentTypes extends Component {
     protected selectedType = null;
 
-    protected readyCallback(): void {}
     protected init(): void {
         this.mapEvents();
     }

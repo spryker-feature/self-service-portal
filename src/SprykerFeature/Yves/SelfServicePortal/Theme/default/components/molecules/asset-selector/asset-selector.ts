@@ -18,7 +18,6 @@ export default class AssetSelector extends Component {
     protected selectedStatus: HTMLElement;
     protected mountedPopup = false;
 
-    protected readyCallback(): void {}
     protected init(): void {
         this.hiddenInput = this.querySelector(`.${this.jsName}__input`);
         this.popup = this.querySelector(`.${this.jsName}__popup`);

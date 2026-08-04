@@ -1,3 +1,5 @@
+@use 'sass:meta';
+
 @mixin self-service-portal-asset-option($name: '.asset-option') {
     #{$name} {
         display: flex;
@@ -6,6 +8,10 @@
         font-size: 0.875rem;
         gap: 1.25rem;
         cursor: auto;
+
+        @if meta.mixin-exists(self-service-portal-asset-option-base-hook) {
+            @include self-service-portal-asset-option-base-hook;
+        }
 
         &:not(:last-child) {
             border-bottom: 1px solid $setting-color-light;

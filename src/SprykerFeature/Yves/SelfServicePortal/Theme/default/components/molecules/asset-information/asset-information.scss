@@ -1,5 +1,11 @@
+@use 'sass:meta';
+
 @mixin self-service-portal-asset-information($name: '.asset-information') {
     #{$name} {
+        @if meta.mixin-exists(self-service-portal-asset-information-base-hook) {
+            @include self-service-portal-asset-information-base-hook;
+        }
+
         &__image {
             border: 0.0625rem solid $setting-color-input-border;
             aspect-ratio: 1.5;

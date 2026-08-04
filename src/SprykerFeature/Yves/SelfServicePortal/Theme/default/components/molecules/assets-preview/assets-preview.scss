@@ -1,5 +1,11 @@
+@use 'sass:meta';
+
 @mixin self-service-portal-assets-preview($name: '.assets-preview') {
     #{$name} {
+        @if meta.mixin-exists(self-service-portal-assets-preview-base-hook) {
+            @include self-service-portal-assets-preview-base-hook;
+        }
+
         &__container {
             display: flex;
             gap: 0.9375rem;

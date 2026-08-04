@@ -1,5 +1,11 @@
+@use 'sass:meta';
+
 @mixin self-service-portal-asset-selector($name: '.asset-selector') {
     #{$name} {
+        @if meta.mixin-exists(self-service-portal-asset-selector-base-hook) {
+            @include self-service-portal-asset-selector-base-hook;
+        }
+
         &.is-disabled {
             opacity: 0.7;
             pointer-events: none;

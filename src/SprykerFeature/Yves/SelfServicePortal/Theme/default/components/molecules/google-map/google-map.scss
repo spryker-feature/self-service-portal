@@ -1,6 +1,12 @@
+@use 'sass:meta';
+
 @mixin self-service-portal-google-map($name: '.google-map') {
     #{$name} {
         height: 100%;
+
+        @if meta.mixin-exists(self-service-portal-google-map-base-hook) {
+            @include self-service-portal-google-map-base-hook;
+        }
 
         &__container {
             height: 100%;

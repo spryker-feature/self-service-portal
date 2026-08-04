@@ -1,9 +1,15 @@
+@use 'sass:meta';
+
 @mixin self-service-portal-image-uploader($name: '.image-uploader') {
     #{$name} {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 0.625rem;
+
+        @if meta.mixin-exists(self-service-portal-image-uploader-base-hook) {
+            @include self-service-portal-image-uploader-base-hook;
+        }
 
         &.is-loading {
             #{$name}__spinner {

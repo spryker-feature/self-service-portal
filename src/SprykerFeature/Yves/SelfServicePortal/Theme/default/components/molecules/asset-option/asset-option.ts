@@ -11,8 +11,6 @@ export interface AssetEventDetail {
 }
 
 export default class AssetOption extends Component {
-    protected readyCallback(): void {}
-
     protected init(): void {
         this.mapEvents();
     }

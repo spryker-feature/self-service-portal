@@ -9,7 +9,6 @@ export default class AssetFinder extends Component {
     protected ajaxProvider: AjaxProvider;
     protected currentSearchValue = '';
 
-    protected readyCallback(): void {}
     protected init(): void {
         this.searchInput = this.querySelector(`.${this.jsName}__search-field`);
         this.ajaxProvider = this.querySelector(`.${this.jsName}__ajax-provider`);

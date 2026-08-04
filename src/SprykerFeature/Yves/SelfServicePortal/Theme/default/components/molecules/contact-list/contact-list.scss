@@ -1,5 +1,11 @@
+@use 'sass:meta';
+
 @mixin self-service-portal-contact-list($name: '.contact-list') {
     #{$name} {
+        @if meta.mixin-exists(self-service-portal-contact-list-base-hook) {
+            @include self-service-portal-contact-list-base-hook;
+        }
+
         &__representative {
             display: flex;
             gap: 0.625rem;
