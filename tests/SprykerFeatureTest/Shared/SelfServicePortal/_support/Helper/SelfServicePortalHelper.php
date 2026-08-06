@@ -451,6 +451,10 @@ class SelfServicePortalHelper extends Module
 
     public function ensureSspAssetRelatedTablesAreEmpty(): void
     {
+        // spy_ssp_inquiry_ssp_asset and spy_ssp_asset_file reference spy_ssp_asset without
+        // onDelete, so rows another test left behind block the parent delete.
+        $this->getSspInquirySspAssetQuery()->deleteAll();
+        $this->createSspAssetFileQuery()->deleteAll();
         $this->getSspAssetToCompanyBusinessUnitQuery()->deleteAll();
         $this->getSspAssetToSspModelQuery()->deleteAll();
         $this->getSspAssetQuery()->deleteAll();
