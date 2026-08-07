@@ -73,6 +73,8 @@ use SprykerFeature\Yves\SelfServicePortal\Reader\CompanyUserReader;
 use SprykerFeature\Yves\SelfServicePortal\Reader\CompanyUserReaderInterface;
 use SprykerFeature\Yves\SelfServicePortal\Service\Checker\AddressFormChecker;
 use SprykerFeature\Yves\SelfServicePortal\Service\Checker\AddressFormCheckerInterface;
+use SprykerFeature\Yves\SelfServicePortal\Service\Checker\RecurringOrderServiceProductChecker;
+use SprykerFeature\Yves\SelfServicePortal\Service\Checker\RecurringOrderServiceProductCheckerInterface;
 use SprykerFeature\Yves\SelfServicePortal\Service\Checker\ShipmentTypeChecker;
 use SprykerFeature\Yves\SelfServicePortal\Service\Checker\ShipmentTypeCheckerInterface;
 use SprykerFeature\Yves\SelfServicePortal\Service\Expander\ProductOfferExpander;
@@ -200,6 +202,13 @@ class SelfServicePortalFactory extends AbstractFactory
     public function createShipmentTypeChecker(): ShipmentTypeCheckerInterface
     {
         return new ShipmentTypeChecker(
+            $this->getConfig(),
+        );
+    }
+
+    public function createRecurringOrderServiceProductChecker(): RecurringOrderServiceProductCheckerInterface
+    {
+        return new RecurringOrderServiceProductChecker(
             $this->getConfig(),
         );
     }

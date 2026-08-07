@@ -207,6 +207,20 @@ class SelfServicePortalConfig extends AbstractBundleConfig
 
     /**
      * Specification:
+     * - Returns the shipment type keys a service product must support to be part of a recurring order.
+     * - An empty list lets recurring orders accept service products with any shipment type.
+     *
+     * @api
+     *
+     * @return array<string>
+     */
+    public function getRecurringOrderServiceShipmentTypeKeys(): array
+    {
+        return $this->getSharedConfig()->getRecurringOrderServiceShipmentTypeKeys();
+    }
+
+    /**
+     * Specification:
      * - Returns the shipment type keys in the order they should be displayed.
      * - Shipment types not in this list will be displayed after the ones in this list.
      *

@@ -440,6 +440,15 @@
     <transfer name="Shipment">
         <property name="shipmentTypeUuid" type="string" strict="true"/>
         <property name="shippingAddress" type="Address"/>
+        <property name="method" type="ShipmentMethod"/>
+    </transfer>
+
+    <transfer name="ShipmentMethod">
+        <property name="shipmentType" type="ShipmentType" strict="true"/>
+    </transfer>
+
+    <transfer name="RecurringScheduleItemAddition" strict="true">
+        <property name="sku" type="string"/>
     </transfer>
 
     <transfer name="FacetConfig">

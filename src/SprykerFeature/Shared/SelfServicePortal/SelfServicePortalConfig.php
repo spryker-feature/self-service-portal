@@ -93,6 +93,17 @@ class SelfServicePortalConfig extends AbstractSharedConfig
     protected const SSP_INQUIRY_STATE_MACHINE_NAME = 'SspInquiry';
 
     /**
+     * Specification:
+     * - Shipment type keys a service product must support to be part of a recurring order.
+     * - Conservative module default, projects state their own list in the project level config.
+     *
+     * @api
+     *
+     * @var array<string>
+     */
+    public const RECURRING_ORDER_SERVICE_SHIPMENT_TYPE_KEYS = [];
+
+    /**
      * @var string
      */
     public const GENERAL_SSP_INQUIRY_SOURCE = 'general';
@@ -383,6 +394,22 @@ class SelfServicePortalConfig extends AbstractSharedConfig
     public function getScheduledProductClassName(): string
     {
         return 'Scheduled';
+    }
+
+    /**
+     * Specification:
+     * - Returns the shipment type keys a service product must support to be part of a recurring order.
+     * - A service fulfilled on site or in a service center needs an appointment, which a recurring order places
+     *   unattended and therefore cannot book.
+     * - An empty list lets recurring orders accept service products with any shipment type.
+     *
+     * @api
+     *
+     * @return array<string>
+     */
+    public function getRecurringOrderServiceShipmentTypeKeys(): array
+    {
+        return static::RECURRING_ORDER_SERVICE_SHIPMENT_TYPE_KEYS;
     }
 
     /**

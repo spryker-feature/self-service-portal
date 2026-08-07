@@ -210,6 +210,8 @@ use SprykerFeature\Zed\SelfServicePortal\Business\Service\Updater\ProductClassUp
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Updater\ProductClassUpdaterInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Utility\SkuExtractor;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Utility\SkuExtractorInterface;
+use SprykerFeature\Zed\SelfServicePortal\Business\Service\Validator\RecurringOrderServiceItemValidator;
+use SprykerFeature\Zed\SelfServicePortal\Business\Service\Validator\RecurringOrderServiceItemValidatorInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\ServicePointSearch\ServicePointSearchCoordinatesExpander;
 use SprykerFeature\Zed\SelfServicePortal\Business\ServicePointSearch\ServicePointSearchCoordinatesExpanderInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\SspModel\DataImport\Step\SspModelAssetWriterStep;
@@ -524,6 +526,15 @@ class SelfServicePortalBusinessFactory extends AbstractBusinessFactory
         return new QuoteItemFilter(
             $this->getConfig(),
             $this->getMessengerFacade(),
+        );
+    }
+
+    public function createRecurringOrderServiceItemValidator(): RecurringOrderServiceItemValidatorInterface
+    {
+        return new RecurringOrderServiceItemValidator(
+            $this->getConfig(),
+            $this->getRepository(),
+            $this->createProductClassIndexer(),
         );
     }
 

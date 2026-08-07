@@ -123,14 +123,12 @@
         "spryker/shipment": "*",
         "spryker/testify": "*"
     },
-    "conflict": {
-        "spryker/api-platform": "<1.23.0"
-    },
     "suggest": {
         "spryker-shop/service-point-widget": "If you want to use the service point geo coordinates functionality, you need to install this module.",
         "spryker/api-platform": "Required to expose SSP assets, inquiries, and booked services via the API Platform (storefront and backend REST endpoints).",
         "spryker/catalog": "If you want to use the product class catalog feature, you need to install this module.",
-        "spryker/container": "Add this module when you want to use the Container."
+        "spryker/container": "Add this module when you want to use the Container.",
+        "spryker-feature/order-experience-management": "If you want to use the order experience management functionality, you need to install this module."
     },
     "autoload": {
         "psr-4": {
@@ -159,5 +157,8 @@
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
+    },
+    "conflict": {
+        "spryker/api-platform": "<1.23.0"
     }
 }
