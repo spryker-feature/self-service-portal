@@ -124,8 +124,6 @@ class ServiceSearchFormDataProvider
 
     /**
      * @param array<string, string> $companyBusinessUnitChoices
-     *
-     * @return string|null
      */
     public function getDefaultBusinessUnitValue(array $companyBusinessUnitChoices): ?string
     {
@@ -203,8 +201,6 @@ class ServiceSearchFormDataProvider
     }
 
     /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitCollectionTransfer $companyBusinessUnitCollectionTransfer
-     *
      * @return array<string, string>
      */
     protected function getChoicesFromCompanyBusinessUnitCollection(

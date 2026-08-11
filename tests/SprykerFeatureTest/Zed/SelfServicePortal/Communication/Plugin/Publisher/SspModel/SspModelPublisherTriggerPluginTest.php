@@ -48,9 +48,6 @@ class SspModelPublisherTriggerPluginTest extends Unit
      */
     protected const COL_ID_SSP_MODEL = 'spy_ssp_model.id_ssp_model';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     protected function setUp(): void

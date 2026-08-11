@@ -25,11 +25,7 @@ use SprykerFeature\Zed\SelfServicePortal\Communication\CompanyFile\Form\AttachFi
 class FileAttachmentMapper implements FileAttachmentMapperInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentTransfer
      * @param array<string, mixed> $formData
-     * @param int $idFile
-     *
-     * @return \Generated\Shared\Transfer\FileAttachmentCollectionRequestTransfer
      */
     public function mapFormDataToFileAttachmentCollectionTransfer(
         FileAttachmentTransfer $fileAttachmentTransfer,
@@ -53,10 +49,6 @@ class FileAttachmentMapper implements FileAttachmentMapperInterface
 
     /**
      * @param array<mixed> $formData
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentToAdd
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentToDelete
-     *
-     * @return void
      */
     protected function setBusinessUnitFileAttachments(
         array $formData,
@@ -88,10 +80,6 @@ class FileAttachmentMapper implements FileAttachmentMapperInterface
 
     /**
      * @param array<mixed> $formData
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentToAdd
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentToDelete
-     *
-     * @return void
      */
     protected function setCompanyFileAttachments(
         array $formData,
@@ -123,10 +111,6 @@ class FileAttachmentMapper implements FileAttachmentMapperInterface
 
     /**
      * @param array<mixed> $formData
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentToAdd
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentToDelete
-     *
-     * @return void
      */
     protected function setCompanyUserFileAttachments(
         array $formData,
@@ -158,10 +142,6 @@ class FileAttachmentMapper implements FileAttachmentMapperInterface
 
     /**
      * @param array<mixed> $formData
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentToAdd
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentToDelete
-     *
-     * @return void
      */
     protected function setSspAssetFileAttachments(
         array $formData,
@@ -191,10 +171,6 @@ class FileAttachmentMapper implements FileAttachmentMapperInterface
 
     /**
      * @param array<mixed> $formData
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentToAdd
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentToDelete
-     *
-     * @return void
      */
     protected function setSspModelToFileAttachments(
         array $formData,
@@ -223,8 +199,6 @@ class FileAttachmentMapper implements FileAttachmentMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentTransfer
-     *
      * @return array<string, array<int>>
      */
     public function mapFileAttachmentCollectionTransferToFormData(FileAttachmentTransfer $fileAttachmentTransfer): array

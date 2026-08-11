@@ -22,10 +22,7 @@ class ProductOfferExpander implements ProductOfferExpanderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
      * @param array<string, mixed> $params
-     *
-     * @return \Generated\Shared\Transfer\ItemTransfer
      */
     public function expandItemTransferWithProductOfferReference(
         ItemTransfer $itemTransfer,

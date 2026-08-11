@@ -93,8 +93,6 @@ class ProductClassExpander implements ProductClassExpanderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductPageLoadTransfer $productPageLoadTransfer
-     *
      * @return array<int>
      */
     protected function extractProductAbstractIds(ProductPageLoadTransfer $productPageLoadTransfer): array

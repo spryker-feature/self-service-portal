@@ -22,8 +22,6 @@ class FileSaver implements FileSaverInterface
 
     /**
      * @param array<\Symfony\Component\HttpFoundation\File\UploadedFile> $uploadedFiles
-     *
-     * @return void
      */
     public function saveFiles(array $uploadedFiles): void
     {

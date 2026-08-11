@@ -31,8 +31,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Applied to MultiMatch queries to prioritize boosted field matches.
      *
      * @api
-     *
-     * @return int
      */
     public function getElasticsearchFullTextBoostedBoostingValue(): int
     {
@@ -59,8 +57,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns pagination configuration for SSP asset search.
      *
      * @api
-     *
-     * @return \Generated\Shared\Transfer\PaginationConfigTransfer
      */
     public function getSspAssetSearchPaginationConfigTransfer(): PaginationConfigTransfer
     {
@@ -72,8 +68,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns sort configuration for ascending name sorting.
      *
      * @api
-     *
-     * @return \Generated\Shared\Transfer\SortConfigTransfer
      */
     public function getAscendingNameSortConfigTransfer(): SortConfigTransfer
     {
@@ -89,8 +83,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns sort configuration for descending name sorting.
      *
      * @api
-     *
-     * @return \Generated\Shared\Transfer\SortConfigTransfer
      */
     public function getDescendingNameSortConfigTransfer(): SortConfigTransfer
     {
@@ -106,8 +98,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns default sort configuration for SSP asset search.
      *
      * @api
-     *
-     * @return \Generated\Shared\Transfer\SortConfigTransfer
      */
     public function getDefaultSortConfigTransfer(): SortConfigTransfer
     {
@@ -133,8 +123,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the service product class name.
      *
      * @api
-     *
-     * @return string
      */
     public function getServiceProductClassName(): string
     {

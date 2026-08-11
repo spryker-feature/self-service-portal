@@ -22,11 +22,7 @@ class StateMachineSspInquiryPostCreateHook implements SspInquiryPostCreateHookIn
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspInquiryTransfer $sspInquiryTransfer
-     *
      * @throws \InvalidArgumentException
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryTransfer
      */
     public function execute(SspInquiryTransfer $sspInquiryTransfer): SspInquiryTransfer
     {

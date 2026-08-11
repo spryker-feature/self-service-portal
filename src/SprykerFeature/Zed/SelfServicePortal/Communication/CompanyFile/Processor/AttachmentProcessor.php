@@ -34,10 +34,6 @@ class AttachmentProcessor implements AttachmentProcessorInterface
 
     /**
      * @param array<string, mixed> $formData
-     * @param int $idFile
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentTransfer
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function processAssetForm(array $formData, int $idFile, FileAttachmentTransfer $fileAttachmentTransfer): RedirectResponse
     {
@@ -51,10 +47,6 @@ class AttachmentProcessor implements AttachmentProcessorInterface
 
     /**
      * @param array<string, mixed> $formData
-     * @param int $idFile
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentTransfer
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function processBusinessUnitForm(array $formData, int $idFile, FileAttachmentTransfer $fileAttachmentTransfer): RedirectResponse
     {
@@ -68,10 +60,6 @@ class AttachmentProcessor implements AttachmentProcessorInterface
 
     /**
      * @param array<string, mixed> $formData
-     * @param int $idFile
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentTransfer
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function processCompanyUserForm(array $formData, int $idFile, FileAttachmentTransfer $fileAttachmentTransfer): RedirectResponse
     {
@@ -85,10 +73,6 @@ class AttachmentProcessor implements AttachmentProcessorInterface
 
     /**
      * @param array<string, mixed> $formData
-     * @param int $idFile
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentTransfer
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function processCompanyForm(array $formData, int $idFile, FileAttachmentTransfer $fileAttachmentTransfer): RedirectResponse
     {
@@ -122,10 +106,6 @@ class AttachmentProcessor implements AttachmentProcessorInterface
 
     /**
      * @param array<string, mixed> $formData
-     * @param int $idFile
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentTransfer
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function processModelForm(array $formData, int $idFile, FileAttachmentTransfer $fileAttachmentTransfer): RedirectResponse
     {
@@ -139,10 +119,6 @@ class AttachmentProcessor implements AttachmentProcessorInterface
 
     /**
      * @param array<string, mixed> $formData
-     * @param int $idFile
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentTransfer
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function processAllScopesForm(array $formData, int $idFile, FileAttachmentTransfer $fileAttachmentTransfer): RedirectResponse
     {

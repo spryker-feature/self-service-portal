@@ -51,9 +51,6 @@ class CancelSalesOrderItemCollectionTest extends Unit
      */
     protected const DEFAULT_OMS_PROCESS_NAME = 'Test01';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalBusinessTester
-     */
     protected SelfServicePortalBusinessTester $tester;
 
     protected function setUp(): void

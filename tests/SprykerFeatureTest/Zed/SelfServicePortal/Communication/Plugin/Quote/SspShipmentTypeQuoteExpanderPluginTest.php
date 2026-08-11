@@ -58,9 +58,6 @@ class SspShipmentTypeQuoteExpanderPluginTest extends Unit
      */
     protected const DEFAULT_SHIPMENT_TYPE_UUID = 'default-shipment-type-uuid';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     public function testExpandExpandsItemsWithShipmentType(): void
@@ -102,8 +99,6 @@ class SspShipmentTypeQuoteExpanderPluginTest extends Unit
 
     /**
      * @skip
-     *
-     * @return void
      */
     public function testExpandExpandsItemsWithDefaultShipmentTypeWhenNoShipmentTypeProvided(): void
     {
@@ -300,7 +295,6 @@ class SspShipmentTypeQuoteExpanderPluginTest extends Unit
 
     /**
      * @param array<string, \Generated\Shared\Transfer\ShipmentTypeTransfer> $shipmentTypesByUuid
-     * @param \Generated\Shared\Transfer\ShipmentTypeTransfer|null $defaultShipmentType
      *
      * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerFeature\Zed\SelfServicePortal\Business\Reader\ShipmentTypeReaderInterface
      */

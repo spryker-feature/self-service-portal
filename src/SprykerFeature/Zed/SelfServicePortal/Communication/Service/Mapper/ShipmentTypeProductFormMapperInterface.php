@@ -12,10 +12,7 @@ use Generated\Shared\Transfer\ProductConcreteTransfer;
 interface ShipmentTypeProductFormMapperInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
      * @param array<string, mixed> $formData
-     *
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
      */
     public function mapShipmentTypeFormDataToProductConcrete(
         ProductConcreteTransfer $productConcreteTransfer,
@@ -23,7 +20,6 @@ interface ShipmentTypeProductFormMapperInterface
     ): ProductConcreteTransfer;
 
     /**
-     * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
      * @param array<string, mixed> $formData
      *
      * @return array<string, mixed>

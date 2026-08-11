@@ -39,10 +39,7 @@ class RecurringOrderServiceProductChecker implements RecurringOrderServiceProduc
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
      * @param array<string> $shipmentTypeKeys
-     *
-     * @return bool
      */
     protected function hasShipmentTypeKey(ProductViewTransfer $productViewTransfer, array $shipmentTypeKeys): bool
     {

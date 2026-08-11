@@ -39,8 +39,6 @@ class DownloadInquiryFileController extends AbstractController
     protected const REQUEST_PARAM_SSP_INQUIRY_REFERENCE = 'ssp-inquiry-reference';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @throws \Exception
      *

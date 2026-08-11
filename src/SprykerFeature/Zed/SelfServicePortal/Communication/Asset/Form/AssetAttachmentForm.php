@@ -91,10 +91,7 @@ class AssetAttachmentForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -107,10 +104,7 @@ class AssetAttachmentForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormInterface $form
      * @param array<string, int> $choices
-     *
-     * @return void
      */
     protected function replaceAssetField(FormInterface $form, array $choices): void
     {
@@ -129,7 +123,6 @@ class AssetAttachmentForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
      *
      * @return $this
@@ -153,8 +146,6 @@ class AssetAttachmentForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addSaveField(FormBuilderInterface $builder)

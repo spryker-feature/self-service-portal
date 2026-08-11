@@ -44,9 +44,6 @@ class SingleAddressPerShipmentTypeCheckoutMultiShippingAddressesFormExpanderPlug
      */
     protected const TEST_SHIPMENT_TYPE_KEY_NOT_APPLICABLE = 'pickup';
 
-    /**
-     * @var \SprykerFeatureTest\Yves\SelfServicePortal\SelfServicePortalYvesTester
-     */
     protected SelfServicePortalYvesTester $tester;
 
     public function testExpandShouldReturnSameFormBuilderInstance(): void
@@ -246,11 +243,7 @@ class SingleAddressPerShipmentTypeCheckoutMultiShippingAddressesFormExpanderPlug
     }
 
     /**
-     * @param callable|null $listenerCallback
      * @param \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Form\FormInterface $formMock
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
-     *
-     * @return void
      */
     protected function executePreSetDataListenerCallback(?callable $listenerCallback, FormInterface $formMock, ItemTransfer $itemTransfer): void
     {
@@ -261,9 +254,6 @@ class SingleAddressPerShipmentTypeCheckoutMultiShippingAddressesFormExpanderPlug
 
     /**
      * @param \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Form\FormBuilderInterface $formBuilderMock
-     * @param callable|null $listenerCallback
-     *
-     * @return void
      */
     protected function mockFormBuilderPreSetDataListener(FormBuilderInterface $formBuilderMock, ?callable &$listenerCallback): void
     {

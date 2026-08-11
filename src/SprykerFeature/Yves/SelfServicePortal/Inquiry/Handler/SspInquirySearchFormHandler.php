@@ -69,10 +69,7 @@ class SspInquirySearchFormHandler implements SspInquirySearchFormHandlerInterfac
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspInquiryCriteriaTransfer $sspInquiryCriteriaTransfer
      * @param array<string, mixed> $formData
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryCriteriaTransfer
      */
     protected function applySorting(SspInquiryCriteriaTransfer $sspInquiryCriteriaTransfer, array $formData): SspInquiryCriteriaTransfer
     {
@@ -92,8 +89,6 @@ class SspInquirySearchFormHandler implements SspInquirySearchFormHandlerInterfac
 
     /**
      * @param array<string, mixed> $formData
-     *
-     * @return string
      */
     protected function getOrderByField(array $formData): string
     {
@@ -102,8 +97,6 @@ class SspInquirySearchFormHandler implements SspInquirySearchFormHandlerInterfac
 
     /**
      * @param array<string, mixed> $formData
-     *
-     * @return bool
      */
     protected function isAscendingOrder(array $formData): bool
     {
@@ -111,10 +104,7 @@ class SspInquirySearchFormHandler implements SspInquirySearchFormHandlerInterfac
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspInquiryCriteriaTransfer $sspInquiryCriteriaTransfer
      * @param array<string, mixed> $formData
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryCriteriaTransfer
      */
     protected function applyBasicFiltering(SspInquiryCriteriaTransfer $sspInquiryCriteriaTransfer, array $formData): SspInquiryCriteriaTransfer
     {
@@ -126,10 +116,7 @@ class SspInquirySearchFormHandler implements SspInquirySearchFormHandlerInterfac
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspInquiryCriteriaTransfer $sspInquiryCriteriaTransfer
      * @param array<string, mixed> $formData
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryCriteriaTransfer
      */
     protected function applyDateFiltering(SspInquiryCriteriaTransfer $sspInquiryCriteriaTransfer, array $formData): SspInquiryCriteriaTransfer
     {
@@ -145,8 +132,6 @@ class SspInquirySearchFormHandler implements SspInquirySearchFormHandlerInterfac
 
     /**
      * @param array<string, mixed> $formData
-     *
-     * @return \DateTime|null
      */
     protected function getCreatedDateFrom(array $formData): ?DateTime
     {
@@ -155,8 +140,6 @@ class SspInquirySearchFormHandler implements SspInquirySearchFormHandlerInterfac
 
     /**
      * @param array<string, mixed> $formData
-     *
-     * @return \DateTime|null
      */
     protected function getCreatedDateTo(array $formData): ?DateTime
     {
@@ -164,10 +147,7 @@ class SspInquirySearchFormHandler implements SspInquirySearchFormHandlerInterfac
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspInquiryCriteriaTransfer $sspInquiryCriteriaTransfer
      * @param array<string, mixed> $formData
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryCriteriaTransfer
      */
     protected function applySearchFiltering(SspInquiryCriteriaTransfer $sspInquiryCriteriaTransfer, array $formData): SspInquiryCriteriaTransfer
     {
@@ -183,8 +163,6 @@ class SspInquirySearchFormHandler implements SspInquirySearchFormHandlerInterfac
 
     /**
      * @param array<string, mixed> $formData
-     *
-     * @return string|null
      */
     protected function getSearchString(array $formData): ?string
     {
@@ -192,10 +170,7 @@ class SspInquirySearchFormHandler implements SspInquirySearchFormHandlerInterfac
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspInquiryCriteriaTransfer $sspInquiryCriteriaTransfer
      * @param array<string, mixed> $formData
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryCriteriaTransfer
      */
     protected function applyAccessLevelFiltering(SspInquiryCriteriaTransfer $sspInquiryCriteriaTransfer, array $formData): SspInquiryCriteriaTransfer
     {

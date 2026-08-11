@@ -100,8 +100,6 @@ class ServiceSspAssetManagementExpanderPluginTest extends Unit
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspServiceCollectionTransfer $sspServiceCollectionTransfer
-     *
      * @return \SprykerFeature\Zed\SspServiceManagement\Business\SspServiceManagementFacade
      */
     protected function createFactoryMock(SspServiceCollectionTransfer $sspServiceCollectionTransfer): SelfServicePortalBusinessFactory

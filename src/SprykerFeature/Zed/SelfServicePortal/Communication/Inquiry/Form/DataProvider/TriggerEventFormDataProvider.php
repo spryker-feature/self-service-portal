@@ -25,8 +25,6 @@ class TriggerEventFormDataProvider implements TriggerEventFormDataProviderInterf
     }
 
     /**
-     * @param int $idSspInquiry
-     *
      * @return array<mixed>
      */
     public function getOptions(int $idSspInquiry): array

@@ -34,8 +34,6 @@ class CompanyAttachmentTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addAttachCompanyTab(TabsViewTransfer $tabsViewTransfer)
@@ -52,8 +50,6 @@ class CompanyAttachmentTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addCompaniesToBeAttachedTab(TabsViewTransfer $tabsViewTransfer)

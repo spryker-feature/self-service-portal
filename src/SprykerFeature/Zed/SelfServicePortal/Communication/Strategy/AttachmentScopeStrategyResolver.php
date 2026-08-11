@@ -38,9 +38,6 @@ class AttachmentScopeStrategyResolver implements AttachmentScopeStrategyResolver
     }
 
     /**
-     * @param string $scopeType
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return array<string, mixed>|null
      */
     public function getFormDataForScope(string $scopeType, Request $request): ?array

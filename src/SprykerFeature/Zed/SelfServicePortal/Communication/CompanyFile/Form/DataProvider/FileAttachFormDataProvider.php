@@ -43,9 +43,6 @@ class FileAttachFormDataProvider
     }
 
     /**
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentTransfer
-     * @param int $idFile
-     *
      * @return array<string, int>
      */
     public function getOptions(FileAttachmentTransfer $fileAttachmentTransfer, int $idFile): array
@@ -56,8 +53,6 @@ class FileAttachFormDataProvider
     }
 
     /**
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentTransfer
-     *
      * @return array<string, int>
      */
     protected function getCompanyChoices(FileAttachmentTransfer $fileAttachmentTransfer): array
@@ -82,8 +77,6 @@ class FileAttachFormDataProvider
     }
 
     /**
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentTransfer
-     *
      * @return array<string, int>
      */
     protected function getCompanyUserChoices(FileAttachmentTransfer $fileAttachmentTransfer): array
@@ -113,8 +106,6 @@ class FileAttachFormDataProvider
     }
 
     /**
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentTransfer
-     *
      * @return array<string, int>
      */
     protected function getCompanyBusinessUnitChoices(FileAttachmentTransfer $fileAttachmentTransfer): array
@@ -138,8 +129,6 @@ class FileAttachFormDataProvider
     }
 
     /**
-     * @param string $searchTerm
-     *
      * @return array<string, array<int, array<string, int|string>>>
      */
     public function getCompanyAutocompleteData(string $searchTerm): array
@@ -163,8 +152,6 @@ class FileAttachFormDataProvider
     }
 
     /**
-     * @param string $searchTerm
-     *
      * @return array<string, array<int, array<string, int|string>>>
      */
     public function getCompanyUserAutocompleteData(string $searchTerm): array
@@ -188,8 +175,6 @@ class FileAttachFormDataProvider
     }
 
     /**
-     * @param string $searchTerm
-     *
      * @return array<string, array<int, array<string, int|string>>>
      */
     public function getCompanyBusinessUnitAutocompleteData(string $searchTerm): array

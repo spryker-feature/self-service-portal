@@ -39,9 +39,6 @@ class ProductClassItemExpanderPluginTest extends Unit
      */
     protected const TEST_PRODUCT_CLASS_NAMES = ['test-class-1', 'test-class-2'];
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     public function testExpandItemsExpandsItemsWithProductClasses(): void

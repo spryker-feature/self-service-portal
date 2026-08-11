@@ -14,7 +14,6 @@ use Generated\Shared\Transfer\FilterTransfer;
 interface SspAssetSearchReaderInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\FilterTransfer $filterTransfer
      * @param array<int> $sspAssetIds
      *
      * @return array<\Generated\Shared\Transfer\SynchronizationDataTransfer>

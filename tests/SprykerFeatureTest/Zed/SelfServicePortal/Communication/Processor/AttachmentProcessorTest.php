@@ -149,10 +149,7 @@ class AttachmentProcessorTest extends Unit
     }
 
     /**
-     * @param callable $onCreateAttachment
      * @param array<int, array<int>> $companyToBuMap
-     *
-     * @return \SprykerFeature\Zed\SelfServicePortal\Communication\CompanyFile\Processor\AttachmentProcessor
      */
     protected function createProcessor(callable $onCreateAttachment, array $companyToBuMap = []): AttachmentProcessor
     {

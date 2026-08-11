@@ -16,12 +16,7 @@ use SprykerFeature\Client\SelfServicePortal\Builder\SortConfigBuilderInterface;
 interface SspAssetSearchQueryExpanderInterface
 {
     /**
-     * @param \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface $searchQuery
      * @param array<string, mixed> $requestParameters
-     * @param \SprykerFeature\Client\SelfServicePortal\Builder\PaginationConfigBuilderInterface $paginationConfigBuilder
-     * @param \SprykerFeature\Client\SelfServicePortal\Builder\SortConfigBuilderInterface $sortConfigBuilder
-     *
-     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
     public function expandQuery(
         QueryInterface $searchQuery,

@@ -100,8 +100,6 @@ class FileSearchFilterFormDataProvider
 
     /**
      * @param array<string, mixed> $businessEntities
-     *
-     * @return string
      */
     public function getDefaultBusinessEntityValue(array $businessEntities): string
     {

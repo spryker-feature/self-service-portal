@@ -21,8 +21,6 @@ class ProductOfferServiceReader implements ProductOfferServiceReaderInterface
     }
 
     /**
-     * @param string $sku
-     *
      * @return list<string>
      */
     public function getProductOfferReferencesWithServiceShipmentTypes(string $sku): array
@@ -51,10 +49,7 @@ class ProductOfferServiceReader implements ProductOfferServiceReaderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductOfferStorageTransfer $productOfferStorage
      * @param list<string> $applicableShipmentTypeKeys
-     *
-     * @return bool
      */
     protected function hasApplicableShipmentType(ProductOfferStorageTransfer $productOfferStorage, array $applicableShipmentTypeKeys): bool
     {

@@ -79,8 +79,6 @@ class SspAssetStorageEntityMapper implements SspAssetStorageEntityMapperInterfac
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetTransfer $sspAssetTransfer
-     *
      * @return array<string, mixed>
      */
     protected function mapSspAssetTransferToStorageData(SspAssetTransfer $sspAssetTransfer): array
@@ -102,8 +100,6 @@ class SspAssetStorageEntityMapper implements SspAssetStorageEntityMapperInterfac
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetTransfer $sspAssetTransfer
-     *
      * @return array<string, list<int>>
      */
     protected function extractBusinessUnitData(SspAssetTransfer $sspAssetTransfer): array
@@ -123,8 +119,6 @@ class SspAssetStorageEntityMapper implements SspAssetStorageEntityMapperInterfac
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetTransfer $sspAssetTransfer
-     *
      * @return list<int>
      */
     protected function extractModelIds(SspAssetTransfer $sspAssetTransfer): array

@@ -70,9 +70,6 @@ class SspModelAssetDataImportPluginTest extends Unit
 
     protected SspAssetTransfer $sspAssetTransfer2;
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     protected function setUp(): void

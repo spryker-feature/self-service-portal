@@ -13,10 +13,7 @@ use SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form\ShipmentType
 class ShipmentTypeProductFormMapper implements ShipmentTypeProductFormMapperInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
      * @param array<string, mixed> $formData
-     *
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
      */
     public function mapShipmentTypeFormDataToProductConcrete(
         ProductConcreteTransfer $productConcreteTransfer,
@@ -30,7 +27,6 @@ class ShipmentTypeProductFormMapper implements ShipmentTypeProductFormMapperInte
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
      * @param array<string, mixed> $formData
      *
      * @return array<string, mixed>

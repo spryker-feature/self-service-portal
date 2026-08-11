@@ -10,8 +10,6 @@ namespace SprykerFeature\Zed\SelfServicePortal\Communication\Inquiry\Form\DataPr
 interface TriggerEventFormDataProviderInterface
 {
     /**
-     * @param int $idSspInquiry
-     *
      * @return array<mixed>
      */
     public function getOptions(int $idSspInquiry): array;

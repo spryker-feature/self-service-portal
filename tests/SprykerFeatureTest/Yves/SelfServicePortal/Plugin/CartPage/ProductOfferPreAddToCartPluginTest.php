@@ -34,9 +34,6 @@ class ProductOfferPreAddToCartPluginTest extends Unit
      */
     protected const TEST_PRODUCT_OFFER_REFERENCE = 'test-product-offer-reference';
 
-    /**
-     * @var \SprykerFeatureTest\Yves\SelfServicePortal\SelfServicePortalYvesTester
-     */
     protected SelfServicePortalYvesTester $tester;
 
     public function testPreAddToCartExpandsItemWithProductOfferReferenceWhenValidReferenceProvided(): void

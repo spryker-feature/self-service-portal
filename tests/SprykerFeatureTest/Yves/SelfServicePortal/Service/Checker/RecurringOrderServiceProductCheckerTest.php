@@ -119,8 +119,6 @@ class RecurringOrderServiceProductCheckerTest extends Unit
 
     /**
      * @param array<string>|null $shipmentTypeKeys
-     *
-     * @return \SprykerFeature\Yves\SelfServicePortal\Service\Checker\RecurringOrderServiceProductChecker
      */
     protected function createChecker(?array $shipmentTypeKeys = null): RecurringOrderServiceProductChecker
     {
@@ -138,8 +136,6 @@ class RecurringOrderServiceProductCheckerTest extends Unit
     /**
      * @param array<string> $productClassNames
      * @param array<string> $shipmentTypeKeys
-     *
-     * @return \Generated\Shared\Transfer\ProductViewTransfer
      */
     protected function createProductView(array $productClassNames, array $shipmentTypeKeys): ProductViewTransfer
     {

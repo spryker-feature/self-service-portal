@@ -37,8 +37,6 @@ class AutocompleteAssetController extends AbstractController
     }
 
     /**
-     * @param string $term
-     *
      * @return array<string, mixed>
      */
     protected function getAssetAutocompleteData(string $term): array
@@ -72,8 +70,6 @@ class AutocompleteAssetController extends AbstractController
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetCollectionTransfer $sspAssetCollectionTransfer
-     *
      * @return array<string, mixed>
      */
     protected function formatAssetsForAutocomplete(SspAssetCollectionTransfer $sspAssetCollectionTransfer): array

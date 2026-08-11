@@ -24,8 +24,6 @@ class SspAssetTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addCompaniesTab(TabsViewTransfer $tabsViewTransfer)
@@ -41,8 +39,6 @@ class SspAssetTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addSspInquiriesTab(TabsViewTransfer $tabsViewTransfer)
@@ -58,8 +54,6 @@ class SspAssetTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addSspServicesTab(TabsViewTransfer $tabsViewTransfer)
@@ -75,8 +69,6 @@ class SspAssetTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addAttachedFilesTab(TabsViewTransfer $tabsViewTransfer)

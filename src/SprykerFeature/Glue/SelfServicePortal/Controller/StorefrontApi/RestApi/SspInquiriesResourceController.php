@@ -40,10 +40,6 @@ class SspInquiriesResourceController extends AbstractController
      *         }]
      *     }
      * })
-     *
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
      */
     public function getAction(RestRequestInterface $restRequest): RestResponseInterface
     {
@@ -74,11 +70,6 @@ class SspInquiriesResourceController extends AbstractController
      *         }
      *     }
      * })
-     *
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     * @param \Generated\Shared\Transfer\RestSspInquiriesAttributesTransfer $restSspInquiriesAttributesTransfer
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
      */
     public function postAction(RestRequestInterface $restRequest, RestSspInquiriesAttributesTransfer $restSspInquiriesAttributesTransfer): RestResponseInterface
     {

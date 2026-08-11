@@ -10,8 +10,6 @@ namespace SprykerFeature\Client\SelfServicePortal\ProductOffer\Reader;
 interface ProductOfferServiceReaderInterface
 {
     /**
-     * @param string $sku
-     *
      * @return list<string>
      */
     public function getProductOfferReferencesWithServiceShipmentTypes(string $sku): array;

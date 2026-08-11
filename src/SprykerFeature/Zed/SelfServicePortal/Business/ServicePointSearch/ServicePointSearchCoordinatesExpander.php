@@ -19,7 +19,6 @@ class ServicePointSearchCoordinatesExpander implements ServicePointSearchCoordin
 
     /**
      * @param array<string, mixed> $searchData
-     * @param \Generated\Shared\Transfer\ServicePointTransfer $servicePointTransfer
      *
      * @return array<string, mixed>
      */

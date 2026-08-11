@@ -13,7 +13,6 @@ use SprykerFeature\Shared\SelfServicePortal\Exception\QuoteStorageStrategyNotFou
 class QuoteStorageStrategyProvider implements QuoteStorageStrategyProviderInterface
 {
     /**
-     * @param \Spryker\Client\Quote\QuoteClientInterface $quoteClient
      * @param array<\SprykerFeature\Client\SelfServicePortal\Asset\Quote\QuoteStorageStrategyInterface> $quoteStorageStrategies
      */
     public function __construct(

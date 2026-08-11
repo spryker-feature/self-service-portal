@@ -13,9 +13,6 @@ interface SspAssetPermissionCheckerInterface
 {
     /**
      * @param array<string, mixed> $storageData
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return bool
      */
     public function canViewSspAsset(array $storageData, CompanyUserTransfer $companyUserTransfer): bool;
 }

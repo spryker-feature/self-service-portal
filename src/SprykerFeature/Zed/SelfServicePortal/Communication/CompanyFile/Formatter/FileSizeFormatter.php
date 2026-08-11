@@ -22,12 +22,7 @@ class FileSizeFormatter implements FileSizeFormatterInterface
     protected const NUMBER_OF_DECIMALS = 2;
 
     /**
-     * @param int $fileSize
-     * @param int $numberOfDecimals
-     *
      * @throws \InvalidArgumentException
-     *
-     * @return string
      */
     public function formatFileSize(int $fileSize, int $numberOfDecimals = self::NUMBER_OF_DECIMALS): string
     {

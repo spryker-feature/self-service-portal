@@ -310,8 +310,6 @@ class SelfServicePortalCommunicationTester extends Actor
     }
 
     /**
-     * @param int $idProduct
-     *
      * @return list<int>
      */
     public function getProductShipmentTypeIds(int $idProduct): array
@@ -324,10 +322,7 @@ class SelfServicePortalCommunicationTester extends Actor
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
      * @param list<\Generated\Shared\Transfer\ShipmentTypeTransfer> $shipmentTypeTransfers
-     *
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
      */
     public function addShipmentTypesToProduct(
         ProductConcreteTransfer $productConcreteTransfer,
@@ -397,8 +392,6 @@ class SelfServicePortalCommunicationTester extends Actor
     }
 
     /**
-     * @param int $idProductConcrete
-     *
      * @return array<string>
      */
     public function getProductClassNamesByIdProductConcrete(int $idProductConcrete): array
@@ -517,8 +510,6 @@ class SelfServicePortalCommunicationTester extends Actor
     }
 
     /**
-     * @param int $idSspModel
-     *
      * @return array|null
      */
     public function findSspModelStorageData(int $idSspModel): ?array
@@ -537,8 +528,6 @@ class SelfServicePortalCommunicationTester extends Actor
     }
 
     /**
-     * @param int $idSspAsset
-     *
      * @return array|null
      */
     public function findSspAssetStorageData(int $idSspAsset): ?array
@@ -635,10 +624,7 @@ class SelfServicePortalCommunicationTester extends Actor
     }
 
     /**
-     * @param int $sspModelId
      * @param array<int> $whitelistIds
-     *
-     * @return void
      */
     public function haveSspModelStorage(int $sspModelId, array $whitelistIds): void
     {
@@ -678,8 +664,6 @@ class SelfServicePortalCommunicationTester extends Actor
     }
 
     /**
-     * @param int $sspModelId
-     *
      * @return array<\Orm\Zed\SelfServicePortal\Persistence\SpySspModelToProductList>
      */
     public function getSspModelToProductListRelations(int $sspModelId): array
@@ -693,8 +677,6 @@ class SelfServicePortalCommunicationTester extends Actor
     }
 
     /**
-     * @param int $sspModelId
-     *
      * @return array<\Orm\Zed\SelfServicePortal\Persistence\SpySspAssetToSspModel>
      */
     public function getSspModelAssetRelations(int $sspModelId): array

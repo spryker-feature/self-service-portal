@@ -139,8 +139,6 @@ class SspAssetTable extends AbstractTable
     }
 
     /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
-     *
      * @return array<mixed>
      */
     protected function prepareData(TableConfiguration $config): array
@@ -187,8 +185,6 @@ class SspAssetTable extends AbstractTable
 
     /**
      * @param array<string> $sspAsset
-     *
-     * @return string
      */
     protected function buildLinks(array $sspAsset): string
     {

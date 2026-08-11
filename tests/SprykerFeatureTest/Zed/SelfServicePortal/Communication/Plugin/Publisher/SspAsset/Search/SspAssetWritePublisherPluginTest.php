@@ -150,9 +150,6 @@ class SspAssetWritePublisherPluginTest extends Unit
 
     /**
      * @param array<string, mixed> $data
-     * @param \Generated\Shared\Transfer\SspAssetTransfer $sspAssetTransfer
-     *
-     * @return void
      */
     protected function assertSspAssetSearchData(array $data, SspAssetTransfer $sspAssetTransfer): void
     {

@@ -131,8 +131,6 @@ class SspModelTable extends AbstractTable
     }
 
     /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
-     *
      * @return array<mixed>
      */
     protected function prepareData(TableConfiguration $config): array
@@ -165,8 +163,6 @@ class SspModelTable extends AbstractTable
 
     /**
      * @param array<string, mixed> $item
-     *
-     * @return string
      */
     protected function getImage(array $item): string
     {
@@ -188,8 +184,6 @@ class SspModelTable extends AbstractTable
 
     /**
      * @param array<string> $sspModel
-     *
-     * @return string
      */
     protected function buildLinks(array $sspModel): string
     {

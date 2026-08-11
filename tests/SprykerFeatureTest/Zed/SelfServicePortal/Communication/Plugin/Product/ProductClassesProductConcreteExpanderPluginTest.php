@@ -22,9 +22,6 @@ use SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTeste
  */
 class ProductClassesProductConcreteExpanderPluginTest extends Unit
 {
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     public function testExpandProductConcrete(): void

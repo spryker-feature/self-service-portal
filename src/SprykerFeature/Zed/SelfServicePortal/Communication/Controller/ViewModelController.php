@@ -38,8 +38,6 @@ class ViewModelController extends AbstractController
     protected const ROUTE_SSP_MODEL_LIST = '/self-service-portal/list-model';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     public function indexAction(Request $request)

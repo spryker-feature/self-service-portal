@@ -95,8 +95,6 @@ class ProductServiceAvailabilityChecker implements ProductServiceAvailabilityChe
 
     /**
      * @param list<string> $productOfferReferences
-     *
-     * @return bool
      */
     protected function hasAvailableOffers(array $productOfferReferences): bool
     {

@@ -57,8 +57,6 @@ class UpdateModelController extends AbstractController
     protected const PARAM_ID_SSP_MODEL = 'id-ssp-model';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     public function indexAction(Request $request): array|RedirectResponse
@@ -139,9 +137,6 @@ class UpdateModelController extends AbstractController
     }
 
     /**
-     * @param \Symfony\Component\Form\FormInterface $sspModelForm
-     * @param \Generated\Shared\Transfer\SspModelTransfer $sspModelTransfer
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     protected function handleFormSubmission(FormInterface $sspModelForm, SspModelTransfer $sspModelTransfer): RedirectResponse|array

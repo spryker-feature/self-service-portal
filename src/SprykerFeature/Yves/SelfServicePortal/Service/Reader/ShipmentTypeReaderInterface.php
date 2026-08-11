@@ -13,9 +13,6 @@ interface ShipmentTypeReaderInterface
 {
     /**
      * @param list<string> $shipmentTypeUuids
-     * @param string $storeName
-     *
-     * @return \Generated\Shared\Transfer\ShipmentTypeStorageCollectionTransfer
      */
     public function getShipmentTypeStorageCollection(array $shipmentTypeUuids, string $storeName): ShipmentTypeStorageCollectionTransfer;
 }

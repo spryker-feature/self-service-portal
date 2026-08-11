@@ -43,8 +43,6 @@ class AddModelController extends AbstractController
     protected const ROUTE_SSP_MODEL_DETAIL = '/self-service-portal/view-model?id-ssp-model=%s';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     public function indexAction(Request $request): array|RedirectResponse
@@ -62,8 +60,6 @@ class AddModelController extends AbstractController
     }
 
     /**
-     * @param \Symfony\Component\Form\FormInterface $sspModelForm
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     protected function handleFormSubmission(FormInterface $sspModelForm): RedirectResponse|array

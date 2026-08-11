@@ -35,10 +35,7 @@ class SspAssetBusinessUnitRelationsForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -47,8 +44,6 @@ class SspAssetBusinessUnitRelationsForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addBusinessUnitIdField(FormBuilderInterface $builder)
@@ -65,8 +60,6 @@ class SspAssetBusinessUnitRelationsForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addAssetReferenceField(FormBuilderInterface $builder)

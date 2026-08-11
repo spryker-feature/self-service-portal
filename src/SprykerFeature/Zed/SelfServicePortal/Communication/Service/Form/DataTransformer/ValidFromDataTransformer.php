@@ -25,8 +25,6 @@ class ValidFromDataTransformer implements DataTransformerInterface
 
     /**
      * @param mixed $value
-     *
-     * @return mixed
      */
     public function transform($value): mixed
     {
@@ -57,8 +55,6 @@ class ValidFromDataTransformer implements DataTransformerInterface
      * @param mixed $value
      *
      * @throws \Symfony\Component\Form\Exception\TransformationFailedException
-     *
-     * @return mixed
      */
     public function reverseTransform($value): mixed
     {

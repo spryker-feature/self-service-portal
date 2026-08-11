@@ -66,8 +66,6 @@ class SspModelProductListUsedByTableExpander implements SspModelProductListUsedB
 
     /**
      * @param array<int> $sspModelIds
-     *
-     * @return \Generated\Shared\Transfer\SspModelCollectionTransfer
      */
     protected function getSspModelCollection(array $sspModelIds): SspModelCollectionTransfer
     {

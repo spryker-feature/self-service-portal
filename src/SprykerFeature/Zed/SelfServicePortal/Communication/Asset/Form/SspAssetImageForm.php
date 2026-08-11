@@ -38,10 +38,7 @@ class SspAssetImageForm extends AbstractType
     public const OPTION_ORIGINAL_IMAGE_URL = 'imageUrl';
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -51,7 +48,6 @@ class SspAssetImageForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
      *
      * @return $this
@@ -83,8 +79,6 @@ class SspAssetImageForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addDeleteField(FormBuilderInterface $builder)

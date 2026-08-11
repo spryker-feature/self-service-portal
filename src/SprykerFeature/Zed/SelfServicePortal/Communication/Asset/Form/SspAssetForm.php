@@ -169,10 +169,7 @@ class SspAssetForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -194,7 +191,6 @@ class SspAssetForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
      *
      * @return $this
@@ -242,8 +238,6 @@ class SspAssetForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addNameField(FormBuilderInterface $builder)
@@ -266,8 +260,6 @@ class SspAssetForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addSerialNumberField(FormBuilderInterface $builder)
@@ -288,7 +280,6 @@ class SspAssetForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
      *
      * @return $this
@@ -306,8 +297,6 @@ class SspAssetForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addNoteField(FormBuilderInterface $builder)
@@ -329,7 +318,6 @@ class SspAssetForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
      *
      * @return $this
@@ -345,7 +333,6 @@ class SspAssetForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
      *
      * @return $this
@@ -373,7 +360,6 @@ class SspAssetForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
      *
      * @return $this
@@ -422,10 +408,6 @@ class SspAssetForm extends AbstractType
 
     /**
      * Adds a validation listener to ensure business unit owner is one of the assigned business units
-     *
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
-     * @return void
      */
     protected function addBusinessUnitOwnerValidationListener(FormBuilderInterface $builder): void
     {
@@ -457,10 +439,6 @@ class SspAssetForm extends AbstractType
 
     /**
      * Adds a validation listener to ensure assigned companies contain all companies from assigned business units
-     *
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
-     * @return void
      */
     protected function addCompanyAssignmentValidationListener(FormBuilderInterface $builder): void
     {
@@ -529,10 +507,6 @@ class SspAssetForm extends AbstractType
 
     /**
      * Adds a validation listener to ensure that if a company is selected, at least one business unit of that company is selected too
-     *
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
-     * @return void
      */
     protected function addBusinessUnitAssignmentValidationListener(FormBuilderInterface $builder): void
     {
@@ -613,8 +587,6 @@ class SspAssetForm extends AbstractType
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetTransfer $sspAssetTransfer
-     *
      * @return array<int>
      */
     protected function extractBusinessUnitsFromTransfer(SspAssetTransfer $sspAssetTransfer): array
@@ -640,8 +612,6 @@ class SspAssetForm extends AbstractType
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetTransfer $sspAssetTransfer
-     *
      * @return array<int>
      */
     protected function extractCompaniesFromTransfer(SspAssetTransfer $sspAssetTransfer): array
@@ -668,8 +638,6 @@ class SspAssetForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addExternalImageUrlField(FormBuilderInterface $builder)

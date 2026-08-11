@@ -35,8 +35,6 @@ class DashboardController extends AbstractController
     protected const DEFAULT_FILE_DASHBOARD_PAGE_NUMBER = 1;
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
      *
      * @return \Spryker\Yves\Kernel\View\View|\Symfony\Component\HttpFoundation\RedirectResponse
@@ -89,8 +87,6 @@ class DashboardController extends AbstractController
     }
 
     /**
-     * @param string $allowedAction
-     *
      * @return array<string>
      */
     protected function getStatusesByAllowedAction(string $allowedAction): array

@@ -66,8 +66,6 @@ class ProductOfferConcreteShipmentTypeValidatorStep implements DataImportStepInt
     }
 
     /**
-     * @param string $productOfferReference
-     *
      * @return array<int, true>
      */
     protected function fetchAssignedShipmentTypeIdsByProductOfferReference(string $productOfferReference): array

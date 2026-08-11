@@ -34,8 +34,6 @@ class EditOfferController extends AbstractController
     protected const URL_PATH_PRODUCT_OFFER_GUI_LIST = '/product-offer-gui/list';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     public function indexAction(Request $request): RedirectResponse|array

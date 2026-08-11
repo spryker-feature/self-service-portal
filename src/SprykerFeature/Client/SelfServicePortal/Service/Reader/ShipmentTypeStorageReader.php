@@ -23,8 +23,6 @@ class ShipmentTypeStorageReader implements ShipmentTypeStorageReaderInterface
 
     /**
      * @param list<string> $shipmentTypeUuids
-     *
-     * @return \Generated\Shared\Transfer\ShipmentTypeStorageCollectionTransfer
      */
     public function getShipmentTypeStorageCollection(array $shipmentTypeUuids): ShipmentTypeStorageCollectionTransfer
     {

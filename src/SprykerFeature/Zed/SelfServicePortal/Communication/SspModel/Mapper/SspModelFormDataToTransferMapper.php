@@ -39,12 +39,8 @@ class SspModelFormDataToTransferMapper implements SspModelFormDataToTransferMapp
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
-     *
      * @throws \Exception
      * @throws \Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException
-     *
-     * @return string
      */
     protected function getFileContent(UploadedFile $uploadedFile): string
     {

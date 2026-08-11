@@ -56,9 +56,6 @@ class ProductClassMapper
 
     /**
      * @param array<\Orm\Zed\SelfServicePortal\Persistence\SpyProductToProductClass> $productToProductClassEntities
-     * @param \Generated\Shared\Transfer\ProductClassCollectionTransfer $productClassCollectionTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductClassCollectionTransfer
      */
     public function mapProductToProductClassEntitiesToProductClassCollectionTransfer(
         array $productToProductClassEntities,
@@ -75,9 +72,6 @@ class ProductClassMapper
 
     /**
      * @param array<\Orm\Zed\SelfServicePortal\Persistence\SpyProductClass> $productClassEntities
-     * @param \Generated\Shared\Transfer\ProductClassCollectionTransfer $productClassCollectionTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductClassCollectionTransfer
      */
     public function mapProductClassEntitiesToProductClassCollectionTransfer(
         array $productClassEntities,

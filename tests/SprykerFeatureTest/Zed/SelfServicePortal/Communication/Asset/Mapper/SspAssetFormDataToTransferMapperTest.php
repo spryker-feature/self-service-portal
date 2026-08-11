@@ -27,9 +27,6 @@ use SprykerFeature\Zed\SelfServicePortal\Communication\Asset\Mapper\SspAssetForm
  */
 class SspAssetFormDataToTransferMapperTest extends Unit
 {
-    /**
-     * @var \SprykerFeature\Zed\SelfServicePortal\Communication\Asset\Mapper\SspAssetFormDataToTransferMapper
-     */
     protected SspAssetFormDataToTransferMapper $mapper;
 
     protected function setUp(): void

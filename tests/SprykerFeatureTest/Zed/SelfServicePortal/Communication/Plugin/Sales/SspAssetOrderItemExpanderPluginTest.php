@@ -27,9 +27,6 @@ use SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTeste
  */
 class SspAssetOrderItemExpanderPluginTest extends Unit
 {
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     public function testExpandExpandsItemsWithSspAssets(): void

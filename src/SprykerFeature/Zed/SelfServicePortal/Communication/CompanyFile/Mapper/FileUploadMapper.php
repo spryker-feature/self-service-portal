@@ -99,12 +99,8 @@ class FileUploadMapper implements FileUploadMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\FileUploadTransfer $fileUploadTransfer
-     *
      * @throws \Exception
      * @throws \Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException
-     *
-     * @return string
      */
     protected function getFileContent(FileUploadTransfer $fileUploadTransfer): string
     {

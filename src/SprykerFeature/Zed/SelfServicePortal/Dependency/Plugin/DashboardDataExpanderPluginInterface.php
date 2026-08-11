@@ -20,11 +20,6 @@ interface DashboardDataExpanderPluginInterface
      * - Provides dashboard data.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\DashboardResponseTransfer $dashboardResponseTransfer
-     * @param \Generated\Shared\Transfer\DashboardRequestTransfer $dashboardRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\DashboardResponseTransfer
      */
     public function provideDashboardData(
         DashboardResponseTransfer $dashboardResponseTransfer,

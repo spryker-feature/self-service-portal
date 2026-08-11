@@ -25,8 +25,6 @@ class ModelAttachmentTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addAttachModelTab(TabsViewTransfer $tabsViewTransfer)

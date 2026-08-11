@@ -34,13 +34,9 @@ class DownloadCompanyFileController extends AbstractController
     protected const PARAM_ID_FILE = 'id-file';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @throws \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
-     *
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
     public function indexAction(Request $request): StreamedResponse
     {

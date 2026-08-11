@@ -96,10 +96,7 @@ class ViewFileDetailTableFilterForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<mixed> $options
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -112,7 +109,6 @@ class ViewFileDetailTableFilterForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<mixed> $options
      *
      * @return $this
@@ -130,8 +126,6 @@ class ViewFileDetailTableFilterForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addDateFromField(FormBuilderInterface $builder)
@@ -149,8 +143,6 @@ class ViewFileDetailTableFilterForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addDateToField(FormBuilderInterface $builder)
@@ -168,8 +160,6 @@ class ViewFileDetailTableFilterForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addIdFileField(FormBuilderInterface $builder)

@@ -26,14 +26,8 @@ class QuoteItemFilter implements QuoteItemFilterInterface
      */
     protected const MESSAGE_INFO_SERVICE_WITHOUT_SHIPMENT_TYPE_DELETED = 'ssp-service-management.info.service-without-shipment-type.removed';
 
-    /**
-     * @var \SprykerFeature\Zed\SelfServicePortal\SelfServicePortalConfig
-     */
     protected SelfServicePortalConfig $config;
 
-    /**
-     * @var \Spryker\Zed\Messenger\Business\MessengerFacadeInterface
-     */
     protected MessengerFacadeInterface $messengerFacade;
 
     public function __construct(
@@ -89,7 +83,6 @@ class QuoteItemFilter implements QuoteItemFilterInterface
     }
 
     /**
-     * @param string $sku
      * @param array<string, \Generated\Shared\Transfer\MessageTransfer> $messageTransfersIndexedBySku
      *
      * @return array<string, \Generated\Shared\Transfer\MessageTransfer>

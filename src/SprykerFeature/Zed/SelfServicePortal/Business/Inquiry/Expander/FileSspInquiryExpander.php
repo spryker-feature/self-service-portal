@@ -40,8 +40,6 @@ class FileSspInquiryExpander implements SspInquiryExpanderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspInquiryCollectionTransfer $sspInquiryCollectionTransfer
-     *
      * @return list<int>
      */
     protected function extractSspInquiryIds(SspInquiryCollectionTransfer $sspInquiryCollectionTransfer): array
@@ -112,10 +110,7 @@ class FileSspInquiryExpander implements SspInquiryExpanderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspInquiryCollectionTransfer $sspInquiryCollectionTransfer
      * @param array<int, list<\Generated\Shared\Transfer\FileTransfer>> $fileTransfersGroupedByInquiryId
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryCollectionTransfer
      */
     protected function expandInquiriesWithFiles(
         SspInquiryCollectionTransfer $sspInquiryCollectionTransfer,

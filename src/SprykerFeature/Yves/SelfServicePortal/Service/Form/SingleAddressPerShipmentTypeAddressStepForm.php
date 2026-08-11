@@ -30,10 +30,7 @@ class SingleAddressPerShipmentTypeAddressStepForm extends AbstractType
     protected const GLOSSARY_KEY_SINGLE_ADDRESS_PER_SHIPMENT_TYPE = 'customer.address.single_address_per_shipment_type';
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
-     *
-     * @return \Symfony\Component\Form\FormBuilderInterface
      */
     public function buildForm(FormBuilderInterface $builder, array $options): FormBuilderInterface
     {
@@ -44,8 +41,6 @@ class SingleAddressPerShipmentTypeAddressStepForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addSingleAddressPerShipmentTypeSubForm(FormBuilderInterface $builder)
@@ -75,8 +70,6 @@ class SingleAddressPerShipmentTypeAddressStepForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addPreSubmitListener(FormBuilderInterface $builder)

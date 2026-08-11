@@ -34,11 +34,6 @@ class SspInquiryWriter implements SspInquiryWriterInterface
     protected const SSP_INQUIRY_REFERENCE_PREFIX = 'INQR';
 
     /**
-     * @param \SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalEntityManagerInterface $selfServicePortalEntityManager
-     * @param \Spryker\Zed\SequenceNumber\Business\SequenceNumberFacadeInterface $sequenceNumberFacade
-     * @param \Spryker\Zed\StateMachine\Business\StateMachineFacadeInterface $stateMachineFacade
-     * @param \SprykerFeature\Zed\SelfServicePortal\SelfServicePortalConfig $selfServicePortalConfig
-     * @param \SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Validator\SspInquiryValidatorInterface $sspInquiryValidator
      * @param array<\SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Hooks\PreCreate\SspInquiryPreCreateHookInterface> $preCreateHooks
      * @param array<\SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Hooks\PostCreate\SspInquiryPostCreateHookInterface> $postCreateHooks
      */
@@ -92,9 +87,6 @@ class SspInquiryWriter implements SspInquiryWriterInterface
 
     /**
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ErrorTransfer> $validationErrors
-     * @param \Generated\Shared\Transfer\SspInquiryCollectionResponseTransfer $sspInquiryCollectionResponseTransfer
-     *
-     * @return void
      */
     protected function addValidationErrors(
         ArrayObject $validationErrors,

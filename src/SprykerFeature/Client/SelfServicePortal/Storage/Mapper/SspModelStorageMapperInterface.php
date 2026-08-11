@@ -13,8 +13,6 @@ interface SspModelStorageMapperInterface
 {
     /**
      * @param array<string, mixed> $storageData
-     *
-     * @return \Generated\Shared\Transfer\SspModelStorageTransfer
      */
     public function mapStorageDataToSspModelStorageTransfer(array $storageData): SspModelStorageTransfer;
 }

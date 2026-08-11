@@ -109,9 +109,6 @@ class SspAssetWritePublisherPluginTest extends Unit
      */
     protected const STORAGE_FIELD_ID_OWNER_COMPANY_ID = 'id_owner_company_id';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     /**

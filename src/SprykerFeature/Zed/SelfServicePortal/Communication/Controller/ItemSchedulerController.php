@@ -44,8 +44,6 @@ class ItemSchedulerController extends AbstractController
     protected const PARAM_ID_SALES_ORDER = 'id-sales-order';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>

@@ -33,9 +33,6 @@ class SspAssetSearchSortConfigBuilder implements SortConfigBuilderInterface
      */
     protected array $sortConfigTransfers = [];
 
-    /**
-     * @var string
-     */
     protected string $sortParamKey;
 
     public function __construct(string $sortParamName = self::DEFAULT_SORT_PARAM_KEY)
@@ -44,8 +41,6 @@ class SspAssetSearchSortConfigBuilder implements SortConfigBuilderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SortConfigTransfer $sortConfigTransfer
-     *
      * @return $this
      */
     public function addSort(SortConfigTransfer $sortConfigTransfer)
@@ -72,8 +67,6 @@ class SspAssetSearchSortConfigBuilder implements SortConfigBuilderInterface
 
     /**
      * @param array<string, mixed> $requestParameters
-     *
-     * @return string|null
      */
     public function getActiveParamName(array $requestParameters): ?string
     {

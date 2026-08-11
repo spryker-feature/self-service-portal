@@ -58,9 +58,6 @@ class ServicePointReader implements ServicePointReaderInterface
 
     /**
      * @param list<string> $servicePointUuids
-     * @param string $storeName
-     *
-     * @return \Generated\Shared\Transfer\ServicePointStorageCollectionTransfer
      */
     public function getServicePointStorageCollection(array $servicePointUuids, string $storeName): ServicePointStorageCollectionTransfer
     {

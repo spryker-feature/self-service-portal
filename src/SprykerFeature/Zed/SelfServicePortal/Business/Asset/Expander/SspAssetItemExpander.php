@@ -80,8 +80,6 @@ class SspAssetItemExpander implements SspAssetItemExpanderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\CartChangeTransfer $cartChangeTransfer
-     *
      * @return array<string>
      */
     protected function extractAssetReferencesFromItems(CartChangeTransfer $cartChangeTransfer): array

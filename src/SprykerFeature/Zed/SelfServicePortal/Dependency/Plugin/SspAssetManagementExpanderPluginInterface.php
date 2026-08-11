@@ -17,11 +17,6 @@ interface SspAssetManagementExpanderPluginInterface
      * - Expands the SspAssetCollectionTransfer with additional data.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspAssetCollectionTransfer $sspAssetCollectionTransfer
-     * @param \Generated\Shared\Transfer\SspAssetCriteriaTransfer $sspAssetCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetCollectionTransfer
      */
     public function expand(
         SspAssetCollectionTransfer $sspAssetCollectionTransfer,

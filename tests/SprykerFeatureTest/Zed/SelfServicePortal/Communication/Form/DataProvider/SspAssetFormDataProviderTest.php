@@ -70,8 +70,6 @@ class SspAssetFormDataProviderTest extends Unit
      * @param array<string, mixed> $submittedFormData
      * @param array<string, mixed> $expectedOptions
      * @param array<string, mixed> $expectedAssertions
-     *
-     * @return void
      */
     public function testExpandOptionsWithSubmittedData(
         array $initialOptions,

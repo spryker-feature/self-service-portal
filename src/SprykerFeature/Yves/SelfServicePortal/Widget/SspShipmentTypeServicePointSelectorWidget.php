@@ -178,8 +178,6 @@ class SspShipmentTypeServicePointSelectorWidget extends AbstractWidget
 
     /**
      * @param array<\Generated\Shared\Transfer\ShipmentTypeStorageTransfer> $shipmentTypeStorageTransfers
-     *
-     * @return void
      */
     protected function addShipmentTypeOptionsParameter(array $shipmentTypeStorageTransfers): void
     {

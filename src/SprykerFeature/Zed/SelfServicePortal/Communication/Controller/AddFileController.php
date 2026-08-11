@@ -27,8 +27,6 @@ class AddFileController extends FileAbstractController
     protected const MESSAGE_FILES_WERE_ADDED_SUCCESSFULLY = 'The files were added successfully.';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<mixed>
      */
     public function indexAction(Request $request): array|RedirectResponse

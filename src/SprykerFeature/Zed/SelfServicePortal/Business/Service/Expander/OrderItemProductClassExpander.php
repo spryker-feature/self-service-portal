@@ -101,10 +101,7 @@ class OrderItemProductClassExpander implements OrderItemProductClassExpanderInte
     }
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param array<int, array<\Generated\Shared\Transfer\ProductClassTransfer>> $productClassesBySalesOrderItemId
-     *
-     * @return \Generated\Shared\Transfer\OrderTransfer
      */
     protected function expandOrderItemTransfersWithProductClasses(
         OrderTransfer $orderTransfer,

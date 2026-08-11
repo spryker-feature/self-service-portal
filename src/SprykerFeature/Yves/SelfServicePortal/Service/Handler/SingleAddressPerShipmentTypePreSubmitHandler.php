@@ -88,8 +88,6 @@ class SingleAddressPerShipmentTypePreSubmitHandler implements SingleAddressPerSh
 
     /**
      * @param array<string, mixed> $data
-     *
-     * @return bool
      */
     protected function shouldProcessEvent(array $data): bool
     {
@@ -117,7 +115,6 @@ class SingleAddressPerShipmentTypePreSubmitHandler implements SingleAddressPerSh
 
     /**
      * @param array<string, mixed> $data
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
      *
      * @return array<string, mixed>
      */

@@ -116,8 +116,6 @@ class SspInquiryTable extends AbstractTable
     }
 
     /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
-     *
      * @return array<mixed>
      */
     protected function prepareData(TableConfiguration $config): array
@@ -152,8 +150,6 @@ class SspInquiryTable extends AbstractTable
 
     /**
      * @param array<string> $sspInquiry
-     *
-     * @return string
      */
     protected function buildLinks(array $sspInquiry): string
     {

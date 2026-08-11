@@ -43,14 +43,8 @@ class SspAssetSearchQueryPluginTest extends Unit
      */
     protected const EMPTY_SEARCH_STRING = '';
 
-    /**
-     * @var \SprykerFeatureTest\Client\SelfServicePortal\SelfServicePortalClientTester
-     */
     protected SelfServicePortalClientTester $tester;
 
-    /**
-     * @var \SprykerFeature\Client\SelfServicePortal\Plugin\Elasticsearch\Query\SspAssetSearchQueryPlugin
-     */
     protected SspAssetSearchQueryPlugin $plugin;
 
     protected function setUp(): void

@@ -68,8 +68,6 @@ class SspModelStorageReader implements SspModelStorageReaderInterface
 
     /**
      * @param list<int> $sspModelIds
-     *
-     * @return \Generated\Shared\Transfer\SspModelStorageCollectionTransfer
      */
     protected function getSspModelStorageByModelIds(array $sspModelIds): SspModelStorageCollectionTransfer
     {

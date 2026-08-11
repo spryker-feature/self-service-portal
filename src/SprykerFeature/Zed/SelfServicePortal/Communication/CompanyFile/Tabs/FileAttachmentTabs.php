@@ -25,8 +25,6 @@ class FileAttachmentTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addAttachAssetTab(TabsViewTransfer $tabsViewTransfer)

@@ -31,9 +31,6 @@ use stdClass;
  */
 class SspAssetQueryExpanderPluginTest extends Unit
 {
-    /**
-     * @var \SprykerFeatureTest\Client\SelfServicePortal\SelfServicePortalClientTester
-     */
     protected SelfServicePortalClientTester $tester;
 
     protected function setUp(): void

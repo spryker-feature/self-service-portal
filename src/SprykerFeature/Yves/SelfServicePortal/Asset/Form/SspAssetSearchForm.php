@@ -64,10 +64,7 @@ class SspAssetSearchForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -81,8 +78,6 @@ class SspAssetSearchForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addOrderByField(FormBuilderInterface $builder)
@@ -96,8 +91,6 @@ class SspAssetSearchForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addOrderDirectionField(FormBuilderInterface $builder)
@@ -111,7 +104,6 @@ class SspAssetSearchForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
      *
      * @return $this
@@ -128,8 +120,6 @@ class SspAssetSearchForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addSearchTextField(FormBuilderInterface $builder)
@@ -147,8 +137,6 @@ class SspAssetSearchForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addResetField(FormBuilderInterface $builder)

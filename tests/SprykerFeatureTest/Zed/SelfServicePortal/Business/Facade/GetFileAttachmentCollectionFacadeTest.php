@@ -86,14 +86,8 @@ class GetFileAttachmentCollectionFacadeTest extends Unit
      */
     protected const PLUGIN_WRITER = 'PLUGIN_WRITER';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalBusinessTester
-     */
     protected SelfServicePortalBusinessTester $tester;
 
-    /**
-     * @var \SprykerFeature\Zed\SelfServicePortal\Business\SelfServicePortalFacadeInterface
-     */
     protected SelfServicePortalFacadeInterface $facade;
 
     /**
@@ -420,8 +414,6 @@ class GetFileAttachmentCollectionFacadeTest extends Unit
 
     /**
      * @param array<string, bool> $permissions
-     *
-     * @return void
      */
     protected function mockPermissions(array $permissions): void
     {

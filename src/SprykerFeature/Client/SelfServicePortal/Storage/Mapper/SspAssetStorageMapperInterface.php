@@ -14,24 +14,16 @@ interface SspAssetStorageMapperInterface
 {
     /**
      * @param array<string, mixed> $storageData
-     *
-     * @return \Generated\Shared\Transfer\SspAssetStorageTransfer
      */
     public function mapStorageDataToSspAssetStorageTransfer(array $storageData): SspAssetStorageTransfer;
 
     /**
      * @param array<string, mixed> $storageData
-     * @param \Generated\Shared\Transfer\SspAssetTransfer $sspAssetTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetTransfer
      */
     public function mapStorageDataToSspAssetTransferWithCompanyAssignmentsOnly(array $storageData, SspAssetTransfer $sspAssetTransfer): SspAssetTransfer;
 
     /**
      * @param array<string, mixed> $storageData
-     * @param \Generated\Shared\Transfer\SspAssetTransfer $sspAssetTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetTransfer
      */
     public function mapStorageDataToSspAssetTransferWithBusinessUnitAssignmentsOnly(array $storageData, SspAssetTransfer $sspAssetTransfer): SspAssetTransfer;
 }

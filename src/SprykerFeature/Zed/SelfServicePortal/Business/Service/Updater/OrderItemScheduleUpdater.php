@@ -69,10 +69,7 @@ class OrderItemScheduleUpdater implements OrderItemScheduleUpdaterInterface
     }
 
     /**
-     * @param string $errorMessage
      * @param array<string, mixed> $parameters
-     *
-     * @return \Generated\Shared\Transfer\SalesOrderItemCollectionResponseTransfer
      */
     protected function createErrorResponse(string $errorMessage, array $parameters = []): SalesOrderItemCollectionResponseTransfer
     {

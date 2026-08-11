@@ -17,8 +17,6 @@ class AddressFormItemShipmentTypeGrouper extends AbstractShipmentTypeGrouper imp
     protected const FORM_PROPERTY_DATA = 'data';
 
     /**
-     * @param \Symfony\Component\Form\FormView $checkoutAddressForm
-     *
      * @return array<string, array<string, list<\Symfony\Component\Form\FormView>>>
      */
     public function groupItemsByShipmentType(FormView $checkoutAddressForm): array

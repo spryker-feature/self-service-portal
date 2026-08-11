@@ -31,8 +31,6 @@ class SspModelStorageWriter implements SspModelStorageWriterInterface
 
     /**
      * @param list<\Generated\Shared\Transfer\EventEntityTransfer> $eventEntityTransfers
-     *
-     * @return void
      */
     public function writeSspModelStorageCollectionBySspModelEvents(array $eventEntityTransfers): void
     {
@@ -47,8 +45,6 @@ class SspModelStorageWriter implements SspModelStorageWriterInterface
 
     /**
      * @param list<\Generated\Shared\Transfer\EventEntityTransfer> $eventEntityTransfers
-     *
-     * @return void
      */
     public function writeSspModelStorageCollectionBySspModelToProductListEvents(array $eventEntityTransfers): void
     {
@@ -66,8 +62,6 @@ class SspModelStorageWriter implements SspModelStorageWriterInterface
 
     /**
      * @param array<int> $sspModelIds
-     *
-     * @return void
      */
     protected function writeSspModelStorageCollection(array $sspModelIds): void
     {
@@ -91,8 +85,6 @@ class SspModelStorageWriter implements SspModelStorageWriterInterface
 
     /**
      * @param list<int> $sspModelIds
-     *
-     * @return \Generated\Shared\Transfer\SspModelCriteriaTransfer
      */
     protected function createSspModelCriteriaTransfer(array $sspModelIds): SspModelCriteriaTransfer
     {

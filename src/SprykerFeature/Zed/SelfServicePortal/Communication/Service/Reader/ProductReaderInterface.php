@@ -12,11 +12,7 @@ use Generated\Shared\Transfer\ProductConcreteTransfer;
 interface ProductReaderInterface
 {
     /**
-     * @param int $idProductConcrete
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     *
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
      */
     public function getProductConcrete(int $idProductConcrete): ProductConcreteTransfer;
 }

@@ -170,10 +170,7 @@ class SspAssetValidator implements SspAssetValidatorInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
      * @param array<string, mixed> $permissionCheckContext
-     *
-     * @return bool
      */
     protected function isCompanyUserAllowedToViewAsset(CompanyUserTransfer $companyUserTransfer, array $permissionCheckContext = []): bool
     {

@@ -29,8 +29,6 @@ abstract class AbstractShipmentTypeGrouper
     }
 
     /**
-     * @param string $shipmentTypeKey
-     *
      * @return array<string, mixed>
      */
     protected function createShipmentTypeGroup(string $shipmentTypeKey): array

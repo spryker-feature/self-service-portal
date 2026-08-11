@@ -68,9 +68,6 @@ class SelfServicePortalClientTest extends Unit
      */
     protected const STORE_NAME_DE = 'DE';
 
-    /**
-     * @var \SprykerFeatureTest\Client\SelfServicePortal\SelfServicePortalClientTester
-     */
     protected SelfServicePortalClientTester $tester;
 
     public function testGetSspModelStorageCollectionReturnsEmptyCollectionWhenConditionsAreNull(): void

@@ -85,9 +85,6 @@ class SspServiceCancelWidget extends AbstractWidget
 
     /**
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ProductClassTransfer> $productClasses
-     * @param string $className
-     *
-     * @return bool
      */
     protected function hasProductClassName(ArrayObject $productClasses, string $className): bool
     {

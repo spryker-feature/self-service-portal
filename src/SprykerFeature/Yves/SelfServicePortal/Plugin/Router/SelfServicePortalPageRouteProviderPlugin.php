@@ -207,10 +207,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\ServicePointWidgetContentController::indexAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addSspServicePointWidgetContentRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -227,10 +223,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\ServicePointSearchController::indexAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addSspServicePointSearchRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -246,10 +238,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\ListServiceController::listAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addSspServiceListRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -267,10 +255,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\UpdateServiceTimeController::updateServiceTimeAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addSspServiceUpdateServiceTimeRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -287,10 +271,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\CancelServiceController::cancelServiceAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addSspServiceCancelServiceRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -307,10 +287,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\ListCompanyFileController::indexAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addSspCompanyFileListFileRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -322,10 +298,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\DownloadCompanyFileController::indexAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addSspCompanyFileDownloadRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -337,10 +309,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\DashboardController::indexAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addCustomerDashboardRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -353,10 +321,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\ListInquiryController::indexAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addCustomerSspInquiryListRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -369,10 +333,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\InquiryController::detailAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addCustomerSspInquiryDetailsRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -385,10 +345,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\InquiryController::cancelAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addSspInquiryCancelRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -401,10 +357,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\InquiryController::createAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addCustomerSspInquiryCreateRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -417,10 +369,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\DownloadInquiryFileController::downloadAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addDownloadFileRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -433,10 +381,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\AssetWidgetContentController::indexAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addAssetWidgetContentRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -448,10 +392,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\AssetController::detailsAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addAssetDetailsRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -463,10 +403,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\AssetController::createAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addAssetCreateRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -478,10 +414,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\AssetController::updateAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addAssetUpdateRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -493,10 +425,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\DownloadAssetImageController::viewImageAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addViewAssetImageRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -508,10 +436,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\ListAssetController::indexAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addAssetListRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -523,10 +447,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\AssetController::updateBusinessUnitRelationAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addUnassignBusinessUnitRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -538,10 +458,6 @@ class SelfServicePortalPageRouteProviderPlugin extends AbstractRouteProviderPlug
 
     /**
      * @uses \SprykerFeature\Yves\SelfServicePortal\Controller\AssetController::searchAction()
-     *
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     protected function addAssetSearchRoute(RouteCollection $routeCollection): RouteCollection
     {

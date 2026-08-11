@@ -35,7 +35,6 @@ class AssetAttachmentFormDataProvider
     }
 
     /**
-     * @param int $idFile
      * @param array<string> $sspAssetIds
      *
      * @return array<string, mixed>

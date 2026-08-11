@@ -105,8 +105,6 @@ class AttachedCompanyUserAttachmentTable extends AbstractTable
     }
 
     /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
-     *
      * @return array<array<string, mixed>>
      */
     protected function prepareData(TableConfiguration $config): array
@@ -162,8 +160,6 @@ class AttachedCompanyUserAttachmentTable extends AbstractTable
 
     /**
      * @param array<string, mixed> $companyUserEntity
-     *
-     * @return string
      */
     protected function buildLinks(array $companyUserEntity): string
     {

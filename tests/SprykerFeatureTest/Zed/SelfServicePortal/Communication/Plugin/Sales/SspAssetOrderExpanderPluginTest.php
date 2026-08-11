@@ -26,9 +26,6 @@ use SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTeste
  */
 class SspAssetOrderExpanderPluginTest extends Unit
 {
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     public function testHydrateExpandsOrderItemsWithSspAssets(): void

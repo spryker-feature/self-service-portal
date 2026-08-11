@@ -34,7 +34,6 @@ interface SelfServicePortalRepositoryInterface
 
     /**
      * @param list<int> $productConcreteIds
-     * @param string $shipmentTypeName
      *
      * @return array<int, list<int>>
      */
@@ -85,8 +84,6 @@ interface SelfServicePortalRepositoryInterface
 
     /**
      * @param array<int> $salesOrderItemIds
-     *
-     * @return void
      */
     public function deleteSalesOrderItemProductClassesBySalesOrderItemIds(array $salesOrderItemIds): void;
 
@@ -95,7 +92,6 @@ interface SelfServicePortalRepositoryInterface
     public function getSspModelQuery(): SpySspModelQuery;
 
     /**
-     * @param \Generated\Shared\Transfer\FilterTransfer $filterTransfer
      * @param list<int> $sspModelIds
      *
      * @return list<\Generated\Shared\Transfer\SynchronizationDataTransfer>
@@ -103,7 +99,6 @@ interface SelfServicePortalRepositoryInterface
     public function getSspModelStorageSynchronizationDataTransfers(FilterTransfer $filterTransfer, array $sspModelIds = []): array;
 
     /**
-     * @param \Generated\Shared\Transfer\FilterTransfer $filterTransfer
      * @param list<int> $sspAssetIds
      *
      * @return list<\Generated\Shared\Transfer\SynchronizationDataTransfer>
@@ -111,7 +106,6 @@ interface SelfServicePortalRepositoryInterface
     public function getSspAssetStorageSynchronizationDataTransfers(FilterTransfer $filterTransfer, array $sspAssetIds = []): array;
 
     /**
-     * @param \Generated\Shared\Transfer\FilterTransfer $filterTransfer
      * @param list<int> $sspAssetIds
      *
      * @return \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\SelfServicePortal\Persistence\SpySspAssetSearch>
@@ -126,8 +120,6 @@ interface SelfServicePortalRepositoryInterface
     public function getBusinessUnitIdsForCompanies(array $companyIds): array;
 
     /**
-     * @param int $idProductList
-     *
      * @return list<int>
      */
     public function getSspModelIdsByProductListId(int $idProductList): array;

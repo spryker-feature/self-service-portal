@@ -46,11 +46,7 @@ class AssignedBusinessUnitKeysToIdStep implements DataImportStepInterface
     }
 
     /**
-     * @param string $businessUnitKey
-     *
      * @throws \Spryker\Zed\DataImport\Business\Exception\InvalidDataException
-     *
-     * @return int
      */
     protected function getIdCompanyBusinessUnitByKey(string $businessUnitKey): int
     {

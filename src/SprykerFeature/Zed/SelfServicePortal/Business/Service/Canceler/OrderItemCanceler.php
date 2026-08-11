@@ -30,9 +30,6 @@ class OrderItemCanceler implements OrderItemCancelerInterface
      */
     protected const EVENT_CANCEL = 'cancel';
 
-    /**
-     * @var \Spryker\Zed\Oms\Business\OmsFacadeInterface
-     */
     protected OmsFacadeInterface $omsFacade;
 
     public function __construct(OmsFacadeInterface $omsFacade)
@@ -69,10 +66,7 @@ class OrderItemCanceler implements OrderItemCancelerInterface
     }
 
     /**
-     * @param string $errorMessage
      * @param array<string, mixed> $parameters
-     *
-     * @return \Generated\Shared\Transfer\SalesOrderItemCollectionResponseTransfer
      */
     protected function createErrorResponse(string $errorMessage, array $parameters = []): SalesOrderItemCollectionResponseTransfer
     {

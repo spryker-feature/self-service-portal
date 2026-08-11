@@ -13,8 +13,6 @@ interface ServiceTypeReaderInterface
 {
     /**
      * @param array<int, string> $serviceTypeUuids
-     *
-     * @return \Generated\Shared\Transfer\ServiceTypeStorageCollectionTransfer
      */
     public function getServiceTypeStorageCollection(array $serviceTypeUuids): ServiceTypeStorageCollectionTransfer;
 }

@@ -21,8 +21,6 @@ class ProductOfferReader implements ProductOfferReaderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
-     *
      * @return array<\Generated\Shared\Transfer\ProductOfferStorageTransfer>
      */
     public function getProductOffers(ProductViewTransfer $productViewTransfer): array

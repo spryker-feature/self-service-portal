@@ -12,10 +12,7 @@ use Generated\Shared\Transfer\ItemTransfer;
 interface ShipmentTypeExpanderInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
      * @param array<string, mixed> $params
-     *
-     * @return \Generated\Shared\Transfer\ItemTransfer
      */
     public function expandItemTransferWithShipmentType(ItemTransfer $itemTransfer, array $params): ItemTransfer;
 }

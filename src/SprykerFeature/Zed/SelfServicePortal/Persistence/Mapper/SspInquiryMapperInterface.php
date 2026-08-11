@@ -30,9 +30,6 @@ interface SspInquiryMapperInterface
 
     /**
      * @param \Propel\Runtime\Collection\Collection<\Orm\Zed\SelfServicePortal\Persistence\SpySspInquiryFile> $sspInquiryFileEntities
-     * @param \Generated\Shared\Transfer\SspInquiryCollectionTransfer $sspInquiryCollectionTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryCollectionTransfer
      */
     public function mapSspInquiryFileEntitiesToSspInquiryCollectionTransfer(
         Collection $sspInquiryFileEntities,

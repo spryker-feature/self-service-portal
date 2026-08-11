@@ -128,7 +128,6 @@ class SelfServicePortalRepository extends AbstractRepository implements SelfServ
 
     /**
      * @param list<int> $productConcreteIds
-     * @param string $shipmentTypeName
      *
      * @return array<int, list<int>>
      */
@@ -583,10 +582,7 @@ class SelfServicePortalRepository extends AbstractRepository implements SelfServ
     }
 
     /**
-     * @param \Orm\Zed\SelfServicePortal\Persistence\SpySspInquiryQuery $sspInquiryQuery
      * @param \ArrayObject<int, \Generated\Shared\Transfer\SortTransfer> $sortCollection
-     *
-     * @return \Orm\Zed\SelfServicePortal\Persistence\SpySspInquiryQuery
      */
     protected function applySspInquirySorting(SpySspInquiryQuery $sspInquiryQuery, ArrayObject $sortCollection): SpySspInquiryQuery
     {
@@ -830,8 +826,6 @@ class SelfServicePortalRepository extends AbstractRepository implements SelfServ
 
     /**
      * @param array<int> $salesOrderItemIds
-     *
-     * @return void
      */
     public function deleteSalesOrderItemProductClassesBySalesOrderItemIds(array $salesOrderItemIds): void
     {
@@ -920,7 +914,6 @@ class SelfServicePortalRepository extends AbstractRepository implements SelfServ
     }
 
     /**
-     * @param \Generated\Shared\Transfer\FilterTransfer $filterTransfer
      * @param list<int> $sspModelIds
      *
      * @return list<\Generated\Shared\Transfer\SynchronizationDataTransfer>
@@ -943,7 +936,6 @@ class SelfServicePortalRepository extends AbstractRepository implements SelfServ
     }
 
     /**
-     * @param \Generated\Shared\Transfer\FilterTransfer $filterTransfer
      * @param list<int> $sspAssetIds
      *
      * @return list<\Generated\Shared\Transfer\SynchronizationDataTransfer>
@@ -966,7 +958,6 @@ class SelfServicePortalRepository extends AbstractRepository implements SelfServ
     }
 
     /**
-     * @param \Generated\Shared\Transfer\FilterTransfer $filterTransfer
      * @param array<int> $sspAssetIds
      *
      * @return \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\SelfServicePortal\Persistence\SpySspAssetSearch>

@@ -18,8 +18,6 @@ class FilesValidator extends FileValidator
     /**
      * @param mixed $value
      * @param \SprykerFeature\Yves\SelfServicePortal\Inquiry\Form\Validator\Constraints\Files $constraint
-     *
-     * @return void
      */
     public function validate($value, Constraint $constraint): void
     {
@@ -78,11 +76,7 @@ class FilesValidator extends FileValidator
     }
 
     /**
-     * @param string|int $totalMaxSize
-     *
      * @throws \Symfony\Component\Validator\Exception\ConstraintDefinitionException
-     *
-     * @return int
      */
     private function normalizeBinaryFormat(int|string $totalMaxSize): int
     {

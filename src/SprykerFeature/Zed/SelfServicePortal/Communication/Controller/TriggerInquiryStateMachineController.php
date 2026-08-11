@@ -69,12 +69,7 @@ class TriggerInquiryStateMachineController extends AbstractController
     }
 
     /**
-     * @param int $idSspInquiry
-     * @param \Symfony\Component\Form\Form $triggerEventForm
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     *
-     * @return bool
      */
     protected function executeTriggerAction(int $idSspInquiry, Form $triggerEventForm): bool
     {

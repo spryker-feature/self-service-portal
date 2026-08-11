@@ -37,9 +37,6 @@ class SspServiceShipmentTypePreReloadItemsPluginTest extends Unit
      */
     protected const SERVICE_PRODUCT_CLASS = 'service';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     public function testPreReloadItemsFiltersOutServicesWithoutShipmentTypes(): void

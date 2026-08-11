@@ -72,9 +72,6 @@ class SspServiceChangeScheduledTimeLinkWidget extends AbstractWidget
 
     /**
      * @param array<\Generated\Shared\Transfer\ProductClassTransfer> $productClasses
-     * @param string $className
-     *
-     * @return bool
      */
     protected function hasProductClassName(array $productClasses, string $className): bool
     {

@@ -383,10 +383,7 @@ class FileAttachmentQueryBuilder
     }
 
     /**
-     * @param \Propel\Runtime\ActiveQuery\ModelCriteria $query
      * @param \ArrayObject<array-key, \Generated\Shared\Transfer\SortTransfer> $sortTransfers
-     *
-     * @return \Propel\Runtime\ActiveQuery\ModelCriteria
      */
     protected function applyFileAttachmentSorting(ModelCriteria $query, ArrayObject $sortTransfers): ModelCriteria
     {

@@ -48,11 +48,7 @@ class SspModelManagementFacadeTest extends Unit
      * @dataProvider modelCreatedSuccessfulCollectionDataProvider
      *
      * @param array<mixed> $sspModelData
-     * @param int $expectedModelCount
-     * @param string $expectedName
      * @param array<string> $expectedValidationErrors
-     *
-     * @return void
      */
     public function testCreateSspModelCollectionIsSuccessful(
         array $sspModelData,
@@ -107,8 +103,6 @@ class SspModelManagementFacadeTest extends Unit
      *
      * @param array<mixed> $sspModelData
      * @param array<string> $expectedValidationErrors
-     *
-     * @return void
      */
     public function testCreateSspModelCollectionFailsWithInvalidData(
         array $sspModelData,
@@ -237,11 +231,7 @@ class SspModelManagementFacadeTest extends Unit
      * @dataProvider modelUpdatedSuccessfulCollectionDataProvider
      *
      * @param array<mixed> $sspModelData
-     * @param int $expectedModelCount
-     * @param string $expectedName
      * @param array<string> $expectedValidationErrors
-     *
-     * @return void
      */
     public function testUpdateSspModelCollectionIsSuccessful(
         array $sspModelData,
@@ -300,8 +290,6 @@ class SspModelManagementFacadeTest extends Unit
      *
      * @param array<mixed> $sspModelData
      * @param array<string> $expectedValidationErrors
-     *
-     * @return void
      */
     public function testUpdateSspModelCollectionFailsWithInvalidDataReturnsResponseWithError(
         array $sspModelData,

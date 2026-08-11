@@ -137,8 +137,6 @@ class FileTable extends AbstractTable
     }
 
     /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
-     *
      * @return array<int, array<string, mixed>>
      */
     protected function prepareData(TableConfiguration $config): array
@@ -214,8 +212,6 @@ class FileTable extends AbstractTable
 
     /**
      * @param array<mixed> $item
-     *
-     * @return string
      */
     protected function buildLinks(array $item): string
     {

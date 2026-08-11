@@ -362,8 +362,6 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      * - Returns the default maximum items per page for file dashboard.
      *
      * @api
-     *
-     * @return int
      */
     public function getDefaultFileDashboardMaxPerPage(): int
     {
@@ -375,8 +373,6 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      * - Returns the service product class name.
      *
      * @api
-     *
-     * @return string
      */
     public function getServiceProductClassName(): string
     {
@@ -388,8 +384,6 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      * - Returns the scheduled product class name.
      *
      * @api
-     *
-     * @return string
      */
     public function getScheduledProductClassName(): string
     {
@@ -418,8 +412,6 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      * - Used for filtering files by date.
      *
      * @api
-     *
-     * @return string
      */
     public function getDateTimeZone(): string
     {
@@ -447,8 +439,6 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      * - Returns ssp inquiry event name for ssp inquiry cancellation.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspInquiryCancelStateMachineEventName(): string
     {
@@ -460,8 +450,6 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      * - Returns the default total file max size for file uploads during ssp inquiry creation.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspInquiriesFilesMaxSize(): string
     {
@@ -473,8 +461,6 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      * - Returns the default file max size per file upload during ssp inquiry creation.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspInquiryFileMaxSize(): string
     {
@@ -486,8 +472,6 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      * - Returns the default file max size per file upload during ssp inquiry creation.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspAssetImageFilesMaxSize(): string
     {
@@ -499,8 +483,6 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      * - Returns the default file max count during ssp inquiry creation.
      *
      * @api
-     *
-     * @return int
      */
     public function getSspInquiryFileMaxCount(): int
     {
@@ -545,8 +527,6 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      * - Returns the ssp inquiry state machine name.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspInquiryStateMachineName(): string
     {
@@ -602,8 +582,6 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      * - Returns the maximum length of the subject field for ssp inquiry.
      *
      * @api
-     *
-     * @return int
      */
     public function getSspInquirySubjectMaxLength(): int
     {
@@ -615,8 +593,6 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      * - Returns the maximum length of the description field for ssp inquiry.
      *
      * @api
-     *
-     * @return int
      */
     public function getSspInquiryDescriptionMaxLength(): int
     {
@@ -628,8 +604,6 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      * - Defines the read chunk size in bytes.
      *
      * @api
-     *
-     * @return int
      */
     public function getSspAssetImageReadChunkSize(): int
     {
@@ -674,8 +648,6 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      *   to be greater than or equal to the effective limit derived from the values above.
      *
      * @api
-     *
-     * @return string
      */
     public function getAssetImageDefaultFileMaxSize(): string
     {
@@ -687,8 +659,6 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      * - Defines the read chunk size in bytes.
      *
      * @api
-     *
-     * @return int
      */
     public function getSspInquiryFileReadChunkSize(): int
     {
@@ -745,8 +715,6 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      * - Returns pagination configuration for SSP asset search.
      *
      * @api
-     *
-     * @return \Generated\Shared\Transfer\PaginationConfigTransfer
      */
     public function getSspAssetSearchPaginationConfigTransfer(): PaginationConfigTransfer
     {
@@ -762,8 +730,6 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      * - Returns the ssp asset inquiry source.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspAssetInquirySource(): string
     {
@@ -775,8 +741,6 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      * - Returns the order inquiry source.
      *
      * @api
-     *
-     * @return string
      */
     public function getOrderInquirySource(): string
     {

@@ -57,9 +57,6 @@ class ServicePointPreAddToCartPluginTest extends Unit
      */
     protected const TEST_SERVICE_POINT_ID = 1;
 
-    /**
-     * @var \SprykerFeatureTest\Yves\SelfServicePortal\SelfServicePortalYvesTester
-     */
     protected SelfServicePortalYvesTester $tester;
 
     public function testPreAddToCartExpandsItemWithServicePointWhenValidParametersProvided(): void

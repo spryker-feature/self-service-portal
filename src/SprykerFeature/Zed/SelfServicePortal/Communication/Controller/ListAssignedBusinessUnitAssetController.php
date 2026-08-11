@@ -20,8 +20,6 @@ use Symfony\Component\HttpFoundation\Request;
 class ListAssignedBusinessUnitAssetController extends AbstractGatewayController
 {
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return array<mixed>
      */
     public function indexAction(Request $request): array

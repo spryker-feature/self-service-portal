@@ -15,9 +15,7 @@ use SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalRepository
 class SspInquiryReader implements SspInquiryReaderInterface
 {
     /**
-     * @param \SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalRepositoryInterface $selfServicePortalRepository
      * @param array<int, \SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Expander\SspInquiryExpanderInterface> $sspInquiryExpanders
-     * @param \SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Expander\SspInquiryCriteriaExpanderInterface $sspInquiryConditionExpander
      */
     public function __construct(
         protected SelfServicePortalRepositoryInterface $selfServicePortalRepository,

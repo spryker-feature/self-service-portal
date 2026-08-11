@@ -44,9 +44,6 @@ class SspAssetListSynchronizationDataBulkRepositoryPluginTest extends Unit
      */
     protected const SYNCHRONIZATION_QUEUE_POOL_NAME = 'synchronizationPool';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     protected function setUp(): void

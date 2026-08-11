@@ -35,9 +35,6 @@ class SspInquiryStateMachineHandlerPluginTest extends Unit
      */
     protected const TEST_INITIAL_STATE = 'TestInitialState';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     public function testGetCommandPlugins(): void

@@ -110,9 +110,6 @@ class FileSearchFilterFormHandler implements FileSearchFilterFormHandlerInterfac
 
     /**
      * @param array<string, mixed> $fileSearchFilterFormData
-     * @param \Generated\Shared\Transfer\FileAttachmentCriteriaTransfer $fileAttachmentCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\FileAttachmentCriteriaTransfer
      */
     protected function applyFormFilters(
         array $fileSearchFilterFormData,

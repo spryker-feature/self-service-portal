@@ -27,9 +27,6 @@ use SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalBusinessTester;
  */
 class GetDashboard extends Unit
 {
- /**
-  * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalBusinessTester
-  */
     protected SelfServicePortalBusinessTester $tester;
 
     public function setUp(): void

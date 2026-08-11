@@ -26,19 +26,10 @@ use SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form\CreateOfferF
 
 class CreateOfferFormDataProvider
 {
-    /**
-     * @var \Spryker\Zed\Store\Business\StoreFacadeInterface
-     */
     protected StoreFacadeInterface $storeFacade;
 
-    /**
-     * @var \Spryker\Zed\ShipmentType\Business\ShipmentTypeFacadeInterface
-     */
     protected ShipmentTypeFacadeInterface $shipmentTypeFacade;
 
-    /**
-     * @var \Spryker\Zed\ServicePoint\Business\ServicePointFacadeInterface
-     */
     protected ServicePointFacadeInterface $servicePointFacade;
 
     /**
@@ -52,9 +43,6 @@ class CreateOfferFormDataProvider
     protected array $formEventSubscribers;
 
     /**
-     * @param \Spryker\Zed\Store\Business\StoreFacadeInterface $storeFacade
-     * @param \Spryker\Zed\ShipmentType\Business\ShipmentTypeFacadeInterface $shipmentTypeFacade
-     * @param \Spryker\Zed\ServicePoint\Business\ServicePointFacadeInterface $servicePointFacade
      * @param array<string, \SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form\DataTransformer\DataTransformerInterface<mixed, mixed>> $formDataTransformers
      * @param list<\Symfony\Component\EventDispatcher\EventSubscriberInterface> $formEventSubscribers
      */
@@ -136,8 +124,6 @@ class CreateOfferFormDataProvider
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ShipmentTypeCollectionTransfer $shipmentTypeCollectionTransfer
-     *
      * @return array<string, string>
      */
     protected function prepareShipmentTypeChoices(ShipmentTypeCollectionTransfer $shipmentTypeCollectionTransfer): array
@@ -153,8 +139,6 @@ class CreateOfferFormDataProvider
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ServicePointCollectionTransfer $servicePointCollectionTransfer
-     *
      * @return array<string, string>
      */
     protected function prepareServicePointChoices(ServicePointCollectionTransfer $servicePointCollectionTransfer): array
@@ -170,8 +154,6 @@ class CreateOfferFormDataProvider
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ServiceCollectionTransfer $serviceCollectionTransfer
-     *
      * @return array<string, string>
      */
     protected function prepareServicePointServiceChoices(ServiceCollectionTransfer $serviceCollectionTransfer): array

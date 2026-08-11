@@ -17,10 +17,6 @@ interface SspAssetFormDataToTransferMapperInterface
 
     /**
      * @param array<int> $assignedBusinessUnitIds
-     * @param \Generated\Shared\Transfer\SspAssetTransfer $sspAssetTransfer
-     * @param \Generated\Shared\Transfer\SspAssetCollectionRequestTransfer $sspAssetCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetCollectionRequestTransfer
      */
     public function mapAssignmentsToSspAssetCollectionRequestTransfer(
         array $assignedBusinessUnitIds,

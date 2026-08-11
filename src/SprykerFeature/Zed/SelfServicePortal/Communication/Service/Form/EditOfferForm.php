@@ -27,10 +27,7 @@ class EditOfferForm extends CreateOfferForm
     protected const FIELD_ID_PRODUCT_OFFER = 'idProductOffer';
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -40,7 +37,6 @@ class EditOfferForm extends CreateOfferForm
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
      *
      * @return $this
@@ -64,7 +60,6 @@ class EditOfferForm extends CreateOfferForm
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
      *
      * @return $this
@@ -95,7 +90,6 @@ class EditOfferForm extends CreateOfferForm
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
      *
      * @return $this
@@ -121,7 +115,6 @@ class EditOfferForm extends CreateOfferForm
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
      *
      * @return $this

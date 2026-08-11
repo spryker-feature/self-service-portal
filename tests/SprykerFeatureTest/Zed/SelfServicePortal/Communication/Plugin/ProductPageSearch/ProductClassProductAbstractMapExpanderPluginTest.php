@@ -25,9 +25,6 @@ use SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTeste
  */
 class ProductClassProductAbstractMapExpanderPluginTest extends Unit
 {
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     public function testExpandProductMapAddsProductClassDataToPageMap(): void

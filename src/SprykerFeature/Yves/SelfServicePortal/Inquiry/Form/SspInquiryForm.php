@@ -76,10 +76,7 @@ class SspInquiryForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<mixed> $options
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -97,8 +94,6 @@ class SspInquiryForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addSubjectField(FormBuilderInterface $builder)
@@ -117,8 +112,6 @@ class SspInquiryForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addDescriptionField(FormBuilderInterface $builder)
@@ -137,7 +130,6 @@ class SspInquiryForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<mixed> $options
      *
      * @return $this
@@ -244,11 +236,7 @@ class SspInquiryForm extends AbstractType
     }
 
     /**
-     * @param string|int $totalMaxSize
-     *
      * @throws \Symfony\Component\Validator\Exception\ConstraintDefinitionException
-     *
-     * @return int
      */
     protected function normalizeBinaryFormat(int|string $totalMaxSize): int
     {

@@ -24,8 +24,6 @@ class SspModelStorageMapper implements SspModelStorageMapperInterface
 
     /**
      * @param array<string, mixed> $storageData
-     *
-     * @return \Generated\Shared\Transfer\SspModelStorageTransfer
      */
     public function mapStorageDataToSspModelStorageTransfer(array $storageData): SspModelStorageTransfer
     {
@@ -38,10 +36,7 @@ class SspModelStorageMapper implements SspModelStorageMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspModelStorageTransfer $sspModelStorageTransfer
      * @param array<string, mixed> $storageData
-     *
-     * @return \Generated\Shared\Transfer\SspModelStorageTransfer
      */
     protected function mapWhitelists(
         SspModelStorageTransfer $sspModelStorageTransfer,

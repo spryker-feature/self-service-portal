@@ -47,8 +47,6 @@ class SalesOrderItemSspAssetSaver implements SalesOrderItemSspAssetSaverInterfac
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SaveOrderTransfer $saveOrderTransfer
-     *
      * @return array<int, int>
      */
     protected function getSalesOrderItemIds(SaveOrderTransfer $saveOrderTransfer): array
@@ -62,8 +60,6 @@ class SalesOrderItemSspAssetSaver implements SalesOrderItemSspAssetSaverInterfac
     }
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
      * @return array<int, \Generated\Shared\Transfer\SspAssetTransfer>
      */
     protected function extractSspAssetDataFromQuoteItems(QuoteTransfer $quoteTransfer): array
@@ -85,8 +81,6 @@ class SalesOrderItemSspAssetSaver implements SalesOrderItemSspAssetSaverInterfac
     /**
      * @param array<int|string> $salesOrderItemIds
      * @param array<int, \Generated\Shared\Transfer\SspAssetTransfer> $quoteItemsSspAssetData
-     *
-     * @return void
      */
     protected function persistSalesOrderItemSspAssets(array $salesOrderItemIds, array $quoteItemsSspAssetData): void
     {
@@ -108,8 +102,6 @@ class SalesOrderItemSspAssetSaver implements SalesOrderItemSspAssetSaverInterfac
      * @param array<int|string> $salesOrderItemIds
      * @param array<int, \Generated\Shared\Transfer\SspAssetTransfer> $quoteItemsSspAssetData
      * @param array<string, \Generated\Shared\Transfer\SspAssetTransfer> $assetsIndexedByReference
-     *
-     * @return bool
      */
     protected function executePersistSalesOrderItemSspAssetsTransaction(
         array $salesOrderItemIds,

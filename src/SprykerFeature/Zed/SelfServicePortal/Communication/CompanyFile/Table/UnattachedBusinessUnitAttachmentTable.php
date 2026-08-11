@@ -84,8 +84,6 @@ class UnattachedBusinessUnitAttachmentTable extends AbstractTable
     }
 
     /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
-     *
      * @return array<int, array<int|string, int|string>>
      */
     protected function prepareData(TableConfiguration $config): array

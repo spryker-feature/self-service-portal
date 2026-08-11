@@ -50,9 +50,6 @@ class ShipmentTypePreAddToCartPluginTest extends Unit
      */
     protected const TEST_SHIPMENT_TYPE_ID = 1;
 
-    /**
-     * @var \SprykerFeatureTest\Yves\SelfServicePortal\SelfServicePortalYvesTester
-     */
     protected SelfServicePortalYvesTester $tester;
 
     public function testPreAddToCartExpandsItemWithShipmentTypeWhenValidUuidProvided(): void

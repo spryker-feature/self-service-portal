@@ -25,10 +25,7 @@ interface SelfServicePortalEntityManagerInterface
     public function createProductShipmentType(ProductConcreteTransfer $productConcreteTransfer, int $idShipmentType): void;
 
     /**
-     * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
      * @param list<int> $shipmentTypeIds
-     *
-     * @return void
      */
     public function deleteProductShipmentTypes(
         ProductConcreteTransfer $productConcreteTransfer,
@@ -47,8 +44,6 @@ interface SelfServicePortalEntityManagerInterface
 
     /**
      * @param array<int> $idsFile
-     *
-     * @return void
      */
     public function deleteAllFileAttachmentCollection(array $idsFile): void;
 
@@ -75,28 +70,19 @@ interface SelfServicePortalEntityManagerInterface
     public function createSalesOrderItemSspAsset(SalesOrderItemSspAssetTransfer $salesOrderItemSspAssetTransfer): void;
 
     /**
-     * @param int $idSspAsset
      * @param array<int> $businessUnitIds
-     *
-     * @return void
      */
     public function deleteAssetToCompanyBusinessUnitRelations(int $idSspAsset, array $businessUnitIds): void;
 
     /**
-     * @param int $idSspAsset
      * @param array<int> $businessUnitIds
-     *
-     * @return void
      */
     public function createAssetToCompanyBusinessUnitRelation(int $idSspAsset, array $businessUnitIds): void;
 
     public function deleteProductConcreteToProductClassRelations(int $idProductConcrete): void;
 
     /**
-     * @param int $idProductConcrete
      * @param array<int> $productClassIds
-     *
-     * @return void
      */
     public function saveProductConcreteProductClassRelations(int $idProductConcrete, array $productClassIds): void;
 
@@ -104,8 +90,6 @@ interface SelfServicePortalEntityManagerInterface
 
     /**
      * @param array<int> $sspModelIds
-     *
-     * @return void
      */
     public function deleteSspModelStorageBySspModelIds(array $sspModelIds): void;
 
@@ -125,8 +109,6 @@ interface SelfServicePortalEntityManagerInterface
 
     /**
      * @param array<int> $sspAssetIds
-     *
-     * @return void
      */
     public function deleteSspAssetStorageBySspAssetIds(array $sspAssetIds): void;
 
@@ -134,8 +116,6 @@ interface SelfServicePortalEntityManagerInterface
 
     /**
      * @param array<int> $sspAssetIds
-     *
-     * @return void
      */
     public function deleteSspAssetSearchBySspAssetIds(array $sspAssetIds): void;
 

@@ -25,8 +25,6 @@ class ListAttachedAssetFileController extends AbstractController
     public const REQUEST_PARAM_ID_SSP_ASSET = 'id-ssp-asset';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return array<mixed>
      */
     public function indexAction(Request $request): array

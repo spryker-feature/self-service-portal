@@ -13,8 +13,6 @@ interface CreateSspInquiryFormDataToTransferMapperInterface
 {
     /**
      * @param array<string, mixed> $formData
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryTransfer
      */
     public function mapSspInquiryData(array $formData): SspInquiryTransfer;
 }

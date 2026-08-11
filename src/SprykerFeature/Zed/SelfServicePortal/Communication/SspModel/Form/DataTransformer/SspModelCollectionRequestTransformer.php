@@ -63,8 +63,6 @@ class SspModelCollectionRequestTransformer implements DataTransformerInterface
 
     /**
      * @param mixed $value
-     *
-     * @return \Generated\Shared\Transfer\SspModelCollectionRequestTransfer
      */
     public function reverseTransform($value): SspModelCollectionRequestTransfer
     {
@@ -82,9 +80,6 @@ class SspModelCollectionRequestTransformer implements DataTransformerInterface
 
     /**
      * @param array<mixed> $formData
-     * @param \Generated\Shared\Transfer\SspModelCollectionRequestTransfer $sspModelCollectionRequestTransfer
-     *
-     * @return void
      */
     protected function processAssetAttachments(array $formData, SspModelCollectionRequestTransfer $sspModelCollectionRequestTransfer): void
     {
@@ -97,9 +92,6 @@ class SspModelCollectionRequestTransformer implements DataTransformerInterface
 
     /**
      * @param array<mixed> $formData
-     * @param \Generated\Shared\Transfer\SspModelCollectionRequestTransfer $sspModelCollectionRequestTransfer
-     *
-     * @return void
      */
     protected function processProductListAttachments(array $formData, SspModelCollectionRequestTransfer $sspModelCollectionRequestTransfer): void
     {
@@ -111,8 +103,6 @@ class SspModelCollectionRequestTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param string $idsString
-     *
      * @return array<int>
      */
     protected function parseIds(string $idsString): array
@@ -131,10 +121,6 @@ class SspModelCollectionRequestTransformer implements DataTransformerInterface
 
     /**
      * @param array<int> $assetIds
-     * @param \Generated\Shared\Transfer\SspModelCollectionRequestTransfer $sspModelCollectionRequestTransfer
-     * @param bool $isAttachment
-     *
-     * @return void
      */
     protected function addAssetAttachments(array $assetIds, SspModelCollectionRequestTransfer $sspModelCollectionRequestTransfer, bool $isAttachment): void
     {
@@ -159,10 +145,6 @@ class SspModelCollectionRequestTransformer implements DataTransformerInterface
 
     /**
      * @param array<int> $productListIds
-     * @param \Generated\Shared\Transfer\SspModelCollectionRequestTransfer $sspModelCollectionRequestTransfer
-     * @param bool $isAttachment
-     *
-     * @return void
      */
     protected function addProductListAttachments(
         array $productListIds,
@@ -190,8 +172,6 @@ class SspModelCollectionRequestTransformer implements DataTransformerInterface
 
     /**
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ModelSspAssetAttachmentTransfer> $modelSspAssetAttachmentTransfers
-     *
-     * @return string
      */
     protected function extractAssetIds(ArrayObject $modelSspAssetAttachmentTransfers): string
     {
@@ -205,8 +185,6 @@ class SspModelCollectionRequestTransformer implements DataTransformerInterface
 
     /**
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ModelProductListAttachmentTransfer> $modelProductListAttachmentTransfers
-     *
-     * @return string
      */
     protected function extractProductListIds(ArrayObject $modelProductListAttachmentTransfers): string
     {

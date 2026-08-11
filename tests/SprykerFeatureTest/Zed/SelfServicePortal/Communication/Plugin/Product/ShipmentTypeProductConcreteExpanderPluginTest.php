@@ -22,9 +22,6 @@ use SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTeste
  */
 class ShipmentTypeProductConcreteExpanderPluginTest extends Unit
 {
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     protected function _before(): void

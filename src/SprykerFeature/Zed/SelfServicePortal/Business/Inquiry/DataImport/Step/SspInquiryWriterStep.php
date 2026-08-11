@@ -38,8 +38,6 @@ class SspInquiryWriterStep implements DataImportStepInterface
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface<\Orm\Zed\SelfServicePortal\Persistence\SpySspInquiry> $dataSet
      *
      * @throws \Spryker\Zed\DataImport\Business\Exception\DataImportException
-     *
-     * @return void
      */
     public function execute(DataSetInterface $dataSet): void
     {

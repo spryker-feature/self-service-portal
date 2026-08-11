@@ -28,9 +28,6 @@ use SprykerFeature\Zed\SelfServicePortal\Business\Asset\Permission\SspAssetCusto
  */
 class SspAssetCustomerPermissionExpanderTest extends Unit
 {
-    /**
-     * @var \SprykerFeature\Zed\SelfServicePortal\Business\Asset\Permission\SspAssetCustomerPermissionExpander|\PHPUnit\Framework\MockObject\MockObject
-     */
     protected SspAssetCustomerPermissionExpander|MockObject $expander;
 
     protected function setUp(): void

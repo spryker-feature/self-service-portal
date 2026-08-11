@@ -14,10 +14,7 @@ use SprykerFeature\Yves\SelfServicePortal\Widget\SspShipmentTypeServicePointSele
 class ServiceDateTimeExpander implements ServiceDateTimeExpanderInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
      * @param array<string, mixed> $params
-     *
-     * @return \Generated\Shared\Transfer\ItemTransfer
      */
     public function expandItemTransferWithServiceDateTime(ItemTransfer $itemTransfer, array $params): ItemTransfer
     {

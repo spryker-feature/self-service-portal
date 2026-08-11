@@ -81,11 +81,7 @@ class UnlinkFileController extends FileAbstractController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @throws \Exception
-     *
-     * @return \Generated\Shared\Transfer\FileAttachmentCollectionRequestTransfer
      */
     protected function createDeleteCriteriaTransfer(Request $request): FileAttachmentCollectionRequestTransfer
     {

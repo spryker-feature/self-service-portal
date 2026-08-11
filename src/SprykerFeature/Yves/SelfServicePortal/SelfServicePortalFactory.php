@@ -361,8 +361,6 @@ class SelfServicePortalFactory extends AbstractFactory
 
     /**
      * @param array<string, mixed> $data
-     *
-     * @return \Symfony\Component\Form\FormInterface
      */
     public function createFileSearchFilterForm(array $data): FormInterface
     {
@@ -402,8 +400,6 @@ class SelfServicePortalFactory extends AbstractFactory
 
     /**
      * @param array<mixed> $formOptions
-     *
-     * @return \Symfony\Component\Form\FormInterface
      */
     public function getSspInquiryForm(array $formOptions = []): FormInterface
     {
@@ -447,8 +443,6 @@ class SelfServicePortalFactory extends AbstractFactory
 
     /**
      * @param array<mixed> $formOptions
-     *
-     * @return \Symfony\Component\Form\FormInterface
      */
     public function getSspInquirySearchForm(array $formOptions = []): FormInterface
     {
@@ -560,10 +554,7 @@ class SelfServicePortalFactory extends AbstractFactory
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetTransfer|null $sspAssetTransfer
      * @param array<mixed> $options
-     *
-     * @return \Symfony\Component\Form\FormInterface
      */
     public function createAssetForm(?SspAssetTransfer $sspAssetTransfer = null, array $options = []): FormInterface
     {
@@ -572,8 +563,6 @@ class SelfServicePortalFactory extends AbstractFactory
 
     /**
      * @param array<mixed> $formData
-     *
-     * @return \Symfony\Component\Form\FormInterface
      */
     public function createSspAssetBusinessUnitRelationsForm(array $formData = []): FormInterface
     {
@@ -583,8 +572,6 @@ class SelfServicePortalFactory extends AbstractFactory
     /**
      * @param array<mixed> $formData
      * @param array<mixed> $options
-     *
-     * @return \Symfony\Component\Form\FormInterface
      */
     public function createQuoteItemSspAssetForm(array $formData = [], array $options = []): FormInterface
     {
@@ -608,8 +595,6 @@ class SelfServicePortalFactory extends AbstractFactory
 
     /**
      * @param array<mixed> $options
-     *
-     * @return \Symfony\Component\Form\FormInterface
      */
     public function createSspAssetSearchForm(array $options): FormInterface
     {

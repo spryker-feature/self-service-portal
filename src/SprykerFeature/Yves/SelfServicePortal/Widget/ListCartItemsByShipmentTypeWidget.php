@@ -54,8 +54,6 @@ class ListCartItemsByShipmentTypeWidget extends AbstractWidget
 
     /**
      * @param iterable<\Generated\Shared\Transfer\ItemTransfer> $itemTransfers
-     *
-     * @return void
      */
     protected function addShipmentTypeGroupsParameter(iterable $itemTransfers): void
     {

@@ -26,8 +26,6 @@ class ListModelController extends AbstractGatewayController
     protected const ROUTE_SSP_ADD_MODEL = '/self-service-portal/add-model';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return array<mixed>
      */
     public function indexAction(Request $request): array

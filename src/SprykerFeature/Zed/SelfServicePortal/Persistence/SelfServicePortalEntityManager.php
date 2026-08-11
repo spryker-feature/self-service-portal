@@ -49,10 +49,7 @@ class SelfServicePortalEntityManager extends AbstractEntityManager implements Se
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
      * @param list<int> $shipmentTypeIds
-     *
-     * @return void
      */
     public function deleteProductShipmentTypes(
         ProductConcreteTransfer $productConcreteTransfer,
@@ -135,8 +132,6 @@ class SelfServicePortalEntityManager extends AbstractEntityManager implements Se
 
     /**
      * @param array<int> $idsFile
-     *
-     * @return void
      */
     public function deleteAllFileAttachmentCollection(array $idsFile): void
     {
@@ -405,10 +400,7 @@ class SelfServicePortalEntityManager extends AbstractEntityManager implements Se
     }
 
     /**
-     * @param int $idSspAsset
      * @param array<int> $businessUnitIds
-     *
-     * @return void
      */
     public function deleteAssetToCompanyBusinessUnitRelations(int $idSspAsset, array $businessUnitIds): void
     {
@@ -419,10 +411,7 @@ class SelfServicePortalEntityManager extends AbstractEntityManager implements Se
     }
 
     /**
-     * @param int $idSspAsset
      * @param array<int> $businessUnitIds
-     *
-     * @return void
      */
     public function createAssetToCompanyBusinessUnitRelation(int $idSspAsset, array $businessUnitIds): void
     {
@@ -448,10 +437,7 @@ class SelfServicePortalEntityManager extends AbstractEntityManager implements Se
     }
 
     /**
-     * @param int $idProductConcrete
      * @param array<int> $productClassIds
-     *
-     * @return void
      */
     public function saveProductConcreteProductClassRelations(int $idProductConcrete, array $productClassIds): void
     {
@@ -511,8 +497,6 @@ class SelfServicePortalEntityManager extends AbstractEntityManager implements Se
 
     /**
      * @param array<int> $sspModelIds
-     *
-     * @return void
      */
     public function deleteSspModelStorageBySspModelIds(array $sspModelIds): void
     {
@@ -554,8 +538,6 @@ class SelfServicePortalEntityManager extends AbstractEntityManager implements Se
 
     /**
      * @param array<int> $sspAssetIds
-     *
-     * @return void
      */
     public function deleteSspAssetStorageBySspAssetIds(array $sspAssetIds): void
     {
@@ -597,8 +579,6 @@ class SelfServicePortalEntityManager extends AbstractEntityManager implements Se
 
     /**
      * @param array<int> $sspAssetIds
-     *
-     * @return void
      */
     public function deleteSspAssetSearchBySspAssetIds(array $sspAssetIds): void
     {

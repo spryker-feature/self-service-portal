@@ -37,8 +37,6 @@ class SspServiceDetectorWidget extends AbstractWidget
 
     /**
      * @param \Generated\Shared\Transfer\ProductViewTransfer|array<string|mixed> $productData
-     *
-     * @return void
      */
     protected function addIsServiceParameter(array|ProductViewTransfer $productData): void
     {
@@ -52,8 +50,6 @@ class SspServiceDetectorWidget extends AbstractWidget
 
     /**
      * @throws \LogicException
-     *
-     * @return string
      */
     public static function getTemplate(): string
     {
@@ -62,8 +58,6 @@ class SspServiceDetectorWidget extends AbstractWidget
 
     /**
      * @param \Generated\Shared\Transfer\ProductViewTransfer|array<string|mixed> $productData
-     *
-     * @return bool
      */
     protected function isSspService(array|ProductViewTransfer $productData): bool
     {

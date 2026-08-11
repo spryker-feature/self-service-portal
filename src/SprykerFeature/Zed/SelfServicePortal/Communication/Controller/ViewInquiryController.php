@@ -38,8 +38,6 @@ class ViewInquiryController extends AbstractController
     protected const MESSAGE_SSP_INQUIRY_NOT_FOUND_ERROR = 'Ssp Inquiry not found';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     public function indexAction(Request $request)

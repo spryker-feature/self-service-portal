@@ -32,10 +32,7 @@ class SspServiceCancelForm extends AbstractType
     protected const FORM_NAME = 'sspServiceCancelForm';
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -44,8 +41,6 @@ class SspServiceCancelForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addItemUuidField(FormBuilderInterface $builder)
@@ -56,8 +51,6 @@ class SspServiceCancelForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addIdSalesOrderField(FormBuilderInterface $builder)

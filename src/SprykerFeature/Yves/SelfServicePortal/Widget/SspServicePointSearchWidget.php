@@ -95,14 +95,8 @@ class SspServicePointSearchWidget extends AbstractWidget
     protected const ROUTE_NAME_SEARCH = 'service-point-widget/search';
 
     /**
-     * @param string|null $serviceTypeKey
-     * @param string|null $serviceTypeUuid
-     * @param string|null $shipmentTypeUuid
      * @param list<string> $itemGroupKeys
-     * @param int|null $searchResultLimit
-     * @param bool $isInitialRenderEnabled
      * @param list<\Generated\Shared\Transfer\ItemTransfer> $itemTransfers
-     * @param string $searchRoute
      */
     public function __construct(
         ?string $serviceTypeKey = null,
@@ -171,15 +165,8 @@ class SspServicePointSearchWidget extends AbstractWidget
     }
 
     /**
-     * @param bool $isInitialRenderEnabled
-     * @param int $searchResultLimit
-     * @param string|null $serviceTypeKey
-     * @param string|null $serviceTypeUuid
-     * @param string|null $shipmentTypeUuid
      * @param list<string> $itemGroupKeys
      * @param list<\Generated\Shared\Transfer\ItemTransfer> $itemTransfers
-     *
-     * @return void
      */
     protected function addSearchResultsParameter(
         bool $isInitialRenderEnabled,
@@ -226,8 +213,6 @@ class SspServicePointSearchWidget extends AbstractWidget
 
     /**
      * @param list<string> $itemGroupKeys
-     *
-     * @return void
      */
     protected function addItemGroupKeysParameter(array $itemGroupKeys): void
     {
@@ -235,15 +220,8 @@ class SspServicePointSearchWidget extends AbstractWidget
     }
 
     /**
-     * @param bool $isInitialRenderEnabled
-     * @param int $searchResultLimit
-     * @param string|null $serviceTypeKey
-     * @param string|null $serviceTypeUuid
-     * @param string|null $shipmentTypeUuid
      * @param list<string> $itemGroupKeys
      * @param list<\Generated\Shared\Transfer\ItemTransfer> $itemTransfers
-     *
-     * @return string
      */
     protected function getSearchResults(
         bool $isInitialRenderEnabled,
@@ -273,14 +251,8 @@ class SspServicePointSearchWidget extends AbstractWidget
     }
 
     /**
-     * @param int $searchResultLimit
-     * @param string|null $serviceTypeKey
-     * @param string|null $serviceTypeUuid
-     * @param string|null $shipmentTypeUuid
      * @param list<string> $itemGroupKeys
      * @param list<\Generated\Shared\Transfer\ItemTransfer> $itemTransfers
-     *
-     * @return \Generated\Shared\Transfer\ServicePointSearchRequestTransfer
      */
     protected function createServicePointSearchRequestTransfer(
         int $searchResultLimit,

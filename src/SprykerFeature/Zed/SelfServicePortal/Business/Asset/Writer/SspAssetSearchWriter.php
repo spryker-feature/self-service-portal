@@ -55,8 +55,6 @@ class SspAssetSearchWriter implements SspAssetSearchWriterInterface
 
     /**
      * @param array<\Generated\Shared\Transfer\EventEntityTransfer> $eventTransfers
-     *
-     * @return void
      */
     public function writeCollectionBySspAssetEvents(array $eventTransfers): void
     {
@@ -66,8 +64,6 @@ class SspAssetSearchWriter implements SspAssetSearchWriterInterface
 
     /**
      * @param array<\Generated\Shared\Transfer\EventEntityTransfer> $eventEntityTransfers
-     *
-     * @return void
      */
     public function writeCollectionBySspAssetToCompanyBusinessUnitEvents(array $eventEntityTransfers): void
     {
@@ -85,8 +81,6 @@ class SspAssetSearchWriter implements SspAssetSearchWriterInterface
 
     /**
      * @param array<\Generated\Shared\Transfer\EventEntityTransfer> $eventEntityTransfers
-     *
-     * @return void
      */
     public function writeCollectionBySspAssetToModelEvents(array $eventEntityTransfers): void
     {
@@ -104,8 +98,6 @@ class SspAssetSearchWriter implements SspAssetSearchWriterInterface
 
      /**
       * @param array<\Generated\Shared\Transfer\EventEntityTransfer> $eventEntityTransfers
-      *
-      * @return void
       */
     public function writeCollectionBySspModelEvents(array $eventEntityTransfers): void
     {
@@ -132,8 +124,6 @@ class SspAssetSearchWriter implements SspAssetSearchWriterInterface
 
     /**
      * @param array<int> $sspAssetIds
-     *
-     * @return void
      */
     protected function writeCollectionBySspAssetIds(array $sspAssetIds): void
     {
@@ -167,8 +157,6 @@ class SspAssetSearchWriter implements SspAssetSearchWriterInterface
 
     /**
      * @param array<int> $sspAssetIds
-     *
-     * @return \Generated\Shared\Transfer\SspAssetCriteriaTransfer
      */
     protected function createSspAssetCriteriaTransfer(array $sspAssetIds): SspAssetCriteriaTransfer
     {

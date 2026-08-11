@@ -637,10 +637,6 @@ class SelfServicePortalCommunicationFactory extends AbstractCommunicationFactory
 
     /**
      * @param array<string, mixed> $formData
-     * @param \Generated\Shared\Transfer\FileAttachmentTransfer $fileAttachmentTransfer
-     * @param int $idFile
-     *
-     * @return \Symfony\Component\Form\FormInterface
      */
     public function createAttachFileForm(array $formData, FileAttachmentTransfer $fileAttachmentTransfer, int $idFile): FormInterface
     {
@@ -680,8 +676,6 @@ class SelfServicePortalCommunicationFactory extends AbstractCommunicationFactory
     /**
      * @param array<mixed> $data
      * @param array<mixed> $options
-     *
-     * @return \Symfony\Component\Form\FormInterface
      */
     public function getTriggerEventForm(array $data, array $options): FormInterface
     {
@@ -789,10 +783,7 @@ class SelfServicePortalCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetTransfer|null $sspAssetTransfer
      * @param array<string, mixed> $formOptions
-     *
-     * @return \Symfony\Component\Form\FormInterface
      */
     public function createSspAssetForm(?SspAssetTransfer $sspAssetTransfer, array $formOptions = []): FormInterface
     {
@@ -800,10 +791,7 @@ class SelfServicePortalCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetTransfer|null $sspAssetTransfer
      * @param array<string, mixed> $formOptions
-     *
-     * @return \Symfony\Component\Form\FormInterface
      */
     public function createSspAssetCreateForm(?SspAssetTransfer $sspAssetTransfer, array $formOptions = []): FormInterface
     {
@@ -831,10 +819,7 @@ class SelfServicePortalCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspModelTransfer|null $sspModelTransfer
      * @param array<string, mixed> $formOptions
-     *
-     * @return \Symfony\Component\Form\FormInterface
      */
     public function createSspModelForm(?SspModelTransfer $sspModelTransfer = null, array $formOptions = []): FormInterface
     {

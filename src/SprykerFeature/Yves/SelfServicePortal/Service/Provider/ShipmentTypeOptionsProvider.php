@@ -96,8 +96,6 @@ class ShipmentTypeOptionsProvider implements ShipmentTypeOptionsProviderInterfac
 
     /**
      * @param array<int, array<string, mixed>> $shipmentTypeOptions
-     *
-     * @return string|null
      */
     public function getDefaultSelectedShipmentTypeUuid(array $shipmentTypeOptions): ?string
     {

@@ -12,10 +12,7 @@ use Generated\Shared\Transfer\ItemTransfer;
 interface SspAssetExpanderInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
      * @param array<string, mixed> $params
-     *
-     * @return \Generated\Shared\Transfer\ItemTransfer
      */
     public function expandItemTransferWithSspAsset(ItemTransfer $itemTransfer, array $params): ItemTransfer;
 }

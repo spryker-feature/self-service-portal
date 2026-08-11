@@ -12,8 +12,6 @@ use Generated\Shared\Transfer\CmsBlockRequestTransfer;
 interface CmsBlockCompanyBusinessUnitStorageReaderInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\CmsBlockRequestTransfer $cmsBlockRequestTransfer
-     *
      * @return array<\Generated\Shared\Transfer\CmsBlockTransfer>
      */
     public function getCmsBlocks(CmsBlockRequestTransfer $cmsBlockRequestTransfer): array;

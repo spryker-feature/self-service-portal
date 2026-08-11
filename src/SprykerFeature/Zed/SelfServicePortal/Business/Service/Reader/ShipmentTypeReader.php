@@ -42,7 +42,6 @@ class ShipmentTypeReader implements ShipmentTypeReaderInterface
 
     /**
      * @param array<string> $shipmentTypeUuids
-     * @param string $storeName
      *
      * @return array<string, \Generated\Shared\Transfer\ShipmentTypeTransfer>
      */

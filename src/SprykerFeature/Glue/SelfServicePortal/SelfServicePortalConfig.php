@@ -209,8 +209,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Defines the ssp asset inquiry type.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspAssetInquiryType(): string
     {
@@ -222,8 +220,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Defines the order inquiry type.
      *
      * @api
-     *
-     * @return string
      */
     public function getOrderInquiryType(): string
     {

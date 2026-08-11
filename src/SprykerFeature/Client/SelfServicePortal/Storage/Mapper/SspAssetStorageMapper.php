@@ -46,8 +46,6 @@ class SspAssetStorageMapper implements SspAssetStorageMapperInterface
 
     /**
      * @param array<string, mixed> $storageData
-     *
-     * @return \Generated\Shared\Transfer\SspAssetStorageTransfer
      */
     public function mapStorageDataToSspAssetStorageTransfer(array $storageData): SspAssetStorageTransfer
     {
@@ -63,9 +61,6 @@ class SspAssetStorageMapper implements SspAssetStorageMapperInterface
 
     /**
      * @param array<string, mixed> $storageData
-     * @param \Generated\Shared\Transfer\SspAssetTransfer $sspAssetTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetTransfer
      */
     public function mapStorageDataToSspAssetTransferWithCompanyAssignmentsOnly(array $storageData, SspAssetTransfer $sspAssetTransfer): SspAssetTransfer
     {
@@ -97,9 +92,6 @@ class SspAssetStorageMapper implements SspAssetStorageMapperInterface
 
     /**
      * @param array<string, mixed> $storageData
-     * @param \Generated\Shared\Transfer\SspAssetTransfer $sspAssetTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetTransfer
      */
     public function mapStorageDataToSspAssetTransferWithBusinessUnitAssignmentsOnly(array $storageData, SspAssetTransfer $sspAssetTransfer): SspAssetTransfer
     {
@@ -129,10 +121,7 @@ class SspAssetStorageMapper implements SspAssetStorageMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetStorageTransfer $sspAssetStorageTransfer
      * @param array<string, mixed> $storageData
-     *
-     * @return \Generated\Shared\Transfer\SspAssetStorageTransfer
      */
     protected function mapBusinessUnitAssignmentsToAssetStorageTransfer(
         SspAssetStorageTransfer $sspAssetStorageTransfer,
@@ -157,10 +146,7 @@ class SspAssetStorageMapper implements SspAssetStorageMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetStorageTransfer $sspAssetStorageTransfer
      * @param array<string, mixed> $storageData
-     *
-     * @return \Generated\Shared\Transfer\SspAssetStorageTransfer
      */
     protected function mapCompanyBusinessUnitToAssetStorageTransfer(
         SspAssetStorageTransfer $sspAssetStorageTransfer,
@@ -180,10 +166,7 @@ class SspAssetStorageMapper implements SspAssetStorageMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetTransfer $sspAssetTransfer
      * @param array<string, mixed> $storageData
-     *
-     * @return \Generated\Shared\Transfer\SspAssetTransfer
      */
     protected function mapCompanyBusinessUnitToAssetTransfer(
         SspAssetTransfer $sspAssetTransfer,
@@ -202,10 +185,7 @@ class SspAssetStorageMapper implements SspAssetStorageMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetStorageTransfer $sspAssetStorageTransfer
      * @param array<string, mixed> $storageData
-     *
-     * @return \Generated\Shared\Transfer\SspAssetStorageTransfer
      */
     protected function mapSspModelsToAssetStorageTransfer(
         SspAssetStorageTransfer $sspAssetStorageTransfer,

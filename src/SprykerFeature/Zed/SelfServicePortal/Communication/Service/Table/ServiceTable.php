@@ -198,8 +198,6 @@ class ServiceTable extends AbstractTable
     }
 
     /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
-     *
      * @return array<array<string, mixed>>
      */
     protected function prepareData(TableConfiguration $config): array
@@ -303,8 +301,6 @@ class ServiceTable extends AbstractTable
 
     /**
      * @param array<mixed> $item
-     *
-     * @return string
      */
     protected function buildLinks(array $item): string
     {

@@ -18,12 +18,6 @@ interface SelfServicePortalServiceInterface
      * - Creates a streamed response for downloading a file.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\FileTransfer $fileTransfer
-     * @param int $chunkSize
-     * @param string $disposition
-     *
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
     public function createFileDownloadResponse(
         FileTransfer $fileTransfer,

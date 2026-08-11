@@ -29,9 +29,6 @@ class ServiceDateTimePreAddToCartPluginTest extends Unit
      */
     protected const TEST_SCHEDULED_AT = '2023-12-25T10:00:00';
 
-    /**
-     * @var \SprykerFeatureTest\Yves\SelfServicePortal\SelfServicePortalYvesTester
-     */
     protected SelfServicePortalYvesTester $tester;
 
     public function testPreAddToCartExpandsItemWithScheduledAtWhenValidDateProvided(): void

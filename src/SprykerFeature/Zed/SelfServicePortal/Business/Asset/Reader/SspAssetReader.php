@@ -21,11 +21,7 @@ class SspAssetReader implements SspAssetReaderInterface
     use PermissionAwareTrait;
 
     /**
-     * @param \SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalRepositoryInterface $selfServicePortalRepository
-     * @param \Spryker\Zed\FileManager\Business\FileManagerFacadeInterface $fileManagerFacade
      * @param array<\SprykerFeature\Zed\SelfServicePortal\Dependency\Plugin\SspAssetManagementExpanderPluginInterface> $sspAssetExpanderPlugins
-     * @param \SprykerFeature\Zed\SelfServicePortal\Business\Asset\Permission\SspAssetCustomerPermissionExpanderInterface $sspAssetCustomerPermissionExpander
-     * @param \SprykerFeature\Zed\SelfServicePortal\Business\Asset\Validator\SspAssetValidatorInterface $assetValidator
      */
     public function __construct(
         protected SelfServicePortalRepositoryInterface $selfServicePortalRepository,

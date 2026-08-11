@@ -61,8 +61,6 @@ class SspAssetFormDataProvider
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetTransfer $sspAssetTransfer
-     *
      * @return array<string, mixed>
      */
     public function getOptions(SspAssetTransfer $sspAssetTransfer): array
@@ -122,8 +120,6 @@ class SspAssetFormDataProvider
     /**
      * @param array<string, mixed> $submittedFormData
      * @param array<int> $assignedBusinessUnitIds
-     *
-     * @return int|null
      */
     protected function extractAndValidateBusinessUnitOwnerId(array $submittedFormData, array $assignedBusinessUnitIds): ?int
     {
@@ -197,7 +193,6 @@ class SspAssetFormDataProvider
     }
 
     /**
-     * @param int|null $businessUnitOwnerId
      * @param array<int> $assignedBusinessUnitIds
      *
      * @return array<string, int>

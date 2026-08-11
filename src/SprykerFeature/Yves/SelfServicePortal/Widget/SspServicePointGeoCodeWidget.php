@@ -36,8 +36,6 @@ class SspServicePointGeoCodeWidget extends AbstractWidget
 
     /**
      * @throws \LogicException
-     *
-     * @return string
      */
     public static function getTemplate(): string
     {

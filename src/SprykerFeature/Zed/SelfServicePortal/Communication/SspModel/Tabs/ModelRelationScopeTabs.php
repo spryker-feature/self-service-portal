@@ -25,8 +25,6 @@ class ModelRelationScopeTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addAttachAssetTab(TabsViewTransfer $tabsViewTransfer)
@@ -43,8 +41,6 @@ class ModelRelationScopeTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addAttachProductListTab(TabsViewTransfer $tabsViewTransfer)

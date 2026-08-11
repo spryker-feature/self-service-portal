@@ -60,9 +60,6 @@ class SspAssetCreationFacadeTest extends Unit
      */
     protected $selfServicePortalFacade;
 
-    /**
-     * @var \Generated\Shared\Transfer\CompanyBusinessUnitTransfer
-     */
     protected CompanyBusinessUnitTransfer $companyBusinessUnit;
 
     protected function _before(): void
@@ -90,11 +87,7 @@ class SspAssetCreationFacadeTest extends Unit
      * @dataProvider assetSuccessfulCollectionDataProvider
      *
      * @param array<mixed> $sspAssetData
-     * @param int $expectedAssetCount
-     * @param string $expectedName
      * @param array<string> $expectedValidationErrors
-     *
-     * @return void
      */
     public function testCreateSspAssetCollectionIsSuccessful(
         array $sspAssetData,
@@ -143,8 +136,6 @@ class SspAssetCreationFacadeTest extends Unit
      * @param array<string, mixed> $originalData
      * @param array<string, mixed> $updateData
      * @param array<string, mixed> $expectedData
-     *
-     * @return void
      */
     public function testUpdateSspAssetCollection(
         array $originalData,
@@ -214,12 +205,8 @@ class SspAssetCreationFacadeTest extends Unit
      * @dataProvider getAssetCollectionDataProvider
      *
      * @param array<mixed> $sspAssets
-     * @param string $assignedBusinessUnitsCondition
      * @param array<mixed> $sorting
-     * @param bool $fetchSspAssetsPerAssignment
      * @param array<mixed> $expectedAssets
-     *
-     * @return void
      */
     public function testGetSspAssetCollectionReturnsCorrectAssets(
         array $sspAssets,

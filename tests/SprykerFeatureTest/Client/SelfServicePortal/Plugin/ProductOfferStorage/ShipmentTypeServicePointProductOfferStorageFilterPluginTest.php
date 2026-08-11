@@ -75,14 +75,8 @@ class ShipmentTypeServicePointProductOfferStorageFilterPluginTest extends Unit
      */
     protected const PRODUCT_OFFER_REFERENCE_3 = 'offer-ref-3';
 
-    /**
-     * @var \SprykerFeatureTest\Client\SelfServicePortal\SelfServicePortalClientTester
-     */
     protected SelfServicePortalClientTester $tester;
 
-    /**
-     * @var \SprykerFeature\Client\SelfServicePortal\Plugin\ProductOfferStorage\ShipmentTypeServicePointProductOfferStorageFilterPlugin
-     */
     protected ShipmentTypeServicePointProductOfferStorageFilterPlugin $plugin;
 
     protected function setUp(): void
@@ -466,8 +460,6 @@ class ShipmentTypeServicePointProductOfferStorageFilterPluginTest extends Unit
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductOfferStorageCollectionTransfer $productOfferStorageCollectionTransfer
-     *
      * @return array<string>
      */
     protected function extractProductOfferReferences(ProductOfferStorageCollectionTransfer $productOfferStorageCollectionTransfer): array

@@ -26,9 +26,6 @@ use Symfony\Component\Form\FormInterface;
  */
 class ProductClassFormExpanderPluginTest extends Unit
 {
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     public function testExpandShouldAddProductClassFieldToForm(): void

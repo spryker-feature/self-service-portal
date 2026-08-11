@@ -12,10 +12,7 @@ use Generated\Shared\Transfer\ItemTransfer;
 interface ServicePointExpanderInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
      * @param array<string, mixed> $params
-     *
-     * @return \Generated\Shared\Transfer\ItemTransfer
      */
     public function expandItemTransferWithServicePoint(
         ItemTransfer $itemTransfer,

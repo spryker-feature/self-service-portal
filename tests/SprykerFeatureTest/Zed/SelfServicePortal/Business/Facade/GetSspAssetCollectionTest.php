@@ -45,9 +45,6 @@ class GetSspAssetCollectionTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @var \SprykerFeature\Zed\SelfServicePortal\Business\SelfServicePortalFacade
-     */
     protected SelfServicePortalFacade $selfServicePortalFacade;
 
     protected function _before(): void

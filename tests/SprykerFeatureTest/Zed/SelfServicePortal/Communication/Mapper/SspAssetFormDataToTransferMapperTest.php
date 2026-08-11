@@ -43,11 +43,8 @@ class SspAssetFormDataToTransferMapperTest extends Unit
      * @dataProvider mapAssignmentsToSspAssetCollectionRequestTransferDataProvider
      *
      * @param array<int> $assignedBusinessUnitIds
-     * @param \Generated\Shared\Transfer\SspAssetTransfer $sspAssetTransfer
      * @param array<int> $expectedAddIds
      * @param array<int> $expectedDeleteIds
-     *
-     * @return void
      */
     public function testMapAssignmentsToSspAssetCollectionRequestTransfer(
         array $assignedBusinessUnitIds,
@@ -126,8 +123,6 @@ class SspAssetFormDataToTransferMapperTest extends Unit
 
     /**
      * @param array<int> $businessUnitIds
-     *
-     * @return \Generated\Shared\Transfer\SspAssetTransfer
      */
     protected function createSspAssetTransferWithAssignments(array $businessUnitIds): SspAssetTransfer
     {

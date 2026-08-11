@@ -113,8 +113,6 @@ class UnattachedSspAssetAttachmentTable extends AbstractTable
     }
 
     /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
-     *
      * @return array<int, array<string, mixed>>
      */
     protected function prepareData(TableConfiguration $config): array

@@ -152,8 +152,6 @@ class ViewFileDetailTable extends AbstractTable
     }
 
     /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
-     *
      * @return array<int, array<string, mixed>>
      */
     protected function prepareData(TableConfiguration $config): array
@@ -194,8 +192,6 @@ class ViewFileDetailTable extends AbstractTable
 
     /**
      * @param array<mixed> $item
-     *
-     * @return string
      */
     protected function getEntityType(array $item): string
     {
@@ -209,8 +205,6 @@ class ViewFileDetailTable extends AbstractTable
 
     /**
      * @param array<mixed> $item
-     *
-     * @return string
      */
     protected function buildLinks(array $item): string
     {
@@ -438,8 +432,6 @@ class ViewFileDetailTable extends AbstractTable
     }
 
     /**
-     * @param \Generated\Shared\Transfer\FileAttachmentViewDetailTableCriteriaTransfer $fileAttachmentViewDetailTableCriteriaTransfer
-     *
      * @return array<int, array<int, mixed>|string>
      */
     protected function getFileUnionQuerySql(FileAttachmentViewDetailTableCriteriaTransfer $fileAttachmentViewDetailTableCriteriaTransfer): array

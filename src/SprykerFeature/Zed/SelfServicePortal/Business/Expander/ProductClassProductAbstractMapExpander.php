@@ -29,12 +29,7 @@ class ProductClassProductAbstractMapExpander implements ProductClassProductAbstr
     protected const STRING_FACET_KEY_PRODUCT_CLASS_NAMES = 'product-class-names';
 
     /**
-     * @param \Generated\Shared\Transfer\PageMapTransfer $pageMapTransfer
-     * @param \Spryker\Zed\ProductPageSearchExtension\Dependency\PageMapBuilderInterface $pageMapBuilder
      * @param array<string, mixed> $productData
-     * @param \Generated\Shared\Transfer\LocaleTransfer $localeTransfer
-     *
-     * @return \Generated\Shared\Transfer\PageMapTransfer
      */
     public function expandProductAbstractMapWithProductClasses(
         PageMapTransfer $pageMapTransfer,

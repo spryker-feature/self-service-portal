@@ -52,14 +52,8 @@ class AttachedSspModelAttachmentTable extends AbstractTable
      */
     protected const COLUMN_SELECTED = 'action';
 
-    /**
-     * @var int
-     */
     protected int $idFile;
 
-    /**
-     * @var \Orm\Zed\SelfServicePortal\Persistence\SpySspModelQuery
-     */
     protected SpySspModelQuery $sspModelQuery;
 
     public function __construct(SpySspModelQuery $sspModelQuery, int $idFile)
@@ -134,8 +128,6 @@ class AttachedSspModelAttachmentTable extends AbstractTable
     }
 
     /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
-     *
      * @return array<int, array<int|string, int|string>>
      */
     protected function prepareData(TableConfiguration $config): array

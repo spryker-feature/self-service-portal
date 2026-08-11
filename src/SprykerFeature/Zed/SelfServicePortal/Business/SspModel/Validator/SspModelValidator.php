@@ -55,10 +55,7 @@ class SspModelValidator implements SspModelValidatorInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspModelTransfer $sspModelTransfer
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ErrorTransfer> $validationErrors
-     *
-     * @return void
      */
     protected function validateName(SspModelTransfer $sspModelTransfer, ArrayObject $validationErrors): void
     {
@@ -84,10 +81,7 @@ class SspModelValidator implements SspModelValidatorInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspModelTransfer $sspModelTransfer
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ErrorTransfer> $validationErrors
-     *
-     * @return void
      */
     protected function validateCode(SspModelTransfer $sspModelTransfer, ArrayObject $validationErrors): void
     {

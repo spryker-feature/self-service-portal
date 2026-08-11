@@ -12,10 +12,7 @@ use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 interface SspAssetQueryExpanderInterface
 {
     /**
-     * @param \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface $searchQuery
      * @param array<string, mixed> $requestParameters
-     *
-     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
     public function expandQuery(
         QueryInterface $searchQuery,

@@ -208,10 +208,7 @@ class SelfServicePortalBusinessTester extends Actor
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspModelTransfer $sspModelTransfer
      * @param array<\Generated\Shared\Transfer\SspAssetTransfer> $sspAssetTransfers
-     *
-     * @return \Generated\Shared\Transfer\SspModelTransfer
      */
     public function assignSspAssetsToSspModel(SspModelTransfer $sspModelTransfer, array $sspAssetTransfers): SspModelTransfer
     {

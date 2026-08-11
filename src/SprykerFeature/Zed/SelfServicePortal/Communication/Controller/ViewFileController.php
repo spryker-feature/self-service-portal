@@ -20,8 +20,6 @@ use Symfony\Component\HttpFoundation\Request;
 class ViewFileController extends FileAbstractController
 {
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     public function indexAction(Request $request): array|RedirectResponse

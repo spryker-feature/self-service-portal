@@ -33,8 +33,6 @@ class SspModelStorageEntityMapper implements SspModelStorageEntityMapperInterfac
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspModelTransfer $sspModelTransfer
-     *
      * @return array<string, mixed>
      */
     protected function mapSspModelTransferToStorageData(SspModelTransfer $sspModelTransfer): array
@@ -48,8 +46,6 @@ class SspModelStorageEntityMapper implements SspModelStorageEntityMapperInterfac
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspModelTransfer $sspModelTransfer
-     *
      * @return list<int>
      */
     protected function extractWhitelistIds(SspModelTransfer $sspModelTransfer): array

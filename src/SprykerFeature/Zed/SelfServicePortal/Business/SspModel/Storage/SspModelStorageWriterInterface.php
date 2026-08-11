@@ -11,15 +11,11 @@ interface SspModelStorageWriterInterface
 {
     /**
      * @param list<\Generated\Shared\Transfer\EventEntityTransfer> $eventEntityTransfers
-     *
-     * @return void
      */
     public function writeSspModelStorageCollectionBySspModelEvents(array $eventEntityTransfers): void;
 
     /**
      * @param list<\Generated\Shared\Transfer\EventEntityTransfer> $eventEntityTransfers
-     *
-     * @return void
      */
     public function writeSspModelStorageCollectionBySspModelToProductListEvents(array $eventEntityTransfers): void;
 }

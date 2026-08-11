@@ -14,12 +14,7 @@ use Spryker\Zed\ProductPageSearchExtension\Dependency\PageMapBuilderInterface;
 interface ProductClassProductAbstractMapExpanderInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\PageMapTransfer $pageMapTransfer
-     * @param \Spryker\Zed\ProductPageSearchExtension\Dependency\PageMapBuilderInterface $pageMapBuilder
      * @param array<string, mixed> $productData
-     * @param \Generated\Shared\Transfer\LocaleTransfer $localeTransfer
-     *
-     * @return \Generated\Shared\Transfer\PageMapTransfer
      */
     public function expandProductAbstractMapWithProductClasses(
         PageMapTransfer $pageMapTransfer,

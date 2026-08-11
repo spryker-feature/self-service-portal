@@ -37,8 +37,6 @@ class ListInquiryController extends AbstractController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *
      * @return array<string, mixed>

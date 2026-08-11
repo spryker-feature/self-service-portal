@@ -69,14 +69,8 @@ class ProductServiceAvailabilityStorageStrategyPluginTest extends Unit
      */
     protected const REGULAR_PRODUCT_CLASS_NAME = 'regular';
 
-    /**
-     * @var \SprykerFeatureTest\Client\SelfServicePortal\SelfServicePortalClientTester
-     */
     protected SelfServicePortalClientTester $tester;
 
-    /**
-     * @var \SprykerFeature\Client\SelfServicePortal\Plugin\AvailabilityStorage\ProductServiceAvailabilityStorageStrategyPlugin
-     */
     protected ProductServiceAvailabilityStorageStrategyPlugin $plugin;
 
     protected function setUp(): void

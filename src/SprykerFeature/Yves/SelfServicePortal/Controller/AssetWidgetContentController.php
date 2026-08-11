@@ -73,8 +73,6 @@ class AssetWidgetContentController extends AbstractController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return array<string, mixed>
      */
     protected function getAssetWidgetContentViewData(Request $request): array

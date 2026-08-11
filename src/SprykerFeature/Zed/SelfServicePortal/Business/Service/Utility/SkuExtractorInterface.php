@@ -12,8 +12,6 @@ use Generated\Shared\Transfer\CartChangeTransfer;
 interface SkuExtractorInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\CartChangeTransfer $cartChangeTransfer
-     *
      * @return array<string>
      */
     public function extractSkusFromCartChange(CartChangeTransfer $cartChangeTransfer): array;

@@ -35,8 +35,6 @@ class ViewAssetController extends AbstractController
     protected const ROUTE_SSP_ASSET_LIST = '/self-service-portal/list-asset';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     public function indexAction(Request $request)

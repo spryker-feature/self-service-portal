@@ -192,8 +192,6 @@ class FormDataNormalizer implements FormDataNormalizerInterface
     /**
      * @param array<mixed> $array
      * @param array<mixed> $result
-     *
-     * @return void
      */
     protected function flattenArray(array $array, array &$result): void
     {

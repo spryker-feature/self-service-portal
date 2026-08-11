@@ -57,9 +57,6 @@ class SspModelToProductListWritePublisherPluginTest extends Unit
      */
     protected const STORAGE_FIELD_WHITELIST_IDS = 'whitelist_ids';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     /**

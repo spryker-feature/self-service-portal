@@ -30,11 +30,6 @@ interface AssetProductCompatibilityCheckerInterface
      * - Returns true if the asset is compatible with the product, false otherwise.
      * - Uses ProductStorageClient to resolve SKU to product ID.
      * - Uses current locale for product data retrieval.
-     *
-     * @param string $assetReference
-     * @param string $sku
-     *
-     * @return bool
      */
     public function isAssetCompatibleToProductSku(string $assetReference, string $sku): bool;
 }

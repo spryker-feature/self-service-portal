@@ -21,8 +21,6 @@ class ServiceTypeReader implements ServiceTypeReaderInterface
 
     /**
      * @param array<int, string> $serviceTypeUuids
-     *
-     * @return \Generated\Shared\Transfer\ServiceTypeStorageCollectionTransfer
      */
     public function getServiceTypeStorageCollection(array $serviceTypeUuids): ServiceTypeStorageCollectionTransfer
     {
@@ -33,8 +31,6 @@ class ServiceTypeReader implements ServiceTypeReaderInterface
 
     /**
      * @param array<int, string> $serviceTypeUuids
-     *
-     * @return \Generated\Shared\Transfer\ServiceTypeStorageCriteriaTransfer
      */
     protected function createServiceTypeStorageCriteriaTransfer(array $serviceTypeUuids): ServiceTypeStorageCriteriaTransfer
     {

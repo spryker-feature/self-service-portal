@@ -46,8 +46,6 @@ class DeleteModelController extends AbstractController
     protected const PARAM_ID_SSP_MODEL = 'id-ssp-model';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return array<mixed>
      */
     public function confirmDeleteAction(Request $request): array|RedirectResponse

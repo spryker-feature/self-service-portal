@@ -21,8 +21,6 @@ class AttachedSspAssetTableDataProvider implements AttachedSspAssetTableDataProv
     }
 
     /**
-     * @param int $idSspModel
-     *
      * @return array<string, mixed>
      */
     public function getAttachedSspAssetTableData(int $idSspModel): array

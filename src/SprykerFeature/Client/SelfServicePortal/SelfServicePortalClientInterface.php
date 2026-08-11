@@ -41,10 +41,6 @@ interface SelfServicePortalClientInterface
      * - Returns a `SspServiceCollectionTransfer` with the services and pagination information.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspServiceCriteriaTransfer $sspServiceCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspServiceCollectionTransfer
      */
     public function getSspServiceCollection(SspServiceCriteriaTransfer $sspServiceCriteriaTransfer): SspServiceCollectionTransfer;
 
@@ -56,10 +52,6 @@ interface SelfServicePortalClientInterface
      * - Returns a `FileAttachmentCollectionTransfer` with the files based on criteria includes.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\FileAttachmentCriteriaTransfer $fileAttachmentCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\FileAttachmentCollectionTransfer
      */
     public function getFileAttachmentCollection(
         FileAttachmentCriteriaTransfer $fileAttachmentCriteriaTransfer
@@ -70,10 +62,6 @@ interface SelfServicePortalClientInterface
      * - Retrieves the dashboard data.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\DashboardRequestTransfer $dashboardRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\DashboardResponseTransfer
      */
     public function getDashboardData(DashboardRequestTransfer $dashboardRequestTransfer): DashboardResponseTransfer;
 
@@ -84,10 +72,6 @@ interface SelfServicePortalClientInterface
      * - Returns a `SalesOrderItemCollectionResponseTransfer` with the updated items and potential errors.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SalesOrderItemCollectionRequestTransfer $salesOrderItemCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SalesOrderItemCollectionResponseTransfer
      */
     public function updateSalesOrderItemCollection(
         SalesOrderItemCollectionRequestTransfer $salesOrderItemCollectionRequestTransfer
@@ -100,10 +84,6 @@ interface SelfServicePortalClientInterface
      * - Returns a `SalesOrderItemCollectionResponseTransfer` with potential errors.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SalesOrderItemCollectionRequestTransfer $salesOrderItemCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SalesOrderItemCollectionResponseTransfer
      */
     public function cancelSalesOrderItemCollection(
         SalesOrderItemCollectionRequestTransfer $salesOrderItemCollectionRequestTransfer
@@ -114,10 +94,6 @@ interface SelfServicePortalClientInterface
      * - Creates a ssp inquiry collection.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspInquiryCollectionRequestTransfer $sspInquiryCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryCollectionResponseTransfer
      */
     public function createSspInquiryCollection(
         SspInquiryCollectionRequestTransfer $sspInquiryCollectionRequestTransfer
@@ -128,10 +104,6 @@ interface SelfServicePortalClientInterface
      * - Gets a ssp inquiry collection by criteria.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspInquiryCriteriaTransfer $sspInquiryCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryCollectionTransfer
      */
     public function getSspInquiryCollection(SspInquiryCriteriaTransfer $sspInquiryCriteriaTransfer): SspInquiryCollectionTransfer;
 
@@ -141,10 +113,6 @@ interface SelfServicePortalClientInterface
      * - Requires `SspInquiryCollectionRequestTransfer.sspInquiries.reference` to be provided.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspInquiryCollectionRequestTransfer $sspInquiryCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryCollectionResponseTransfer
      */
     public function cancelSspInquiryCollection(
         SspInquiryCollectionRequestTransfer $sspInquiryCollectionRequestTransfer
@@ -159,10 +127,6 @@ interface SelfServicePortalClientInterface
      * - Returns response with created assets and validation messages.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspAssetCollectionRequestTransfer $sspAssetCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetCollectionResponseTransfer
      */
     public function createSspAssetCollection(SspAssetCollectionRequestTransfer $sspAssetCollectionRequestTransfer): SspAssetCollectionResponseTransfer;
 
@@ -174,10 +138,6 @@ interface SelfServicePortalClientInterface
      * - Expands assets with relations based on criteria includes.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspAssetCriteriaTransfer $sspAssetCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetCollectionTransfer
      */
     public function getSspAssetCollection(SspAssetCriteriaTransfer $sspAssetCriteriaTransfer): SspAssetCollectionTransfer;
 
@@ -190,10 +150,6 @@ interface SelfServicePortalClientInterface
      * - Returns response with updated assets and validation messages.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspAssetCollectionRequestTransfer $sspAssetCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetCollectionResponseTransfer
      */
     public function updateSspAssetCollection(SspAssetCollectionRequestTransfer $sspAssetCollectionRequestTransfer): SspAssetCollectionResponseTransfer;
 
@@ -205,10 +161,6 @@ interface SelfServicePortalClientInterface
      * - Returns `SspModelStorageCollectionTransfer` filled with found SSP models.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspModelStorageCriteriaTransfer $sspModelStorageCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspModelStorageCollectionTransfer
      */
     public function getSspModelStorageCollection(
         SspModelStorageCriteriaTransfer $sspModelStorageCriteriaTransfer
@@ -221,10 +173,6 @@ interface SelfServicePortalClientInterface
      * - Returns `SspAssetSearchCollectionTransfer` filled with found SSP assets.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspAssetSearchCriteriaTransfer $sspAssetSearchCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetSearchCollectionTransfer
      */
     public function getSspAssetSearchCollection(
         SspAssetSearchCriteriaTransfer $sspAssetSearchCriteriaTransfer
@@ -240,10 +188,6 @@ interface SelfServicePortalClientInterface
      * - Returns collection of SSP asset storage transfers.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspAssetStorageCriteriaTransfer $sspAssetStorageCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetStorageCollectionTransfer
      */
     public function getSspAssetStorageCollection(
         SspAssetStorageCriteriaTransfer $sspAssetStorageCriteriaTransfer
@@ -254,10 +198,6 @@ interface SelfServicePortalClientInterface
      * - Sets ssp asset to quote item and saves the quote.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspAssetQuoteItemAttachmentRequestTransfer $sspAssetQuoteItemAttachmentRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
      */
     public function attachSspAssetToQuoteItem(SspAssetQuoteItemAttachmentRequestTransfer $sspAssetQuoteItemAttachmentRequestTransfer): QuoteResponseTransfer;
 

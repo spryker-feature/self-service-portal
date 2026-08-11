@@ -70,9 +70,6 @@ class ShipmentTypeItemExpander implements ShipmentTypeItemExpanderInterface
 
     /**
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ItemTransfer> $itemTransfers
-     * @param string $storeName
-     *
-     * @return void
      */
     protected function expandItemsWithShipmentType(ArrayObject $itemTransfers, string $storeName): void
     {
@@ -126,9 +123,6 @@ class ShipmentTypeItemExpander implements ShipmentTypeItemExpanderInterface
     /**
      * @param list<\Generated\Shared\Transfer\ItemTransfer> $itemsWithShipmentType
      * @param array<string> $shipmentTypeUuids
-     * @param string $storeName
-     *
-     * @return void
      */
     protected function expandExistingShipmentTypes(array $itemsWithShipmentType, array $shipmentTypeUuids, string $storeName): void
     {
@@ -148,7 +142,6 @@ class ShipmentTypeItemExpander implements ShipmentTypeItemExpanderInterface
 
     /**
      * @param array<string> $shipmentTypeUuids
-     * @param string $storeName
      *
      * @return array<string, \Generated\Shared\Transfer\ShipmentTypeTransfer>
      */
@@ -161,10 +154,7 @@ class ShipmentTypeItemExpander implements ShipmentTypeItemExpanderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
      * @param array<string, \Generated\Shared\Transfer\ShipmentTypeTransfer> $shipmentTypeTransfersByUuid
-     *
-     * @return void
      */
     protected function assignShipmentTypeToItem(
         ItemTransfer $itemTransfer,
@@ -182,9 +172,6 @@ class ShipmentTypeItemExpander implements ShipmentTypeItemExpanderInterface
 
     /**
      * @param list<\Generated\Shared\Transfer\ItemTransfer> $itemsWithoutShipmentType
-     * @param \Generated\Shared\Transfer\ShipmentTypeTransfer $defaultShipmentTypeTransfer
-     *
-     * @return void
      */
     protected function expandProductsWithDefaultShipmentType(array $itemsWithoutShipmentType, ShipmentTypeTransfer $defaultShipmentTypeTransfer): void
     {
@@ -215,9 +202,6 @@ class ShipmentTypeItemExpander implements ShipmentTypeItemExpanderInterface
 
     /**
      * @param list<\Generated\Shared\Transfer\ItemTransfer> $itemsWithoutShipmentType
-     * @param \Generated\Shared\Transfer\ShipmentTypeTransfer $defaultShipmentTypeTransfer
-     *
-     * @return void
      */
     protected function expandProductOffersWithDefaultShipmentType(array $itemsWithoutShipmentType, ShipmentTypeTransfer $defaultShipmentTypeTransfer): void
     {
@@ -264,9 +248,6 @@ class ShipmentTypeItemExpander implements ShipmentTypeItemExpanderInterface
 
     /**
      * @param list<string> $productOfferReferences
-     * @param \Generated\Shared\Transfer\ShipmentTypeTransfer $defaultShipmentTypeTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductOfferShipmentTypeCollectionTransfer
      */
     protected function getProductOfferShipmentTypeCollection(
         array $productOfferReferences,
@@ -283,8 +264,6 @@ class ShipmentTypeItemExpander implements ShipmentTypeItemExpanderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductOfferShipmentTypeCollectionTransfer $productOfferShipmentTypeCollection
-     *
      * @return list<string>
      */
     protected function extractProductOfferReferencesWithDefaultShipmentType(
@@ -307,9 +286,6 @@ class ShipmentTypeItemExpander implements ShipmentTypeItemExpanderInterface
     /**
      * @param list<\Generated\Shared\Transfer\ItemTransfer> $itemsWithoutShipmentType
      * @param list<string> $productOfferReferencesWithDefaultShipmentType
-     * @param \Generated\Shared\Transfer\ShipmentTypeTransfer $defaultShipmentTypeTransfer
-     *
-     * @return void
      */
     protected function assignDefaultShipmentTypeToProductOfferItems(
         array $itemsWithoutShipmentType,
@@ -329,8 +305,6 @@ class ShipmentTypeItemExpander implements ShipmentTypeItemExpanderInterface
     /**
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ItemTransfer> $itemTransfers
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ItemTransfer> $bundleItemTransfers
-     *
-     * @return void
      */
     protected function expandBundleRelatedItems(
         ArrayObject $itemTransfers,

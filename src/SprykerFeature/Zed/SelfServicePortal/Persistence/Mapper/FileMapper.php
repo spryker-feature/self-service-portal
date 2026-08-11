@@ -29,9 +29,6 @@ class FileMapper
 {
     /**
      * @param \Propel\Runtime\Collection\Collection<\Orm\Zed\FileManager\Persistence\SpyFile> $fileEntities
-     * @param \Generated\Shared\Transfer\FileAttachmentCollectionTransfer $fileCollectionTransfer
-     *
-     * @return \Generated\Shared\Transfer\FileAttachmentCollectionTransfer
      */
     public function mapFileEntityCollectionToFileAttachmentCollectionTransfer(
         Collection $fileEntities,
@@ -110,8 +107,6 @@ class FileMapper
     }
 
     /**
-     * @param string|null $relationIdsString
-     *
      * @return array<int|string>
      */
     protected function extractRelationIds(?string $relationIdsString): array

@@ -66,9 +66,6 @@ class SspAssetStorageReader implements SspAssetStorageReaderInterface
 
     /**
      * @param list<string> $references
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetStorageCollectionTransfer
      */
     protected function getSspAssetStorageCollectionByReferences(array $references, CompanyUserTransfer $companyUserTransfer): SspAssetStorageCollectionTransfer
     {

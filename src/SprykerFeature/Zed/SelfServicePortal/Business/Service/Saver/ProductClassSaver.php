@@ -67,10 +67,7 @@ class ProductClassSaver implements ProductClassSaverInterface
     }
 
     /**
-     * @param int $idProductConcrete
      * @param array<int> $productClassIds
-     *
-     * @return \Generated\Shared\Transfer\ProductClassCriteriaTransfer
      */
     protected function createProductClassCriteriaTransfer(int $idProductConcrete, array $productClassIds): ProductClassCriteriaTransfer
     {

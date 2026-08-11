@@ -78,8 +78,6 @@ class SspAssetSearchFormHandler implements SspAssetSearchFormHandlerInterface
 
     /**
      * @param array<string, mixed> $formData
-     *
-     * @return bool
      */
     protected function isResetRequest(array $formData): bool
     {
@@ -87,10 +85,7 @@ class SspAssetSearchFormHandler implements SspAssetSearchFormHandlerInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetCriteriaTransfer $sspAssetCriteriaTransfer
      * @param array<string, mixed> $formData
-     *
-     * @return \Generated\Shared\Transfer\SspAssetCriteriaTransfer
      */
     protected function applySorting(SspAssetCriteriaTransfer $sspAssetCriteriaTransfer, array $formData): SspAssetCriteriaTransfer
     {
@@ -111,8 +106,6 @@ class SspAssetSearchFormHandler implements SspAssetSearchFormHandlerInterface
 
     /**
      * @param array<string, mixed> $formData
-     *
-     * @return bool
      */
     protected function isAscendingOrder(array $formData): bool
     {
@@ -142,10 +135,7 @@ class SspAssetSearchFormHandler implements SspAssetSearchFormHandlerInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetCriteriaTransfer $sspAssetCriteriaTransfer
      * @param array<string, mixed> $formData
-     *
-     * @return \Generated\Shared\Transfer\SspAssetCriteriaTransfer
      */
     protected function applySearchTextFiltering(SspAssetCriteriaTransfer $sspAssetCriteriaTransfer, array $formData): SspAssetCriteriaTransfer
     {
@@ -157,8 +147,6 @@ class SspAssetSearchFormHandler implements SspAssetSearchFormHandlerInterface
 
     /**
      * @param string $scopeValue
-     *
-     * @return bool
      */
     protected function isValidBusinessUnitId(mixed $scopeValue): bool
     {

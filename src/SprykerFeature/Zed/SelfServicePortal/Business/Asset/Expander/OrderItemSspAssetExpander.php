@@ -34,10 +34,7 @@ class OrderItemSspAssetExpander implements OrderItemSspAssetExpanderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param array<int, \Generated\Shared\Transfer\SspAssetTransfer> $sspAssetsIndexedByIdSalesOrderItem
-     *
-     * @return \Generated\Shared\Transfer\OrderTransfer
      */
     protected function setAssetsToOrderItems(
         OrderTransfer $orderTransfer,

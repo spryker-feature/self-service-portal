@@ -30,19 +30,10 @@ class SspAssetSearchQueryPlugin extends AbstractPlugin implements QueryInterface
      */
     protected const SOURCE_IDENTIFIER = 'ssp_asset';
 
-    /**
-     * @var \Elastica\Query
-     */
     protected Query $query;
 
-    /**
-     * @var string|null
-     */
     protected ?string $searchString = null;
 
-    /**
-     * @var \Generated\Shared\Transfer\SearchContextTransfer|null
-     */
     protected ?SearchContextTransfer $searchContextTransfer = null;
 
     /**

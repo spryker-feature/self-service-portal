@@ -50,9 +50,6 @@ class SspAssetDataImportPluginTest extends Unit
 
     protected const string IMPORT_TYPE = 'ssp-asset';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     protected function setUp(): void

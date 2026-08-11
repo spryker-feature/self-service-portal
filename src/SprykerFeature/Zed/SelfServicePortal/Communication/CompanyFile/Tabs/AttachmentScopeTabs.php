@@ -28,8 +28,6 @@ class AttachmentScopeTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addAssetTab(TabsViewTransfer $tabsViewTransfer)
@@ -46,8 +44,6 @@ class AttachmentScopeTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addModelTab(TabsViewTransfer $tabsViewTransfer)
@@ -64,8 +60,6 @@ class AttachmentScopeTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addBusinessUnitTab(TabsViewTransfer $tabsViewTransfer)
@@ -82,8 +76,6 @@ class AttachmentScopeTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addCompanyUserTab(TabsViewTransfer $tabsViewTransfer)
@@ -100,8 +92,6 @@ class AttachmentScopeTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addCompanyTab(TabsViewTransfer $tabsViewTransfer)

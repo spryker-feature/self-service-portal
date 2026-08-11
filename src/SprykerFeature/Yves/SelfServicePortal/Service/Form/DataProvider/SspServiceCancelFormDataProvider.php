@@ -13,8 +13,6 @@ use SprykerFeature\Yves\SelfServicePortal\Service\Form\SspServiceCancelForm;
 class SspServiceCancelFormDataProvider
 {
     /**
-     * @param \Generated\Shared\Transfer\ItemTransfer|null $itemTransfer
-     *
      * @return array<string, mixed>
      */
     public function getData(?ItemTransfer $itemTransfer = null): array

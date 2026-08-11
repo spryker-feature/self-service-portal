@@ -48,9 +48,6 @@ class SspAssetPublisherTriggerPluginTest extends Unit
      */
     protected const COL_ID_SSP_ASSET = 'spy_ssp_asset.id_ssp_asset';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     protected function setUp(): void

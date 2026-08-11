@@ -66,8 +66,6 @@ class ServicePointWidgetContentController extends AbstractController
 
     /**
      * @param array<string, mixed> $servicePointWidgetContentViewData
-     *
-     * @return string
      */
     protected function renderServicePointWidgetContent(array $servicePointWidgetContentViewData): string
     {
@@ -80,8 +78,6 @@ class ServicePointWidgetContentController extends AbstractController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return array<string, mixed>
      */
     protected function getServicePointWidgetContentViewData(Request $request): array
@@ -199,9 +195,6 @@ class ServicePointWidgetContentController extends AbstractController
     }
 
     /**
-     * @param string $sku
-     * @param int $quantity
-     *
      * @return array<\Generated\Shared\Transfer\ItemTransfer>
      */
     protected function createItemTransfers(string $sku, int $quantity): array

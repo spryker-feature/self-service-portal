@@ -43,8 +43,6 @@ class DownloadInquiryFileController extends AbstractController
     protected const REDIRECT_URL = '/self-service-portal/list-inquiry';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function downloadAction(Request $request): Response|RedirectResponse

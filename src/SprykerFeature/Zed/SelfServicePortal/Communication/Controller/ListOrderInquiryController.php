@@ -22,8 +22,6 @@ class ListOrderInquiryController extends AbstractGatewayController
     /**
      * @deprecated Exists for BC reasons. Use {@link \SprykerFeature\Zed\SelfServicePortal\Communication\Plugin\Sales\SelfServicePortalOrderInquiryListBlockRendererPlugin} instead.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return array<mixed>
      */
     public function indexAction(Request $request): array

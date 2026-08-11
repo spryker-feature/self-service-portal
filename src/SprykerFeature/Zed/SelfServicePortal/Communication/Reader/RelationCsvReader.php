@@ -18,8 +18,6 @@ class RelationCsvReader implements RelationCsvReaderInterface
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
-     *
      * @return array<string, array<string>>
      */
     public function readRelations(UploadedFile $uploadedFile): array

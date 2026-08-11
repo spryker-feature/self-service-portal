@@ -38,10 +38,7 @@ class UploadFileForm extends AbstractType
     protected const ERROR_FILE_REQUIRED = 'Please select a file to upload';
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -49,8 +46,6 @@ class UploadFileForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addUploadedFileField(FormBuilderInterface $builder)

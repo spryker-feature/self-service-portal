@@ -42,12 +42,7 @@ class InquiryController extends AbstractController
     protected const GLOSSARY_KEY_SSP_INQUIRY_STATUS_CHANGE_ERROR = 'self_service_portal.inquiry.error.status_change';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param string $sspInquiryReference
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function cancelAction(Request $request, string $sspInquiryReference): RedirectResponse
     {
@@ -101,8 +96,6 @@ class InquiryController extends AbstractController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return \Spryker\Yves\Kernel\View\View|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function detailAction(Request $request): View|RedirectResponse
@@ -121,8 +114,6 @@ class InquiryController extends AbstractController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
      *
      * @return \Spryker\Yves\Kernel\View\View|\Symfony\Component\HttpFoundation\RedirectResponse
@@ -137,8 +128,6 @@ class InquiryController extends AbstractController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return \Spryker\Yves\Kernel\View\View|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     protected function executeCreateAction(Request $request): View|RedirectResponse
@@ -191,8 +180,6 @@ class InquiryController extends AbstractController
     }
 
     /**
-     * @param string $sspInquiryReference
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *
      * @return array<string, mixed>

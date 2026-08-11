@@ -11,7 +11,6 @@ interface ServicePointReaderInterface
 {
     /**
      * @param array<string> $servicePointUuids
-     * @param string $storeName
      *
      * @return array<string, \Generated\Shared\Transfer\ServicePointTransfer>
      */

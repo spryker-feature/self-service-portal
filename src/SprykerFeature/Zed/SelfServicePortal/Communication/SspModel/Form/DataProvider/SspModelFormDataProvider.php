@@ -19,8 +19,6 @@ class SspModelFormDataProvider
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspModelTransfer $sspModelTransfer
-     *
      * @return array<string, mixed>
      */
     public function getOptions(SspModelTransfer $sspModelTransfer): array

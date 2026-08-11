@@ -82,9 +82,6 @@ class ServiceSearchFormHandler implements ServiceSearchFormHandlerInterface
 
     /**
      * @param array<string, mixed> $serviceSearchFormData
-     * @param \Generated\Shared\Transfer\SspServiceCriteriaTransfer $sspServiceCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspServiceCriteriaTransfer
      */
     protected function handleSearchTypeInputs(
         array $serviceSearchFormData,
@@ -123,9 +120,6 @@ class ServiceSearchFormHandler implements ServiceSearchFormHandlerInterface
 
     /**
      * @param array<string, mixed> $serviceSearchFormData
-     * @param \Generated\Shared\Transfer\SspServiceCriteriaTransfer $sspServiceCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspServiceCriteriaTransfer
      */
     protected function handleBusinessUnitTypeSubmit(
         array $serviceSearchFormData,
@@ -198,9 +192,6 @@ class ServiceSearchFormHandler implements ServiceSearchFormHandlerInterface
 
     /**
      * @param array<string, mixed> $serviceSearchFormData
-     * @param \Generated\Shared\Transfer\SspServiceCriteriaTransfer $sspServiceCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspServiceCriteriaTransfer
      */
     protected function handleOrderInputs(
         array $serviceSearchFormData,

@@ -46,8 +46,6 @@ class CreateOfferController extends AbstractController
     protected const URL_PATH_SELF_SERVICE_PORTAL_CREATE_OFFER = '/self-service-portal/create-offer';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return array<string, mixed>
      */
     public function indexAction(Request $request): array
@@ -62,8 +60,6 @@ class CreateOfferController extends AbstractController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     public function formAction(Request $request): RedirectResponse|array

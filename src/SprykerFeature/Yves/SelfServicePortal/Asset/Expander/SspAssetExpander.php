@@ -18,10 +18,7 @@ class SspAssetExpander implements SspAssetExpanderInterface
     protected const PARAM_ASSET_REFERENCE = 'assetReference';
 
     /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
      * @param array<string, mixed> $params
-     *
-     * @return \Generated\Shared\Transfer\ItemTransfer
      */
     public function expandItemTransferWithSspAsset(ItemTransfer $itemTransfer, array $params): ItemTransfer
     {

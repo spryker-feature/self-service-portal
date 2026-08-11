@@ -12,8 +12,6 @@ use Generated\Shared\Transfer\OrderTransfer;
 class SalesOrderItemIdExtractor implements SalesOrderItemIdExtractorInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
      * @return array<int>
      */
     public function extractSalesOrderItemIds(OrderTransfer $orderTransfer): array

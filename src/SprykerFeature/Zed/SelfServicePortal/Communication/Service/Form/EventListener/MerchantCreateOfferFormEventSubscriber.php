@@ -19,19 +19,10 @@ use Symfony\Component\Form\FormEvents;
 
 class MerchantCreateOfferFormEventSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var \Spryker\Zed\Merchant\Business\MerchantFacadeInterface
-     */
     protected MerchantFacadeInterface $merchantFacade;
 
-    /**
-     * @var \Spryker\Zed\MerchantStock\Business\MerchantStockFacadeInterface
-     */
     protected MerchantStockFacadeInterface $merchantStockFacade;
 
-    /**
-     * @var \SprykerFeature\Zed\SelfServicePortal\SelfServicePortalConfig
-     */
     protected SelfServicePortalConfig $config;
 
     public function __construct(

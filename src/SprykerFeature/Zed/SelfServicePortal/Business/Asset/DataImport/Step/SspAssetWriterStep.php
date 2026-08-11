@@ -24,8 +24,6 @@ class SspAssetWriterStep implements DataImportStepInterface
 
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface<\Orm\Zed\SelfServicePortal\Persistence\SpySspAsset> $dataSet
-     *
-     * @return void
      */
     public function execute(DataSetInterface $dataSet): void
     {

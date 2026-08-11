@@ -25,8 +25,6 @@ class ModelProductListRelationTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addUnattachedProductListsTab(TabsViewTransfer $tabsViewTransfer)
@@ -43,8 +41,6 @@ class ModelProductListRelationTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addProductListsToBeAttachedTab(TabsViewTransfer $tabsViewTransfer)

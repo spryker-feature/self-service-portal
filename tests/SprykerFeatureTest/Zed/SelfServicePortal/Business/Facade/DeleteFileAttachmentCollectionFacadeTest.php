@@ -42,9 +42,6 @@ class DeleteFileAttachmentCollectionFacadeTest extends Unit
 
     protected const string PLUGIN_WRITER = 'PLUGIN_WRITER';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalBusinessTester
-     */
     protected SelfServicePortalBusinessTester $tester;
 
     protected function _before(): void

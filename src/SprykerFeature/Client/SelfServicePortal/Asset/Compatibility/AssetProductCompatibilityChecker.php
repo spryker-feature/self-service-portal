@@ -219,8 +219,6 @@ class AssetProductCompatibilityChecker implements AssetProductCompatibilityCheck
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspModelStorageTransfer $modelStorageTransfer
-     *
      * @return list<int>
      */
     protected function extractWhitelistIds(SspModelStorageTransfer $modelStorageTransfer): array
@@ -236,8 +234,6 @@ class AssetProductCompatibilityChecker implements AssetProductCompatibilityCheck
 
     /**
      * @param list<int> $modelIds
-     *
-     * @return \Generated\Shared\Transfer\SspModelStorageCollectionTransfer
      */
     protected function getModelStorageByIds(array $modelIds): SspModelStorageCollectionTransfer
     {
@@ -252,10 +248,7 @@ class AssetProductCompatibilityChecker implements AssetProductCompatibilityCheck
     }
 
     /**
-     * @param int $idProduct
      * @param list<int> $productListIds
-     *
-     * @return bool
      */
     protected function isProductInProductLists(int $idProduct, array $productListIds): bool
     {

@@ -28,11 +28,7 @@ class ProductClassKeyToIdProductClassStep implements DataImportStepInterface
     }
 
     /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
      * @throws \Spryker\Zed\DataImport\Business\Exception\EntityNotFoundException
-     *
-     * @return void
      */
     public function execute(DataSetInterface $dataSet): void
     {

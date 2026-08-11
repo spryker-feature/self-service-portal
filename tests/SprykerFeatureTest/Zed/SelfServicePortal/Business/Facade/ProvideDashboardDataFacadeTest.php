@@ -44,9 +44,6 @@ use SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalBusinessTester;
  */
 class ProvideDashboardDataFacadeTest extends Unit
 {
- /**
-  * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalBusinessTester
-  */
     protected SelfServicePortalBusinessTester $tester;
 
     /**

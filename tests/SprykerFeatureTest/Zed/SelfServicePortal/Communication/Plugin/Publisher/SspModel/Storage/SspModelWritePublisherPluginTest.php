@@ -73,9 +73,6 @@ class SspModelWritePublisherPluginTest extends Unit
      */
     protected const DEFAULT_LOCALE = 'DE';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     /**

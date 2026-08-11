@@ -62,9 +62,6 @@ class SspShipmentTypeItemExpanderPluginTest extends Unit
      */
     protected const DEFAULT_SHIPMENT_TYPE_UUID = 'default-shipment-type-uuid';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     public function testExpandItemsExpandsItemsWithShipmentType(): void
@@ -89,8 +86,6 @@ class SspShipmentTypeItemExpanderPluginTest extends Unit
 
     /**
      * @skip
-     *
-     * @return void
      */
     public function testExpandItemsExpandsItemsWithDefaultShipmentTypeWhenNoShipmentTypeProvided(): void
     {
@@ -368,7 +363,6 @@ class SspShipmentTypeItemExpanderPluginTest extends Unit
 
     /**
      * @param array<string, \Generated\Shared\Transfer\ShipmentTypeTransfer> $shipmentTypesByUuid
-     * @param \Generated\Shared\Transfer\ShipmentTypeTransfer|null $defaultShipmentType
      *
      * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerFeature\Zed\SelfServicePortal\Business\Reader\ShipmentTypeReaderInterface
      */
@@ -390,11 +384,6 @@ class SspShipmentTypeItemExpanderPluginTest extends Unit
 
     /**
      * @param array<string, \Generated\Shared\Transfer\ShipmentTypeTransfer> $shipmentTypesByUuid
-     * @param \Generated\Shared\Transfer\ShipmentTypeTransfer|null $defaultShipmentType
-     * @param \SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalRepositoryInterface|null $repository
-     * @param \Spryker\Zed\ProductOfferShipmentType\Business\ProductOfferShipmentTypeFacadeInterface|null $productOfferShipmentTypeFacade
-     *
-     * @return \SprykerFeature\Zed\SelfServicePortal\Business\SelfServicePortalBusinessFactory
      */
     protected function createMockBusinessFactory(
         array $shipmentTypesByUuid = [],
@@ -444,11 +433,6 @@ class SspShipmentTypeItemExpanderPluginTest extends Unit
 
     /**
      * @param array<string, \Generated\Shared\Transfer\ShipmentTypeTransfer> $shipmentTypesByUuid
-     * @param \Generated\Shared\Transfer\ShipmentTypeTransfer|null $defaultShipmentType
-     * @param \SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalRepositoryInterface|null $repository
-     * @param \Spryker\Zed\ProductOfferShipmentType\Business\ProductOfferShipmentTypeFacadeInterface|null $productOfferShipmentTypeFacade
-     *
-     * @return \SprykerFeature\Zed\SelfServicePortal\Communication\Plugin\Cart\SspShipmentTypeItemExpanderPlugin
      */
     protected function createPluginWithMockFactory(
         array $shipmentTypesByUuid = [],

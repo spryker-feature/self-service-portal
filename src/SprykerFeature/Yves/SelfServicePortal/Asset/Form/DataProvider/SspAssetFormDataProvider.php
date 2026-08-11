@@ -50,8 +50,6 @@ class SspAssetFormDataProvider
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetTransfer $sspAssetTransfer
-     *
      * @return array<string, mixed>
      */
     public function getOptions(SspAssetTransfer $sspAssetTransfer): array

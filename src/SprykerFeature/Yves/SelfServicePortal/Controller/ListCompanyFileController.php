@@ -34,8 +34,6 @@ class ListCompanyFileController extends AbstractController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return array<string, mixed>
      */
     protected function executeIndexAction(Request $request): array

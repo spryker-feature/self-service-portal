@@ -54,10 +54,7 @@ class SspModelReader implements SspModelReaderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspModelCollectionTransfer $sspModelCollectionTransfer
      * @param array<\Generated\Shared\Transfer\FileManagerDataTransfer> $fileManagerDataTransfers
-     *
-     * @return \Generated\Shared\Transfer\SspModelCollectionTransfer
      */
     protected function expandWithImage(SspModelCollectionTransfer $sspModelCollectionTransfer, array $fileManagerDataTransfers): SspModelCollectionTransfer
     {

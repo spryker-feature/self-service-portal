@@ -25,9 +25,6 @@ use SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalBusinessTester;
  */
 class DeleteSspModelCollectionTest extends Unit
 {
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalBusinessTester
-     */
     protected SelfServicePortalBusinessTester $tester;
 
     protected function setUp(): void

@@ -19,15 +19,11 @@ interface PaginationConfigBuilderInterface
 
     /**
      * @param array<string, mixed> $requestParameters
-     *
-     * @return int
      */
     public function getCurrentPage(array $requestParameters): int;
 
     /**
      * @param array<string, mixed> $requestParameters
-     *
-     * @return int
      */
     public function getCurrentItemsPerPage(array $requestParameters): int;
 }

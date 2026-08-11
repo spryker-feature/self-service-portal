@@ -38,8 +38,6 @@ class UpdateServiceTimeController extends AbstractController
     protected const PARAM_ORDER_ID = 'id-sales-order';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *
      * @return \Spryker\Yves\Kernel\View\View|\Symfony\Component\HttpFoundation\RedirectResponse

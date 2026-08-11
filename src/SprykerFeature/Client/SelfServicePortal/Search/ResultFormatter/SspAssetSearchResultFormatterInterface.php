@@ -16,8 +16,6 @@ interface SspAssetSearchResultFormatterInterface
     /**
      * @param \Elastica\ResultSet|mixed $searchResult
      * @param array<string, mixed> $requestParameters
-     *
-     * @return \Generated\Shared\Transfer\SspAssetSearchCollectionTransfer
      */
     public function formatResult($searchResult, array $requestParameters = []): SspAssetSearchCollectionTransfer;
 }

@@ -49,11 +49,7 @@ class ProductOfferTableActionExpander implements ProductOfferTableActionExpander
     }
 
     /**
-     * @param string $url
-     * @param string $title
      * @param array<string, string> $options
-     *
-     * @return string
      */
     protected function generateEditButton(string $url, string $title, array $options = []): string
     {

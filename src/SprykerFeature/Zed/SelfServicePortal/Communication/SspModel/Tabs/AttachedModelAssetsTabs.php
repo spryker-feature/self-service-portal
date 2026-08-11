@@ -25,8 +25,6 @@ class AttachedModelAssetsTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addAttachedSspAssetsTab(TabsViewTransfer $tabsViewTransfer)
@@ -43,8 +41,6 @@ class AttachedModelAssetsTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addAssetsToBeUnattachedTab(TabsViewTransfer $tabsViewTransfer)

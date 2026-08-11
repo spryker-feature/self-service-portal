@@ -39,8 +39,6 @@ class SspAssetStorageWriter implements SspAssetStorageWriterInterface
 
     /**
      * @param list<\Generated\Shared\Transfer\EventEntityTransfer> $eventEntityTransfers
-     *
-     * @return void
      */
     public function writeSspAssetStorageCollectionBySspAssetToCompanyBusinessUnitEvents(array $eventEntityTransfers): void
     {
@@ -58,8 +56,6 @@ class SspAssetStorageWriter implements SspAssetStorageWriterInterface
 
     /**
      * @param list<\Generated\Shared\Transfer\EventEntityTransfer> $eventEntityTransfers
-     *
-     * @return void
      */
     public function writeSspAssetStorageCollectionBySspAssetToModelEvents(array $eventEntityTransfers): void
     {
@@ -77,8 +73,6 @@ class SspAssetStorageWriter implements SspAssetStorageWriterInterface
 
     /**
      * @param list<\Generated\Shared\Transfer\EventEntityTransfer> $eventEntityTransfers
-     *
-     * @return void
      */
     public function writeSspAssetStorageCollectionBySspAssetEvents(array $eventEntityTransfers): void
     {
@@ -93,8 +87,6 @@ class SspAssetStorageWriter implements SspAssetStorageWriterInterface
 
     /**
      * @param array<int> $sspAssetIds
-     *
-     * @return void
      */
     public function writeSspAssetStorageCollection(array $sspAssetIds): void
     {
@@ -118,8 +110,6 @@ class SspAssetStorageWriter implements SspAssetStorageWriterInterface
 
     /**
      * @param list<int> $sspAssetIds
-     *
-     * @return \Generated\Shared\Transfer\SspAssetCriteriaTransfer
      */
     protected function createSspAssetCriteriaTransfer(array $sspAssetIds): SspAssetCriteriaTransfer
     {

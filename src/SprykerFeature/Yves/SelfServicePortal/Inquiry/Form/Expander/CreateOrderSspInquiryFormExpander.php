@@ -79,10 +79,7 @@ class CreateOrderSspInquiryFormExpander implements CreateSspInquiryFormExpanderI
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<mixed> $options
-     *
-     * @return void
      */
     public function expand(FormBuilderInterface $builder, array $options): void
     {
@@ -91,8 +88,6 @@ class CreateOrderSspInquiryFormExpander implements CreateSspInquiryFormExpanderI
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addOrderReference(FormBuilderInterface $builder)
@@ -119,7 +114,6 @@ class CreateOrderSspInquiryFormExpander implements CreateSspInquiryFormExpanderI
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<mixed> $options
      *
      * @return $this

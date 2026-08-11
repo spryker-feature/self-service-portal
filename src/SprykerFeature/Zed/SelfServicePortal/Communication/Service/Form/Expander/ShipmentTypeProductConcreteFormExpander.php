@@ -20,10 +20,7 @@ class ShipmentTypeProductConcreteFormExpander implements ShipmentTypeProductConc
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<mixed> $options
-     *
-     * @return \Symfony\Component\Form\FormBuilderInterface
      */
     public function expand(FormBuilderInterface $builder, array $options): FormBuilderInterface
     {

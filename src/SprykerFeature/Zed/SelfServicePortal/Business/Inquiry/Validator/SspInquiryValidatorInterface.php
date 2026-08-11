@@ -15,8 +15,6 @@ use Generated\Shared\Transfer\SspInquiryTransfer;
 interface SspInquiryValidatorInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\SspInquiryTransfer $sspInquiryTransfer
-     *
      * @return \ArrayObject<int, \Generated\Shared\Transfer\ErrorTransfer>
      */
     public function validateSspInquiry(SspInquiryTransfer $sspInquiryTransfer): ArrayObject;

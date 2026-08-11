@@ -56,8 +56,6 @@ class AddAssetController extends AbstractController
     protected const ROUTE_SSP_ASSET_DETAIL = '/self-service-portal/view-asset?id-ssp-asset=%s';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     public function indexAction(Request $request)

@@ -108,8 +108,6 @@ class AssetController extends AbstractController
     protected const GLOSSARY_KEY_ASSET_ATTACH_TO_CART_ITEM_ERROR = 'self_service_portal.asset.error.attach_to_cart_item';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *
@@ -196,8 +194,6 @@ class AssetController extends AbstractController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
      *
      * @return \Spryker\Yves\Kernel\View\View|\Symfony\Component\HttpFoundation\RedirectResponse
@@ -269,8 +265,6 @@ class AssetController extends AbstractController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
      *
@@ -365,12 +359,8 @@ class AssetController extends AbstractController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function updateBusinessUnitRelationAction(Request $request): RedirectResponse
     {
@@ -447,8 +437,6 @@ class AssetController extends AbstractController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -501,8 +489,6 @@ class AssetController extends AbstractController
     }
 
     /**
-     * @param string $allowedAction
-     *
      * @return array<string>
      */
     protected function getStatusesByAllowedAction(string $allowedAction): array

@@ -25,9 +25,6 @@ use Symfony\Component\Form\Forms;
  */
 class ShipmentTypeProductConcreteFormExpanderPluginTest extends Unit
 {
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     public function testExpandShouldAddShipmentTypeFieldToForm(): void

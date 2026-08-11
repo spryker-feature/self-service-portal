@@ -35,10 +35,6 @@ class SelfServicePortalStub implements SelfServicePortalStubInterface
 
     /**
      * @uses \SprykerFeature\Zed\SelfServicePortal\Communication\Controller\GatewayController::getSspServiceCollectionAction()
-     *
-     * @param \Generated\Shared\Transfer\SspServiceCriteriaTransfer $sspServiceCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspServiceCollectionTransfer
      */
     public function getSspServiceCollection(SspServiceCriteriaTransfer $sspServiceCriteriaTransfer): SspServiceCollectionTransfer
     {
@@ -53,10 +49,6 @@ class SelfServicePortalStub implements SelfServicePortalStubInterface
 
     /**
      * @uses \SprykerFeature\Zed\SelfServicePortal\Communication\Controller\GatewayController::updateSalesOrderItemCollectionAction()
-     *
-     * @param \Generated\Shared\Transfer\SalesOrderItemCollectionRequestTransfer $salesOrderItemCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SalesOrderItemCollectionResponseTransfer
      */
     public function updateSalesOrderItemCollection(
         SalesOrderItemCollectionRequestTransfer $salesOrderItemCollectionRequestTransfer
@@ -72,10 +64,6 @@ class SelfServicePortalStub implements SelfServicePortalStubInterface
 
     /**
      * @uses \SprykerFeature\Zed\SelfServicePortal\Communication\Controller\GatewayController::cancelSalesOrderItemCollectionAction()
-     *
-     * @param \Generated\Shared\Transfer\SalesOrderItemCollectionRequestTransfer $salesOrderItemCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SalesOrderItemCollectionResponseTransfer
      */
     public function cancelSalesOrderItemCollection(
         SalesOrderItemCollectionRequestTransfer $salesOrderItemCollectionRequestTransfer
@@ -91,10 +79,6 @@ class SelfServicePortalStub implements SelfServicePortalStubInterface
 
     /**
      * @uses \SprykerFeature\Zed\SelfServicePortal\Communication\Controller\GatewayController::getFileAttachmentCollectionAction()
-     *
-     * @param \Generated\Shared\Transfer\FileAttachmentCriteriaTransfer $fileAttachmentCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\FileAttachmentCollectionTransfer
      */
     public function getFileAttachmentCollection(
         FileAttachmentCriteriaTransfer $fileAttachmentCriteriaTransfer
@@ -110,10 +94,6 @@ class SelfServicePortalStub implements SelfServicePortalStubInterface
 
     /**
      * @uses \SprykerFeature\Zed\SelfServicePortal\Communication\Controller\GatewayController::getDashboardAction()
-     *
-     * @param \Generated\Shared\Transfer\DashboardRequestTransfer $dashboardRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\DashboardResponseTransfer
      */
     public function getDashboard(DashboardRequestTransfer $dashboardRequestTransfer): DashboardResponseTransfer
     {
@@ -125,10 +105,6 @@ class SelfServicePortalStub implements SelfServicePortalStubInterface
 
     /**
      * @uses \SprykerFeature\Zed\SelfServicePortal\Communication\Controller\GatewayController::createSspInquiryCollectionAction()
-     *
-     * @param \Generated\Shared\Transfer\SspInquiryCollectionRequestTransfer $sspInquiryCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryCollectionResponseTransfer
      */
     public function createSspInquiryCollection(SspInquiryCollectionRequestTransfer $sspInquiryCollectionRequestTransfer): SspInquiryCollectionResponseTransfer
     {
@@ -140,10 +116,6 @@ class SelfServicePortalStub implements SelfServicePortalStubInterface
 
     /**
      * @uses \SprykerFeature\Zed\SelfServicePortal\Communication\Controller\GatewayController::getSspInquiryCollectionAction()
-     *
-     * @param \Generated\Shared\Transfer\SspInquiryCriteriaTransfer $sspInquiryCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryCollectionTransfer
      */
     public function getSspInquiryCollection(SspInquiryCriteriaTransfer $sspInquiryCriteriaTransfer): SspInquiryCollectionTransfer
     {
@@ -155,10 +127,6 @@ class SelfServicePortalStub implements SelfServicePortalStubInterface
 
     /**
      * @uses \SprykerFeature\Zed\SelfServicePortal\Communication\Controller\GatewayController::cancelSspInquiryCollectionAction()
-     *
-     * @param \Generated\Shared\Transfer\SspInquiryCollectionRequestTransfer $sspInquiryCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryCollectionResponseTransfer
      */
     public function cancelSspInquiryCollection(SspInquiryCollectionRequestTransfer $sspInquiryCollectionRequestTransfer): SspInquiryCollectionResponseTransfer
     {
@@ -170,10 +138,6 @@ class SelfServicePortalStub implements SelfServicePortalStubInterface
 
     /**
      * @uses \SprykerFeature\Zed\SelfServicePortal\Communication\Controller\GatewayController::createSspAssetCollectionAction()
-     *
-     * @param \Generated\Shared\Transfer\SspAssetCollectionRequestTransfer $sspAssetCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetCollectionResponseTransfer
      */
     public function createSspAssetCollection(SspAssetCollectionRequestTransfer $sspAssetCollectionRequestTransfer): SspAssetCollectionResponseTransfer
     {
@@ -185,10 +149,6 @@ class SelfServicePortalStub implements SelfServicePortalStubInterface
 
     /**
      * @uses \SprykerFeature\Zed\SelfServicePortal\Communication\Controller\GatewayController::getSspAssetCollectionAction()
-     *
-     * @param \Generated\Shared\Transfer\SspAssetCriteriaTransfer $sspAssetCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetCollectionTransfer
      */
     public function getSspAssetCollection(SspAssetCriteriaTransfer $sspAssetCriteriaTransfer): SspAssetCollectionTransfer
     {
@@ -200,10 +160,6 @@ class SelfServicePortalStub implements SelfServicePortalStubInterface
 
     /**
      * @uses \SprykerFeature\Zed\SelfServicePortal\Communication\Controller\GatewayController::updateSspAssetCollectionAction()
-     *
-     * @param \Generated\Shared\Transfer\SspAssetCollectionRequestTransfer $sspAssetCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetCollectionResponseTransfer
      */
     public function updateSspAssetCollection(SspAssetCollectionRequestTransfer $sspAssetCollectionRequestTransfer): SspAssetCollectionResponseTransfer
     {
@@ -215,10 +171,6 @@ class SelfServicePortalStub implements SelfServicePortalStubInterface
 
     /**
      * @uses \SprykerFeature\Zed\SelfServicePortal\Communication\Controller\GatewayController::attachSspAssetToQuoteItemAction()
-     *
-     * @param \Generated\Shared\Transfer\SspAssetQuoteItemAttachmentRequestTransfer $sspAssetQuoteItemAttachmentRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
      */
     public function attachSspAssetToQuoteItem(SspAssetQuoteItemAttachmentRequestTransfer $sspAssetQuoteItemAttachmentRequestTransfer): QuoteResponseTransfer
     {

@@ -422,8 +422,6 @@ class FileAttachmentPermissionExpanderTest extends Unit
 
     /**
      * @param array<string, bool> $permissions
-     *
-     * @return void
      */
     protected function mockPermissions(array $permissions): void
     {

@@ -116,8 +116,6 @@ class SelfServicePortalServiceTest extends Unit
 
     /**
      * @param resource $fileStream
-     * @param string $storageFileName
-     * @param string $storageName
      *
      * @return \PHPUnit\Framework\MockObject\MockObject|\Spryker\Service\FileManager\FileManagerServiceInterface
      */
@@ -135,9 +133,6 @@ class SelfServicePortalServiceTest extends Unit
     }
 
     /**
-     * @param string $storageFileName
-     * @param string $storageName
-     *
      * @return \PHPUnit\Framework\MockObject\MockObject|\Spryker\Service\FileManager\FileManagerServiceInterface
      */
     protected function getFileManagerServiceMockThatThrowsException(
@@ -161,9 +156,6 @@ class SelfServicePortalServiceTest extends Unit
             ->getMock();
 
         $fileDownloader = new class ($fileManagerServiceMock, $this->createLoggerMock()) extends FileDownloader {
-            /**
-             * @var \Psr\Log\LoggerInterface
-             */
             protected LoggerInterface $loggerMock;
 
             /**

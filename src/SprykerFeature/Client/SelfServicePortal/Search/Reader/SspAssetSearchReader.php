@@ -44,9 +44,6 @@ class SspAssetSearchReader implements SspAssetSearchReaderInterface
     protected const PARAMETER_SORT = 'sort';
 
     /**
-     * @param \Spryker\Client\Search\SearchClientInterface $searchClient
-     * @param \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface $sspAssetSearchQueryPlugin
-     * @param \Spryker\Client\CompanyUser\CompanyUserClientInterface $companyUserClient
      * @param array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface> $sspAssetSearchQueryExpanderPlugins
      * @param array<\Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface> $sspAssetSearchResultFormatterPlugins
      */
@@ -91,8 +88,6 @@ class SspAssetSearchReader implements SspAssetSearchReaderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetSearchCriteriaTransfer $criteriaTransfer
-     *
      * @return array<string, mixed>
      */
     protected function prepareRequestParameters(SspAssetSearchCriteriaTransfer $criteriaTransfer): array

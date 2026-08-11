@@ -49,9 +49,6 @@ class GetSspServiceCollectionTest extends Unit
      */
     protected const DEFAULT_PRODUCT_CLASS_NAME = 'Service';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalBusinessTester
-     */
     protected SelfServicePortalBusinessTester $tester;
 
     protected function setUp(): void

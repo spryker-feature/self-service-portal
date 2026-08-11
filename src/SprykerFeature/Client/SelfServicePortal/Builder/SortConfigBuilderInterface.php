@@ -14,8 +14,6 @@ use Generated\Shared\Transfer\SortConfigTransfer;
 interface SortConfigBuilderInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\SortConfigTransfer $sortConfigTransfer
-     *
      * @return $this
      */
     public function addSort(SortConfigTransfer $sortConfigTransfer);
@@ -29,8 +27,6 @@ interface SortConfigBuilderInterface
 
     /**
      * @param array<string, mixed> $requestParameters
-     *
-     * @return string|null
      */
     public function getActiveParamName(array $requestParameters): ?string;
 

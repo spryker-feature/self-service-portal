@@ -34,9 +34,6 @@ class ProductClassOrderItemsPostSavePluginTest extends Unit
      */
     protected const OMS_PROCESS_NAME = 'test01';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     protected function setUp(): void

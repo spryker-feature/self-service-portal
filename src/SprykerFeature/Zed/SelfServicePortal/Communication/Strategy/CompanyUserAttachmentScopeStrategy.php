@@ -28,8 +28,6 @@ class CompanyUserAttachmentScopeStrategy extends BusinessUnitAttachmentScopeStra
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return array<string, mixed>|null
      */
     public function getFormData(Request $request): ?array

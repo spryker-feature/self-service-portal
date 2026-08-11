@@ -22,8 +22,6 @@ interface RelationCsvReaderInterface
     public const KEY_ENTITY_IDENTIFIERS_TO_BE_UNATTACHED = 'toBeUnattached';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
-     *
      * @return array<string, array<string>>
      */
     public function readRelations(UploadedFile $uploadedFile): array;

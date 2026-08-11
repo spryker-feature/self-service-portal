@@ -47,9 +47,6 @@ class SspModelListSynchronizationDataBulkRepositoryPluginTest extends Unit
      */
     protected const TEST_INVALID_ID = 999999;
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     protected function setUp(): void

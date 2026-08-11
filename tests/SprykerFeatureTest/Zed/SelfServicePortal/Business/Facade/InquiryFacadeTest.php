@@ -51,14 +51,8 @@ class InquiryFacadeTest extends Unit
      */
     protected $selfServicePortalFacade;
 
-    /**
-     * @var \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected CustomerTransfer $customerTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\CompanyUserTransfer
-     */
     protected CompanyUserTransfer $companyUserTransfer;
 
     /**
@@ -141,12 +135,7 @@ class InquiryFacadeTest extends Unit
      * @dataProvider sspInquirySuccessfulCollectionDataProvider
      *
      * @param array<mixed> $sspInquiryData
-     * @param int $expectedSspInquiryCount
-     * @param string $expectedSubject
-     * @param int $expectedFileCount
      * @param array<int, int> $expectedValidationErrors
-     *
-     * @return void
      */
     public function testCreateSspInquiryCollectionIsSuccessful(
         array $sspInquiryData,
@@ -231,9 +220,6 @@ class InquiryFacadeTest extends Unit
      * @dataProvider negativeSspInquiryCollectionDataProvider
      *
      * @param array<mixed> $sspInquiryData
-     * @param string $expectedExceptionMessage
-     *
-     * @return void
      */
     public function testCreateSspInquiryCollectionIsNotSuccessful(array $sspInquiryData, string $expectedExceptionMessage): void
     {
@@ -284,8 +270,6 @@ class InquiryFacadeTest extends Unit
      * @param array<string, string> $filters
      * @param array<string, string> $sorting
      * @param array<array<string, string>> $expectedSspInquiries
-     *
-     * @return void
      */
     public function testGetSspInquiryCollection(array $filters, array $sorting, array $expectedSspInquiries): void
     {
@@ -355,8 +339,6 @@ class InquiryFacadeTest extends Unit
      *
      * @param array<mixed> $sspInquiryData
      * @param array<string> $expectedValidationErrorMessages
-     *
-     * @return void
      */
     public function testCreateSspInquiryCollectionValidationErrors(
         array $sspInquiryData,

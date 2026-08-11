@@ -11,29 +11,21 @@ interface SspAssetStorageWriterInterface
 {
     /**
      * @param list<\Generated\Shared\Transfer\EventEntityTransfer> $eventEntityTransfers
-     *
-     * @return void
      */
     public function writeSspAssetStorageCollectionBySspAssetEvents(array $eventEntityTransfers): void;
 
     /**
      * @param array<int> $sspAssetIds
-     *
-     * @return void
      */
     public function writeSspAssetStorageCollection(array $sspAssetIds): void;
 
     /**
      * @param list<\Generated\Shared\Transfer\EventEntityTransfer> $eventEntityTransfers
-     *
-     * @return void
      */
     public function writeSspAssetStorageCollectionBySspAssetToCompanyBusinessUnitEvents(array $eventEntityTransfers): void;
 
     /**
      * @param list<\Generated\Shared\Transfer\EventEntityTransfer> $eventEntityTransfers
-     *
-     * @return void
      */
     public function writeSspAssetStorageCollectionBySspAssetToModelEvents(array $eventEntityTransfers): void;
 }

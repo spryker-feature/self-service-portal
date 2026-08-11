@@ -175,8 +175,6 @@ class ShipmentTypeProductConcreteFormEventSubscriber implements EventSubscriberI
     }
 
     /**
-     * @param int $idProductConcrete
-     *
      * @return list<int>
      */
     protected function getCurrentProductShipmentTypeIds(int $idProductConcrete): array

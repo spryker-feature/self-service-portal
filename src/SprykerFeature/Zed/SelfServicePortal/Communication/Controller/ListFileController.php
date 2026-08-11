@@ -19,8 +19,6 @@ use Symfony\Component\HttpFoundation\Request;
 class ListFileController extends FileAbstractController
 {
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return array<string, string|\Symfony\Component\Form\FormView>
      */
     public function indexAction(Request $request): array

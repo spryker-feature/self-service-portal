@@ -15,14 +15,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductReader implements ProductReaderInterface
 {
-    /**
-     * @var \Spryker\Zed\Product\Business\ProductFacadeInterface
-     */
     protected ProductFacadeInterface $productFacade;
 
-    /**
-     * @var \Spryker\Zed\Locale\Business\LocaleFacadeInterface
-     */
     protected LocaleFacadeInterface $localeFacade;
 
     public function __construct(
@@ -34,11 +28,7 @@ class ProductReader implements ProductReaderInterface
     }
 
     /**
-     * @param int $idProductConcrete
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     *
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
      */
     public function getProductConcrete(int $idProductConcrete): ProductConcreteTransfer
     {

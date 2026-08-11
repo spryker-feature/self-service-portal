@@ -61,8 +61,6 @@ class SspInquirySspAssetExpander implements SspInquirySspAssetExpanderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetCollectionTransfer $sspAssetCollectionTransfer
-     *
      * @return list<int>
      */
     protected function extractSspAssetIds(SspAssetCollectionTransfer $sspAssetCollectionTransfer): array
@@ -79,9 +77,6 @@ class SspInquirySspAssetExpander implements SspInquirySspAssetExpanderInterface
 
     /**
      * @param list<int> $sspAssetIds
-     * @param \Generated\Shared\Transfer\SspInquiryOwnerConditionGroupTransfer $sspInquiryOwnerConditionGroupTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryCollectionTransfer
      */
     protected function getSspInquiryCollectionTransfer(
         array $sspAssetIds,

@@ -89,10 +89,7 @@ class AttachModelForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -107,8 +104,6 @@ class AttachModelForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addHiddenSelectionFields(FormBuilderInterface $builder)
@@ -125,8 +120,6 @@ class AttachModelForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addFileUploadFields(FormBuilderInterface $builder)
@@ -155,8 +148,6 @@ class AttachModelForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addSubmitField(FormBuilderInterface $builder)

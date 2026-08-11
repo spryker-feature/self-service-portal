@@ -18,9 +18,6 @@ class SspAssetBusinessUnitAssignmentMapper
 {
     /**
      * @param \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\SelfServicePortal\Persistence\SpySspAssetToCompanyBusinessUnit> $sspAssetToCompanyBusinessUnitEntities
-     * @param \Generated\Shared\Transfer\SspAssetCollectionTransfer $sspAssetCollectionTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetCollectionTransfer
      */
     public function mapSspAssetToCompanyBusinessUnitEntitiesToSspAssetCollection(
         ObjectCollection $sspAssetToCompanyBusinessUnitEntities,

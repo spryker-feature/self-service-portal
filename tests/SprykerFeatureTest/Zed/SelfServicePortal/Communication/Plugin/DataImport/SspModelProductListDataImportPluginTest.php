@@ -70,9 +70,6 @@ class SspModelProductListDataImportPluginTest extends Unit
 
     protected ProductListTransfer $productListTransfer2;
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     protected function setUp(): void

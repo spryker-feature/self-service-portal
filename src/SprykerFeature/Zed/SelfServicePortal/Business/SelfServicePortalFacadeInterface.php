@@ -42,10 +42,6 @@ interface SelfServicePortalFacadeInterface
      * - Returns a `SspServiceCollectionTransfer` transfer object with the results and pagination information.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspServiceCriteriaTransfer $sspServiceCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspServiceCollectionTransfer
      */
     public function getSspServiceCollection(SspServiceCriteriaTransfer $sspServiceCriteriaTransfer): SspServiceCollectionTransfer;
 
@@ -62,10 +58,6 @@ interface SelfServicePortalFacadeInterface
      * - Returns `SalesOrderItemCollectionResponseTransfer` with updated items or error information.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SalesOrderItemCollectionRequestTransfer $salesOrderItemCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SalesOrderItemCollectionResponseTransfer
      */
     public function updateSalesOrderItemCollection(
         SalesOrderItemCollectionRequestTransfer $salesOrderItemCollectionRequestTransfer
@@ -81,10 +73,6 @@ interface SelfServicePortalFacadeInterface
      * - Returns `SalesOrderItemCollectionResponseTransfer` with canceled items or error information.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SalesOrderItemCollectionRequestTransfer $salesOrderItemCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SalesOrderItemCollectionResponseTransfer
      */
     public function cancelSalesOrderItemCollection(
         SalesOrderItemCollectionRequestTransfer $salesOrderItemCollectionRequestTransfer
@@ -96,10 +84,6 @@ interface SelfServicePortalFacadeInterface
      * - Uses `FileAttachmentCollectionResponseTransfer.fileAttachmentsToAdd` to create file attachments.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\FileAttachmentCollectionRequestTransfer $fileAttachmentCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\FileAttachmentCollectionResponseTransfer
      */
     public function createFileAttachmentCollection(
         FileAttachmentCollectionRequestTransfer $fileAttachmentCollectionRequestTransfer
@@ -110,10 +94,6 @@ interface SelfServicePortalFacadeInterface
      * - Deletes file attachments by provided criteria.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\FileAttachmentCollectionRequestTransfer $fileAttachmentCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\FileAttachmentCollectionResponseTransfer
      */
     public function deleteFileAttachmentCollection(
         FileAttachmentCollectionRequestTransfer $fileAttachmentCollectionRequestTransfer
@@ -125,10 +105,6 @@ interface SelfServicePortalFacadeInterface
      * - Uses `FileAttachmentCriteriaTransfer` to filter and sort the results.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\FileAttachmentCriteriaTransfer $fileAttachmentCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\FileAttachmentCollectionTransfer
      */
     public function getFileAttachmentCollection(
         FileAttachmentCriteriaTransfer $fileAttachmentCriteriaTransfer
@@ -140,10 +116,6 @@ interface SelfServicePortalFacadeInterface
      * - Runs a stack of `\SprykerFeature\Zed\SelfServicePortal\Dependency\Plugin\DashboardDataExpanderPluginInterface` plugins to collect the data.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\DashboardRequestTransfer $dashboardRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\DashboardResponseTransfer
      */
     public function getDashboard(DashboardRequestTransfer $dashboardRequestTransfer): DashboardResponseTransfer;
 
@@ -154,10 +126,6 @@ interface SelfServicePortalFacadeInterface
      * - Executes a stack of `\SprykerFeature\Zed\SelfServicePortal\Business\Hooks\PostCreate\SspInquiryPostCreateHookInterface`.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspInquiryCollectionRequestTransfer $sspInquiryCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryCollectionResponseTransfer
      */
     public function createSspInquiryCollection(
         SspInquiryCollectionRequestTransfer $sspInquiryCollectionRequestTransfer
@@ -168,10 +136,6 @@ interface SelfServicePortalFacadeInterface
      * - Finds ssp inquiries by criteria.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspInquiryCriteriaTransfer $sspInquiryCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryCollectionTransfer
      */
     public function getSspInquiryCollection(SspInquiryCriteriaTransfer $sspInquiryCriteriaTransfer): SspInquiryCollectionTransfer;
 
@@ -181,10 +145,6 @@ interface SelfServicePortalFacadeInterface
      * - Requires `SspInquiryCollectionRequestTransfer.sspInquiries.reference` to be provided.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspInquiryCollectionRequestTransfer $sspInquiryCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryCollectionResponseTransfer
      */
     public function cancelSspInquiryCollection(
         SspInquiryCollectionRequestTransfer $sspInquiryCollectionRequestTransfer
@@ -198,10 +158,6 @@ interface SelfServicePortalFacadeInterface
      * - Returns response with created assets and validation messages.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspAssetCollectionRequestTransfer $sspAssetCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetCollectionResponseTransfer
      */
     public function createSspAssetCollection(SspAssetCollectionRequestTransfer $sspAssetCollectionRequestTransfer): SspAssetCollectionResponseTransfer;
 
@@ -212,10 +168,6 @@ interface SelfServicePortalFacadeInterface
      * - Expands assets with relations based on criteria includes.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspAssetCriteriaTransfer $sspAssetCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetCollectionTransfer
      */
     public function getSspAssetCollection(SspAssetCriteriaTransfer $sspAssetCriteriaTransfer): SspAssetCollectionTransfer;
 
@@ -227,10 +179,6 @@ interface SelfServicePortalFacadeInterface
      * - Returns response with updated assets and validation messages.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspAssetCollectionRequestTransfer $sspAssetCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetCollectionResponseTransfer
      */
     public function updateSspAssetCollection(SspAssetCollectionRequestTransfer $sspAssetCollectionRequestTransfer): SspAssetCollectionResponseTransfer;
 
@@ -242,10 +190,6 @@ interface SelfServicePortalFacadeInterface
      * - Returns response with created models and validation messages.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspModelCollectionRequestTransfer $sspModelCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspModelCollectionResponseTransfer
      */
     public function createSspModelCollection(SspModelCollectionRequestTransfer $sspModelCollectionRequestTransfer): SspModelCollectionResponseTransfer;
 
@@ -256,10 +200,6 @@ interface SelfServicePortalFacadeInterface
      * - Expands models with relations based on criteria includes.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspModelCriteriaTransfer $sspModelCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspModelCollectionTransfer
      */
     public function getSspModelCollection(SspModelCriteriaTransfer $sspModelCriteriaTransfer): SspModelCollectionTransfer;
 
@@ -272,10 +212,6 @@ interface SelfServicePortalFacadeInterface
      * - Returns `SspModelCollectionResponseTransfer` with deleted models or empty collection if no models found.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspModelCollectionDeleteCriteriaTransfer $sspModelCollectionDeleteCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspModelCollectionResponseTransfer
      */
     public function deleteSspModelCollection(
         SspModelCollectionDeleteCriteriaTransfer $sspModelCollectionDeleteCriteriaTransfer
@@ -289,10 +225,6 @@ interface SelfServicePortalFacadeInterface
      * - Returns response with updated models and validation messages.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspModelCollectionRequestTransfer $sspModelCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspModelCollectionResponseTransfer
      */
     public function updateSspModelCollection(SspModelCollectionRequestTransfer $sspModelCollectionRequestTransfer): SspModelCollectionResponseTransfer;
 
@@ -305,10 +237,6 @@ interface SelfServicePortalFacadeInterface
      * - Returns success status in QuoteResponseTransfer.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\SspAssetQuoteItemAttachmentRequestTransfer $sspAssetQuoteItemAttachmentRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
      */
     public function attachSspAssetToQuoteItem(SspAssetQuoteItemAttachmentRequestTransfer $sspAssetQuoteItemAttachmentRequestTransfer): QuoteResponseTransfer;
 }

@@ -20,8 +20,6 @@ use Symfony\Component\HttpFoundation\Response;
 class ListServiceController extends AbstractController
 {
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\Response|array<mixed>
      */
     public function indexAction(Request $request): Response|array

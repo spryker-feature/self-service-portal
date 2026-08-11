@@ -43,9 +43,6 @@ class ShipmentTypeCheckerTest extends Unit
      */
     protected const SHIPMENT_TYPE_IN_CENTER_SERVICE = 'in-center-service';
 
-    /**
-     * @var \SprykerFeatureTest\Yves\SelfServicePortal\SelfServicePortalYvesTester
-     */
     protected SelfServicePortalYvesTester $tester;
 
     public function testHasOnlyDeliveryLikeShipmentTypeReturnsTrueForDelivery(): void
@@ -223,8 +220,6 @@ class ShipmentTypeCheckerTest extends Unit
 
     /**
      * @param list<string> $deliveryLikeShipmentTypes
-     *
-     * @return \SprykerFeature\Yves\SelfServicePortal\Service\Checker\ShipmentTypeChecker
      */
     protected function createShipmentTypeCheckerWithDeliveryTypes(array $deliveryLikeShipmentTypes): ShipmentTypeChecker
     {

@@ -43,10 +43,6 @@ class SspAssetFormDataToTransferMapper implements SspAssetFormDataToTransferMapp
 
     /**
      * @param array<int> $assignedBusinessUnitIds
-     * @param \Generated\Shared\Transfer\SspAssetTransfer $sspAssetTransfer
-     * @param \Generated\Shared\Transfer\SspAssetCollectionRequestTransfer $sspAssetCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\SspAssetCollectionRequestTransfer
      */
     public function mapAssignmentsToSspAssetCollectionRequestTransfer(
         array $assignedBusinessUnitIds,
@@ -94,12 +90,8 @@ class SspAssetFormDataToTransferMapper implements SspAssetFormDataToTransferMapp
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
-     *
      * @throws \Exception
      * @throws \Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException
-     *
-     * @return string
      */
     protected function getFileContent(UploadedFile $uploadedFile): string
     {

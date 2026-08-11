@@ -37,9 +37,6 @@ class SspServiceCancellableOrderItemExpanderPluginTest extends Unit
      */
     protected const TEST_STATE_NAME = 'TestState';
 
-    /**
-     * @var \SprykerFeature\Zed\SelfServicePortal\Communication\Plugin\Sales\SspServiceCancellableOrderItemExpanderPlugin
-     */
     protected SspServiceCancellableOrderItemExpanderPlugin $plugin;
 
     /**

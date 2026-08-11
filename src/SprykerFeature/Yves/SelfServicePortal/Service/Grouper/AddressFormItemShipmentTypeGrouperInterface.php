@@ -12,8 +12,6 @@ use Symfony\Component\Form\FormView;
 interface AddressFormItemShipmentTypeGrouperInterface
 {
     /**
-     * @param \Symfony\Component\Form\FormView $checkoutAddressForm
-     *
      * @return array<string, array<string, list<\Symfony\Component\Form\FormView>>>
      */
     public function groupItemsByShipmentType(FormView $checkoutAddressForm): array;

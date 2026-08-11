@@ -48,10 +48,7 @@ class ShipmentTypeProductConcreteForm extends AbstractType
     public const FIELD_ID_PRODUCT_CONCRETE = 'id_product';
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -67,10 +64,7 @@ class ShipmentTypeProductConcreteForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
-     *
-     * @return void
      */
     public function addShipmentTypeField(FormBuilderInterface $builder, array $options): void
     {

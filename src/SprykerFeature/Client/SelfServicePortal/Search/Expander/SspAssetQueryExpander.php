@@ -33,10 +33,7 @@ class SspAssetQueryExpander implements SspAssetQueryExpanderInterface
     }
 
     /**
-     * @param \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface $searchQuery
      * @param array<string, mixed> $requestParameters
-     *
-     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
     public function expandQuery(
         QueryInterface $searchQuery,
@@ -86,10 +83,7 @@ class SspAssetQueryExpander implements SspAssetQueryExpanderInterface
     }
 
     /**
-     * @param \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface $searchQuery
      * @param list<int> $whitelistIds
-     *
-     * @return void
      */
     protected function applyWhitelistFilter(QueryInterface $searchQuery, array $whitelistIds): void
     {
@@ -110,8 +104,6 @@ class SspAssetQueryExpander implements SspAssetQueryExpanderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetStorageTransfer $sspAssetStorageTransfer
-     *
      * @return list<int>
      */
     protected function extractModelIds(SspAssetStorageTransfer $sspAssetStorageTransfer): array
@@ -147,8 +139,6 @@ class SspAssetQueryExpander implements SspAssetQueryExpanderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspModelStorageTransfer $sspModelStorageTransfer
-     *
      * @return list<int>
      */
     protected function extractWhitelistIdsFromModel(SspModelStorageTransfer $sspModelStorageTransfer): array
@@ -167,8 +157,6 @@ class SspAssetQueryExpander implements SspAssetQueryExpanderInterface
 
     /**
      * @param mixed $query
-     *
-     * @return \Elastica\Query\BoolQuery
      */
     protected function getBoolQuery($query): BoolQuery
     {

@@ -29,10 +29,7 @@ class ProductClassForm extends AbstractType
     public const FIELD_PRODUCT_CLASSES = 'product_classes';
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -40,8 +37,6 @@ class ProductClassForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addProductClassField(FormBuilderInterface $builder)

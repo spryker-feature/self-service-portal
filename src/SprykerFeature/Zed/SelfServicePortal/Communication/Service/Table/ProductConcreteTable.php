@@ -70,8 +70,6 @@ class ProductConcreteTable extends AbstractTable
     protected const COL_IMAGE = 'image';
 
     /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
-     *
      * @return mixed
      */
     protected function configure(TableConfiguration $config)
@@ -113,8 +111,6 @@ class ProductConcreteTable extends AbstractTable
     }
 
     /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
-     *
      * @return mixed
      */
     protected function prepareData(TableConfiguration $config)
@@ -151,8 +147,6 @@ class ProductConcreteTable extends AbstractTable
     }
 
     /**
-     * @param \Orm\Zed\Product\Persistence\SpyProduct $productEntity
-     *
      * @return array<string, mixed>
      */
     protected function generateItem(SpyProduct $productEntity): array
@@ -202,8 +196,6 @@ class ProductConcreteTable extends AbstractTable
     }
 
     /**
-     * @param \Orm\Zed\Product\Persistence\SpyProduct $productEntity
-     *
      * @return array<int, string>
      */
     protected function createActionColumn(SpyProduct $productEntity): array

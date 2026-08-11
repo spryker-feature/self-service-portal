@@ -41,9 +41,6 @@ class ServicePointItemExpanderPluginTest extends Unit
      */
     protected const TEST_STORE_NAME = 'DE';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     public function testExpandItemsExpandsItemsWithServicePoint(): void

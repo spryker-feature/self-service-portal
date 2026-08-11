@@ -19,8 +19,6 @@ class CompanyUserReader implements CompanyUserReaderInterface
 
     /**
      * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer
      */
     public function getCurrentCompanyUser(): CompanyUserTransfer
     {

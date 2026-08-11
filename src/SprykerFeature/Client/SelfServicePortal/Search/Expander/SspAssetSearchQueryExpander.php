@@ -61,12 +61,7 @@ class SspAssetSearchQueryExpander implements SspAssetSearchQueryExpanderInterfac
     }
 
     /**
-     * @param \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface $searchQuery
      * @param array<string, mixed> $requestParameters
-     * @param \SprykerFeature\Client\SelfServicePortal\Builder\PaginationConfigBuilderInterface $paginationConfigBuilder
-     * @param \SprykerFeature\Client\SelfServicePortal\Builder\SortConfigBuilderInterface $sortConfigBuilder
-     *
-     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
     public function expandQuery(
         QueryInterface $searchQuery,
@@ -91,10 +86,7 @@ class SspAssetSearchQueryExpander implements SspAssetSearchQueryExpanderInterfac
     }
 
     /**
-     * @param \Elastica\Query\BoolQuery $query
      * @param array<string, mixed> $requestParameters
-     *
-     * @return void
      */
     protected function addPermissionBasedFiltering(BoolQuery $query, array $requestParameters): void
     {
@@ -158,11 +150,7 @@ class SspAssetSearchQueryExpander implements SspAssetSearchQueryExpanderInterfac
     }
 
     /**
-     * @param \Elastica\Query $query
      * @param array<string, mixed> $requestParameters
-     * @param \SprykerFeature\Client\SelfServicePortal\Builder\PaginationConfigBuilderInterface $paginationConfigBuilder
-     *
-     * @return void
      */
     protected function addPaginationToQuery(Query $query, array $requestParameters, PaginationConfigBuilderInterface $paginationConfigBuilder): void
     {
@@ -181,11 +169,7 @@ class SspAssetSearchQueryExpander implements SspAssetSearchQueryExpanderInterfac
     }
 
     /**
-     * @param \Elastica\Query $searchQuery
      * @param array<string, mixed> $requestParameters
-     * @param \SprykerFeature\Client\SelfServicePortal\Builder\SortConfigBuilderInterface $sortConfigBuilder
-     *
-     * @return void
      */
     protected function addSorting(Query $searchQuery, array $requestParameters, SortConfigBuilderInterface $sortConfigBuilder): void
     {
@@ -201,10 +185,7 @@ class SspAssetSearchQueryExpander implements SspAssetSearchQueryExpanderInterfac
     }
 
     /**
-     * @param \SprykerFeature\Client\SelfServicePortal\Builder\SortConfigBuilderInterface $sspAssetSearchSortConfigBuilder
      * @param array<string, mixed> $requestParameters
-     *
-     * @return \Generated\Shared\Transfer\SortConfigTransfer
      */
     protected function getSortConfigTransfer(
         SortConfigBuilderInterface $sspAssetSearchSortConfigBuilder,

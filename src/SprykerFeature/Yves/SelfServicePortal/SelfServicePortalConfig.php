@@ -171,8 +171,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - This template is used to render the content of the service point widget in a dynamic way, when the shipment type is selected.
      *
      * @api
-     *
-     * @return string
      */
     public function getServicePointWidgetContentTemplatePath(): string
     {
@@ -184,8 +182,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the service product class name.
      *
      * @api
-     *
-     * @return string
      */
     public function getServiceProductClassName(): string
     {
@@ -197,8 +193,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the scheduled product class name.
      *
      * @api
-     *
-     * @return string
      */
     public function getScheduledProductClassName(): string
     {
@@ -242,8 +236,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the page parameter name for service list pagination.
      *
      * @api
-     *
-     * @return string
      */
     public function getServiceListPageParameterName(): string
     {
@@ -255,8 +247,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the default number of items per page for service list.
      *
      * @api
-     *
-     * @return int
      */
     public function getServiceListDefaultItemsPerPage(): int
     {
@@ -269,8 +259,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Used as a fallback.
      *
      * @api
-     *
-     * @return int
      */
     public function getSearchResultLimit(): int
     {
@@ -283,8 +271,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Used for filtering files by date.
      *
      * @api
-     *
-     * @return string
      */
     public function getDateTimeZone(): string
     {
@@ -309,8 +295,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Defines the download chunk size in bytes.
      *
      * @api
-     *
-     * @return int
      */
     public function getCompanyFileDownloadChunkSize(): int
     {
@@ -322,8 +306,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns parameter name for file attachment page number.
      *
      * @api
-     *
-     * @return string
      */
     public function getFileAttachmentPageParameterName(): string
     {
@@ -335,8 +317,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns maximum items per page for file attachment pagination.
      *
      * @api
-     *
-     * @return int
      */
     public function getFileAttachmentDefaultMaxPerPage(): int
     {
@@ -362,8 +342,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - File size can be given with units: Kb Mb or Gb.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspInquiryFilesMaxSize(): string
     {
@@ -376,8 +354,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - File size can be given with units: Kb Mb or Gb.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspInquiryFileMaxSize(): string
     {
@@ -389,8 +365,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the default file max count during ssp inquiry creation.
      *
      * @api
-     *
-     * @return int
      */
     public function getSspInquiryFileMaxCount(): int
     {
@@ -415,8 +389,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the maximum length of the subject field for ssp inquiry.
      *
      * @api
-     *
-     * @return int
      */
     public function getSspInquirySubjectMaxLength(): int
     {
@@ -428,8 +400,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the maximum length of the description field for ssp inquiry.
      *
      * @api
-     *
-     * @return int
      */
     public function getSspInquiryDescriptionMaxLength(): int
     {
@@ -455,8 +425,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Supported only in State Machines where Cancel event is allowed.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspInquiryCancelStateMachineEventName(): string
     {
@@ -468,8 +436,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns parameter name for ssp inquiries per page.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspInquiryParamPerPage(): string
     {
@@ -481,8 +447,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns parameter name for ssp inquiries page number.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspInquiryParamPage(): string
     {
@@ -494,8 +458,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns page size for ssp inquiries list page.
      *
      * @api
-     *
-     * @return int
      */
     public function getSspInquiryCountPerPageList(): int
     {
@@ -520,8 +482,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the default maximum items per page for file dashboard.
      *
      * @api
-     *
-     * @return int
      */
     public function getDefaultFileDashboardMaxPerPage(): int
     {
@@ -592,8 +552,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      *   to be greater than or equal to the effective limit derived from the values above.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspAssetImageFileMaxSize(): string
     {
@@ -605,8 +563,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Defines the read chunk size in bytes.
      *
      * @api
-     *
-     * @return int
      */
     public function getSspAssetImageDownloadChunkSize(): int
     {
@@ -618,8 +574,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Defines the read chunk size in bytes for the inquiry file download on the storefront.
      *
      * @api
-     *
-     * @return int
      */
     public function getInquiryFileDownloadChunkSize(): int
     {
@@ -631,8 +585,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns base URL for Yves including scheme and port (e.g. http://www.de.demoshop.local:8080).
      *
      * @api
-     *
-     * @return string
      */
     public function getYvesBaseUrl(): string
     {
@@ -644,8 +596,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns parameter name for ssp asset page number.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspAssetParamPage(): string
     {
@@ -657,8 +607,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns parameter name for ssp assets per page.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspAssetParamPerPage(): string
     {
@@ -670,8 +618,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns page size for ssp assets list page.
      *
      * @api
-     *
-     * @return int
      */
     public function getSspAssetCountPerPageList(): int
     {
@@ -692,8 +638,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * Returns the shipment type key for in-center service.
      *
      * @api
-     *
-     * @return string
      */
     public function getShipmentTypeInCenterService(): string
     {
@@ -705,8 +649,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the Google Maps API key.
      *
      * @api
-     *
-     * @return string
      */
     public function getGoogleMapsApiKey(): string
     {
@@ -750,8 +692,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns pagination configuration for SSP asset search.
      *
      * @api
-     *
-     * @return \Generated\Shared\Transfer\PaginationConfigTransfer
      */
     public function getSspAssetSearchPaginationConfigTransfer(): PaginationConfigTransfer
     {
@@ -777,8 +717,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - This shipment type will be pre-selected in the shipment type options for the services.
      *
      * @api
-     *
-     * @return string
      */
     public function getDefaultSelectedShipmentTypeKey(): string
     {

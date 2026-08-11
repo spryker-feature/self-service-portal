@@ -32,8 +32,6 @@ class SspInquiryValidator implements SspInquiryValidatorInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspInquiryTransfer $sspInquiryTransfer
-     *
      * @return \ArrayObject<int, \Generated\Shared\Transfer\ErrorTransfer>
      */
     public function validateSspInquiry(SspInquiryTransfer $sspInquiryTransfer): ArrayObject
@@ -72,10 +70,7 @@ class SspInquiryValidator implements SspInquiryValidatorInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspInquiryTransfer $sspInquiryTransfer
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ErrorTransfer> $validationErrors
-     *
-     * @return void
      */
     protected function validateCompanyUser(SspInquiryTransfer $sspInquiryTransfer, ArrayObject $validationErrors): void
     {
@@ -87,10 +82,7 @@ class SspInquiryValidator implements SspInquiryValidatorInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspInquiryTransfer $sspInquiryTransfer
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ErrorTransfer> $validationErrors
-     *
-     * @return void
      */
     protected function validateType(SspInquiryTransfer $sspInquiryTransfer, ArrayObject $validationErrors): void
     {
@@ -112,10 +104,7 @@ class SspInquiryValidator implements SspInquiryValidatorInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspInquiryTransfer $sspInquiryTransfer
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ErrorTransfer> $validationErrors
-     *
-     * @return void
      */
     protected function validateSubject(SspInquiryTransfer $sspInquiryTransfer, ArrayObject $validationErrors): void
     {
@@ -135,10 +124,7 @@ class SspInquiryValidator implements SspInquiryValidatorInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspInquiryTransfer $sspInquiryTransfer
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ErrorTransfer> $validationErrors
-     *
-     * @return void
      */
     protected function validateDescription(SspInquiryTransfer $sspInquiryTransfer, ArrayObject $validationErrors): void
     {
@@ -158,10 +144,7 @@ class SspInquiryValidator implements SspInquiryValidatorInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspInquiryTransfer $sspInquiryTransfer
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ErrorTransfer> $validationErrors
-     *
-     * @return void
      */
     protected function validateFiles(SspInquiryTransfer $sspInquiryTransfer, ArrayObject $validationErrors): void
     {
@@ -180,8 +163,6 @@ class SspInquiryValidator implements SspInquiryValidatorInterface
     /**
      * @param array<int, \Generated\Shared\Transfer\FileUploadTransfer> $fileUploads
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ErrorTransfer> $validationErrors
-     *
-     * @return void
      */
     protected function validateFileCount(array $fileUploads, ArrayObject $validationErrors): void
     {
@@ -197,8 +178,6 @@ class SspInquiryValidator implements SspInquiryValidatorInterface
     /**
      * @param array<int, \Generated\Shared\Transfer\FileUploadTransfer> $fileUploads
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ErrorTransfer> $validationErrors
-     *
-     * @return void
      */
     protected function validateFileTotalSize(array $fileUploads, ArrayObject $validationErrors): void
     {
@@ -219,8 +198,6 @@ class SspInquiryValidator implements SspInquiryValidatorInterface
     /**
      * @param array<int, \Generated\Shared\Transfer\FileUploadTransfer> $fileUploads
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ErrorTransfer> $validationErrors
-     *
-     * @return void
      */
     protected function validateFileIndividualSizes(array $fileUploads, ArrayObject $validationErrors): void
     {
@@ -242,8 +219,6 @@ class SspInquiryValidator implements SspInquiryValidatorInterface
     /**
      * @param array<int, \Generated\Shared\Transfer\FileUploadTransfer> $fileUploads
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ErrorTransfer> $validationErrors
-     *
-     * @return void
      */
     protected function validateFileTypes(array $fileUploads, ArrayObject $validationErrors): void
     {
@@ -257,11 +232,8 @@ class SspInquiryValidator implements SspInquiryValidatorInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\FileUploadTransfer $fileUpload
      * @param array<string> $allowedMimeTypes
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ErrorTransfer> $validationErrors
-     *
-     * @return void
      */
     protected function validateFileMimeType(FileUploadTransfer $fileUpload, array $allowedMimeTypes, ArrayObject $validationErrors): void
     {
@@ -277,11 +249,8 @@ class SspInquiryValidator implements SspInquiryValidatorInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\FileUploadTransfer $fileUpload
      * @param array<string> $allowedExtensions
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ErrorTransfer> $validationErrors
-     *
-     * @return void
      */
     protected function validateFileExtension(FileUploadTransfer $fileUpload, array $allowedExtensions, ArrayObject $validationErrors): void
     {

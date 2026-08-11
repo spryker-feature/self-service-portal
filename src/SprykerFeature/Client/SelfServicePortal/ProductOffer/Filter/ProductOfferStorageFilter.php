@@ -44,8 +44,6 @@ class ProductOfferStorageFilter implements ProductOfferStorageFilterInterface
     /**
      * @param array<string> $shipmentTypeUuids
      * @param array<string> $servicePointUuids
-     *
-     * @return bool
      */
     protected function shouldSkipFiltering(array $shipmentTypeUuids, array $servicePointUuids): bool
     {
@@ -53,11 +51,8 @@ class ProductOfferStorageFilter implements ProductOfferStorageFilterInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductOfferStorageTransfer $productOfferStorageTransfer
      * @param array<string, true> $shipmentTypeUuidsMap
      * @param array<string, true> $servicePointUuidsMap
-     *
-     * @return bool
      */
     protected function isProductOfferMatching(
         ProductOfferStorageTransfer $productOfferStorageTransfer,
@@ -71,10 +66,7 @@ class ProductOfferStorageFilter implements ProductOfferStorageFilterInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductOfferStorageTransfer $productOfferStorageTransfer
      * @param array<string, true> $shipmentTypeUuidsMap
-     *
-     * @return bool
      */
     protected function matchesShipmentTypeCriteria(
         ProductOfferStorageTransfer $productOfferStorageTransfer,
@@ -94,10 +86,7 @@ class ProductOfferStorageFilter implements ProductOfferStorageFilterInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductOfferStorageTransfer $productOfferStorageTransfer
      * @param array<string, true> $servicePointUuidsMap
-     *
-     * @return bool
      */
     protected function matchesServicePointCriteria(
         ProductOfferStorageTransfer $productOfferStorageTransfer,

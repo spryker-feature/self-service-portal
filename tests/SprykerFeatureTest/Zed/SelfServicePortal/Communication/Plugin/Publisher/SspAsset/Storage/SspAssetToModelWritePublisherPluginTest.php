@@ -94,9 +94,6 @@ class SspAssetToModelWritePublisherPluginTest extends Unit
      */
     protected const STORAGE_FIELD_MODEL_IDS = 'model_ids';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalCommunicationTester
-     */
     protected SelfServicePortalCommunicationTester $tester;
 
     /**

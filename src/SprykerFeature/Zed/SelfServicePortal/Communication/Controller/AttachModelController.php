@@ -79,8 +79,6 @@ class AttachModelController extends AbstractController
     protected const EXAMPLE_PRODUCT_LIST_CSV_ATTACHMENT_FILE_CONTENT = "Product list to be attached,Product list to be detached\n1,4\n2,5\n3,6";
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     public function indexAction(Request $request): array|RedirectResponse

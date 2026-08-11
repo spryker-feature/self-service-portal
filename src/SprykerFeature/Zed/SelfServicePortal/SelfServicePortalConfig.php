@@ -327,8 +327,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Import configuration for product shipment type.
      *
      * @api
-     *
-     * @return \Generated\Shared\Transfer\DataImporterDataSourceConfigurationTransfer
      */
     public function getProductShipmentTypeDataImporterConfiguration(): DataImporterDataSourceConfigurationTransfer
     {
@@ -344,8 +342,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Import configuration for product class.
      *
      * @api
-     *
-     * @return \Generated\Shared\Transfer\DataImporterDataSourceConfigurationTransfer
      */
     public function getProductClassDataImporterConfiguration(): DataImporterDataSourceConfigurationTransfer
     {
@@ -361,8 +357,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Import configuration for product to product class relation.
      *
      * @api
-     *
-     * @return \Generated\Shared\Transfer\DataImporterDataSourceConfigurationTransfer
      */
     public function getProductToProductClassDataImporterConfiguration(): DataImporterDataSourceConfigurationTransfer
     {
@@ -378,8 +372,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      *  - Import configuration for ssp inquiry.
      *
      * @api
-     *
-     * @return \Generated\Shared\Transfer\DataImporterDataSourceConfigurationTransfer
      */
     public function getSspInquiryDataImporterConfiguration(): DataImporterDataSourceConfigurationTransfer
     {
@@ -395,8 +387,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Import configuration for ssp asset.
      *
      * @api
-     *
-     * @return \Generated\Shared\Transfer\DataImporterDataSourceConfigurationTransfer
      */
     public function getSspAssetDataImporterConfiguration(): DataImporterDataSourceConfigurationTransfer
     {
@@ -413,8 +403,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns data source configuration for importing ssp models.
      *
      * @api
-     *
-     * @return \Generated\Shared\Transfer\DataImporterDataSourceConfigurationTransfer
      */
     public function getSspModelDataImporterConfiguration(): DataImporterDataSourceConfigurationTransfer
     {
@@ -431,8 +419,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns data source configuration for importing ssp model to asset relations.
      *
      * @api
-     *
-     * @return \Generated\Shared\Transfer\DataImporterDataSourceConfigurationTransfer
      */
     public function getSspModelAssetDataImporterConfiguration(): DataImporterDataSourceConfigurationTransfer
     {
@@ -449,8 +435,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns data source configuration for importing ssp model to product list relations.
      *
      * @api
-     *
-     * @return \Generated\Shared\Transfer\DataImporterDataSourceConfigurationTransfer
      */
     public function getSspModelProductListDataImporterConfiguration(): DataImporterDataSourceConfigurationTransfer
     {
@@ -512,8 +496,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - The default shipment type key is used for the cart items if no shipment type is set.
      *
      * @api
-     *
-     * @return string
      */
     public function getDefaultShipmentType(): string
     {
@@ -527,8 +509,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * @api
      *
      * @throws \SprykerFeature\Zed\SelfServicePortal\Business\Service\Exception\DefaultMerchantNotConfiguredException
-     *
-     * @return string
      */
     public function getDefaultMerchantReference(): string
     {
@@ -540,8 +520,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the service product class name.
      *
      * @api
-     *
-     * @return string
      */
     public function getServiceProductClassName(): string
     {
@@ -587,8 +565,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the default sort field for file dashboard.
      *
      * @api
-     *
-     * @return string
      */
     public function getDefaultFileDashboardSortField(): string
     {
@@ -600,8 +576,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the default max per page for inquiry asset expansion pagination.
      *
      * @api
-     *
-     * @return int
      */
     public function getInquiryAssetExpanderMaxPerPage(): int
     {
@@ -613,8 +587,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the default maximum items per page for inquiry dashboard.
      *
      * @api
-     *
-     * @return int
      */
     public function getDashboardInquiryMaxPerPage(): int
     {
@@ -626,8 +598,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the default sort field for inquiry dashboard.
      *
      * @api
-     *
-     * @return string
      */
     public function getDefaultInquiryDashboardSortField(): string
     {
@@ -639,8 +609,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the default sort direction for inquiry dashboard.
      *
      * @api
-     *
-     * @return bool
      */
     public function isDefaultInquiryDashboardSortAscending(): bool
     {
@@ -652,8 +620,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the maximum file size allowed for company file uploads.
      *
      * @api
-     *
-     * @return string
      */
     public function getCompanyFileMaxFileSize(): string
     {
@@ -711,8 +677,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the prefix for company file sequence number generation.
      *
      * @api
-     *
-     * @return string
      */
     public function getCompanyFileSequenceNumberPrefix(): string
     {
@@ -724,8 +688,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the name for company file sequence number generation.
      *
      * @api
-     *
-     * @return string
      */
     public function getCompanyFileSequenceNumberName(): string
     {
@@ -738,8 +700,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Used for filtering files by date.
      *
      * @api
-     *
-     * @return string
      */
     public function getDateTimeZone(): string
     {
@@ -754,8 +714,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * @api
      *
      * @throws \SprykerFeature\Zed\SelfServicePortal\Business\CompanyFile\Exception\CompanyFileUploadStorageNameNotConfiguredException
-     *
-     * @return string
      */
     public function getCompanyFileUploadStorageName(): string
     {
@@ -770,8 +728,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * @api
      *
      * @throws \SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Exception\InquiryFileUploadStorageNameNotConfiguredException
-     *
-     * @return string
      */
     public function getInquiryFileUploadStorageName(): string
     {
@@ -786,8 +742,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * @api
      *
      * @throws \SprykerFeature\Zed\SelfServicePortal\Business\Asset\Exception\AssetImageFileUploadStorageNameNotConfiguredException
-     *
-     * @return string
      */
     public function getAssetImageFileUploadStorageName(): string
     {
@@ -801,8 +755,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Applied when searching for entities to attach files to.
      *
      * @api
-     *
-     * @return int
      */
     public function getCompanyFileAutocompleteLimit(): int
     {
@@ -827,8 +779,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the ssp inquiry state machine name.
      *
      * @api
-     *
-     * @return string
      */
     public function getInquiryStateMachineName(): string
     {
@@ -871,8 +821,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns exact ssp inquiry event name for ssp inquiry cancellation.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspInquiryCancelStateMachineEventName(): string
     {
@@ -884,8 +832,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
       * - Returns base URL for Yves including scheme and port (e.g. http://www.de.demoshop.local:8080).
       *
       * @api
-      *
-      * @return string
       */
     public function getYvesBaseUrl(): string
     {
@@ -927,8 +873,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * @api
      *
      * @throws \SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Exception\InquiryPendingStatusNotConfiguredException
-     *
-     * @return string
      */
     public function getInquiryPendingStatus(): string
     {
@@ -941,8 +885,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Used for reading inquiry files in chunks during file download in backoffice.
      *
      * @api
-     *
-     * @return int
      */
     public function getSspInquiryFileReadChunkSize(): int
     {
@@ -954,8 +896,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the maximum length of the subject field for ssp inquiry.
      *
      * @api
-     *
-     * @return int
      */
     public function getSspInquirySubjectMaxLength(): int
     {
@@ -967,8 +907,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the maximum length of the description field for ssp inquiry.
      *
      * @api
-     *
-     * @return int
      */
     public function getSspInquiryDescriptionMaxLength(): int
     {
@@ -980,8 +918,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the default file max count during ssp inquiry creation.
      *
      * @api
-     *
-     * @return int
      */
     public function getSspInquiryFileMaxCount(): int
     {
@@ -994,8 +930,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - File size can be given with units: Kb Mb or Gb.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspInquiryFilesMaxSize(): string
     {
@@ -1008,8 +942,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - File size can be given with units: Kb Mb or Gb.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspInquiryFileMaxSize(): string
     {
@@ -1047,8 +979,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the settings for the ssp asset sequence number.
      *
      * @api
-     *
-     * @return \Generated\Shared\Transfer\SequenceNumberSettingsTransfer
      */
     public function getAssetSequenceNumberSettings(): SequenceNumberSettingsTransfer
     {
@@ -1077,8 +1007,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the initial asset status.
      *
      * @api
-     *
-     * @return string
      */
     public function getInitialAssetStatus(): string
     {
@@ -1090,8 +1018,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the settings for the ssp model sequence number.
      *
      * @api
-     *
-     * @return \Generated\Shared\Transfer\SequenceNumberSettingsTransfer
      */
     public function getModelSequenceNumberSettings(): SequenceNumberSettingsTransfer
     {
@@ -1109,8 +1035,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * @api
      *
      * @throws \SprykerFeature\Zed\SelfServicePortal\Business\Service\Exception\SspModelImageFileStorageNameIsNotConfigured
-     *
-     * @return string
      */
     public function getModelStorageName(): string
     {
@@ -1148,8 +1072,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the default file max size for file uploads for ssp asset.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspAssetDefaultFileMaxSize(): string
     {
@@ -1161,8 +1083,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Defines the read chunk size in bytes.
      *
      * @api
-     *
-     * @return int
      */
     public function getSspAssetImageReadChunkSize(): int
     {
@@ -1174,8 +1094,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Creates a prefix for the asset sequence number.
      *
      * @api
-     *
-     * @return string
      */
     protected function createAssetPrefix(): string
     {
@@ -1190,8 +1108,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Creates a prefix for the model sequence number.
      *
      * @api
-     *
-     * @return string
      */
     protected function createModelPrefix(): string
     {
@@ -1206,8 +1122,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the maximum length for the model name.
      *
      * @api
-     *
-     * @return int
      */
     public function getSspModelNameMaxLength(): int
     {
@@ -1219,8 +1133,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the maximum length for the model code.
      *
      * @api
-     *
-     * @return int
      */
     public function getSspModelCodeMaxLength(): int
     {
@@ -1262,8 +1174,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the default file max size for file uploads for ssp model.
      *
      * @api
-     *
-     * @return string
      */
     public function getSspModelDefaultImageFileMaxSize(): string
     {
@@ -1275,8 +1185,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the synchronization pool name for SSP model and assets storage.
      *
      * @api
-     *
-     * @return string|null
      */
     public function getSelfServicePortalStorageSynchronizationPoolName(): ?string
     {
@@ -1288,8 +1196,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Returns the SSP asset search synchronization pool name.
      *
      * @api
-     *
-     * @return string|null
      */
     public function getSspAssetSearchSynchronizationPoolName(): ?string
     {
@@ -1320,8 +1226,6 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * - Used to restrict the size of uploaded files for performance and security reasons.
      *
      * @api
-     *
-     * @return int
      */
     public function getMaxUploadFileSize(): int
     {

@@ -34,8 +34,6 @@ class AttachedCompanyUsersTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addAttachedCompanyUsersTab(TabsViewTransfer $tabsViewTransfer)
@@ -52,8 +50,6 @@ class AttachedCompanyUsersTabs extends AbstractTabs
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
      * @return $this
      */
     protected function addCompanyUsersToBeUnattachedTab(TabsViewTransfer $tabsViewTransfer)

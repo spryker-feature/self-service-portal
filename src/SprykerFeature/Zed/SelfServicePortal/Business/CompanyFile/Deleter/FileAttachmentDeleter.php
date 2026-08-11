@@ -25,8 +25,6 @@ class FileAttachmentDeleter implements FileAttachmentDeleterInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\FileCollectionTransfer $fileCollectionTransfer
-     *
      * @return list<int>
      */
     protected function extractFileIds(FileCollectionTransfer $fileCollectionTransfer): array

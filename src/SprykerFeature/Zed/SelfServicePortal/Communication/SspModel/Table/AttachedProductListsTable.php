@@ -26,19 +26,10 @@ class AttachedProductListsTable extends AbstractTable
      */
     protected const COL_TITLE = 'title';
 
-    /**
-     * @var \Orm\Zed\SelfServicePortal\Persistence\SpySspModelToProductListQuery
-     */
     protected SpySspModelToProductListQuery $sspModelToProductListQuery;
 
-    /**
-     * @var \SprykerFeature\Zed\SelfServicePortal\SelfServicePortalConfig
-     */
     protected SelfServicePortalConfig $selfServicePortalConfig;
 
-    /**
-     * @var int
-     */
     protected int $idSspModel;
 
     public function __construct(
@@ -79,8 +70,6 @@ class AttachedProductListsTable extends AbstractTable
     }
 
     /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
-     *
      * @return array<array<string, mixed>>
      */
     protected function prepareData(TableConfiguration $config): array

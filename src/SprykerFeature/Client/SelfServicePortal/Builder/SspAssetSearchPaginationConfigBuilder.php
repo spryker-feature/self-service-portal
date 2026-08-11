@@ -13,9 +13,6 @@ use Generated\Shared\Transfer\PaginationConfigTransfer;
 
 class SspAssetSearchPaginationConfigBuilder implements PaginationConfigBuilderInterface
 {
-    /**
-     * @var \Generated\Shared\Transfer\PaginationConfigTransfer
-     */
     protected PaginationConfigTransfer $paginationConfigTransfer;
 
     public function setPaginationConfigTransfer(PaginationConfigTransfer $paginationConfigTransfer): void
@@ -30,8 +27,6 @@ class SspAssetSearchPaginationConfigBuilder implements PaginationConfigBuilderIn
 
     /**
      * @param array<string, mixed> $requestParameters
-     *
-     * @return int
      */
     public function getCurrentPage(array $requestParameters): int
     {
@@ -42,8 +37,6 @@ class SspAssetSearchPaginationConfigBuilder implements PaginationConfigBuilderIn
 
     /**
      * @param array<string, mixed> $requestParameters
-     *
-     * @return int
      */
     public function getCurrentItemsPerPage(array $requestParameters): int
     {
@@ -58,8 +51,6 @@ class SspAssetSearchPaginationConfigBuilder implements PaginationConfigBuilderIn
 
     /**
      * @param array<string, mixed> $requestParameters
-     *
-     * @return bool
      */
     protected function isValidItemsPerPage(array $requestParameters): bool
     {

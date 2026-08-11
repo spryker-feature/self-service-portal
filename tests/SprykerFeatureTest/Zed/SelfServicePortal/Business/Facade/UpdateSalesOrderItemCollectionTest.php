@@ -74,9 +74,6 @@ class UpdateSalesOrderItemCollectionTest extends Unit
      */
     protected const GLOSSARY_KEY_VALIDATION_NO_ORDER_ITEMS_PROVIDED = 'self_service_portal.service.validation.no_order_items_provided';
 
-    /**
-     * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalBusinessTester
-     */
     protected SelfServicePortalBusinessTester $tester;
 
     protected function setUp(): void

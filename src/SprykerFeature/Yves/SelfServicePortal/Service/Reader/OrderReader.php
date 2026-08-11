@@ -54,12 +54,7 @@ class OrderReader implements OrderReaderInterface
     }
 
     /**
-     * @param int $idSalesOrder
-     * @param string $orderItemUuid
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     *
-     * @return \Generated\Shared\Transfer\ItemTransfer
      */
     public function getOrderItem(int $idSalesOrder, string $orderItemUuid): ItemTransfer
     {

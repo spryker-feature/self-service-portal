@@ -24,9 +24,6 @@ class SspAssetPermissionChecker implements SspAssetPermissionCheckerInterface
 
     /**
      * @param array<string, mixed> $storageData
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return bool
      */
     public function canViewSspAsset(array $storageData, CompanyUserTransfer $companyUserTransfer): bool
     {
@@ -36,9 +33,6 @@ class SspAssetPermissionChecker implements SspAssetPermissionCheckerInterface
 
     /**
      * @param array<string, mixed> $storageData
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return bool
      */
     protected function isBusinessUnitPermissionGranted(array $storageData, CompanyUserTransfer $companyUserTransfer): bool
     {
@@ -60,9 +54,6 @@ class SspAssetPermissionChecker implements SspAssetPermissionCheckerInterface
 
     /**
      * @param array<string, mixed> $storageData
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return bool
      */
     protected function isCompanyPermissionGranted(array $storageData, CompanyUserTransfer $companyUserTransfer): bool
     {

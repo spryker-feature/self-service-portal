@@ -89,8 +89,6 @@ class ServicePointItemExpander implements ServicePointItemExpanderInterface
     /**
      * @param \ArrayObject<int, \Generated\Shared\Transfer\ItemTransfer> $itemTransfers
      * @param array<string, \Generated\Shared\Transfer\ServicePointTransfer> $servicePointTransfersIndexedByUuid
-     *
-     * @return void
      */
     protected function expandItemsWithServicePoints(
         ArrayObject $itemTransfers,

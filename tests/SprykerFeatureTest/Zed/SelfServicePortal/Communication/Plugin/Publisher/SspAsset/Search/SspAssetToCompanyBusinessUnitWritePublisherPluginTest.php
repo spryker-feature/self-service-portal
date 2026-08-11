@@ -357,8 +357,6 @@ class SspAssetToCompanyBusinessUnitWritePublisherPluginTest extends Unit
 
     /**
      * @param array<string, mixed> $data
-     *
-     * @return void
      */
     protected function assertSearchDataStructure(array $data): void
     {

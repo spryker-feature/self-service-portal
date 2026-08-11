@@ -12,8 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 interface FormDataProcessorInterface
 {
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return array<string, mixed>|null
      */
     public function getFormDataFromRequest(Request $request): ?array;

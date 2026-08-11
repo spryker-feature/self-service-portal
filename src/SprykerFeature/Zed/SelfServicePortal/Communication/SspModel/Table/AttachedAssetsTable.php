@@ -105,8 +105,6 @@ class AttachedAssetsTable extends AbstractTable
     }
 
     /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
-     *
      * @return array<mixed>
      */
     protected function prepareData(TableConfiguration $config): array

@@ -71,8 +71,6 @@ class SspAssetReader implements SspAssetReaderInterface
     }
 
     /**
-     * @param string $allowedAction
-     *
      * @return array<string>
      */
     protected function getStatusesByAllowedAction(string $allowedAction): array

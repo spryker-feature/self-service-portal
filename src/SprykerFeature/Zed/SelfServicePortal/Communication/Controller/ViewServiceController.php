@@ -41,8 +41,6 @@ class ViewServiceController extends AbstractController
     protected const URL_PATH_SELF_SERVICE_PORTAL_LIST_SERVICE = '/self-service-portal/list-service';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<string, mixed>
      */
     public function indexAction(Request $request): array|RedirectResponse

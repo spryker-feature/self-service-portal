@@ -24,9 +24,6 @@ use SprykerFeature\Zed\SelfServicePortal\Persistence\Mapper\ProductClassMapper;
  */
 class ProductClassMapperTest extends Unit
 {
-    /**
-     * @var \SprykerFeature\Zed\SelfServicePortal\Persistence\Mapper\ProductClassMapper
-     */
     protected ProductClassMapper $productClassMapper;
 
     protected function _before(): void

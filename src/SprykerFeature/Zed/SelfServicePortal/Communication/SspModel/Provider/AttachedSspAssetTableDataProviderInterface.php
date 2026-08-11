@@ -10,8 +10,6 @@ namespace SprykerFeature\Zed\SelfServicePortal\Communication\SspModel\Provider;
 interface AttachedSspAssetTableDataProviderInterface
 {
     /**
-     * @param int $idSspModel
-     *
      * @return array<string, mixed>
      */
     public function getAttachedSspAssetTableData(int $idSspModel): array;

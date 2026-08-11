@@ -78,8 +78,6 @@ class SelfServicePortalHelper extends Module
 
     /**
      * @param array<string, mixed> $productClassOverride
-     *
-     * @return \Generated\Shared\Transfer\ProductClassTransfer
      */
     public function haveProductClass(array $productClassOverride = []): ProductClassTransfer
     {
@@ -177,8 +175,6 @@ class SelfServicePortalHelper extends Module
 
     /**
      * @param array<string, mixed> $seedData
-     *
-     * @return \Generated\Shared\Transfer\SspInquiryTransfer
      */
     public function haveSspInquiry(array $seedData = []): SspInquiryTransfer
     {
@@ -257,8 +253,6 @@ class SelfServicePortalHelper extends Module
 
     /**
      * @param array<string, mixed> $seedData
-     *
-     * @return \Generated\Shared\Transfer\SspAssetTransfer
      */
     public function haveAsset(array $seedData = []): SspAssetTransfer
     {
@@ -331,8 +325,6 @@ class SelfServicePortalHelper extends Module
 
     /**
      * @param array<string, mixed> $salesProductClassOverride
-     *
-     * @return \Generated\Shared\Transfer\SalesProductClassTransfer
      */
     public function haveSalesProductClass(array $salesProductClassOverride = []): SalesProductClassTransfer
     {
@@ -358,8 +350,6 @@ class SelfServicePortalHelper extends Module
 
     /**
      * @param array<string, int> $data
-     *
-     * @return void
      */
     public function haveCompanyUserFileAttachment(array $data): void
     {
@@ -471,10 +461,7 @@ class SelfServicePortalHelper extends Module
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
      * @param array<\Generated\Shared\Transfer\ProductClassTransfer> $productClassTransfers
-     *
-     * @return \Generated\Shared\Transfer\ProductAbstractTransfer
      */
     public function addProductClassesToProductAbstract(
         ProductAbstractTransfer $productAbstractTransfer,
@@ -492,10 +479,7 @@ class SelfServicePortalHelper extends Module
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SspAssetTransfer $sspAssetTransfer
      * @param array<string, mixed> $imageData
-     *
-     * @return void
      */
     public function attachImageToAsset(SspAssetTransfer $sspAssetTransfer, array $imageData): void
     {
@@ -631,10 +615,7 @@ class SelfServicePortalHelper extends Module
     }
 
     /**
-     * @param int $fileAmount
      * @param \Generated\Shared\Transfer\SspInquiryTransfer|int $sspInquiryTransfer
-     *
-     * @return void
      */
     protected function generateAndSaveSspInquiryImages(int $fileAmount, SspInquiryTransfer $sspInquiryTransfer): void
     {
