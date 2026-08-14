@@ -55,7 +55,7 @@ class ViewFileDetailTable extends AbstractTable
 
     protected const string COL_ACTIONS = 'Actions';
 
-    protected const string COL_ENTITY_TYPE_COMPANY = '\'company\'';
+    protected const string COL_ENTITY_TYPE_COMPANY = 'CONCAT(\'company\')';
 
     protected const string COL_ENTITY_TYPE_COMPANY_BUSINESS_UNIT = '\'company_business_unit\'';
 
