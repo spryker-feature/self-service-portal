@@ -264,7 +264,7 @@ class SelfServicePortalBusinessFactory extends AbstractBusinessFactory
     public function createFileAttachmentDeleter(): FileAttachmentDeleterInterface
     {
         return new FileAttachmentDeleter(
-            $this->createCompanyFileReader(),
+            $this->getRepository(),
             $this->getEntityManager(),
         );
     }

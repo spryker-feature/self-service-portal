@@ -10,6 +10,8 @@ namespace SprykerFeatureTest\Zed\SelfServicePortal\Business\Facade;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\CompanyBusinessUnitCollectionTransfer;
 use Generated\Shared\Transfer\CompanyBusinessUnitTransfer;
+use Generated\Shared\Transfer\CompanyCollectionTransfer;
+use Generated\Shared\Transfer\CompanyTransfer;
 use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\FileAttachmentCollectionRequestTransfer;
@@ -121,7 +123,64 @@ class DeleteFileAttachmentCollectionFacadeTest extends Unit
         $this->assertCount(1, SpyFileQuery::create()->findByIdFile($fileTransfer->getIdFileOrFail()));
     }
 
-    public function testDeleteSpecificCompanyFileAttachmentIsSuccessful(): void
+    public function testDeleteSpecificCompanyFileAttachmentRemovesAttachmentsOfEveryBusinessUnitOfTheCompany(): void
+    {
+        // Arrange
+        $companyTransfer = $this->tester->haveCompany();
+        $anotherCompanyTransfer = $this->tester->haveCompany();
+
+        $businessUnitTransfer = $this->tester->haveCompanyBusinessUnit([
+            CompanyBusinessUnitTransfer::FK_COMPANY => $companyTransfer->getIdCompany(),
+            CompanyBusinessUnitTransfer::COMPANY => $companyTransfer,
+        ]);
+        $secondBusinessUnitTransfer = $this->tester->haveCompanyBusinessUnit([
+            CompanyBusinessUnitTransfer::FK_COMPANY => $companyTransfer->getIdCompany(),
+            CompanyBusinessUnitTransfer::COMPANY => $companyTransfer,
+        ]);
+        $anotherCompanyBusinessUnitTransfer = $this->tester->haveCompanyBusinessUnit([
+            CompanyBusinessUnitTransfer::FK_COMPANY => $anotherCompanyTransfer->getIdCompany(),
+            CompanyBusinessUnitTransfer::COMPANY => $anotherCompanyTransfer,
+        ]);
+
+        $fileTransfer = $this->tester->haveFile();
+
+        foreach ([$businessUnitTransfer, $secondBusinessUnitTransfer, $anotherCompanyBusinessUnitTransfer] as $companyBusinessUnitTransfer) {
+            $this->tester->haveCompanyBusinessUnitFileAttachment([
+                'idFile' => $fileTransfer->getIdFileOrFail(),
+                'idCompanyBusinessUnit' => $companyBusinessUnitTransfer->getIdCompanyBusinessUnitOrFail(),
+            ]);
+        }
+
+        $fileAttachmentTransfer = (new FileAttachmentTransfer())
+            ->setFile((new FileTransfer())->setIdFile($fileTransfer->getIdFileOrFail()))
+            ->setCompanyCollection(
+                (new CompanyCollectionTransfer())->addCompany(
+                    (new CompanyTransfer())->setIdCompany($companyTransfer->getIdCompanyOrFail()),
+                ),
+            );
+
+        $fileAttachmentCollectionRequestTransfer = (new FileAttachmentCollectionRequestTransfer())
+            ->addFileAttachmentToDelete($fileAttachmentTransfer);
+
+        // Act
+        $this->tester->getFacade()->deleteFileAttachmentCollection($fileAttachmentCollectionRequestTransfer);
+
+        // Assert
+        $this->assertCount(0, SpyCompanyBusinessUnitFileQuery::create()
+            ->filterByFkFile($fileTransfer->getIdFileOrFail())
+            ->filterByFkCompanyBusinessUnit_In([
+                $businessUnitTransfer->getIdCompanyBusinessUnitOrFail(),
+                $secondBusinessUnitTransfer->getIdCompanyBusinessUnitOrFail(),
+            ])
+            ->find());
+
+        $this->assertCount(1, SpyCompanyBusinessUnitFileQuery::create()
+            ->filterByFkFile($fileTransfer->getIdFileOrFail())
+            ->filterByFkCompanyBusinessUnit($anotherCompanyBusinessUnitTransfer->getIdCompanyBusinessUnitOrFail())
+            ->find());
+    }
+
+    public function testDeleteSpecificBusinessUnitFileAttachmentIsSuccessful(): void
     {
         // Arrange
         $companyTransfer = $this->tester->haveCompany();

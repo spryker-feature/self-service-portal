@@ -37,85 +37,45 @@ use SprykerFeature\Zed\SelfServicePortal\SelfServicePortalConfig;
 
 class ViewFileDetailTable extends AbstractTable
 {
-    /**
-     * @var string
-     */
-    protected const HEADER_BUSINESS_ENTITY_NAME = 'Business entity name';
+    protected const string HEADER_BUSINESS_ENTITY_NAME = 'Business entity name';
 
-    /**
-     * @var string
-     */
-    protected const HEADER_BUSINESS_ENTITY_TYPE = 'Business entity type';
+    protected const string HEADER_BUSINESS_ENTITY_TYPE = 'Business entity type';
 
-    /**
-     * @var string
-     */
-    protected const HEADER_DATE_ATTACHED = 'Date Attached';
+    protected const string HEADER_DATE_ATTACHED = 'Date Attached';
 
-    /**
-     * @var string
-     */
-    protected const COL_ATTACHED_AT = 'attached_at';
+    protected const string COL_ATTACHED_AT = 'attached_at';
 
-    /**
-     * @var string
-     */
-    protected const COL_ENTITY_NAME = 'entity_name';
+    protected const string COL_ENTITY_NAME = 'entity_name';
 
-    /**
-     * @var string
-     */
-    protected const COL_ENTITY_TYPE = 'entity_type';
+    protected const string COL_ENTITY_TYPE = 'entity_type';
 
-    /**
-     * @var string
-     */
-    protected const COL_ID_FILE = 'id_file';
+    protected const string COL_ID_FILE = 'id_file';
 
-    /**
-     * @var string
-     */
-    protected const COL_ENTITY_ID = 'entity_id';
+    protected const string COL_ENTITY_ID = 'entity_id';
 
-    /**
-     * @var string
-     */
-    protected const COL_ACTIONS = 'Actions';
+    protected const string COL_ACTIONS = 'Actions';
 
-    /**
-     * @var string
-     */
-    protected const COL_ENTITY_TYPE_COMPANY = '\'company\'';
+    protected const string COL_ENTITY_TYPE_COMPANY = '\'company\'';
 
-    /**
-     * @var string
-     */
-    protected const COL_ENTITY_TYPE_COMPANY_BUSINESS_UNIT = '\'company_business_unit\'';
+    protected const string COL_ENTITY_TYPE_COMPANY_BUSINESS_UNIT = '\'company_business_unit\'';
 
-    /**
-     * @var string
-     */
-    protected const COL_ENTITY_TYPE_COMPANY_USER = '\'company_user\'';
+    protected const string COL_ENTITY_TYPE_COMPANY_USER = '\'company_user\'';
 
-    /**
-     * @var string
-     */
-    protected const COL_ENTITY_TYPE_ASSET = '\'ssp_asset\'';
+    protected const string COL_ENTITY_TYPE_ASSET = '\'ssp_asset\'';
 
-    /**
-     * @var string
-     */
-    protected const COL_ENTITY_TYPE_MODEL = '\'ssp_model\'';
+    protected const string COL_ENTITY_TYPE_MODEL = '\'ssp_model\'';
 
-    /**
-     * @var string
-     */
-    protected const SORTABLE_COLUMN = 'column';
+    protected const string SORTABLE_COLUMN = 'column';
 
-    /**
-     * @var string
-     */
-    protected const SORTABLE_DIRECTION = 'dir';
+    protected const string SORTABLE_DIRECTION = 'dir';
+
+    protected const string ALIAS_COMPANY_BUSINESS_UNIT_TOTAL = 'company_business_unit_total';
+
+    protected const string COLUMN_FK_COMPANY = 'fk_company';
+
+    protected const string EXPRESSION_MAX_ATTACHED_AT = 'MAX(%s)';
+
+    protected const string EXPRESSION_ALL_BUSINESS_UNITS_ATTACHED = 'COUNT(DISTINCT %1$s) = (SELECT COUNT(*) FROM %2$s AS %3$s WHERE %3$s.%4$s = %5$s)';
 
     public function __construct(
         protected SpyFileQuery $fileQuery,
@@ -236,16 +196,24 @@ class ViewFileDetailTable extends AbstractTable
             ->filterByIdFile($this->idFile)
             ->withColumn(SpyFileTableMap::COL_ID_FILE, static::COL_ID_FILE)
             ->useSpyCompanyBusinessUnitFileQuery(null, Criteria::LEFT_JOIN)
-                ->withColumn(SpyCompanyBusinessUnitFileTableMap::COL_CREATED_AT, static::COL_ATTACHED_AT)
-                    ->useCompanyBusinessUnitQuery()
-                        ->withColumn(SpyCompanyBusinessUnitTableMap::COL_FK_COMPANY, static::COL_ENTITY_ID)
-                            ->useCompanyQuery()
-                                ->withColumn(SpyCompanyTableMap::COL_NAME, static::COL_ENTITY_NAME)
-                                ->withColumn(static::COL_ENTITY_TYPE_COMPANY, static::COL_ENTITY_TYPE)
-                                ->filterByName_Like($this->getSearchString())
-                            ->endUse()
+                ->withColumn(sprintf(static::EXPRESSION_MAX_ATTACHED_AT, SpyCompanyBusinessUnitFileTableMap::COL_CREATED_AT), static::COL_ATTACHED_AT)
+                ->useCompanyBusinessUnitQuery()
+                    ->useCompanyQuery()
+                        ->withColumn(SpyCompanyTableMap::COL_ID_COMPANY, static::COL_ENTITY_ID)
+                        ->withColumn(SpyCompanyTableMap::COL_NAME, static::COL_ENTITY_NAME)
+                        ->withColumn(static::COL_ENTITY_TYPE_COMPANY, static::COL_ENTITY_TYPE)
+                        ->filterByName_Like($this->getSearchString())
                     ->endUse()
+                ->endUse()
             ->endUse()
+            ->having(sprintf(
+                static::EXPRESSION_ALL_BUSINESS_UNITS_ATTACHED,
+                SpyCompanyBusinessUnitTableMap::COL_ID_COMPANY_BUSINESS_UNIT,
+                SpyCompanyBusinessUnitTableMap::TABLE_NAME,
+                static::ALIAS_COMPANY_BUSINESS_UNIT_TOTAL,
+                static::COLUMN_FK_COMPANY,
+                SpyCompanyTableMap::COL_ID_COMPANY,
+            ))
             ->select([
                 static::COL_ID_FILE,
                 static::COL_ATTACHED_AT,
@@ -253,6 +221,9 @@ class ViewFileDetailTable extends AbstractTable
                 static::COL_ENTITY_NAME,
                 static::COL_ENTITY_TYPE,
             ]);
+
+        $companyFileQuery->addGroupByColumn(SpyFileTableMap::COL_ID_FILE);
+        $companyFileQuery->addGroupByColumn(SpyCompanyTableMap::COL_ID_COMPANY);
 
         if ($fileAttachmentViewDetailTableCriteriaTransfer->getDateFrom()) {
             $companyFileQuery

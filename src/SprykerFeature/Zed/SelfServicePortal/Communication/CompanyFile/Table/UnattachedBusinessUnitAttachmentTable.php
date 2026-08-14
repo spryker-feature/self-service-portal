@@ -10,30 +10,30 @@ namespace SprykerFeature\Zed\SelfServicePortal\Communication\CompanyFile\Table;
 use Orm\Zed\Company\Persistence\Map\SpyCompanyTableMap;
 use Orm\Zed\CompanyBusinessUnit\Persistence\Map\SpyCompanyBusinessUnitTableMap;
 use Orm\Zed\CompanyBusinessUnit\Persistence\SpyCompanyBusinessUnitQuery;
+use Orm\Zed\SelfServicePortal\Persistence\Map\SpyCompanyBusinessUnitFileTableMap;
 use Spryker\Service\UtilText\Model\Url\Url;
 use Spryker\Zed\Gui\Communication\Table\AbstractTable;
 use Spryker\Zed\Gui\Communication\Table\TableConfiguration;
-use Spryker\Zed\PropelOrm\Business\Runtime\ActiveQuery\Criteria;
 use SprykerFeature\Zed\SelfServicePortal\Communication\Controller\FileAbstractController;
 use SprykerFeature\Zed\SelfServicePortal\Communication\Reader\RelationCsvReaderInterface;
 
 class UnattachedBusinessUnitAttachmentTable extends AbstractTable
 {
-    /**
-     * @var string
-     */
-    protected const TABLE_IDENTIFIER = 'unattached-business-unit-table';
+    protected const string TABLE_IDENTIFIER = 'unattached-business-unit-table';
 
-    protected const COLUMN_ID_BUSINESS_UNIT = SpyCompanyBusinessUnitTableMap::COL_ID_COMPANY_BUSINESS_UNIT;
+    protected const string COLUMN_ID_BUSINESS_UNIT = SpyCompanyBusinessUnitTableMap::COL_ID_COMPANY_BUSINESS_UNIT;
 
-    protected const COLUMN_COMPANY_NAME = SpyCompanyTableMap::COL_NAME;
+    protected const string COLUMN_COMPANY_NAME = SpyCompanyTableMap::COL_NAME;
 
-    protected const COLUMN_BUSINESS_UNIT_NAME = SpyCompanyBusinessUnitTableMap::COL_NAME;
+    protected const string COLUMN_BUSINESS_UNIT_NAME = SpyCompanyBusinessUnitTableMap::COL_NAME;
 
-    /**
-     * @var string
-     */
-    protected const COLUMN_SELECTED = 'action';
+    protected const string COLUMN_SELECTED = 'action';
+
+    protected const string RELATION_COMPANY_BUSINESS_UNIT_FILE = 'SpyCompanyBusinessUnitFile';
+
+    protected const string CONDITION_ATTACHED_TO_FILE = '%s = ?';
+
+    protected const string CONDITION_NOT_ATTACHED = '%s IS NULL';
 
     public function __construct(
         protected SpyCompanyBusinessUnitQuery $companyBusinessUnitQuery,
@@ -100,15 +100,14 @@ class UnattachedBusinessUnitAttachmentTable extends AbstractTable
 
     protected function prepareQuery(): SpyCompanyBusinessUnitQuery
     {
-        /** @var \Orm\Zed\CompanyBusinessUnit\Persistence\SpyCompanyBusinessUnitQuery $query */
-        $query = $this->companyBusinessUnitQuery
-            ->useSpyCompanyBusinessUnitFileQuery('file_attachment', Criteria::LEFT_JOIN)
-                ->filterByFkFile(null, Criteria::ISNULL)
-                ->_or()
-                ->filterByFkFile($this->idFile, Criteria::NOT_EQUAL)
-            ->endUse();
-
-        return $query
+        return $this->companyBusinessUnitQuery
+            ->leftJoin(static::RELATION_COMPANY_BUSINESS_UNIT_FILE)
+            ->addJoinCondition(
+                static::RELATION_COMPANY_BUSINESS_UNIT_FILE,
+                sprintf(static::CONDITION_ATTACHED_TO_FILE, SpyCompanyBusinessUnitFileTableMap::COL_FK_FILE),
+                $this->idFile,
+            )
+            ->where(sprintf(static::CONDITION_NOT_ATTACHED, SpyCompanyBusinessUnitFileTableMap::COL_FK_COMPANY_BUSINESS_UNIT))
             ->joinWithCompany()
             ->select([
                 SpyCompanyBusinessUnitTableMap::COL_ID_COMPANY_BUSINESS_UNIT,
