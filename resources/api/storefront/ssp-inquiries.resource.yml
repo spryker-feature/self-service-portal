@@ -19,6 +19,8 @@ resource:
                   200:
                       description: 'Inquiry returned.'
                   401:
+                      description: 'Invalid access token.'
+                  403:
                       description: 'Missing access token.'
                   404:
                       description: 'Inquiry not found.'
@@ -31,6 +33,8 @@ resource:
                   200:
                       description: 'Inquiries collection returned.'
                   401:
+                      description: 'Invalid access token.'
+                  403:
                       description: 'Missing access token.'
 
         - type: Post
@@ -42,7 +46,11 @@ resource:
                   201:
                       description: 'Inquiry created.'
                   400:
-                      description: 'Bad request.'
+                      description: 'A required attribute is missing, or one is set that the inquiry type does not allow.'
+                  401:
+                      description: 'Invalid access token.'
+                  403:
+                      description: 'Missing access token, or the company user may not create inquiries.'
                   422:
                       description: 'Unprocessable inquiry.'
 

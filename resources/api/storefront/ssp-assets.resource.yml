@@ -19,9 +19,9 @@ resource:
                   200:
                       description: 'Asset returned.'
                   401:
-                      description: 'Missing access token.'
+                      description: 'Invalid access token.'
                   403:
-                      description: 'Forbidden.'
+                      description: 'Missing access token, or the customer has no company user.'
                   404:
                       description: 'Asset not found.'
 
@@ -33,6 +33,8 @@ resource:
                   200:
                       description: 'Assets collection returned.'
                   401:
+                      description: 'Invalid access token.'
+                  403:
                       description: 'Missing access token.'
 
         - type: Post
@@ -43,8 +45,10 @@ resource:
               responses:
                   201:
                       description: 'Asset created.'
+                  401:
+                      description: 'Invalid access token.'
                   403:
-                      description: 'Forbidden.'
+                      description: 'Missing access token, or the customer has no company user.'
                   422:
                       description: 'Unprocessable asset.'
 

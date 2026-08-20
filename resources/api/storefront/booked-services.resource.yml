@@ -18,7 +18,9 @@ resource:
                   200:
                       description: 'Booked services collection returned.'
                   401:
-                      description: 'Missing access token.'
+                      description: 'Invalid access token.'
+                  403:
+                      description: 'Missing access token, or the customer has no company user.'
 
     properties:
         uuid:
