@@ -120,6 +120,7 @@
         "spryker/ramsey-uuid": "*",
         "spryker/sales-payment": "*",
         "spryker/search": "*",
+        "spryker/search-elasticsearch": "*",
         "spryker/shipment": "*",
         "spryker/testify": "*"
     },
