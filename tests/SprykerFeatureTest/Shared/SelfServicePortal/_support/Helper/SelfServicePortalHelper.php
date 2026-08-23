@@ -542,7 +542,6 @@ class SelfServicePortalHelper extends Module
                     $type = 'image/jpeg';
                 }
                 $imageContent = ob_get_clean();
-                imagedestroy($image);
 
                 break;
             case 'heic':

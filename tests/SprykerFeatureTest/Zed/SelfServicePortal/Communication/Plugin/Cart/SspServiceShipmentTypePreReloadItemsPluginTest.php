@@ -161,7 +161,6 @@ class SspServiceShipmentTypePreReloadItemsPluginTest extends Unit
 
         $plugin = new SspServiceShipmentTypePreReloadItemsPlugin();
         $reflectionProperty = new ReflectionProperty(get_class($plugin), 'businessFactory');
-        $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($plugin, $factoryMock);
 
         return $plugin;
