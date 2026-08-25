@@ -24,7 +24,7 @@ class SspInquiryFormDataProvider
         return [
             SspInquiryForm::OPTION_SSP_INQUIRY_TYPE_CHOICES => $this->selfServicePortalConfig->getSelectableSspInquiryTypes(),
             SspInquiryForm::OPTION_ALLOWED_EXTENSIONS => $this->selfServicePortalConfig->getSspInquiryAllowedFileExtensions(),
-            SspInquiryForm::OPTION_ALLOWED_MIME_TYPES => $this->selfServicePortalConfig->getCompanyFilesAllowedFileTypes(),
+            SspInquiryForm::OPTION_ALLOWED_MIME_TYPES => $this->selfServicePortalConfig->getSspInquiryAllowedFileMimeTypes(),
         ];
     }
 }
