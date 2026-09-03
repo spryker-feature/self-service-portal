@@ -8,12 +8,14 @@
 namespace SprykerFeature\Zed\SelfServicePortal\Communication\CompanyFile\Form;
 
 use DateTime;
+use DateTimeZone;
+use Exception;
 use Generated\Shared\Transfer\FileAttachmentTableCriteriaTransfer;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
 use SprykerFeature\Zed\SelfServicePortal\Communication\CompanyFile\Form\DataProvider\FileTableFilterFormDataProvider;
+use SprykerFeature\Zed\SelfServicePortal\Communication\Form\DatePickerTypeResolverTrait;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,6 +28,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class FileTableFilterForm extends AbstractType
 {
+    use DatePickerTypeResolverTrait;
+
+    /**
+     * @var string
+     */
+    protected const RANGE_GROUP_DATE = 'ssp-file-date';
+
     /**
      * @var string
      */
@@ -127,15 +136,17 @@ class FileTableFilterForm extends AbstractType
      */
     protected function addDateFromField(FormBuilderInterface $builder, array $options = [])
     {
-        $builder->add(static::FIELD_DATE_FROM, DateTimeType::class, [
-            'widget' => 'single_text',
+        $timezone = $options[FileTableFilterFormDataProvider::OPTION_CURRENT_TIMEZONE];
+
+        $builder->add(static::FIELD_DATE_FROM, $this->getDateTimeFieldType(), [
             'required' => false,
             'label' => static::LABEL_DATE_FROM,
-            'view_timezone' => $options[FileTableFilterFormDataProvider::OPTION_CURRENT_TIMEZONE],
-        ]);
+            'model_timezone' => $timezone,
+            'view_timezone' => $timezone,
+        ] + $this->getDateFieldOptions(static::RANGE_GROUP_DATE, static::RANGE_ROLE_START));
 
         $builder->get(static::FIELD_DATE_FROM)
-            ->addModelTransformer(new CallbackTransformer($this->formatDate(), $this->formatDate()));
+            ->addModelTransformer($this->createDateModelTransformer($timezone));
 
         return $this;
     }
@@ -147,21 +158,43 @@ class FileTableFilterForm extends AbstractType
      */
     protected function addDateToField(FormBuilderInterface $builder, array $options = [])
     {
-        $builder->add(static::FIELD_DATE_TO, DateTimeType::class, [
-            'widget' => 'single_text',
+        $timezone = $options[FileTableFilterFormDataProvider::OPTION_CURRENT_TIMEZONE];
+
+        $builder->add(static::FIELD_DATE_TO, $this->getDateTimeFieldType(), [
             'required' => false,
             'label' => static::LABEL_DATE_TO,
-            'view_timezone' => $options[FileTableFilterFormDataProvider::OPTION_CURRENT_TIMEZONE],
-        ]);
+            'model_timezone' => $timezone,
+            'view_timezone' => $timezone,
+        ] + $this->getDateFieldOptions(static::RANGE_GROUP_DATE, static::RANGE_ROLE_END));
 
         $builder->get(static::FIELD_DATE_TO)
-            ->addModelTransformer(new CallbackTransformer($this->formatDate(), $this->formatDate()));
+            ->addModelTransformer($this->createDateModelTransformer($timezone));
 
         return $this;
     }
 
+    protected function createDateModelTransformer(string $timezone): CallbackTransformer
+    {
+        return new CallbackTransformer($this->parseDate($timezone), $this->formatDate());
+    }
+
+    protected function parseDate(string $timezone): callable
+    {
+        return function ($date) use ($timezone): ?DateTime {
+            if (!$date) {
+                return null;
+            }
+
+            try {
+                return new DateTime($date, new DateTimeZone($timezone));
+            } catch (Exception) {
+                return null;
+            }
+        };
+    }
+
     protected function formatDate(): callable
     {
-        return fn ($date) => DateTime::createFromFormat(static::DATE_TIME_FORMAT, $date) ?: null;
+        return fn ($date) => $date instanceof DateTime ? $date->format(static::DATE_TIME_FORMAT) : null;
     }
 }

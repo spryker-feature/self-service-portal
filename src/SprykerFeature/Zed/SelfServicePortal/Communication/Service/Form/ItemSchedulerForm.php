@@ -11,10 +11,10 @@ use DateTime;
 use DateTimeZone;
 use Generated\Shared\Transfer\ItemMetadataTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
+use SprykerFeature\Zed\SelfServicePortal\Communication\Form\DatePickerTypeResolverTrait;
 use SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form\DataProvider\ItemSchedulerFormDataProvider;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\GreaterThan;
@@ -28,6 +28,8 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 class ItemSchedulerForm extends AbstractType
 {
+    use DatePickerTypeResolverTrait;
+
     public const string FIELD_SCHEDULED_AT = 'scheduledAt';
 
     protected const string FIELD_LABEL_SCHEDULED_AT = 'Date and time';
@@ -60,9 +62,8 @@ class ItemSchedulerForm extends AbstractType
      */
     protected function addScheduledAtField(FormBuilderInterface $builder, array $options = [])
     {
-        $builder->add(static::FIELD_SCHEDULED_AT, DateTimeType::class, [
+        $builder->add(static::FIELD_SCHEDULED_AT, $this->getDateTimeFieldType(), [
             'label' => static::FIELD_LABEL_SCHEDULED_AT,
-            'widget' => 'single_text',
             'required' => true,
             'view_timezone' => $options[ItemSchedulerFormDataProvider::OPTION_CURRENT_TIMEZONE],
             'constraints' => [
@@ -72,16 +73,29 @@ class ItemSchedulerForm extends AbstractType
                     'message' => 'Service date must be in the future',
                 ]),
             ],
-            'attr' => [
-                'min' => (new DateTime('now', new DateTimeZone($options[ItemSchedulerFormDataProvider::OPTION_CURRENT_TIMEZONE])))
-                    ->format(static::DATE_TIME_FORMAT_HTML5),
-            ],
             'property_path' => ItemTransfer::METADATA . '.' . ItemMetadataTransfer::SCHEDULED_AT,
-        ]);
+        ] + $this->getScheduledAtLowerBoundOptions($options[ItemSchedulerFormDataProvider::OPTION_CURRENT_TIMEZONE]));
 
         $this->addScheduledAtTransformer($builder);
 
         return $this;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    protected function getScheduledAtLowerBoundOptions(string $timezone): array
+    {
+        $lowerBound = (new DateTime('now', new DateTimeZone($timezone)))->format(static::DATE_TIME_FORMAT_HTML5);
+
+        if ($this->isGuiDateTimePickerTypeAvailable()) {
+            return ['min_date' => $lowerBound];
+        }
+
+        return [
+            'widget' => 'single_text',
+            'attr' => ['min' => $lowerBound],
+        ];
     }
 
     /**

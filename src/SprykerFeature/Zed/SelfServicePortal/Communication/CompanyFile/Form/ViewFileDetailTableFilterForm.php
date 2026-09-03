@@ -10,9 +10,9 @@ namespace SprykerFeature\Zed\SelfServicePortal\Communication\CompanyFile\Form;
 use DateTime;
 use Generated\Shared\Transfer\FileAttachmentViewDetailTableCriteriaTransfer;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
+use SprykerFeature\Zed\SelfServicePortal\Communication\Form\DatePickerTypeResolverTrait;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,6 +26,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ViewFileDetailTableFilterForm extends AbstractType
 {
+    use DatePickerTypeResolverTrait;
+
+    /**
+     * @var string
+     */
+    protected const RANGE_GROUP_DATE = 'ssp-file-detail-date';
+
     /**
      * @var string
      */
@@ -130,11 +137,10 @@ class ViewFileDetailTableFilterForm extends AbstractType
      */
     protected function addDateFromField(FormBuilderInterface $builder)
     {
-        $builder->add(static::FIELD_DATE_FROM, DateType::class, [
-            'widget' => 'single_text',
+        $builder->add(static::FIELD_DATE_FROM, $this->getDateFieldType(), [
             'required' => false,
             'label' => static::LABEL_DATE_FROM,
-        ]);
+        ] + $this->getDateFieldOptions(static::RANGE_GROUP_DATE, static::RANGE_ROLE_START));
 
         $builder->get(static::FIELD_DATE_FROM)
             ->addModelTransformer(new CallbackTransformer($this->formatDate(), $this->formatDate()));
@@ -147,11 +153,10 @@ class ViewFileDetailTableFilterForm extends AbstractType
      */
     protected function addDateToField(FormBuilderInterface $builder)
     {
-        $builder->add(static::FIELD_DATE_TO, DateType::class, [
-            'widget' => 'single_text',
+        $builder->add(static::FIELD_DATE_TO, $this->getDateFieldType(), [
             'required' => false,
             'label' => static::LABEL_DATE_TO,
-        ]);
+        ] + $this->getDateFieldOptions(static::RANGE_GROUP_DATE, static::RANGE_ROLE_END));
 
         $builder->get(static::FIELD_DATE_TO)
             ->addModelTransformer(new CallbackTransformer($this->formatDate(), $this->formatDate()));

@@ -9,7 +9,6 @@ namespace SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form;
 
 use Spryker\Zed\Gui\Communication\Form\Type\Select2ComboBoxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -96,18 +95,18 @@ class EditOfferForm extends CreateOfferForm
      */
     protected function addValidFromField(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(static::FIELD_VALID_FROM, DateType::class, [
+        $builder->add(static::FIELD_VALID_FROM, $this->getDateFieldType(), [
             'required' => false,
-            'attr' => [
-                'class' => 'js-from-date',
-            ],
             'label' => 'Valid From',
             'constraints' => [
                 $this->createValidFromRangeConstraint(),
             ],
-            'widget' => static::WIDGET_SINGLE_TEXT,
             'property_path' => 'productOfferValidity.validFrom',
-        ]);
+        ] + $this->getDateFieldOptions(
+            static::RANGE_GROUP_VALIDITY,
+            static::RANGE_ROLE_START,
+            ['class' => 'js-from-date'],
+        ));
 
         $builder->get(static::FIELD_VALID_FROM)->addModelTransformer($options[static::OPTION_FORM_DATA_TRANSFORMERS][static::FIELD_VALID_FROM]);
 
@@ -121,18 +120,18 @@ class EditOfferForm extends CreateOfferForm
      */
     protected function addValidToField(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(static::FIELD_VALID_TO, DateType::class, [
+        $builder->add(static::FIELD_VALID_TO, $this->getDateFieldType(), [
             'required' => false,
-            'attr' => [
-                'class' => 'js-from-date',
-            ],
             'label' => 'Valid To',
             'constraints' => [
                 $this->createValidToFieldRangeConstraint(),
             ],
-            'widget' => static::WIDGET_SINGLE_TEXT,
             'property_path' => 'productOfferValidity.validTo',
-        ]);
+        ] + $this->getDateFieldOptions(
+            static::RANGE_GROUP_VALIDITY,
+            static::RANGE_ROLE_END,
+            ['class' => 'js-from-date'],
+        ));
 
         $builder->get(static::FIELD_VALID_TO)->addModelTransformer($options[static::OPTION_FORM_DATA_TRANSFORMERS][static::FIELD_VALID_TO]);
 

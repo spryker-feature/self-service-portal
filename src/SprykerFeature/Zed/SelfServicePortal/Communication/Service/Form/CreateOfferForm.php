@@ -10,9 +10,9 @@ namespace SprykerFeature\Zed\SelfServicePortal\Communication\Service\Form;
 use Generated\Shared\Transfer\ProductOfferTransfer;
 use Spryker\Zed\Gui\Communication\Form\Type\Select2ComboBoxType;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
+use SprykerFeature\Zed\SelfServicePortal\Communication\Form\DatePickerTypeResolverTrait;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -29,6 +29,10 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 class CreateOfferForm extends AbstractType
 {
+    use DatePickerTypeResolverTrait;
+
+    protected const string RANGE_GROUP_VALIDITY = 'ssp-offer-validity';
+
     /**
      * @var string
      */
@@ -124,16 +128,6 @@ class CreateOfferForm extends AbstractType
      * @var string
      */
     public const FIELD_IS_NEVER_OUT_OF_STOCK = 'isNeverOutOfStock';
-
-    /**
-     * @var string
-     */
-    protected const WIDGET_SINGLE_TEXT = 'single_text';
-
-    /**
-     * @var int
-     */
-    protected const FIELD_MERCHANT_SKU_MAX_LENGTH = 255;
 
     /**
      * @param array<string, mixed> $options
@@ -267,18 +261,18 @@ class CreateOfferForm extends AbstractType
      */
     protected function addValidFromField(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(static::FIELD_VALID_FROM, DateType::class, [
+        $builder->add(static::FIELD_VALID_FROM, $this->getDateFieldType(), [
             'required' => false,
-            'attr' => [
-                'class' => 'js-from-date',
-            ],
             'label' => 'Valid From',
             'constraints' => [
                 $this->createValidFromRangeConstraint(),
             ],
-            'widget' => static::WIDGET_SINGLE_TEXT,
             'property_path' => 'productOfferValidity.validFrom',
-        ]);
+        ] + $this->getDateFieldOptions(
+            static::RANGE_GROUP_VALIDITY,
+            static::RANGE_ROLE_START,
+            ['class' => 'js-from-date'],
+        ));
 
         return $this;
     }
@@ -290,18 +284,18 @@ class CreateOfferForm extends AbstractType
      */
     protected function addValidToField(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(static::FIELD_VALID_TO, DateType::class, [
+        $builder->add(static::FIELD_VALID_TO, $this->getDateFieldType(), [
             'required' => false,
-            'attr' => [
-                'class' => 'js-from-date',
-            ],
             'label' => 'Valid To',
             'constraints' => [
                 $this->createValidToFieldRangeConstraint(),
             ],
-            'widget' => static::WIDGET_SINGLE_TEXT,
             'property_path' => 'productOfferValidity.validTo',
-        ]);
+        ] + $this->getDateFieldOptions(
+            static::RANGE_GROUP_VALIDITY,
+            static::RANGE_ROLE_END,
+            ['class' => 'js-from-date'],
+        ));
 
         return $this;
     }
