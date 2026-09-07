@@ -55,7 +55,7 @@
 
         &__subtitle {
             display: block;
-            word-wrap: break-word;
+            overflow-wrap: break-word;
             padding-bottom: 5px;
 
             &--filter {
@@ -99,7 +99,7 @@
         }
 
         &__asset-text {
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         &__separator--cart {
