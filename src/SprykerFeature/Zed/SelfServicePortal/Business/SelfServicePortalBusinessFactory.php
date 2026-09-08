@@ -142,6 +142,8 @@ use SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Writer\SspInquiryState
 use SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Writer\SspInquiryStateWriterInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Writer\SspInquiryWriter;
 use SprykerFeature\Zed\SelfServicePortal\Business\Inquiry\Writer\SspInquiryWriterInterface;
+use SprykerFeature\Zed\SelfServicePortal\Business\Product\Validator\ProductClassValidator;
+use SprykerFeature\Zed\SelfServicePortal\Business\Product\Validator\ProductClassValidatorInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Canceler\OrderItemCanceler;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Canceler\OrderItemCancelerInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\DashboardDataExpander\ServiceDashboardDataExpander;
@@ -249,6 +251,13 @@ class SelfServicePortalBusinessFactory extends AbstractBusinessFactory
         );
     }
 
+    public function createProductClassValidator(): ProductClassValidatorInterface
+    {
+        return new ProductClassValidator(
+            $this->getRepository(),
+        );
+    }
+
     public function createFileAttachmentPermissionChecker(): FileAttachmentPermissionCheckerInterface
     {
         return new FileAttachmentPermissionChecker();
@@ -287,6 +296,7 @@ class SelfServicePortalBusinessFactory extends AbstractBusinessFactory
             $this->getEntityManager(),
             $this->getRepository(),
             $this->getEventFacade(),
+            $this->getShipmentTypeFacade(),
         );
     }
 

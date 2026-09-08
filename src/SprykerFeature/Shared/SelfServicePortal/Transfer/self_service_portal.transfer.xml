@@ -1414,4 +1414,10 @@
         <property name="path" type="string"/>
     </transfer>
 
+    <transfer name="ProductConcreteCollectionRequest" strict="true">
+    </transfer>
+
+    <transfer name="ProductConcreteCollectionResponse" strict="true">
+    </transfer>
+
 </transfers>

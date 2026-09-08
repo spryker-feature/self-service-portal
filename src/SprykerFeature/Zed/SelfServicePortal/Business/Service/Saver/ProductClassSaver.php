@@ -33,6 +33,7 @@ class ProductClassSaver implements ProductClassSaverInterface
         }
 
         $idProductConcrete = $productConcreteTransfer->getIdProductConcreteOrFail();
+        $this->resolveProductClassIds($productConcreteTransfer->getProductClasses());
         $productClassIds = $this->extractProductClassIds($productConcreteTransfer->getProductClasses());
 
         $productClassCriteriaTransfer = $this->createProductClassCriteriaTransfer($idProductConcrete, $productClassIds);
@@ -64,6 +65,51 @@ class ProductClassSaver implements ProductClassSaverInterface
         }
 
         return $productClassIds;
+    }
+
+    /**
+     * @param \ArrayObject<int, \Generated\Shared\Transfer\ProductClassTransfer> $productClassTransfers
+     */
+    protected function resolveProductClassIds(ArrayObject $productClassTransfers): void
+    {
+        $keysToResolve = [];
+
+        foreach ($productClassTransfers as $productClassTransfer) {
+            if ($productClassTransfer->getIdProductClass() === null && $productClassTransfer->getKey() !== null) {
+                $keysToResolve[] = $productClassTransfer->getKeyOrFail();
+            }
+        }
+
+        $keysToResolve = array_values(array_unique($keysToResolve));
+
+        if ($keysToResolve === []) {
+            return;
+        }
+
+        $criteriaTransfer = (new ProductClassCriteriaTransfer())
+            ->setProductClassConditions(
+                (new ProductClassConditionsTransfer())->setKeys($keysToResolve),
+            );
+
+        $collectionTransfer = $this->selfServicePortalRepository->getProductClassCollection($criteriaTransfer);
+
+        $productClassIdsIndexedByKey = [];
+
+        foreach ($collectionTransfer->getProductClasses() as $resolvedProductClassTransfer) {
+            $productClassIdsIndexedByKey[$resolvedProductClassTransfer->getKeyOrFail()] = $resolvedProductClassTransfer->getIdProductClassOrFail();
+        }
+
+        foreach ($productClassTransfers as $productClassTransfer) {
+            if ($productClassTransfer->getIdProductClass() !== null) {
+                continue;
+            }
+
+            $key = $productClassTransfer->getKey();
+
+            if ($key !== null && isset($productClassIdsIndexedByKey[$key])) {
+                $productClassTransfer->setIdProductClass($productClassIdsIndexedByKey[$key]);
+            }
+        }
     }
 
     /**

@@ -192,9 +192,17 @@ class SelfServicePortalRepository extends AbstractRepository implements SelfServ
         }
 
         $productClassConditions = $productClassCriteriaTransfer->getProductClassConditions();
+        $keys = $productClassConditions->getKeys();
+        $productClassIds = $productClassConditions->getProductClassIds();
         $skus = $productClassConditions->getSkus();
         $productAbstractIds = $productClassConditions->getProductAbstractIds();
         $productConcreteIds = $productClassConditions->getProductConcreteIds();
+
+        if ($keys || $productClassIds) {
+            if (!$skus && !$productAbstractIds && !$productConcreteIds) {
+                return $this->getProductClassCollectionByDirectConditions($keys, $productClassIds, $productClassCollectionTransfer);
+            }
+        }
 
         if (!$skus && !$productAbstractIds && !$productConcreteIds) {
             return $productClassCollectionTransfer;
@@ -202,24 +210,35 @@ class SelfServicePortalRepository extends AbstractRepository implements SelfServ
 
         $productToProductClassQuery = $this->getFactory()
             ->createProductToProductClassQuery()
-            ->joinWithProductClass()
-            ->useProductQuery();
+            ->joinWithProductClass();
+
+        $productQuery = $productToProductClassQuery->useProductQuery();
 
         if ($skus) {
-            $productToProductClassQuery->filterBySku_In($skus);
+            $productQuery->filterBySku_In($skus);
         }
 
         if ($productAbstractIds) {
-            $productToProductClassQuery->filterByFkProductAbstract_In($productAbstractIds);
+            $productQuery->filterByFkProductAbstract_In($productAbstractIds);
         }
 
         if ($productConcreteIds) {
-            $productToProductClassQuery->filterByIdProduct_In($productConcreteIds);
+            $productQuery->filterByIdProduct_In($productConcreteIds);
         }
 
-        $productToProductClassEntities = $productToProductClassQuery
-            ->endUse()
-            ->find();
+        $productQuery->endUse();
+
+        if ($keys) {
+            $productToProductClassQuery->useProductClassQuery()
+                ->filterByKey_In($keys)
+            ->endUse();
+        }
+
+        if ($productClassIds) {
+            $productToProductClassQuery->filterByFkProductClass_In($productClassIds);
+        }
+
+        $productToProductClassEntities = $productToProductClassQuery->find();
 
         if ($productToProductClassEntities->isEmpty()) {
             return $productClassCollectionTransfer;
@@ -231,6 +250,32 @@ class SelfServicePortalRepository extends AbstractRepository implements SelfServ
                 $productToProductClassEntities->getArrayCopy(),
                 $productClassCollectionTransfer,
             );
+    }
+
+    /**
+     * @param array<int, string> $keys
+     * @param array<int, int> $productClassIds
+     */
+    protected function getProductClassCollectionByDirectConditions(
+        array $keys,
+        array $productClassIds,
+        ProductClassCollectionTransfer $productClassCollectionTransfer,
+    ): ProductClassCollectionTransfer {
+        $query = $this->getFactory()->createProductClassQuery();
+
+        if (count($keys)) {
+            $query->filterByKey_In($keys);
+        }
+
+        if (count($productClassIds)) {
+            $query->filterByIdProductClass_In($productClassIds);
+        }
+
+        $productClassEntities = $query->find()->getData();
+
+        return $this->getFactory()
+            ->createProductClassMapper()
+            ->mapProductClassEntitiesToProductClassCollectionTransfer($productClassEntities, $productClassCollectionTransfer);
     }
 
     protected function joinServiceOrderData(SpySalesOrderItemQuery $query): SpySalesOrderItemQuery
