@@ -302,8 +302,8 @@ class CreateOfferForm extends AbstractType
 
     protected function createValidFromRangeConstraint(): Callback
     {
-        return new Callback([
-            'callback' => function ($validFrom, ExecutionContextInterface $context): void {
+        return new Callback(
+            callback: function ($validFrom, ExecutionContextInterface $context): void {
                 $formData = $context->getRoot()->getData();
                 if (!$validFrom) {
                     return;
@@ -319,13 +319,13 @@ class CreateOfferForm extends AbstractType
                     }
                 }
             },
-        ]);
+        );
     }
 
     protected function createValidToFieldRangeConstraint(): Callback
     {
-        return new Callback([
-            'callback' => function ($validTo, ExecutionContextInterface $context): void {
+        return new Callback(
+            callback: function ($validTo, ExecutionContextInterface $context): void {
                 $formData = $context->getRoot()->getData();
                 if (!$validTo) {
                     return;
@@ -337,7 +337,7 @@ class CreateOfferForm extends AbstractType
                     }
                 }
             },
-        ]);
+        );
     }
 
     /**
@@ -457,8 +457,8 @@ class CreateOfferForm extends AbstractType
 
     protected function createServicePointServicesValidationConstraint(): Callback
     {
-        return new Callback([
-            'callback' => function ($value, ExecutionContextInterface $context): void {
+        return new Callback(
+            callback: function ($value, ExecutionContextInterface $context): void {
                 $servicePointField = $context->getRoot()->get(static::FIELD_SERVICE_POINT);
                 $servicePointValue = $servicePointField->getData();
 
@@ -468,6 +468,6 @@ class CreateOfferForm extends AbstractType
                     }
                 }
             },
-        ]);
+        );
     }
 }

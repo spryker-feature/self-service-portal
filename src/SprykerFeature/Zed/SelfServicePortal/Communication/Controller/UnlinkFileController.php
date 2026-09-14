@@ -87,7 +87,7 @@ class UnlinkFileController extends FileAbstractController
     {
         $idFile = $this->castId($request->query->getInt(static::REQUEST_PARAM_ID_FILE));
 
-        if ($request->query->getBoolean(static::REQUEST_PARAM_DELETE_ALL_ATTACHMENTS)) {
+        if (filter_var($request->query->get(static::REQUEST_PARAM_DELETE_ALL_ATTACHMENTS), \FILTER_VALIDATE_BOOLEAN)) {
             return (new FileAttachmentCollectionRequestTransfer())->addFileIdToDeleteAttachments($idFile);
         }
 

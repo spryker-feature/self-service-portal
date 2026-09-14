@@ -91,7 +91,7 @@ class DeleteModelController extends AbstractController
             return $this->redirectResponse(static::URL_REDIRECT_SSP_MODEL_PAGE);
         }
 
-        $idSspModel = $request->query->getInt(static::PARAM_ID_SSP_MODEL);
+        $idSspModel = (int)$request->query->get(static::PARAM_ID_SSP_MODEL, 0);
         if (!$idSspModel) {
             $this->addErrorMessage(static::MESSAGE_ERROR_SSP_MODEL_DELETE);
 
