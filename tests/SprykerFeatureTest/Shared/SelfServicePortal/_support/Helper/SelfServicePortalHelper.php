@@ -9,6 +9,8 @@ namespace SprykerFeatureTest\Shared\SelfServicePortal\Helper;
 
 use ArrayObject;
 use Codeception\Module;
+use Faker\Factory as FakerFactory;
+use Faker\Generator as FakerGenerator;
 use Generated\Shared\DataBuilder\CmsBlockBuilder;
 use Generated\Shared\DataBuilder\CmsBlockGlossaryPlaceholderBuilder;
 use Generated\Shared\DataBuilder\CmsBlockGlossaryPlaceholderTranslationBuilder;
@@ -18,6 +20,7 @@ use Generated\Shared\DataBuilder\SspAssetBuilder;
 use Generated\Shared\DataBuilder\SspInquiryBuilder;
 use Generated\Shared\Transfer\CmsBlockGlossaryTransfer;
 use Generated\Shared\Transfer\CmsBlockTransfer;
+use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\FileInfoTransfer;
 use Generated\Shared\Transfer\FileManagerDataTransfer;
 use Generated\Shared\Transfer\FileTransfer;
@@ -28,6 +31,7 @@ use Generated\Shared\Transfer\ProductConcreteTransfer;
 use Generated\Shared\Transfer\SalesProductClassTransfer;
 use Generated\Shared\Transfer\ShipmentTypeTransfer;
 use Generated\Shared\Transfer\SspAssetTransfer;
+use Generated\Shared\Transfer\SspInquiryCollectionRequestTransfer;
 use Generated\Shared\Transfer\SspInquiryTransfer;
 use Generated\Shared\Transfer\StoreRelationTransfer;
 use Orm\Zed\Company\Persistence\SpyCompanyQuery;
@@ -65,6 +69,7 @@ use Ramsey\Uuid\Nonstandard\Uuid;
 use Spryker\Service\UtilDateTime\UtilDateTimeService;
 use Spryker\Zed\CmsBlock\Business\CmsBlockFacadeInterface;
 use Spryker\Zed\FileManager\Business\FileManagerFacade;
+use SprykerFeature\Zed\SelfServicePortal\Business\SelfServicePortalFacadeInterface;
 use SprykerFeature\Zed\SelfServicePortal\Persistence\Mapper\SspAssetMapper;
 use SprykerFeature\Zed\SelfServicePortal\Persistence\Mapper\SspInquiryMapper;
 use SprykerFeature\Zed\SelfServicePortal\SelfServicePortalConfig as ZedSelfServicePortalConfig;
@@ -75,6 +80,13 @@ class SelfServicePortalHelper extends Module
 {
     use DataCleanupHelperTrait;
     use LocatorHelperTrait;
+
+    /**
+     * Faker format for a serial number: SN- followed by four digits and four letters.
+     */
+    protected const string SERIAL_NUMBER_FORMAT = 'SN-####-????';
+
+    protected ?FakerGenerator $faker = null;
 
     /**
      * @param array<string, mixed> $productClassOverride
@@ -249,6 +261,75 @@ class SelfServicePortalHelper extends Module
                 $idSspAsset,
             );
         });
+    }
+
+    /**
+     * Builds an asset transfer without persisting it — the payload source for a test that drives the
+     * create endpoint and must not have the asset in the database beforehand.
+     *
+     * The generated builder fills only name, reference and status; serial number and note are
+     * readable through the API, so they are generated here rather than left null.
+     *
+     * @param array<string, mixed> $seedData
+     */
+    public function buildAsset(array $seedData = []): SspAssetTransfer
+    {
+        return (new SspAssetBuilder($seedData + [
+            SspAssetTransfer::SERIAL_NUMBER => $this->getFaker()->unique()->bothify(static::SERIAL_NUMBER_FORMAT),
+            SspAssetTransfer::NOTE => $this->getFaker()->sentence(),
+        ]))->build();
+    }
+
+    /**
+     * Builds an inquiry transfer without persisting it — the payload source for a test that drives
+     * the create endpoint and must not have the inquiry in the database beforehand.
+     *
+     * @param array<string, mixed> $seedData
+     */
+    public function buildSspInquiry(array $seedData = []): SspInquiryTransfer
+    {
+        return (new SspInquiryBuilder($seedData))->build();
+    }
+
+    /**
+     * Creates an inquiry through the facade: only the create hook assigns the state machine item
+     * state the read query inner-joins on.
+     *
+     * @param array<string, mixed> $seedData
+     */
+    public function haveSspInquiryForCompanyUser(CompanyUserTransfer $companyUserTransfer, array $seedData = []): SspInquiryTransfer
+    {
+        $sspInquiryTransfer = $this->buildSspInquiry($seedData)->setCompanyUser($companyUserTransfer);
+
+        $sspInquiryCollectionResponseTransfer = $this->getSelfServicePortalFacade()->createSspInquiryCollection(
+            (new SspInquiryCollectionRequestTransfer())
+                ->addSspInquiry($sspInquiryTransfer)
+                ->setCompanyUser($companyUserTransfer),
+        );
+
+        $errorTransfer = $sspInquiryCollectionResponseTransfer->getErrors()->getIterator()->current();
+
+        if ($errorTransfer !== null) {
+            $this->fail(sprintf('Could not create the SSP inquiry: %s', (string)$errorTransfer->getMessage()));
+        }
+
+        /** @var \Generated\Shared\Transfer\SspInquiryTransfer $createdSspInquiryTransfer */
+        $createdSspInquiryTransfer = $sspInquiryCollectionResponseTransfer->getSspInquiries()->getIterator()->current();
+
+        $this->getDataCleanupHelper()->_addCleanup(function () use ($createdSspInquiryTransfer): void {
+            $this->getSspInquiryQuery()->filterByIdSspInquiry($createdSspInquiryTransfer->getIdSspInquiry())->delete();
+        });
+
+        return $createdSspInquiryTransfer;
+    }
+
+    public function getFaker(): FakerGenerator
+    {
+        if ($this->faker === null) {
+            $this->faker = FakerFactory::create();
+        }
+
+        return $this->faker;
     }
 
     /**
@@ -663,6 +744,11 @@ class SelfServicePortalHelper extends Module
     protected function getCmsBlockFacade(): CmsBlockFacadeInterface
     {
         return $this->getLocator()->cmsBlock()->facade();
+    }
+
+    protected function getSelfServicePortalFacade(): SelfServicePortalFacadeInterface
+    {
+        return $this->getLocator()->selfServicePortal()->facade();
     }
 
     protected function createTranslations(CmsBlockTransfer $cmsBlockTransfer): void
