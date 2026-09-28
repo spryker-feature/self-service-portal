@@ -44,7 +44,8 @@ resource:
             type: string
             writable: false
             readable: true
-            description: 'Scheduled date and time of the service.'
+            responseOptional: true
+            description: 'Scheduled date and time of the service. Absent while the service is booked but not yet scheduled.'
             openapiContext:
                 example: '2024-01-15T10:00:00+00:00'
 
@@ -56,13 +57,15 @@ resource:
             openapiContext:
                 example: '2024-01-01T10:00:00+00:00'
 
+        # Nothing in SelfServicePortal assigns a display name, so this serializes as null on every
+        # response while `stateName` carries the state. It needs a real source or removal from the
+        # contract; until then the description must not promise a value and no example is shown.
         stateDisplayName:
             type: string
             writable: false
             readable: true
-            description: 'Display name of the service state.'
-            openapiContext:
-                example: 'Confirmed'
+            responseOptional: true
+            description: 'Human-readable name of the service state. Not populated; read `stateName` instead.'
 
         stateName:
             type: string
@@ -77,6 +80,7 @@ resource:
             objectName: Pagination
             writable: false
             readable: true
+            collectionOnly: true
             description: 'Pagination metadata for the collection.'
             properties:
                 currentPage:

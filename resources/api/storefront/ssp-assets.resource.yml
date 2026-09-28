@@ -100,6 +100,7 @@ resource:
             objectName: Pagination
             writable: false
             readable: true
+            collectionOnly: true
             description: 'Pagination metadata for the collection.'
             properties:
                 currentPage:

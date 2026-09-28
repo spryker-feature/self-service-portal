@@ -68,7 +68,8 @@ resource:
             type: string
             writable: true
             readable: true
-            description: 'Reference of the related SSP asset.'
+            responseOptional: true
+            description: 'Reference of the related SSP asset. Answered only for an inquiry raised against one; an inquiry may be raised against an order instead, or against neither.'
             openapiContext:
                 example: 'SSP-001'
 
@@ -76,7 +77,8 @@ resource:
             type: string
             writable: true
             readable: true
-            description: 'Reference of the related order.'
+            responseOptional: true
+            description: 'Reference of the related order. Answered only for an inquiry raised against one; an inquiry may be raised against an asset instead, or against neither.'
             openapiContext:
                 example: 'DE--1'
 
@@ -128,6 +130,7 @@ resource:
             objectName: Pagination
             writable: false
             readable: true
+            collectionOnly: true
             description: 'Pagination metadata for the collection.'
             properties:
                 currentPage:
