@@ -42,7 +42,7 @@ export default class ImageUploader extends Component {
 
     protected onDelete(event: Event) {
         const button = (event.target as HTMLElement).closest<HTMLButtonElement>(
-            `.${this.jsName}__delete[data-id="${this.id}"]`,
+            `.${this.jsName}__delete[data-id="${this.imageId}"]`,
         );
 
         if (!button) {
@@ -98,7 +98,7 @@ export default class ImageUploader extends Component {
         return this.getAttribute('confirmation-trigger');
     }
 
-    protected get id(): string {
+    protected get imageId(): string {
         return this.getAttribute('data-id');
     }
 }
