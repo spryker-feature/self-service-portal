@@ -50,6 +50,7 @@
         <property name="isActive" type="bool"/>
         <property name="storeNames" type="string[]" singular="storeName"/>
         <property name="uuids" type="string[]" singular="uuid"/>
+        <property name="shipmentTypeIds" type="int[]" singular="idShipmentType"/>
     </transfer>
 
     <transfer name="ProductConcreteStorage">
@@ -208,6 +209,7 @@
 
     <transfer name="Locale">
         <property name="idLocale" type="int"/>
+        <property name="localeName" type="string"/>
     </transfer>
 
     <transfer name="ServiceConditions" strict="true">
@@ -1415,9 +1417,11 @@
     </transfer>
 
     <transfer name="ProductConcreteCollectionRequest" strict="true">
+        <property name="products" type="ProductConcrete[]" singular="product"/>
     </transfer>
 
     <transfer name="ProductConcreteCollectionResponse" strict="true">
+        <property name="errors" type="Error[]" singular="error"/>
     </transfer>
 
 </transfers>
