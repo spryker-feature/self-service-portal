@@ -105,6 +105,7 @@
         "spryker/company-business-unit-sales-connector": "*",
         "spryker/company-role": "*",
         "spryker/company-sales-connector": "*",
+        "spryker/company-users-rest-api": "*",
         "spryker/container": "*",
         "spryker/country": "*",
         "spryker/elastica": "*",
@@ -134,6 +135,7 @@
     "autoload": {
         "psr-4": {
             "SprykerFeature\\": "src/SprykerFeature/",
+            "SprykerFeatureTest\\Glue\\SelfServicePortal\\Helper\\": "tests/SprykerFeatureTest/Glue/SelfServicePortal/_support/Helper/",
             "SprykerFeatureTest\\Shared\\SelfServicePortal\\Helper\\": "tests/SprykerFeatureTest/Shared/SelfServicePortal/_support/Helper/"
         }
     },
