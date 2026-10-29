@@ -215,7 +215,7 @@ class ProductConcreteTable extends AbstractTable
     protected function getStatusLabel(bool $status): string
     {
         if (!$status) {
-            return $this->generateLabel('Deactivated', 'label-danger');
+            return $this->generateLabel('Inactive', 'badge-outline-dark');
         }
 
         return $this->generateLabel('Active', 'label-info');
