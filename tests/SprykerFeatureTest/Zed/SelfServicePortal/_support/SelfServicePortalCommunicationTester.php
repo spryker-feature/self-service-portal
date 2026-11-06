@@ -69,6 +69,8 @@ use Orm\Zed\SelfServicePortal\Persistence\SpySspModelToProductListQuery;
  * @method void lookForwardTo($achieveValue)
  * @method void comment($description)
  * @method void pause($vars = [])
+ * @method \SprykerFeature\Zed\SelfServicePortal\SelfServicePortalConfig getModuleConfig()
+ *
  * @SuppressWarnings(PHPMD)
  */
 class SelfServicePortalCommunicationTester extends Actor

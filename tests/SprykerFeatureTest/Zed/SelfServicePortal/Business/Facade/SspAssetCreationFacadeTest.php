@@ -23,11 +23,13 @@ use Generated\Shared\Transfer\SspAssetIncludeTransfer;
 use Generated\Shared\Transfer\SspAssetTransfer;
 use Orm\Zed\CompanyBusinessUnit\Persistence\SpyCompanyBusinessUnitQuery;
 use Orm\Zed\SelfServicePortal\Persistence\SpySspAssetQuery;
+use Orm\Zed\SelfServicePortal\Persistence\SpySspAssetToCompanyBusinessUnitQuery;
 use Spryker\Zed\CompanyRole\Communication\Plugin\PermissionStoragePlugin;
 use Spryker\Zed\FileManager\Dependency\Service\FileManagerToFileSystemServiceInterface;
 use Spryker\Zed\FileManager\FileManagerDependencyProvider;
 use SprykerFeature\Shared\SelfServicePortal\Plugin\Permission\ViewBusinessUnitSspAssetPermissionPlugin;
 use SprykerFeature\Shared\SelfServicePortal\Plugin\Permission\ViewCompanySspAssetPermissionPlugin;
+use SprykerFeature\Shared\SelfServicePortal\SelfServicePortalConfig;
 use SprykerFeature\Zed\SelfServicePortal\Business\SelfServicePortalFacade;
 use SprykerFeature\Zed\SelfServicePortal\Communication\Plugin\SspDashboardManagement\SspAssetDashboardDataExpanderPlugin;
 
@@ -49,6 +51,10 @@ class SspAssetCreationFacadeTest extends Unit
      * @var string
      */
     public const PLUGINS_PERMISSION = 'PLUGINS_PERMISSION';
+
+    protected const string SERIAL_NUMBER_ORIGINAL = 'SN-ORIGINAL';
+
+    protected const string SERIAL_NUMBER_UPDATED = 'SN-UPDATED';
 
     /**
      * @var \SprykerFeatureTest\Zed\SelfServicePortal\SelfServicePortalBusinessTester
@@ -356,6 +362,95 @@ class SspAssetCreationFacadeTest extends Unit
         $this->assertSame($expectedNote, $actualSspAssetTransfer->getNote());
     }
 
+    public function testGivenAnExistingAssetWhenUpdateSspAssetCollectionWithNewSerialNumberStatusAndOwnerThenTheyArePersisted(): void
+    {
+        // Arrange
+        $newOwnerCompanyBusinessUnitTransfer = $this->tester->haveCompanyBusinessUnit([
+            CompanyBusinessUnitTransfer::FK_COMPANY => $this->companyBusinessUnit->getFkCompanyOrFail(),
+        ]);
+        $sspAssetTransfer = $this->tester->haveAsset([
+            SspAssetTransfer::SERIAL_NUMBER => static::SERIAL_NUMBER_ORIGINAL,
+            SspAssetTransfer::STATUS => SelfServicePortalConfig::STATUS_PENDING,
+            SspAssetTransfer::COMPANY_BUSINESS_UNIT => $this->companyBusinessUnit,
+        ]);
+
+        $sspAssetUpdateTransfer = (new SspAssetTransfer())
+            ->setIdSspAsset($sspAssetTransfer->getIdSspAssetOrFail())
+            ->setReference($sspAssetTransfer->getReferenceOrFail())
+            ->setName($sspAssetTransfer->getNameOrFail())
+            ->setSerialNumber(static::SERIAL_NUMBER_UPDATED)
+            ->setStatus(SelfServicePortalConfig::STATUS_APPROVED)
+            ->setCompanyBusinessUnit($newOwnerCompanyBusinessUnitTransfer);
+
+        // Act
+        $sspAssetCollectionResponseTransfer = $this->selfServicePortalFacade->updateSspAssetCollection(
+            (new SspAssetCollectionRequestTransfer())->addSspAsset($sspAssetUpdateTransfer),
+        );
+
+        // Assert
+        $this->assertCount(0, $sspAssetCollectionResponseTransfer->getErrors());
+
+        $sspAssetEntity = SpySspAssetQuery::create()->findOneByIdSspAsset($sspAssetTransfer->getIdSspAssetOrFail());
+        $this->assertSame(static::SERIAL_NUMBER_UPDATED, $sspAssetEntity->getSerialNumber());
+        $this->assertSame(SelfServicePortalConfig::STATUS_APPROVED, $sspAssetEntity->getStatus());
+        $this->assertSame(
+            $newOwnerCompanyBusinessUnitTransfer->getIdCompanyBusinessUnitOrFail(),
+            $sspAssetEntity->getFkCompanyBusinessUnit(),
+        );
+    }
+
+    public function testGivenAnAssetAssignedToTwoBusinessUnitsOfOneCompanyWhenUpdateSspAssetCollectionReassignsItThenTheBusinessUnitAssignmentsArePersisted(): void
+    {
+        // Arrange
+        $secondCompanyBusinessUnitTransfer = $this->tester->haveCompanyBusinessUnit([
+            CompanyBusinessUnitTransfer::FK_COMPANY => $this->companyBusinessUnit->getFkCompanyOrFail(),
+        ]);
+        $otherCompanyTransfer = $this->tester->haveCompany();
+        $otherCompanyBusinessUnitTransfer = $this->tester->haveCompanyBusinessUnit([
+            CompanyBusinessUnitTransfer::FK_COMPANY => $otherCompanyTransfer->getIdCompanyOrFail(),
+        ]);
+        $sspAssetTransfer = $this->tester->haveAsset([
+            SspAssetTransfer::COMPANY_BUSINESS_UNIT => $this->companyBusinessUnit,
+            SspAssetTransfer::BUSINESS_UNIT_ASSIGNMENTS => [
+                [SspAssetBusinessUnitAssignmentTransfer::COMPANY_BUSINESS_UNIT => $this->companyBusinessUnit],
+                [SspAssetBusinessUnitAssignmentTransfer::COMPANY_BUSINESS_UNIT => $secondCompanyBusinessUnitTransfer],
+            ],
+        ]);
+
+        $sspAssetUpdateTransfer = (new SspAssetTransfer())
+            ->setIdSspAsset($sspAssetTransfer->getIdSspAssetOrFail())
+            ->setReference($sspAssetTransfer->getReferenceOrFail())
+            ->setName($sspAssetTransfer->getNameOrFail())
+            ->setCompanyBusinessUnit($secondCompanyBusinessUnitTransfer);
+
+        $sspAssetCollectionRequestTransfer = (new SspAssetCollectionRequestTransfer())
+            ->addSspAsset($sspAssetUpdateTransfer)
+            ->addBusinessUnitAssignmentToAdd(
+                (new SspAssetBusinessUnitAssignmentTransfer())
+                    ->setSspAsset($sspAssetUpdateTransfer)
+                    ->setCompanyBusinessUnit($otherCompanyBusinessUnitTransfer),
+            )
+            ->addBusinessUnitAssignmentToDelete(
+                (new SspAssetBusinessUnitAssignmentTransfer())
+                    ->setSspAsset($sspAssetUpdateTransfer)
+                    ->setCompanyBusinessUnit($this->companyBusinessUnit),
+            );
+
+        // Act
+        $sspAssetCollectionResponseTransfer = $this->selfServicePortalFacade->updateSspAssetCollection($sspAssetCollectionRequestTransfer);
+
+        // Assert
+        $this->assertCount(0, $sspAssetCollectionResponseTransfer->getErrors());
+
+        $assignedCompanyBusinessUnitIds = $this->getAssignedCompanyBusinessUnitIds($sspAssetTransfer->getIdSspAssetOrFail());
+        $expectedCompanyBusinessUnitIds = [
+            $secondCompanyBusinessUnitTransfer->getIdCompanyBusinessUnitOrFail(),
+            $otherCompanyBusinessUnitTransfer->getIdCompanyBusinessUnitOrFail(),
+        ];
+        sort($expectedCompanyBusinessUnitIds);
+        $this->assertSame($expectedCompanyBusinessUnitIds, $assignedCompanyBusinessUnitIds);
+    }
+
     /**
      * @return array<mixed>
      */
@@ -606,5 +701,21 @@ class SspAssetCreationFacadeTest extends Unit
                 ],
             ],
         ];
+    }
+
+    /**
+     * @return array<int>
+     */
+    protected function getAssignedCompanyBusinessUnitIds(int $idSspAsset): array
+    {
+        $companyBusinessUnitIds = [];
+
+        foreach (SpySspAssetToCompanyBusinessUnitQuery::create()->findByFkSspAsset($idSspAsset) as $sspAssetToCompanyBusinessUnitEntity) {
+            $companyBusinessUnitIds[] = $sspAssetToCompanyBusinessUnitEntity->getFkCompanyBusinessUnit();
+        }
+
+        sort($companyBusinessUnitIds);
+
+        return $companyBusinessUnitIds;
     }
 }
