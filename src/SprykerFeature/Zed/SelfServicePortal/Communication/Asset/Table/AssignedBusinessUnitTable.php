@@ -49,11 +49,6 @@ class AssignedBusinessUnitTable extends AbstractTable
             SpyCompanyBusinessUnitTableMap::COL_NAME,
         ]);
 
-        $config->setRawColumns([
-            SpyCompanyTableMap::COL_NAME,
-            SpyCompanyBusinessUnitTableMap::COL_NAME,
-        ]);
-
         return $config;
     }
 

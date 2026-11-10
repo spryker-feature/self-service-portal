@@ -163,6 +163,8 @@ class UnattachedModelProductListAttachmentTable extends AbstractTable
         $this->loadData($data);
 
         $dataWithoutCheckboxColumn = array_map(function ($productListRow) {
+             $productListRow = $this->escapeColumns($productListRow, $this->config->getRawColumns());
+
              unset($productListRow[static::COLUMN_SELECTED]);
 
              return array_values($productListRow);

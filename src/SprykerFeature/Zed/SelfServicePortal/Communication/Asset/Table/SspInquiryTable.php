@@ -72,8 +72,6 @@ class SspInquiryTable extends AbstractTable
         ]);
 
         $config->setRawColumns([
-            SpySspInquiryTableMap::COL_SUBJECT,
-            SpySspInquiryTableMap::COL_REFERENCE,
             SpyStateMachineItemStateTableMap::COL_NAME,
             static::COL_ACTIONS,
         ]);

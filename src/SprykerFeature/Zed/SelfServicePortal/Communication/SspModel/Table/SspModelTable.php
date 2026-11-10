@@ -179,7 +179,7 @@ class SspModelTable extends AbstractTable
 
         $imageUrl = $this->modelImageUrlProvider->getImageUrl($sspModelTransfer);
 
-        return $imageUrl ? sprintf('<img src="%s" width="50" height="50" />', $imageUrl) : '';
+        return $imageUrl ? sprintf('<img src="%s" width="50" height="50" />', htmlspecialchars((string)$imageUrl, ENT_QUOTES, 'UTF-8')) : '';
     }
 
     /**

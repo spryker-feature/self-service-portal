@@ -73,7 +73,6 @@ class OrderSspInquiryTable extends AbstractTable
 
         $config->setRawColumns([
             SpySspInquiryTableMap::COL_FK_STATE_MACHINE_ITEM_STATE,
-            SpySspInquiryTableMap::COL_SUBJECT,
             static::COL_ACTIONS,
         ]);
 

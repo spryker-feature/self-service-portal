@@ -119,7 +119,6 @@ class SspServiceTable extends AbstractTable
 
         $config->setRawColumns([
             SpySalesOrderTableMap::COL_ORDER_REFERENCE,
-            SpySalesOrderItemTableMap::COL_NAME,
             static::FIELD_STATUS,
             static::COL_ACTIONS,
         ]);

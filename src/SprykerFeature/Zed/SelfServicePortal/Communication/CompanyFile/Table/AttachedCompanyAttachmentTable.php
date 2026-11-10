@@ -148,6 +148,8 @@ class AttachedCompanyAttachmentTable extends AbstractTable
         $this->loadData($data);
 
         $dataWithoutCheckboxColumn = array_map(function ($companyRow) {
+             $companyRow = $this->escapeColumns($companyRow, $this->config->getRawColumns());
+
              unset($companyRow[static::COLUMN_SELECTED]);
 
              return array_values($companyRow);

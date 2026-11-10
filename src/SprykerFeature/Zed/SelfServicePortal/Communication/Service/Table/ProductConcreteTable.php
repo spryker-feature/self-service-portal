@@ -160,7 +160,7 @@ class ProductConcreteTable extends AbstractTable
 
         return [
             SpyProductTableMap::COL_SKU => (string)$productEntity->getSku(),
-            static::COL_IMAGE => sprintf('<img src="%s" style="max-width: 100px;max-height: 100px"/>', $productEntity->getVirtualColumn(ProductImageTransfer::EXTERNAL_URL_SMALL)),
+            static::COL_IMAGE => sprintf('<img src="%s" style="max-width: 100px;max-height: 100px"/>', htmlspecialchars((string)$productEntity->getVirtualColumn(ProductImageTransfer::EXTERNAL_URL_SMALL), ENT_QUOTES, 'UTF-8')),
             SpyProductLocalizedAttributesTableMap::COL_NAME => $productEntity->getVirtualColumn(static::COL_NAME),
             static::COL_STORES => $storeColumnHtml,
             SpyProductTableMap::COL_IS_ACTIVE => $this->getStatusLabel($productEntity->getIsActive()),

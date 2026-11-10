@@ -193,6 +193,8 @@ class AttachedSspModelAssetAttachmentTable extends AbstractTable
         $this->loadData($data);
 
         $dataWithoutCheckboxColumn = array_map(function ($assetRow) {
+            $assetRow = $this->escapeColumns($assetRow, $this->config->getRawColumns());
+
             unset($assetRow[static::COLUMN_SELECTED]);
 
             return array_values($assetRow);
