@@ -159,11 +159,11 @@ class AttachedSspModelAssetAttachmentTable extends AbstractTable
      */
     protected function formatRow(array $row): array
     {
-        $id = (int)$row[SpySspAssetTableMap::COL_ID_SSP_ASSET];
+        $idSspAsset = (int)$row[SpySspAssetTableMap::COL_ID_SSP_ASSET];
 
         return [
-            static::COLUMN_SELECTED => sprintf('<input class="js-selectable-table-checkbox" type="checkbox" value="%d" />', $id),
-            static::COLUMN_ID => $id,
+            static::COLUMN_SELECTED => sprintf('<input class="js-selectable-table-checkbox" type="checkbox" value="%d" />', $idSspAsset),
+            static::COLUMN_ID => $idSspAsset,
             static::COLUMN_NAME => $row[SpySspAssetTableMap::COL_NAME],
             static::COLUMN_REFERENCE => $row[SpySspAssetTableMap::COL_REFERENCE],
             static::COLUMN_SERIAL => $row[SpySspAssetTableMap::COL_SERIAL_NUMBER],

@@ -19,7 +19,7 @@ class ItemShipmentTypeGrouper extends AbstractShipmentTypeGrouper implements Ite
         $shipmentTypeGroups = [];
 
         foreach ($itemTransfers as $itemTransfer) {
-            $shipmentTypeKey = $itemTransfer->getShipmentType()?->getKey() ?? $this->SelfServicePortalConfig::SHIPMENT_TYPE_DELIVERY;
+            $shipmentTypeKey = $itemTransfer->getShipmentType()?->getKey() ?? $this->selfServicePortalConfig::SHIPMENT_TYPE_DELIVERY;
             if (!isset($shipmentTypeGroups[$shipmentTypeKey])) {
                 $shipmentTypeGroups[$shipmentTypeKey] = $this->createShipmentTypeGroup($shipmentTypeKey);
             }

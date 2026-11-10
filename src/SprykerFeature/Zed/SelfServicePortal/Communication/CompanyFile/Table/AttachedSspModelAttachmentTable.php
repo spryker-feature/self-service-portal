@@ -148,11 +148,11 @@ class AttachedSspModelAttachmentTable extends AbstractTable
      */
     protected function formatRow(array $row): array
     {
-        $id = (int)$row[SpySspModelTableMap::COL_ID_SSP_MODEL];
+        $idSspModel = (int)$row[SpySspModelTableMap::COL_ID_SSP_MODEL];
 
         return [
-            static::COLUMN_SELECTED => sprintf('<input class="js-selectable-table-checkbox" type="checkbox" value="%d" />', $id),
-            static::COLUMN_ID => $id,
+            static::COLUMN_SELECTED => sprintf('<input class="js-selectable-table-checkbox" type="checkbox" value="%d" />', $idSspModel),
+            static::COLUMN_ID => $idSspModel,
             static::COLUMN_REFERENCE => (string)$row[SpySspModelTableMap::COL_REFERENCE],
             static::COLUMN_NAME => (string)$row[SpySspModelTableMap::COL_NAME],
             static::COLUMN_CODE => (string)($row[SpySspModelTableMap::COL_CODE] ?: '---'),

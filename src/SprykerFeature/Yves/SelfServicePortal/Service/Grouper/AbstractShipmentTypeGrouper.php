@@ -23,7 +23,7 @@ abstract class AbstractShipmentTypeGrouper
     protected const SHIPMENT_TYPE_GROUP_ITEMS = 'items';
 
     public function __construct(
-        protected SelfServicePortalConfig $SelfServicePortalConfig,
+        protected SelfServicePortalConfig $selfServicePortalConfig,
         protected ShipmentTypeGroupSorterInterface $shipmentTypeGroupSorter
     ) {
     }

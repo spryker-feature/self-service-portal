@@ -121,11 +121,11 @@ class AttachedBusinessUnitAttachmentTable extends AbstractTable
      */
     protected function formatRow(array $row): array
     {
-        $id = (int)$row[SpyCompanyBusinessUnitTableMap::COL_ID_COMPANY_BUSINESS_UNIT];
+        $idCompanyBusinessUnit = (int)$row[SpyCompanyBusinessUnitTableMap::COL_ID_COMPANY_BUSINESS_UNIT];
 
         return [
-            static::COLUMN_SELECTED => sprintf('<input class="js-selectable-table-checkbox" type="checkbox" value="%d" />', $id),
-            static::COLUMN_ID_BUSINESS_UNIT => $id,
+            static::COLUMN_SELECTED => sprintf('<input class="js-selectable-table-checkbox" type="checkbox" value="%d" />', $idCompanyBusinessUnit),
+            static::COLUMN_ID_BUSINESS_UNIT => $idCompanyBusinessUnit,
             static::COLUMN_COMPANY_NAME => (string)$row[SpyCompanyTableMap::COL_NAME],
             static::COLUMN_BUSINESS_UNIT_NAME => (string)$row[SpyCompanyBusinessUnitTableMap::COL_NAME],
         ];

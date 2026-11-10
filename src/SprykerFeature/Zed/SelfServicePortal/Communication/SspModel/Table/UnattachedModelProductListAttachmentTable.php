@@ -135,11 +135,11 @@ class UnattachedModelProductListAttachmentTable extends AbstractTable
      */
     protected function formatRow(array $row): array
     {
-        $id = (int)$row[SpyProductListTableMap::COL_ID_PRODUCT_LIST];
+        $idProductList = (int)$row[SpyProductListTableMap::COL_ID_PRODUCT_LIST];
 
         return [
-            static::COLUMN_SELECTED => sprintf('<input class="js-selectable-table-checkbox" type="checkbox" value="%d" />', $id),
-            static::COLUMN_ID => $id,
+            static::COLUMN_SELECTED => sprintf('<input class="js-selectable-table-checkbox" type="checkbox" value="%d" />', $idProductList),
+            static::COLUMN_ID => $idProductList,
             static::COLUMN_TITLE => $row[SpyProductListTableMap::COL_TITLE],
         ];
     }

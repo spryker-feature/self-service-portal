@@ -23,7 +23,7 @@ class ShipmentTypeItemExpander implements ShipmentTypeItemExpanderInterface
 {
     public function __construct(
         protected ShipmentTypeReaderInterface $shipmentTypeReader,
-        protected SelfServicePortalRepositoryInterface $SelfServicePortalRepository,
+        protected SelfServicePortalRepositoryInterface $selfServicePortalRepository,
         protected ProductOfferShipmentTypeFacadeInterface $productOfferShipmentTypeFacade
     ) {
     }
@@ -188,7 +188,7 @@ class ShipmentTypeItemExpander implements ShipmentTypeItemExpanderInterface
             $productConcreteIds[] = $itemWithoutShipmentType->getId();
         }
 
-        $productConcreteIdsWithDefaultShipmentType = $this->SelfServicePortalRepository->getProductIdsWithShipmentType($productConcreteIds, $defaultShipmentTypeTransfer->getNameOrFail());
+        $productConcreteIdsWithDefaultShipmentType = $this->selfServicePortalRepository->getProductIdsWithShipmentType($productConcreteIds, $defaultShipmentTypeTransfer->getNameOrFail());
 
         foreach ($itemsWithoutShipmentType as $itemWithoutShipmentType) {
             if (!in_array($itemWithoutShipmentType->getId(), $productConcreteIdsWithDefaultShipmentType)) {

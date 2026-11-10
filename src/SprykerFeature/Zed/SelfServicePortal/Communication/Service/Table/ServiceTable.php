@@ -127,7 +127,7 @@ class ServiceTable extends AbstractTable
     public function __construct(
         protected SpySalesOrderItemQuery $salesOrderItemQuery,
         protected UtilDateTimeServiceInterface $utilDateTimeService,
-        protected SelfServicePortalConfig $SelfServicePortalConfig
+        protected SelfServicePortalConfig $selfServicePortalConfig
     ) {
     }
 
@@ -217,7 +217,7 @@ class ServiceTable extends AbstractTable
     {
         $query = $this->salesOrderItemQuery->useSpySalesOrderItemProductClassQuery()
             ->useSpySalesProductClassQuery()
-                ->filterByName($this->SelfServicePortalConfig->getServiceProductClassName())
+                ->filterByName($this->selfServicePortalConfig->getServiceProductClassName())
             ->endUse()
             ->endUse();
 

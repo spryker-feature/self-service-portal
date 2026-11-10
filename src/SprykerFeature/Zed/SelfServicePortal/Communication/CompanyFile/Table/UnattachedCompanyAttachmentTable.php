@@ -124,11 +124,11 @@ class UnattachedCompanyAttachmentTable extends AbstractTable
      */
     protected function formatRow(array $row): array
     {
-        $id = (int)$row[SpyCompanyTableMap::COL_ID_COMPANY];
+        $idCompany = (int)$row[SpyCompanyTableMap::COL_ID_COMPANY];
 
         return [
-            static::COLUMN_SELECTED => sprintf('<input class="js-selectable-table-checkbox" type="checkbox" value="%d" data-company-name="%s" />', $id, htmlspecialchars($row[SpyCompanyTableMap::COL_NAME] ?? '')),
-            static::COLUMN_ID => $id,
+            static::COLUMN_SELECTED => sprintf('<input class="js-selectable-table-checkbox" type="checkbox" value="%d" data-company-name="%s" />', $idCompany, htmlspecialchars($row[SpyCompanyTableMap::COL_NAME] ?? '')),
+            static::COLUMN_ID => $idCompany,
             static::COLUMN_COMPANY_NAME => htmlspecialchars($row[SpyCompanyTableMap::COL_NAME] ?? ''),
         ];
     }

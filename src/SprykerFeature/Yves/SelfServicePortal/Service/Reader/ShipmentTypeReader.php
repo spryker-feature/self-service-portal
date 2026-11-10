@@ -17,7 +17,7 @@ class ShipmentTypeReader implements ShipmentTypeReaderInterface
 {
     public function __construct(
         protected ShipmentTypeStorageClientInterface $shipmentTypeStorageClient,
-        protected SelfServicePortalConfig $SelfServicePortalConfig
+        protected SelfServicePortalConfig $selfServicePortalConfig
     ) {
     }
 

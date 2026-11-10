@@ -112,8 +112,8 @@ class SspModelCollectionRequestTransformer implements DataTransformerInterface
         }
 
         $ids = explode(',', trim($idsString));
-        $ids = array_filter($ids, function ($id) {
-            return (bool)$id && is_numeric($id);
+        $ids = array_filter($ids, function ($idEntity) {
+            return (bool)$idEntity && is_numeric($idEntity);
         });
 
         return array_map('intval', array_unique($ids));

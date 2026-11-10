@@ -17,7 +17,7 @@ class ShipmentTypeReader implements ShipmentTypeReaderInterface
 {
     public function __construct(
         protected ShipmentTypeFacadeInterface $shipmentTypeFacade,
-        protected SelfServicePortalConfig $SelfServicePortalConfig
+        protected SelfServicePortalConfig $selfServicePortalConfig
     ) {
     }
 
@@ -26,7 +26,7 @@ class ShipmentTypeReader implements ShipmentTypeReaderInterface
         $shipmentTypeCriteriaTransfer = (new ShipmentTypeCriteriaTransfer())
             ->setShipmentTypeConditions(
                 (new ShipmentTypeConditionsTransfer())
-                    ->setKeys([$this->SelfServicePortalConfig->getDefaultShipmentType()])
+                    ->setKeys([$this->selfServicePortalConfig->getDefaultShipmentType()])
                     ->setIsActive(true),
             );
 

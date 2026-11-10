@@ -26,7 +26,7 @@ class AddressFormItemShipmentTypeGrouper extends AbstractShipmentTypeGrouper imp
         foreach ($checkoutAddressForm as $checkoutAddressFormItem) {
             $itemTransfer = $checkoutAddressFormItem->vars[static::FORM_PROPERTY_DATA];
 
-            $shipmentTypeKey = $itemTransfer->getShipmentType()?->getKey() ?? $this->SelfServicePortalConfig::SHIPMENT_TYPE_DELIVERY;
+            $shipmentTypeKey = $itemTransfer->getShipmentType()?->getKey() ?? $this->selfServicePortalConfig::SHIPMENT_TYPE_DELIVERY;
             if (!isset($shipmentTypeGroups[$shipmentTypeKey])) {
                 $shipmentTypeGroups[$shipmentTypeKey] = $this->createShipmentTypeGroup($shipmentTypeKey);
             }

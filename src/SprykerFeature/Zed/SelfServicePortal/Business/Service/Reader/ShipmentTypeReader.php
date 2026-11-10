@@ -17,14 +17,14 @@ class ShipmentTypeReader implements ShipmentTypeReaderInterface
 {
     public function __construct(
         protected ShipmentTypeFacadeInterface $shipmentTypeFacade,
-        protected SelfServicePortalConfig $SelfServicePortalConfig
+        protected SelfServicePortalConfig $selfServicePortalConfig
     ) {
     }
 
     public function getDefaultShipmentType(string $storeName): ?ShipmentTypeTransfer
     {
         $shipmentTypeConditionsTransfer = (new ShipmentTypeConditionsTransfer())
-            ->addKey($this->SelfServicePortalConfig->getDefaultShipmentType())
+            ->addKey($this->selfServicePortalConfig->getDefaultShipmentType())
             ->addStoreName($storeName)
             ->setIsActive(true);
 
