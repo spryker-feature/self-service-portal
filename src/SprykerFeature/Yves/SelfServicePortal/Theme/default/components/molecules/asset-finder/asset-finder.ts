@@ -1,6 +1,6 @@
 import Component from 'ShopUi/models/component';
 import AjaxProvider from 'ShopUi/components/molecules/ajax-provider/ajax-provider';
-import debounce from 'lodash-es/debounce';
+import { debounce } from 'ShopUi/utils/timing/debounce';
 
 export default class AssetFinder extends Component {
     protected controller = new AbortController();
