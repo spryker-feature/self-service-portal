@@ -37,7 +37,7 @@ class SspInquiryRestrictionHandler implements SspInquiryRestrictionHandlerInterf
             return;
         }
 
-        [$controllerInstance, $actionName] = $eventController;
+        [$controllerInstance] = $eventController;
 
         if (!in_array(get_class($controllerInstance), static::SSP_INQUIRY_CONTROLLERS, true)) {
             return;
