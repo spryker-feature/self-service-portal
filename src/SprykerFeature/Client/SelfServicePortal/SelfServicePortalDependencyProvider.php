@@ -7,7 +7,9 @@
 
 namespace SprykerFeature\Client\SelfServicePortal;
 
+use Spryker\Client\Catalog\CatalogClientInterface;
 use Spryker\Client\CompanyUser\CompanyUserClientInterface;
+use Spryker\Client\Customer\CustomerClientInterface;
 use Spryker\Client\Kernel\AbstractDependencyProvider;
 use Spryker\Client\Kernel\Container;
 use Spryker\Client\Permission\PermissionClientInterface;
@@ -112,6 +114,10 @@ class SelfServicePortalDependencyProvider extends AbstractDependencyProvider
      */
     public const CLIENT_PRODUCT_STORAGE = 'CLIENT_PRODUCT_STORAGE';
 
+    public const string CLIENT_CATALOG = 'CLIENT_CATALOG';
+
+    public const string CLIENT_CUSTOMER = 'CLIENT_CUSTOMER';
+
     public function provideServiceLayerDependencies(Container $container): Container
     {
         $container = $this->addZedRequestClient($container);
@@ -132,6 +138,8 @@ class SelfServicePortalDependencyProvider extends AbstractDependencyProvider
         $container = $this->addProductOfferAvailabilityStorageClient($container);
         $container = $this->addProductListStorageClient($container);
         $container = $this->addProductStorageClient($container);
+        $container = $this->addCatalogClient($container);
+        $container = $this->addCustomerClient($container);
 
         return $container;
     }
@@ -314,6 +322,24 @@ class SelfServicePortalDependencyProvider extends AbstractDependencyProvider
     {
         $container->set(static::CLIENT_PRODUCT_STORAGE, function (Container $container) {
             return $container->getLocator()->productStorage()->client();
+        });
+
+        return $container;
+    }
+
+    protected function addCatalogClient(Container $container): Container
+    {
+        $container->set(static::CLIENT_CATALOG, function (Container $container): CatalogClientInterface {
+            return $container->getLocator()->catalog()->client();
+        });
+
+        return $container;
+    }
+
+    protected function addCustomerClient(Container $container): Container
+    {
+        $container->set(static::CLIENT_CUSTOMER, function (Container $container): CustomerClientInterface {
+            return $container->getLocator()->customer()->client();
         });
 
         return $container;

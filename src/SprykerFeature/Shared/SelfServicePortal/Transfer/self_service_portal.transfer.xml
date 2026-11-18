@@ -1426,4 +1426,8 @@
         <property name="errors" type="Error[]" singular="error"/>
     </transfer>
 
+    <transfer name="PaginationSearchResult">
+        <property name="numFound" type="int"/>
+    </transfer>
+
 </transfers>

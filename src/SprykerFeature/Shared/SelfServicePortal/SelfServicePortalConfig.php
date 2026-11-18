@@ -187,6 +187,10 @@ class SelfServicePortalConfig extends AbstractSharedConfig
      */
     protected const DEFAULT_FILE_DASHBOARD_MAX_PER_PAGE = 3;
 
+    protected const string SPARE_PART_PRODUCT_CLASS_NAME = 'Spare parts';
+
+    protected const int ASSET_DETAILS_SERVICE_COUNT = 4;
+
     /**
      * Specification:
      * - This event is used for spy_ssp_model entity creation.
@@ -377,6 +381,28 @@ class SelfServicePortalConfig extends AbstractSharedConfig
     public function getServiceProductClassName(): string
     {
         return 'Service';
+    }
+
+    /**
+     * Specification:
+     * - Returns the name of the product class of spare parts.
+     *
+     * @api
+     */
+    public function getSparePartProductClassName(): string
+    {
+        return static::SPARE_PART_PRODUCT_CLASS_NAME;
+    }
+
+    /**
+     * Specification:
+     * - Returns the maximum number of booked services that the asset details show for an asset.
+     *
+     * @api
+     */
+    public function getAssetDetailsServiceCount(): int
+    {
+        return static::ASSET_DETAILS_SERVICE_COUNT;
     }
 
     /**

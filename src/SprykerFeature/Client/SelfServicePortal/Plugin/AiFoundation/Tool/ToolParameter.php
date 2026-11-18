@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
+declare(strict_types=1);
+
+namespace SprykerFeature\Client\SelfServicePortal\Plugin\AiFoundation\Tool;
+
+use Spryker\Client\AiFoundationExtension\Dependency\Tools\ToolParameterInterface;
+use Spryker\Shared\AiFoundationExtension\Tools\ToolParameterType;
+
+class ToolParameter implements ToolParameterInterface
+{
+    public function __construct(
+        protected string $name,
+        protected ToolParameterType $type,
+        protected string $description,
+        protected bool $isRequired
+    ) {
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getType(): ToolParameterType
+    {
+        return $this->type;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function isRequired(): bool
+    {
+        return $this->isRequired;
+    }
+}

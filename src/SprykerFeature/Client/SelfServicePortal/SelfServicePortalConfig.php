@@ -10,6 +10,7 @@ namespace SprykerFeature\Client\SelfServicePortal;
 use Generated\Shared\Transfer\PaginationConfigTransfer;
 use Generated\Shared\Transfer\SortConfigTransfer;
 use Spryker\Client\Kernel\AbstractBundleConfig;
+use SprykerFeature\Shared\SelfServicePortal\SelfServicePortalConfig as SharedSelfServicePortalConfig;
 
 /**
  * @method \SprykerFeature\Shared\SelfServicePortal\SelfServicePortalConfig getSharedConfig()
@@ -22,6 +23,8 @@ class SelfServicePortalConfig extends AbstractBundleConfig
      * @var string
      */
     protected const FULL_TEXT_BOOSTED_BOOSTING_VALUE = 'SEARCH_ELASTICSEARCH:FULL_TEXT_BOOSTED_BOOSTING_VALUE';
+
+    protected const int COMPATIBLE_PRODUCT_SEARCH_ITEMS_PER_PAGE = 12;
 
     /**
      * Specification:
@@ -127,5 +130,75 @@ class SelfServicePortalConfig extends AbstractBundleConfig
     public function getServiceProductClassName(): string
     {
         return $this->getSharedConfig()->getServiceProductClassName();
+    }
+
+    /**
+     * Specification:
+     * - Returns the name of the product class of spare parts.
+     * - The compatible product reader uses it to find the spare parts that are compatible with an asset.
+     *
+     * @api
+     */
+    public function getSparePartProductClassName(): string
+    {
+        return $this->getSharedConfig()->getSparePartProductClassName();
+    }
+
+    /**
+     * Specification:
+     * - Returns the maximum number of booked services that the asset details reader returns for an asset.
+     *
+     * @api
+     */
+    public function getAssetDetailsServiceCount(): int
+    {
+        return $this->getSharedConfig()->getAssetDetailsServiceCount();
+    }
+
+    /**
+     * Specification:
+     * - Returns the number of items per page that the compatible product reader requests from the catalog search.
+     * - The value must be one of the valid items-per-page options of the catalog search, otherwise the catalog search ignores it.
+     *
+     * @api
+     */
+    public function getCompatibleProductSearchItemsPerPage(): int
+    {
+        return static::COMPATIBLE_PRODUCT_SEARCH_ITEMS_PER_PAGE;
+    }
+
+    /**
+     * Specification:
+     * - Returns the asset statuses that allow the view action.
+     * - The asset details reader returns only assets with these statuses, the same as the asset details page.
+     *
+     * @api
+     *
+     * @return list<string>
+     */
+    public function getAssetDetailsViewStatuses(): array
+    {
+        $statuses = [];
+
+        foreach ($this->getSharedConfig()->getSspStatusAllowedActionsMapping() as $status => $allowedActions) {
+            if (in_array(SharedSelfServicePortalConfig::ACTION_VIEW, $allowedActions, true)) {
+                $statuses[] = $status;
+            }
+        }
+
+        return $statuses;
+    }
+
+    /**
+     * Specification:
+     * - Returns the display names of the asset statuses, keyed by the status.
+     *
+     * @api
+     *
+     * @return array<string, string>
+     */
+    public function getAssetDetailsStatusNames(): array
+    {
+        return $this->getSharedConfig()->getAssetStatuses();
     }
 }

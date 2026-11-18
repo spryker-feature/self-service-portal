@@ -8,6 +8,9 @@
 namespace SprykerFeatureTest\Zed\SelfServicePortal\Business\Facade;
 
 use Codeception\Test\Unit;
+use Generated\Shared\Transfer\CompanyBusinessUnitTransfer;
+use Generated\Shared\Transfer\CompanyUserTransfer;
+use Generated\Shared\Transfer\PaginationTransfer;
 use Generated\Shared\Transfer\PermissionCollectionTransfer;
 use Generated\Shared\Transfer\SspAssetBusinessUnitAssignmentTransfer;
 use Generated\Shared\Transfer\SspAssetCollectionTransfer;
@@ -188,5 +191,94 @@ class GetSspAssetCollectionTest extends Unit
         $this->assertInstanceOf(SspAssetCollectionTransfer::class, $sspAssetCollectionTransfer);
         $this->assertCount(1, $sspAssetCollectionTransfer->getSspAssets());
         $this->assertSame('Test Asset 1', $sspAssetCollectionTransfer->getSspAssets()[0]->getName());
+    }
+
+    public function testGivenSearchTextOfNameWhenGettingAssetCollectionThenOnlyMatchingAssetsOfTheCompanyAreReturned(): void
+    {
+        // Arrange
+        $companyUserTransfer = $this->haveCompanyUserWithCompanyAssetPermission();
+        $ownSspAssetTransfer = $this->haveAssetAssignedToBusinessUnit('OfficeJet Searchable 9025e', 'SN-SEARCH-OWN', $companyUserTransfer->getCompanyBusinessUnitOrFail());
+        $this->haveAssetAssignedToBusinessUnit('Titan Searchable X9', 'SN-SEARCH-OTHER', $companyUserTransfer->getCompanyBusinessUnitOrFail());
+        $foreignCompanyBusinessUnitTransfer = $this->tester->haveCompanyBusinessUnit([CompanyBusinessUnitTransfer::FK_COMPANY => $this->tester->haveCompany()->getIdCompanyOrFail()]);
+        $this->haveAssetAssignedToBusinessUnit('OfficeJet Searchable 9025e', 'SN-SEARCH-FOREIGN', $foreignCompanyBusinessUnitTransfer);
+
+        // Act
+        $sspAssetCollectionTransfer = $this->selfServicePortalFacade->getSspAssetCollection($this->createSearchCriteria($companyUserTransfer, 'OfficeJet Searchable'));
+
+        // Assert
+        $this->assertSame([$ownSspAssetTransfer->getReference()], $this->getReferences($sspAssetCollectionTransfer));
+        $this->assertSame(1, $sspAssetCollectionTransfer->getPaginationOrFail()->getNbResults());
+    }
+
+    public function testGivenSearchTextOfSerialNumberWhenGettingAssetCollectionThenTheAssetIsReturned(): void
+    {
+        // Arrange
+        $companyUserTransfer = $this->haveCompanyUserWithCompanyAssetPermission();
+        $this->haveAssetAssignedToBusinessUnit('Printer Searchable', 'SN-SEARCH-AAA', $companyUserTransfer->getCompanyBusinessUnitOrFail());
+        $sspAssetTransfer = $this->haveAssetAssignedToBusinessUnit('Printer Searchable', 'SN-SEARCH-BBB', $companyUserTransfer->getCompanyBusinessUnitOrFail());
+
+        // Act
+        $sspAssetCollectionTransfer = $this->selfServicePortalFacade->getSspAssetCollection($this->createSearchCriteria($companyUserTransfer, 'SN-SEARCH-BBB'));
+
+        // Assert
+        $this->assertSame([$sspAssetTransfer->getReference()], $this->getReferences($sspAssetCollectionTransfer));
+    }
+
+    public function testGivenSearchTextOfReferenceWhenGettingAssetCollectionThenTheAssetIsReturned(): void
+    {
+        // Arrange
+        $companyUserTransfer = $this->haveCompanyUserWithCompanyAssetPermission();
+        $this->haveAssetAssignedToBusinessUnit('Scanner Searchable', 'SN-SEARCH-CCC', $companyUserTransfer->getCompanyBusinessUnitOrFail());
+        $sspAssetTransfer = $this->haveAssetAssignedToBusinessUnit('Scanner Searchable', 'SN-SEARCH-DDD', $companyUserTransfer->getCompanyBusinessUnitOrFail());
+
+        // Act
+        $sspAssetCollectionTransfer = $this->selfServicePortalFacade->getSspAssetCollection($this->createSearchCriteria($companyUserTransfer, $sspAssetTransfer->getReferenceOrFail()));
+
+        // Assert
+        $this->assertSame([$sspAssetTransfer->getReference()], $this->getReferences($sspAssetCollectionTransfer));
+    }
+
+    protected function haveCompanyUserWithCompanyAssetPermission(): CompanyUserTransfer
+    {
+        $permissionTransfer = $this->tester->havePermission(new ViewCompanySspAssetPermissionPlugin());
+
+        return $this->tester->haveCompanyUserWithPermissions($this->tester->haveCompany(), (new PermissionCollectionTransfer())->addPermission($permissionTransfer));
+    }
+
+    protected function haveAssetAssignedToBusinessUnit(
+        string $name,
+        string $serialNumber,
+        CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
+    ): SspAssetTransfer {
+        return $this->tester->haveAsset([
+            SspAssetTransfer::NAME => $name,
+            SspAssetTransfer::SERIAL_NUMBER => $serialNumber,
+            SspAssetTransfer::COMPANY_BUSINESS_UNIT => $companyBusinessUnitTransfer,
+            SspAssetTransfer::BUSINESS_UNIT_ASSIGNMENTS => [
+                [SspAssetBusinessUnitAssignmentTransfer::COMPANY_BUSINESS_UNIT => $companyBusinessUnitTransfer],
+            ],
+        ]);
+    }
+
+    protected function createSearchCriteria(CompanyUserTransfer $companyUserTransfer, string $searchText): SspAssetCriteriaTransfer
+    {
+        return (new SspAssetCriteriaTransfer())
+            ->setCompanyUser($companyUserTransfer)
+            ->setSspAssetConditions((new SspAssetConditionsTransfer())->setSearchText($searchText))
+            ->setPagination((new PaginationTransfer())->setPage(1)->setMaxPerPage(10));
+    }
+
+    /**
+     * @return list<string>
+     */
+    protected function getReferences(SspAssetCollectionTransfer $sspAssetCollectionTransfer): array
+    {
+        $references = [];
+
+        foreach ($sspAssetCollectionTransfer->getSspAssets() as $sspAssetTransfer) {
+            $references[] = (string)$sspAssetTransfer->getReference();
+        }
+
+        return $references;
     }
 }

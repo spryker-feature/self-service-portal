@@ -38,6 +38,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * @method \SprykerFeature\Client\SelfServicePortal\SelfServicePortalClientInterface getClient()
  * @method \SprykerFeature\Yves\SelfServicePortal\SelfServicePortalFactory getFactory()
  * @method \SprykerFeature\Yves\SelfServicePortal\SelfServicePortalConfig getConfig()
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class AssetController extends AbstractController
 {
@@ -91,8 +93,7 @@ class AssetController extends AbstractController
     protected const KEY_MESSAGES = 'messages';
 
     /**
-     * The number of services to be included in the SspAssetTransfer.
-     * This constant is used to limit the number of services fetched for each asset.
+     * @deprecated Use {@link \SprykerFeature\Yves\SelfServicePortal\SelfServicePortalConfig::getAssetDetailsServiceCount()} instead.
      *
      * @var int
      */
@@ -149,7 +150,7 @@ class AssetController extends AbstractController
                     ->setWithAssignedBusinessUnits(true)
                     ->setWithSspInquiries(true)
                     ->setWithFiles(true)
-                    ->setWithServicesCount(static::SERVICE_COUNT),
+                    ->setWithServicesCount($this->getAssetDetailsServiceCount()),
             );
 
         $sspAssetCriteriaTransfer->setCompanyUser($companyUserTransfer);
@@ -523,5 +524,14 @@ class AssetController extends AbstractController
         }
 
         return $statuses;
+    }
+
+    protected function getAssetDetailsServiceCount(): int
+    {
+        if (static::SERVICE_COUNT !== self::SERVICE_COUNT) { // phpcs:ignore Spryker.Internal.SprykerPreferStaticOverSelf.StaticVsSelf
+            return static::SERVICE_COUNT;
+        }
+
+        return $this->getFactory()->getConfig()->getAssetDetailsServiceCount();
     }
 }

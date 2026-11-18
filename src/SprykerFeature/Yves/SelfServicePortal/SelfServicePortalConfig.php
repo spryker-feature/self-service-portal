@@ -190,6 +190,17 @@ class SelfServicePortalConfig extends AbstractBundleConfig
 
     /**
      * Specification:
+     * - Returns the maximum number of booked services that the asset details page shows for an asset.
+     *
+     * @api
+     */
+    public function getAssetDetailsServiceCount(): int
+    {
+        return $this->getSharedConfig()->getAssetDetailsServiceCount();
+    }
+
+    /**
+     * Specification:
      * - Returns the scheduled product class name.
      *
      * @api

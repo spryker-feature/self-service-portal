@@ -7,7 +7,9 @@
 
 namespace SprykerFeature\Client\SelfServicePortal;
 
+use Spryker\Client\Catalog\CatalogClientInterface;
 use Spryker\Client\CompanyUser\CompanyUserClientInterface;
+use Spryker\Client\Customer\CustomerClientInterface;
 use Spryker\Client\Kernel\AbstractFactory;
 use Spryker\Client\Locale\LocaleClientInterface;
 use Spryker\Client\Permission\PermissionClientInterface;
@@ -23,6 +25,8 @@ use Spryker\Client\Storage\StorageClientInterface;
 use Spryker\Client\Store\StoreClientInterface;
 use Spryker\Service\Synchronization\SynchronizationServiceInterface;
 use Spryker\Service\UtilEncoding\UtilEncodingServiceInterface;
+use SprykerFeature\Client\SelfServicePortal\Asset\Access\SspAssetAccessResolver;
+use SprykerFeature\Client\SelfServicePortal\Asset\Access\SspAssetAccessResolverInterface;
 use SprykerFeature\Client\SelfServicePortal\Asset\Compatibility\AssetProductCompatibilityChecker;
 use SprykerFeature\Client\SelfServicePortal\Asset\Compatibility\AssetProductCompatibilityCheckerInterface;
 use SprykerFeature\Client\SelfServicePortal\Asset\Quote\DatabaseQuoteStorageStrategy;
@@ -32,6 +36,12 @@ use SprykerFeature\Client\SelfServicePortal\Asset\Quote\QuoteStorageStrategyInte
 use SprykerFeature\Client\SelfServicePortal\Asset\Quote\QuoteStorageStrategyProvider;
 use SprykerFeature\Client\SelfServicePortal\Asset\Quote\QuoteStorageStrategyProviderInterface;
 use SprykerFeature\Client\SelfServicePortal\Asset\Quote\SessionQuoteStorageStrategy;
+use SprykerFeature\Client\SelfServicePortal\Asset\Reader\SspAssetCompatibleProductReader;
+use SprykerFeature\Client\SelfServicePortal\Asset\Reader\SspAssetCompatibleProductReaderInterface;
+use SprykerFeature\Client\SelfServicePortal\Asset\Reader\SspAssetDetailsReader;
+use SprykerFeature\Client\SelfServicePortal\Asset\Reader\SspAssetDetailsReaderInterface;
+use SprykerFeature\Client\SelfServicePortal\Asset\Reader\SspAssetFinder;
+use SprykerFeature\Client\SelfServicePortal\Asset\Reader\SspAssetFinderInterface;
 use SprykerFeature\Client\SelfServicePortal\Builder\PaginationConfigBuilderInterface;
 use SprykerFeature\Client\SelfServicePortal\Builder\SortConfigBuilderInterface;
 use SprykerFeature\Client\SelfServicePortal\Builder\SspAssetSearchPaginationConfigBuilder;
@@ -359,5 +369,51 @@ class SelfServicePortalFactory extends AbstractFactory
     public function getProductStorageClient(): ProductStorageClientInterface
     {
         return $this->getProvidedDependency(SelfServicePortalDependencyProvider::CLIENT_PRODUCT_STORAGE);
+    }
+
+    public function createSspAssetAccessResolver(): SspAssetAccessResolverInterface
+    {
+        return new SspAssetAccessResolver(
+            $this->getCompanyUserClient(),
+            $this->createSspAssetStorageReader(),
+        );
+    }
+
+    public function createSspAssetDetailsReader(): SspAssetDetailsReaderInterface
+    {
+        return new SspAssetDetailsReader(
+            $this->createSspAssetAccessResolver(),
+            $this->createSelfServicePortalStub(),
+            $this->getCustomerClient(),
+            $this->getConfig(),
+        );
+    }
+
+    public function getCustomerClient(): CustomerClientInterface
+    {
+        return $this->getProvidedDependency(SelfServicePortalDependencyProvider::CLIENT_CUSTOMER);
+    }
+
+    public function createSspAssetFinder(): SspAssetFinderInterface
+    {
+        return new SspAssetFinder(
+            $this->getCompanyUserClient(),
+            $this->createSelfServicePortalStub(),
+            $this->getConfig(),
+        );
+    }
+
+    public function createSspAssetCompatibleProductReader(): SspAssetCompatibleProductReaderInterface
+    {
+        return new SspAssetCompatibleProductReader(
+            $this->createSspAssetAccessResolver(),
+            $this->getCatalogClient(),
+            $this->getConfig(),
+        );
+    }
+
+    public function getCatalogClient(): CatalogClientInterface
+    {
+        return $this->getProvidedDependency(SelfServicePortalDependencyProvider::CLIENT_CATALOG);
     }
 }
