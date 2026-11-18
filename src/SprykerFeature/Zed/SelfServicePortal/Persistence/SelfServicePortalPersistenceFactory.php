@@ -52,7 +52,11 @@ use SprykerFeature\Zed\SelfServicePortal\Persistence\Propel\Mapper\SspAssetStora
 use SprykerFeature\Zed\SelfServicePortal\Persistence\Propel\Mapper\SspModelStorageEntityMapper;
 use SprykerFeature\Zed\SelfServicePortal\Persistence\Propel\Mapper\SspModelStorageEntityMapperInterface;
 use SprykerFeature\Zed\SelfServicePortal\Persistence\QueryBuilder\FileAttachmentQueryBuilder;
+use SprykerFeature\Zed\SelfServicePortal\Persistence\QueryBuilder\FileAttachmentRelationCriteriaBuilder;
+use SprykerFeature\Zed\SelfServicePortal\Persistence\QueryBuilder\FileAttachmentRelationCriteriaBuilderInterface;
+use SprykerFeature\Zed\SelfServicePortal\Persistence\QueryBuilder\SspInquiryQueryBuilder;
 use SprykerFeature\Zed\SelfServicePortal\Persistence\QueryBuilder\SspModelQueryBuilder;
+use SprykerFeature\Zed\SelfServicePortal\Persistence\QueryBuilder\SspServiceQueryBuilder;
 use SprykerFeature\Zed\SelfServicePortal\Persistence\Saver\FileAttachmentSaver;
 use SprykerFeature\Zed\SelfServicePortal\SelfServicePortalDependencyProvider;
 
@@ -140,7 +144,14 @@ class SelfServicePortalPersistenceFactory extends AbstractPersistenceFactory
 
     public function createFileAttachmentQueryBuilder(): FileAttachmentQueryBuilder
     {
-        return new FileAttachmentQueryBuilder();
+        return new FileAttachmentQueryBuilder(
+            $this->createFileAttachmentRelationCriteriaBuilder(),
+        );
+    }
+
+    public function createFileAttachmentRelationCriteriaBuilder(): FileAttachmentRelationCriteriaBuilderInterface
+    {
+        return new FileAttachmentRelationCriteriaBuilder();
     }
 
     public function createFileAttachmentSaver(): FileAttachmentSaver
@@ -225,6 +236,16 @@ class SelfServicePortalPersistenceFactory extends AbstractPersistenceFactory
     public function createSspAssetStorageEntityMapper(): SspAssetStorageEntityMapperInterface
     {
         return new SspAssetStorageEntityMapper();
+    }
+
+    public function createSspInquiryQueryBuilder(): SspInquiryQueryBuilder
+    {
+        return new SspInquiryQueryBuilder();
+    }
+
+    public function createSspServiceQueryBuilder(): SspServiceQueryBuilder
+    {
+        return new SspServiceQueryBuilder($this->getConfig());
     }
 
     public function createSspModelQueryBuilder(): SspModelQueryBuilder

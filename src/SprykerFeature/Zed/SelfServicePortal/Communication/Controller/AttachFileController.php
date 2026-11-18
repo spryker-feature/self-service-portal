@@ -22,6 +22,8 @@ use Symfony\Component\HttpFoundation\Request;
  * @method \SprykerFeature\Zed\SelfServicePortal\Communication\SelfServicePortalCommunicationFactory getFactory()
  * @method \SprykerFeature\Zed\SelfServicePortal\Business\SelfServicePortalFacadeInterface getFacade()
  * @method \SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalRepositoryInterface getRepository()
+ *
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 class AttachFileController extends FileAbstractController
 {

@@ -84,21 +84,31 @@ class FormDataProcessor implements FormDataProcessorInterface
             $sspAssetData = [];
         }
 
-        if (isset($fileAttachmentData[static::FIELD_COMPANY_IDS]) && is_array($fileAttachmentData[static::FIELD_COMPANY_IDS])) {
-            $fileAttachmentData[static::FIELD_COMPANY_IDS] = $this->formDataNormalizer->flattenToIndexedArray($fileAttachmentData[static::FIELD_COMPANY_IDS]);
-        }
-        if (isset($fileAttachmentData[static::FIELD_COMPANY_USER_IDS]) && is_array($fileAttachmentData[static::FIELD_COMPANY_USER_IDS])) {
-            $fileAttachmentData[static::FIELD_COMPANY_USER_IDS] = $this->formDataNormalizer->flattenToIndexedArray($fileAttachmentData[static::FIELD_COMPANY_USER_IDS]);
-        }
-        if (isset($fileAttachmentData[static::FIELD_COMPANY_BUSINESS_UNIT_IDS]) && is_array($fileAttachmentData[static::FIELD_COMPANY_BUSINESS_UNIT_IDS])) {
-            $fileAttachmentData[static::FIELD_COMPANY_BUSINESS_UNIT_IDS] = $this->formDataNormalizer->flattenToIndexedArray($fileAttachmentData[static::FIELD_COMPANY_BUSINESS_UNIT_IDS]);
-        }
-
-        if (isset($sspAssetData[static::FIELD_SSP_ASSET_IDS]) && is_array($sspAssetData[static::FIELD_SSP_ASSET_IDS])) {
-            $sspAssetData[static::FIELD_SSP_ASSET_IDS] = $this->formDataNormalizer->flattenToIndexedArray($sspAssetData[static::FIELD_SSP_ASSET_IDS]);
-        }
+        $fileAttachmentData = $this->flattenIdFields($fileAttachmentData, [
+            static::FIELD_COMPANY_IDS,
+            static::FIELD_COMPANY_USER_IDS,
+            static::FIELD_COMPANY_BUSINESS_UNIT_IDS,
+        ]);
+        $sspAssetData = $this->flattenIdFields($sspAssetData, [static::FIELD_SSP_ASSET_IDS]);
 
         $request->request->set(static::REQUEST_PARAM_FILE_ATTACHMENT, $fileAttachmentData);
         $request->request->set(static::REQUEST_PARAM_SSP_ASSET_FILE_ATTACHMENT, $sspAssetData);
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     * @param array<string> $fieldNames
+     *
+     * @return array<string, mixed>
+     */
+    protected function flattenIdFields(array $data, array $fieldNames): array
+    {
+        foreach ($fieldNames as $fieldName) {
+            if (isset($data[$fieldName]) && is_array($data[$fieldName])) {
+                $data[$fieldName] = $this->formDataNormalizer->flattenToIndexedArray($data[$fieldName]);
+            }
+        }
+
+        return $data;
     }
 }

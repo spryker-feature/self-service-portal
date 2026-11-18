@@ -98,6 +98,15 @@ class ProductShipmentTypeSaver implements ProductShipmentTypeSaverInterface
             $shipmentTypeIdsIndexedByUuid[$resolvedShipmentTypeTransfer->getUuidOrFail()] = $resolvedShipmentTypeTransfer->getIdShipmentTypeOrFail();
         }
 
+        $this->assignResolvedShipmentTypeIds($shipmentTypeTransfers, $shipmentTypeIdsIndexedByUuid);
+    }
+
+    /**
+     * @param list<\Generated\Shared\Transfer\ShipmentTypeTransfer> $shipmentTypeTransfers
+     * @param array<string, int> $shipmentTypeIdsIndexedByUuid
+     */
+    protected function assignResolvedShipmentTypeIds(array $shipmentTypeTransfers, array $shipmentTypeIdsIndexedByUuid): void
+    {
         foreach ($shipmentTypeTransfers as $shipmentTypeTransfer) {
             if ($shipmentTypeTransfer->getIdShipmentType() !== null) {
                 continue;

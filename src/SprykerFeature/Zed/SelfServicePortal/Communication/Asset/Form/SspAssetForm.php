@@ -32,6 +32,8 @@ use Symfony\Component\Validator\Constraints\Url;
  * @method \SprykerFeature\Zed\SelfServicePortal\SelfServicePortalConfig getConfig()
  * @method \SprykerFeature\Zed\SelfServicePortal\Business\SelfServicePortalFacadeInterface getFacade()
  * @method \SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalRepositoryInterface getRepository()
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class SspAssetForm extends AbstractType
 {
@@ -445,63 +447,90 @@ class SspAssetForm extends AbstractType
         $builder->addEventListener(
             FormEvents::PRE_SUBMIT,
             function (FormEvent $event): void {
-                $data = $event->getData();
-                $form = $event->getForm();
-
-                if (!isset($data[static::FIELD_ASSIGNED_BUSINESS_UNITS]) || !$data[static::FIELD_ASSIGNED_BUSINESS_UNITS]) {
-                    return;
-                }
-
-                if (!isset($data[static::FIELD_ASSIGNED_COMPANIES]) || !$data[static::FIELD_ASSIGNED_COMPANIES]) {
-                    $form->addError(new FormError('Companies must be assigned when business units are assigned.'));
-
-                    return;
-                }
-
-                $assignedBusinessUnitIds = array_map('intval', $data[static::FIELD_ASSIGNED_BUSINESS_UNITS]);
-                $assignedCompanyIds = array_map('intval', $data[static::FIELD_ASSIGNED_COMPANIES]);
-
-                $businessUnitOptions = $form->getConfig()->getOption(static::OPTION_BUSINESS_UNIT_ASSIGMENT_OPTIONS);
-                $companyOptions = $form->getConfig()->getOption(static::OPTION_COMPANY_ASSIGMENT_OPTIONS);
-
-                if (!$businessUnitOptions || !$companyOptions) {
-                    return;
-                }
-
-                $companyBusinessUnitFacade = $this->getFactory()->getCompanyBusinessUnitFacade();
-                $businessUnitCollection = $companyBusinessUnitFacade->getCompanyBusinessUnitCollection(
-                    (new CompanyBusinessUnitCriteriaFilterTransfer())->setCompanyBusinessUnitIds($assignedBusinessUnitIds),
-                );
-
-                $requiredCompanyIds = [];
-                foreach ($businessUnitCollection->getCompanyBusinessUnits() as $businessUnit) {
-                    if ($businessUnit->getCompany() && $businessUnit->getCompany()->getIdCompany()) {
-                        $requiredCompanyIds[] = $businessUnit->getCompany()->getIdCompany();
-                    }
-                }
-
-                $requiredCompanyIds = array_unique($requiredCompanyIds);
-                $missingCompanyIds = array_diff($requiredCompanyIds, $assignedCompanyIds);
-
-                if ($missingCompanyIds) {
-                    $companyFacade = $this->getFactory()->getCompanyFacade();
-                    $missingCompanyCollection = $companyFacade->getCompanyCollection(
-                        (new CompanyCriteriaFilterTransfer())->setCompanyIds($missingCompanyIds),
-                    );
-
-                    $missingCompanyNames = [];
-                    foreach ($missingCompanyCollection->getCompanies() as $company) {
-                        $missingCompanyNames[] = $company->getName();
-                    }
-
-                    $errorMessage = sprintf(
-                        'All companies that own the assigned business units must be included in assigned companies. Missing companies: %s.',
-                        implode(', ', $missingCompanyNames),
-                    );
-
-                    $form->addError(new FormError($errorMessage));
-                }
+                $this->validateCompanyAssignment($event);
             },
+        );
+    }
+
+    protected function validateCompanyAssignment(FormEvent $event): void
+    {
+        $data = $event->getData();
+        $form = $event->getForm();
+
+        if (!$this->hasFieldValue($data, static::FIELD_ASSIGNED_BUSINESS_UNITS)) {
+            return;
+        }
+
+        if (!$this->hasFieldValue($data, static::FIELD_ASSIGNED_COMPANIES)) {
+            $form->addError(new FormError('Companies must be assigned when business units are assigned.'));
+
+            return;
+        }
+
+        $assignedBusinessUnitIds = array_map('intval', $data[static::FIELD_ASSIGNED_BUSINESS_UNITS]);
+        $assignedCompanyIds = array_map('intval', $data[static::FIELD_ASSIGNED_COMPANIES]);
+
+        $businessUnitOptions = $form->getConfig()->getOption(static::OPTION_BUSINESS_UNIT_ASSIGMENT_OPTIONS);
+        $companyOptions = $form->getConfig()->getOption(static::OPTION_COMPANY_ASSIGMENT_OPTIONS);
+
+        if (!$businessUnitOptions || !$companyOptions) {
+            return;
+        }
+
+        $requiredCompanyIds = $this->getRequiredCompanyIds($assignedBusinessUnitIds);
+        $missingCompanyIds = array_diff($requiredCompanyIds, $assignedCompanyIds);
+
+        if ($missingCompanyIds) {
+            $form->addError(new FormError($this->buildMissingCompaniesErrorMessage($missingCompanyIds)));
+        }
+    }
+
+    /**
+     * @param mixed $data
+     */
+    protected function hasFieldValue($data, string $fieldName): bool
+    {
+        return isset($data[$fieldName]) && $data[$fieldName];
+    }
+
+    /**
+     * @param array<int> $assignedBusinessUnitIds
+     *
+     * @return array<int>
+     */
+    protected function getRequiredCompanyIds(array $assignedBusinessUnitIds): array
+    {
+        $businessUnitCollection = $this->getFactory()->getCompanyBusinessUnitFacade()->getCompanyBusinessUnitCollection(
+            (new CompanyBusinessUnitCriteriaFilterTransfer())->setCompanyBusinessUnitIds($assignedBusinessUnitIds),
+        );
+
+        $requiredCompanyIds = [];
+        foreach ($businessUnitCollection->getCompanyBusinessUnits() as $businessUnit) {
+            if ($businessUnit->getCompany() && $businessUnit->getCompany()->getIdCompany()) {
+                $requiredCompanyIds[] = $businessUnit->getCompany()->getIdCompany();
+            }
+        }
+
+        return array_unique($requiredCompanyIds);
+    }
+
+    /**
+     * @param array<int> $missingCompanyIds
+     */
+    protected function buildMissingCompaniesErrorMessage(array $missingCompanyIds): string
+    {
+        $missingCompanyCollection = $this->getFactory()->getCompanyFacade()->getCompanyCollection(
+            (new CompanyCriteriaFilterTransfer())->setCompanyIds($missingCompanyIds),
+        );
+
+        $missingCompanyNames = [];
+        foreach ($missingCompanyCollection->getCompanies() as $company) {
+            $missingCompanyNames[] = $company->getName();
+        }
+
+        return sprintf(
+            'All companies that own the assigned business units must be included in assigned companies. Missing companies: %s.',
+            implode(', ', $missingCompanyNames),
         );
     }
 
@@ -513,77 +542,108 @@ class SspAssetForm extends AbstractType
         $builder->addEventListener(
             FormEvents::PRE_SUBMIT,
             function (FormEvent $event): void {
-                $data = $event->getData();
-                $form = $event->getForm();
-
-                if (!isset($data[static::FIELD_ASSIGNED_COMPANIES]) || !$data[static::FIELD_ASSIGNED_COMPANIES]) {
-                    return;
-                }
-
-                if (!isset($data[static::FIELD_ASSIGNED_BUSINESS_UNITS]) || !$data[static::FIELD_ASSIGNED_BUSINESS_UNITS]) {
-                    return;
-                }
-
-                $assignedCompanyIds = array_map('intval', $data[static::FIELD_ASSIGNED_COMPANIES]);
-                $assignedBusinessUnitIds = array_map('intval', $data[static::FIELD_ASSIGNED_BUSINESS_UNITS]);
-
-                $companyBusinessUnitFacade = $this->getFactory()->getCompanyBusinessUnitFacade();
-                $businessUnitCollection = $companyBusinessUnitFacade->getCompanyBusinessUnitCollection(
-                    (new CompanyBusinessUnitCriteriaFilterTransfer())->setCompanyIds($assignedCompanyIds),
-                );
-
-                $companyBusinessUnits = [];
-                foreach ($businessUnitCollection->getCompanyBusinessUnits() as $businessUnit) {
-                    if ($businessUnit->getFkCompany() && $businessUnit->getIdCompanyBusinessUnit()) {
-                        $companyId = $businessUnit->getFkCompany();
-                        $businessUnitId = $businessUnit->getIdCompanyBusinessUnit();
-
-                        if (!isset($companyBusinessUnits[$companyId])) {
-                            $companyBusinessUnits[$companyId] = [];
-                        }
-
-                        $companyBusinessUnits[$companyId][] = $businessUnitId;
-                    }
-                }
-
-                $companyFacade = $this->getFactory()->getCompanyFacade();
-                $companiesWithoutBusinessUnits = [];
-
-                foreach ($assignedCompanyIds as $companyId) {
-                    $hasSelectedBusinessUnit = false;
-
-                    if (isset($companyBusinessUnits[$companyId])) {
-                        foreach ($companyBusinessUnits[$companyId] as $businessUnitId) {
-                            if (in_array($businessUnitId, $assignedBusinessUnitIds)) {
-                                $hasSelectedBusinessUnit = true;
-
-                                break;
-                            }
-                        }
-                    }
-
-                    if (!$hasSelectedBusinessUnit) {
-                        $companyCollection = $companyFacade->getCompanyCollection(
-                            (new CompanyCriteriaFilterTransfer())->setCompanyIds([$companyId]),
-                        );
-
-                        if ($companyCollection->getCompanies()->count() > 0) {
-                            $company = $companyCollection->getCompanies()->getIterator()->current();
-                            $companiesWithoutBusinessUnits[] = $company->getNameOrFail();
-                        }
-                    }
-                }
-
-                if ((bool)$companiesWithoutBusinessUnits) {
-                    $errorMessage = sprintf(
-                        'For each selected company, at least one of its business units must be selected. Missing business units for companies: %s.',
-                        implode(', ', $companiesWithoutBusinessUnits),
-                    );
-
-                    $form->addError(new FormError($errorMessage));
-                }
+                $this->validateBusinessUnitAssignment($event);
             },
         );
+    }
+
+    protected function validateBusinessUnitAssignment(FormEvent $event): void
+    {
+        $data = $event->getData();
+        $form = $event->getForm();
+
+        if (!$this->hasFieldValue($data, static::FIELD_ASSIGNED_COMPANIES)) {
+            return;
+        }
+
+        if (!$this->hasFieldValue($data, static::FIELD_ASSIGNED_BUSINESS_UNITS)) {
+            return;
+        }
+
+        $assignedCompanyIds = array_map('intval', $data[static::FIELD_ASSIGNED_COMPANIES]);
+        $assignedBusinessUnitIds = array_map('intval', $data[static::FIELD_ASSIGNED_BUSINESS_UNITS]);
+
+        $companiesWithoutBusinessUnits = $this->findCompanyNamesWithoutSelectedBusinessUnit(
+            $assignedCompanyIds,
+            $assignedBusinessUnitIds,
+            $this->groupBusinessUnitIdsByCompanyId($assignedCompanyIds),
+        );
+
+        if ((bool)$companiesWithoutBusinessUnits) {
+            $errorMessage = sprintf(
+                'For each selected company, at least one of its business units must be selected. Missing business units for companies: %s.',
+                implode(', ', $companiesWithoutBusinessUnits),
+            );
+
+            $form->addError(new FormError($errorMessage));
+        }
+    }
+
+    /**
+     * @param array<int> $assignedCompanyIds
+     *
+     * @return array<int, array<int>>
+     */
+    protected function groupBusinessUnitIdsByCompanyId(array $assignedCompanyIds): array
+    {
+        $businessUnitCollection = $this->getFactory()->getCompanyBusinessUnitFacade()->getCompanyBusinessUnitCollection(
+            (new CompanyBusinessUnitCriteriaFilterTransfer())->setCompanyIds($assignedCompanyIds),
+        );
+
+        $companyBusinessUnits = [];
+        foreach ($businessUnitCollection->getCompanyBusinessUnits() as $businessUnit) {
+            if ($businessUnit->getFkCompany() && $businessUnit->getIdCompanyBusinessUnit()) {
+                $companyBusinessUnits[$businessUnit->getFkCompany()][] = $businessUnit->getIdCompanyBusinessUnit();
+            }
+        }
+
+        return $companyBusinessUnits;
+    }
+
+    /**
+     * @param array<int> $assignedCompanyIds
+     * @param array<int> $assignedBusinessUnitIds
+     * @param array<int, array<int>> $companyBusinessUnits
+     *
+     * @return array<string>
+     */
+    protected function findCompanyNamesWithoutSelectedBusinessUnit(
+        array $assignedCompanyIds,
+        array $assignedBusinessUnitIds,
+        array $companyBusinessUnits
+    ): array {
+        $companiesWithoutBusinessUnits = [];
+
+        foreach ($assignedCompanyIds as $companyId) {
+            if ($this->hasSelectedBusinessUnit($companyBusinessUnits[$companyId] ?? [], $assignedBusinessUnitIds)) {
+                continue;
+            }
+
+            $companyCollection = $this->getFactory()->getCompanyFacade()->getCompanyCollection(
+                (new CompanyCriteriaFilterTransfer())->setCompanyIds([$companyId]),
+            );
+
+            if ($companyCollection->getCompanies()->count() > 0) {
+                $companiesWithoutBusinessUnits[] = $companyCollection->getCompanies()->getIterator()->current()->getNameOrFail();
+            }
+        }
+
+        return $companiesWithoutBusinessUnits;
+    }
+
+    /**
+     * @param array<int> $companyBusinessUnitIds
+     * @param array<int> $assignedBusinessUnitIds
+     */
+    protected function hasSelectedBusinessUnit(array $companyBusinessUnitIds, array $assignedBusinessUnitIds): bool
+    {
+        foreach ($companyBusinessUnitIds as $businessUnitId) {
+            if (in_array($businessUnitId, $assignedBusinessUnitIds)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

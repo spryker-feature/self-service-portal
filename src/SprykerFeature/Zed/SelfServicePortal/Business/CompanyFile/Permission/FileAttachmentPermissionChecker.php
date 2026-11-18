@@ -27,37 +27,36 @@ class FileAttachmentPermissionChecker implements FileAttachmentPermissionChecker
 
         $companyUserId = $fileAttachmentCriteriaTransfer->getCompanyUserOrFail()->getIdCompanyUserOrFail();
 
-        if (
-            $fileAttachmentCriteriaTransfer->getWithBusinessUnitRelation() &&
-            (
-                $this->can(ViewCompanyFilesPermissionPlugin::KEY, $companyUserId) ||
-                $this->can(ViewCompanyBusinessUnitFilesPermissionPlugin::KEY, $companyUserId)
-            )
-        ) {
-            return true;
-        }
+        return $this->isGrantedToViewBusinessUnitFiles($fileAttachmentCriteriaTransfer, $companyUserId)
+            || $this->isGrantedToViewCompanyUserFiles($fileAttachmentCriteriaTransfer, $companyUserId)
+            || $this->isGrantedToViewSspAssetFiles($fileAttachmentCriteriaTransfer, $companyUserId);
+    }
 
-        if (
-            $fileAttachmentCriteriaTransfer->getWithCompanyUserRelation() &&
-            (
-                $this->can(ViewCompanyUserFilesPermissionPlugin::KEY, $companyUserId) ||
-                $this->can(ViewCompanyBusinessUnitFilesPermissionPlugin::KEY, $companyUserId) ||
+    protected function isGrantedToViewBusinessUnitFiles(FileAttachmentCriteriaTransfer $fileAttachmentCriteriaTransfer, int $companyUserId): bool
+    {
+        return $fileAttachmentCriteriaTransfer->getWithBusinessUnitRelation()
+            && (
                 $this->can(ViewCompanyFilesPermissionPlugin::KEY, $companyUserId)
-            )
-        ) {
-            return true;
-        }
+                || $this->can(ViewCompanyBusinessUnitFilesPermissionPlugin::KEY, $companyUserId)
+            );
+    }
 
-        if (
-            $fileAttachmentCriteriaTransfer->getWithSspAssetRelation() &&
-            (
-                $this->can(ViewCompanySspAssetPermissionPlugin::KEY, $companyUserId) ||
-                $this->can(ViewBusinessUnitSspAssetPermissionPlugin::KEY, $companyUserId)
-            )
-        ) {
-            return true;
-        }
+    protected function isGrantedToViewCompanyUserFiles(FileAttachmentCriteriaTransfer $fileAttachmentCriteriaTransfer, int $companyUserId): bool
+    {
+        return $fileAttachmentCriteriaTransfer->getWithCompanyUserRelation()
+            && (
+                $this->can(ViewCompanyUserFilesPermissionPlugin::KEY, $companyUserId)
+                || $this->can(ViewCompanyBusinessUnitFilesPermissionPlugin::KEY, $companyUserId)
+                || $this->can(ViewCompanyFilesPermissionPlugin::KEY, $companyUserId)
+            );
+    }
 
-        return false;
+    protected function isGrantedToViewSspAssetFiles(FileAttachmentCriteriaTransfer $fileAttachmentCriteriaTransfer, int $companyUserId): bool
+    {
+        return $fileAttachmentCriteriaTransfer->getWithSspAssetRelation()
+            && (
+                $this->can(ViewCompanySspAssetPermissionPlugin::KEY, $companyUserId)
+                || $this->can(ViewBusinessUnitSspAssetPermissionPlugin::KEY, $companyUserId)
+            );
     }
 }

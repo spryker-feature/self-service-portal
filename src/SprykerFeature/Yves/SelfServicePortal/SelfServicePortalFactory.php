@@ -128,6 +128,9 @@ use Twig\Environment;
 /**
  * @method \SprykerFeature\Yves\SelfServicePortal\SelfServicePortalConfig getConfig()
  * @method \SprykerFeature\Client\SelfServicePortal\SelfServicePortalClientInterface getClient()
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ * @SuppressWarnings(PHPMD.TooManyMethods)
  */
 class SelfServicePortalFactory extends AbstractFactory
 {

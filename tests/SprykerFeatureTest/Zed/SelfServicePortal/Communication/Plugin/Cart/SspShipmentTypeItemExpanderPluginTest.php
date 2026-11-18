@@ -19,6 +19,7 @@ use Generated\Shared\Transfer\StoreTransfer;
 use Spryker\Zed\ProductOfferShipmentType\Business\ProductOfferShipmentTypeFacadeInterface;
 use Spryker\Zed\ShipmentType\Business\ShipmentTypeFacadeInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\SelfServicePortalBusinessFactory;
+use SprykerFeature\Zed\SelfServicePortal\Business\Service\Expander\DefaultShipmentTypeItemExpander;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Expander\ShipmentTypeItemExpander;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Reader\ShipmentTypeReaderInterface;
 use SprykerFeature\Zed\SelfServicePortal\Communication\Plugin\Cart\SspShipmentTypeItemExpanderPlugin;
@@ -210,14 +211,13 @@ class SspShipmentTypeItemExpanderPluginTest extends Unit
             ->with([$itemTransfer->getId()], $defaultShipmentType->getNameOrFail())
             ->willReturn([$itemTransfer->getId()]);
 
-        $shipmentTypeItemExpander = $this->getMockBuilder(ShipmentTypeItemExpander::class)
-            ->setConstructorArgs([
-                $shipmentTypeReader,
+        $shipmentTypeItemExpander = new ShipmentTypeItemExpander(
+            $shipmentTypeReader,
+            new DefaultShipmentTypeItemExpander(
                 $repository,
                 $this->createMock(ProductOfferShipmentTypeFacadeInterface::class),
-            ])
-            ->onlyMethods([])
-            ->getMock();
+            ),
+        );
 
         $businessFactoryMock = $this->getMockBuilder(SelfServicePortalBusinessFactory::class)
             ->disableOriginalConstructor()
@@ -281,17 +281,18 @@ class SspShipmentTypeItemExpanderPluginTest extends Unit
             ->method('getProductOfferShipmentTypeCollection')
             ->willReturn($emptyCollection);
 
-        $modifiedExpander = $this->getMockBuilder(ShipmentTypeItemExpander::class)
+        $modifiedDefaultExpander = $this->getMockBuilder(DefaultShipmentTypeItemExpander::class)
             ->setConstructorArgs([
-                $shipmentTypeReader,
                 $this->createMock(SelfServicePortalRepositoryInterface::class),
                 $productOfferFacade,
             ])
             ->onlyMethods(['extractProductOfferReferencesWithDefaultShipmentType'])
             ->getMock();
 
-        $modifiedExpander->method('extractProductOfferReferencesWithDefaultShipmentType')
+        $modifiedDefaultExpander->method('extractProductOfferReferencesWithDefaultShipmentType')
             ->willReturn([$productOfferReference]);
+
+        $modifiedExpander = new ShipmentTypeItemExpander($shipmentTypeReader, $modifiedDefaultExpander);
 
         $businessFactoryMock = $this->getMockBuilder(SelfServicePortalBusinessFactory::class)
             ->disableOriginalConstructor()
@@ -397,8 +398,7 @@ class SspShipmentTypeItemExpanderPluginTest extends Unit
 
         $shipmentTypeItemExpander = new ShipmentTypeItemExpander(
             $shipmentTypeReaderMock,
-            $repository,
-            $productOfferShipmentTypeFacade,
+            new DefaultShipmentTypeItemExpander($repository, $productOfferShipmentTypeFacade),
         );
 
         $businessFactoryMock = $this->getMockBuilder(SelfServicePortalBusinessFactory::class)

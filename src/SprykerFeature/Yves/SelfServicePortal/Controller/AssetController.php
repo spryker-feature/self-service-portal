@@ -8,13 +8,16 @@
 namespace SprykerFeature\Yves\SelfServicePortal\Controller;
 
 use Generated\Shared\Transfer\CompanyBusinessUnitTransfer;
+use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\SspAssetBusinessUnitAssignmentTransfer;
 use Generated\Shared\Transfer\SspAssetCollectionRequestTransfer;
+use Generated\Shared\Transfer\SspAssetCollectionResponseTransfer;
 use Generated\Shared\Transfer\SspAssetConditionsTransfer;
 use Generated\Shared\Transfer\SspAssetCriteriaTransfer;
 use Generated\Shared\Transfer\SspAssetIncludeTransfer;
 use Generated\Shared\Transfer\SspAssetQuoteItemAttachmentRequestTransfer;
+use Generated\Shared\Transfer\SspAssetTransfer;
 use Spryker\Yves\Kernel\Controller\AbstractController;
 use Spryker\Yves\Kernel\PermissionAwareTrait;
 use Spryker\Yves\Kernel\View\View;
@@ -165,12 +168,7 @@ class AssetController extends AbstractController
             ));
         }
 
-        $canBusinessUnitBeUnassigned = false;
-        foreach ($sspAssetTransfer->getBusinessUnitAssignments() as $sspAssetBusinessUnitAssignmentTransfer) {
-            if ($sspAssetBusinessUnitAssignmentTransfer->getCompanyBusinessUnitOrFail()->getIdCompanyBusinessUnitOrFail() === $companyUserTransfer->getCompanyBusinessUnitOrFail()->getIdCompanyBusinessUnit()) {
-                $canBusinessUnitBeUnassigned = true;
-            }
-        }
+        $canBusinessUnitBeUnassigned = $this->findCurrentCompanyBusinessUnitAssignment($sspAssetTransfer, $companyUserTransfer) !== null;
 
         return $this->view(
             [
@@ -246,13 +244,7 @@ class AssetController extends AbstractController
                 ]);
             }
 
-            foreach ($sspAssetCollectionResponseTransfer->getErrors() as $error) {
-                $this->addErrorMessage($error->getMessageOrFail());
-            }
-
-            if (!$sspAssetCollectionResponseTransfer->getSspAssets()->count()) {
-                $this->addErrorMessage(static::GLOSSARY_KEY_ASSET_CREATE_ERROR);
-            }
+            $this->addAssetCollectionErrorMessages($sspAssetCollectionResponseTransfer, static::GLOSSARY_KEY_ASSET_CREATE_ERROR);
         }
 
         return $this->view(
@@ -299,14 +291,7 @@ class AssetController extends AbstractController
             throw new NotFoundHttpException('ssp_asset.error.not_found');
         }
 
-        if (
-            !in_array(
-                $sspAssetTransfer->getStatusOrFail(),
-                $this->getStatusesByAllowedAction(SelfServicePortalConfig::ASSET_ACTION_UPDATE),
-            )
-        ) {
-            throw new AccessDeniedHttpException('self_service_portal.asset.access.status.restricted');
-        }
+        $this->assertSspAssetStatusAllowsAction($sspAssetTransfer, SelfServicePortalConfig::ASSET_ACTION_UPDATE);
 
         $sspAssetUpdateForm = $this->getFactory()
             ->createAssetForm($sspAssetTransfer, $sspAssetFormDataProvider->getOptions($sspAssetTransfer))
@@ -318,34 +303,14 @@ class AssetController extends AbstractController
                 $sspAssetUpdateForm->getData(),
             );
 
-            $sspAssetCollectionResponseTransfer = $this->getClient()->updateSspAssetCollection(
-                (new SspAssetCollectionRequestTransfer())->setCompanyUser($companyUserTransfer)
-                    ->addSspAsset($sspAssetTransfer),
-            );
+            $redirectResponse = $this->updateSspAsset($sspAssetTransfer, $companyUserTransfer);
 
-            if (!$sspAssetCollectionResponseTransfer->getErrors()->count() && $sspAssetCollectionResponseTransfer->getSspAssets()->count()) {
-                $this->addSuccessMessage(static::GLOSSARY_KEY_ASSET_UPDATED);
-
-                return $this->redirectResponseInternal(SelfServicePortalPageRouteProviderPlugin::ROUTE_NAME_ASSET_DETAILS, [
-                    'reference' => $sspAssetCollectionResponseTransfer->getSspAssets()->getIterator()->current()->getReference(),
-                ]);
-            }
-
-            foreach ($sspAssetCollectionResponseTransfer->getErrors() as $error) {
-                $this->addErrorMessage($error->getMessageOrFail());
-            }
-
-            if (!$sspAssetCollectionResponseTransfer->getSspAssets()->count()) {
-                $this->addErrorMessage(static::GLOSSARY_KEY_ASSET_UPDATE_ERROR);
+            if ($redirectResponse !== null) {
+                return $redirectResponse;
             }
         }
 
-        $currentCompanyBusinessUnitAssigment = null;
-        foreach ($sspAssetTransfer->getBusinessUnitAssignments() as $sspBusinessUnitAssetAssignmentTransfer) {
-            if ($sspBusinessUnitAssetAssignmentTransfer->getCompanyBusinessUnitOrFail()->getIdCompanyBusinessUnitOrFail() === $companyUserTransfer->getCompanyBusinessUnitOrFail()->getIdCompanyBusinessUnit()) {
-                $currentCompanyBusinessUnitAssigment = $sspBusinessUnitAssetAssignmentTransfer;
-            }
-        }
+        $currentCompanyBusinessUnitAssigment = $this->findCurrentCompanyBusinessUnitAssignment($sspAssetTransfer, $companyUserTransfer);
 
         return $this->view(
             [
@@ -393,9 +358,7 @@ class AssetController extends AbstractController
                 throw new NotFoundHttpException('self_service_portal.asset.error.not_found');
             }
 
-            if (!in_array($sspAssetTransfer->getStatusOrFail(), $this->getStatusesByAllowedAction(SelfServicePortalConfig::ASSET_ACTION_UNASSIGN))) {
-                throw new AccessDeniedHttpException('self_service_portal.asset.access.status.restricted');
-            }
+            $this->assertSspAssetStatusAllowsAction($sspAssetTransfer, SelfServicePortalConfig::ASSET_ACTION_UNASSIGN);
 
             $businessUnitIdToUnassign = (int)$formData[SspAssetBusinessUnitRelationsForm::FIELD_BUSINESS_UNIT_ID];
 
@@ -486,6 +449,64 @@ class AssetController extends AbstractController
         }
 
         return $this->redirectResponseInternal(static::ROUTE_NAME_CART_ASYNC_VIEW);
+    }
+
+    protected function updateSspAsset(SspAssetTransfer $sspAssetTransfer, CompanyUserTransfer $companyUserTransfer): ?RedirectResponse
+    {
+        $sspAssetCollectionResponseTransfer = $this->getClient()->updateSspAssetCollection(
+            (new SspAssetCollectionRequestTransfer())->setCompanyUser($companyUserTransfer)
+                ->addSspAsset($sspAssetTransfer),
+        );
+
+        if (!$sspAssetCollectionResponseTransfer->getErrors()->count() && $sspAssetCollectionResponseTransfer->getSspAssets()->count()) {
+            $this->addSuccessMessage(static::GLOSSARY_KEY_ASSET_UPDATED);
+
+            return $this->redirectResponseInternal(SelfServicePortalPageRouteProviderPlugin::ROUTE_NAME_ASSET_DETAILS, [
+                'reference' => $sspAssetCollectionResponseTransfer->getSspAssets()->getIterator()->current()->getReference(),
+            ]);
+        }
+
+        $this->addAssetCollectionErrorMessages($sspAssetCollectionResponseTransfer, static::GLOSSARY_KEY_ASSET_UPDATE_ERROR);
+
+        return null;
+    }
+
+    protected function addAssetCollectionErrorMessages(
+        SspAssetCollectionResponseTransfer $sspAssetCollectionResponseTransfer,
+        string $emptyCollectionGlossaryKey
+    ): void {
+        foreach ($sspAssetCollectionResponseTransfer->getErrors() as $error) {
+            $this->addErrorMessage($error->getMessageOrFail());
+        }
+
+        if (!$sspAssetCollectionResponseTransfer->getSspAssets()->count()) {
+            $this->addErrorMessage($emptyCollectionGlossaryKey);
+        }
+    }
+
+    protected function findCurrentCompanyBusinessUnitAssignment(
+        SspAssetTransfer $sspAssetTransfer,
+        CompanyUserTransfer $companyUserTransfer
+    ): ?SspAssetBusinessUnitAssignmentTransfer {
+        $currentCompanyBusinessUnitAssigment = null;
+
+        foreach ($sspAssetTransfer->getBusinessUnitAssignments() as $sspBusinessUnitAssetAssignmentTransfer) {
+            if ($sspBusinessUnitAssetAssignmentTransfer->getCompanyBusinessUnitOrFail()->getIdCompanyBusinessUnitOrFail() === $companyUserTransfer->getCompanyBusinessUnitOrFail()->getIdCompanyBusinessUnit()) {
+                $currentCompanyBusinessUnitAssigment = $sspBusinessUnitAssetAssignmentTransfer;
+            }
+        }
+
+        return $currentCompanyBusinessUnitAssigment;
+    }
+
+    /**
+     * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
+     */
+    protected function assertSspAssetStatusAllowsAction(SspAssetTransfer $sspAssetTransfer, string $allowedAction): void
+    {
+        if (!in_array($sspAssetTransfer->getStatusOrFail(), $this->getStatusesByAllowedAction($allowedAction))) {
+            throw new AccessDeniedHttpException('self_service_portal.asset.access.status.restricted');
+        }
     }
 
     /**

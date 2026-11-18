@@ -20,6 +20,9 @@ use SprykerFeature\Zed\SelfServicePortal\Business\Service\Exception\SspModelImag
 
 /**
  * @method \SprykerFeature\Shared\SelfServicePortal\SelfServicePortalConfig getSharedConfig()
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ * @SuppressWarnings(PHPMD.ExcessiveClassLength)
  */
 class SelfServicePortalConfig extends AbstractBundleConfig
 {

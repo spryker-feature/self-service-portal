@@ -72,6 +72,13 @@ class SspInquiriesStorefrontProcessor extends AbstractStorefrontProcessor
 
     protected function validateInquiryCreateRequest(SspInquiriesStorefrontResource $data, string $locale): void
     {
+        $this->validateRequiredFields($data, $locale);
+        $this->validateSspAssetReference($data, $locale);
+        $this->validateOrderReference($data, $locale);
+    }
+
+    protected function validateRequiredFields(SspInquiriesStorefrontResource $data, string $locale): void
+    {
         if (!$data->type) {
             throw $this->exceptionFactory->createInquiryTypeRequiredException($locale);
         }
@@ -83,20 +90,30 @@ class SspInquiriesStorefrontProcessor extends AbstractStorefrontProcessor
         if (!$data->description) {
             throw $this->exceptionFactory->createInquiryDescriptionRequiredException($locale);
         }
+    }
 
-        if ($data->type === $this->selfServicePortalConfig->getSspAssetInquiryType() && !$data->sspAssetReference) {
+    protected function validateSspAssetReference(SspInquiriesStorefrontResource $data, string $locale): void
+    {
+        $isSspAssetInquiryType = $data->type === $this->selfServicePortalConfig->getSspAssetInquiryType();
+
+        if ($isSspAssetInquiryType && !$data->sspAssetReference) {
             throw $this->exceptionFactory->createSspAssetReferenceRequiredException($locale);
         }
 
-        if ($data->type !== $this->selfServicePortalConfig->getSspAssetInquiryType() && $data->sspAssetReference) {
+        if (!$isSspAssetInquiryType && $data->sspAssetReference) {
             throw $this->exceptionFactory->createSspAssetReferenceNotAllowedException($locale);
         }
+    }
 
-        if ($data->type === $this->selfServicePortalConfig->getOrderInquiryType() && !$data->orderReference) {
+    protected function validateOrderReference(SspInquiriesStorefrontResource $data, string $locale): void
+    {
+        $isOrderInquiryType = $data->type === $this->selfServicePortalConfig->getOrderInquiryType();
+
+        if ($isOrderInquiryType && !$data->orderReference) {
             throw $this->exceptionFactory->createOrderReferenceRequiredException($locale);
         }
 
-        if ($data->type !== $this->selfServicePortalConfig->getOrderInquiryType() && $data->orderReference) {
+        if (!$isOrderInquiryType && $data->orderReference) {
             throw $this->exceptionFactory->createOrderReferenceNotAllowedException($locale);
         }
     }

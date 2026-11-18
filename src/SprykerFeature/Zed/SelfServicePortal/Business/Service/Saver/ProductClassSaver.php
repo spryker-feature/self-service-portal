@@ -99,6 +99,15 @@ class ProductClassSaver implements ProductClassSaverInterface
             $productClassIdsIndexedByKey[$resolvedProductClassTransfer->getKeyOrFail()] = $resolvedProductClassTransfer->getIdProductClassOrFail();
         }
 
+        $this->assignResolvedProductClassIds($productClassTransfers, $productClassIdsIndexedByKey);
+    }
+
+    /**
+     * @param \ArrayObject<int, \Generated\Shared\Transfer\ProductClassTransfer> $productClassTransfers
+     * @param array<string, int> $productClassIdsIndexedByKey
+     */
+    protected function assignResolvedProductClassIds(ArrayObject $productClassTransfers, array $productClassIdsIndexedByKey): void
+    {
         foreach ($productClassTransfers as $productClassTransfer) {
             if ($productClassTransfer->getIdProductClass() !== null) {
                 continue;

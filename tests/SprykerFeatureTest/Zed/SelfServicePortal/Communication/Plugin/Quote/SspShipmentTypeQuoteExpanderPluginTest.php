@@ -16,6 +16,7 @@ use Generated\Shared\Transfer\ShipmentTypeTransfer;
 use Generated\Shared\Transfer\StoreTransfer;
 use Spryker\Zed\ProductOfferShipmentType\Business\ProductOfferShipmentTypeFacadeInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\SelfServicePortalBusinessFactory;
+use SprykerFeature\Zed\SelfServicePortal\Business\Service\Expander\DefaultShipmentTypeItemExpander;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Expander\ShipmentTypeItemExpander;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Reader\ShipmentTypeReaderInterface;
 use SprykerFeature\Zed\SelfServicePortal\Communication\Plugin\Quote\SspShipmentTypeQuoteExpanderPlugin;
@@ -71,8 +72,7 @@ class SspShipmentTypeQuoteExpanderPluginTest extends Unit
 
         $shipmentTypeItemExpander = new ShipmentTypeItemExpander(
             $shipmentTypeReaderMock,
-            $repository,
-            $productOfferShipmentTypeFacade,
+            new DefaultShipmentTypeItemExpander($repository, $productOfferShipmentTypeFacade),
         );
 
         $businessFactoryMock = $this->getMockBuilder(SelfServicePortalBusinessFactory::class)
@@ -118,8 +118,7 @@ class SspShipmentTypeQuoteExpanderPluginTest extends Unit
 
         $shipmentTypeItemExpander = new ShipmentTypeItemExpander(
             $shipmentTypeReaderMock,
-            $repository,
-            $productOfferShipmentTypeFacade,
+            new DefaultShipmentTypeItemExpander($repository, $productOfferShipmentTypeFacade),
         );
 
         $businessFactoryMock = $this->getMockBuilder(SelfServicePortalBusinessFactory::class)
@@ -152,8 +151,7 @@ class SspShipmentTypeQuoteExpanderPluginTest extends Unit
 
         $shipmentTypeItemExpander = new ShipmentTypeItemExpander(
             $shipmentTypeReaderMock,
-            $repository,
-            $productOfferShipmentTypeFacade,
+            new DefaultShipmentTypeItemExpander($repository, $productOfferShipmentTypeFacade),
         );
 
         $businessFactoryMock = $this->getMockBuilder(SelfServicePortalBusinessFactory::class)
@@ -201,8 +199,7 @@ class SspShipmentTypeQuoteExpanderPluginTest extends Unit
 
         $shipmentTypeItemExpander = new ShipmentTypeItemExpander(
             $shipmentTypeReaderMock,
-            $repository,
-            $productOfferShipmentTypeFacade,
+            new DefaultShipmentTypeItemExpander($repository, $productOfferShipmentTypeFacade),
         );
 
         $businessFactoryMock = $this->getMockBuilder(SelfServicePortalBusinessFactory::class)
@@ -235,8 +232,7 @@ class SspShipmentTypeQuoteExpanderPluginTest extends Unit
 
         $shipmentTypeItemExpander = new ShipmentTypeItemExpander(
             $shipmentTypeReaderMock,
-            $repository,
-            $productOfferShipmentTypeFacade,
+            new DefaultShipmentTypeItemExpander($repository, $productOfferShipmentTypeFacade),
         );
 
         $businessFactoryMock = $this->getMockBuilder(SelfServicePortalBusinessFactory::class)

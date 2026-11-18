@@ -50,6 +50,8 @@ use SprykerFeature\Zed\SelfServicePortal\Business\SelfServicePortalFacadeInterfa
 
 /**
  * @method \SprykerFeature\Glue\SelfServicePortal\SelfServicePortalConfig getConfig()
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class SelfServicePortalFactory extends AbstractBackendApiFactory
 {

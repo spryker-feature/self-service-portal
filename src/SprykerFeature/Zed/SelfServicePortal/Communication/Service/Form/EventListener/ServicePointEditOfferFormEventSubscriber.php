@@ -45,25 +45,48 @@ class ServicePointEditOfferFormEventSubscriber implements EventSubscriberInterfa
             return;
         }
 
-        $serviceUuids = [];
-        $servicePointId = null;
-
-        foreach ($services as $serviceTransfer) {
-            if ($serviceTransfer->getUuid() !== null) {
-                $serviceUuids[] = $serviceTransfer->getUuid();
-            }
-
-            if ($servicePointId === null && $serviceTransfer->getServicePoint() !== null && $serviceTransfer->getServicePoint()->getIdServicePoint() !== null) {
-                $servicePointId = (string)$serviceTransfer->getServicePoint()->getIdServicePoint();
-            }
-        }
+        $servicePointId = $this->findServicePointId($services);
 
         if ($servicePointId !== null && $form->has(CreateOfferForm::FIELD_SERVICE_POINT)) {
             $form->get(CreateOfferForm::FIELD_SERVICE_POINT)->setData($servicePointId);
         }
         if ($form->has(CreateOfferForm::FIELD_SERVICE_POINT_SERVICES)) {
-            $form->get(CreateOfferForm::FIELD_SERVICE_POINT_SERVICES)->setData($serviceUuids);
+            $form->get(CreateOfferForm::FIELD_SERVICE_POINT_SERVICES)->setData($this->extractServiceUuids($services));
         }
+    }
+
+    /**
+     * @param \ArrayObject<int, \Generated\Shared\Transfer\ServiceTransfer> $services
+     *
+     * @return array<string>
+     */
+    protected function extractServiceUuids(ArrayObject $services): array
+    {
+        $serviceUuids = [];
+
+        foreach ($services as $serviceTransfer) {
+            if ($serviceTransfer->getUuid() !== null) {
+                $serviceUuids[] = $serviceTransfer->getUuid();
+            }
+        }
+
+        return $serviceUuids;
+    }
+
+    /**
+     * @param \ArrayObject<int, \Generated\Shared\Transfer\ServiceTransfer> $services
+     */
+    protected function findServicePointId(ArrayObject $services): ?string
+    {
+        foreach ($services as $serviceTransfer) {
+            $idServicePoint = $serviceTransfer->getServicePoint()?->getIdServicePoint();
+
+            if ($idServicePoint !== null) {
+                return (string)$idServicePoint;
+            }
+        }
+
+        return null;
     }
 
     public function expandProductOfferWithServices(FormEvent $event): void

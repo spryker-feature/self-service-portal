@@ -53,6 +53,9 @@ use Spryker\Zed\User\Business\UserFacadeInterface;
 
 /**
  * @method \SprykerFeature\Zed\SelfServicePortal\SelfServicePortalConfig getConfig()
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ * @SuppressWarnings(PHPMD.TooManyMethods)
  */
 class SelfServicePortalDependencyProvider extends AbstractBundleDependencyProvider
 {

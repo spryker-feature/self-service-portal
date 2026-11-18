@@ -38,6 +38,8 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
  * @method \SprykerFeature\Zed\SelfServicePortal\Business\SelfServicePortalBusinessFactory getFactory()
  * @method \SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalEntityManagerInterface getEntityManager()
  * @method \SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalRepositoryInterface getRepository()
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class SelfServicePortalFacade extends AbstractFacade implements SelfServicePortalFacadeInterface
 {

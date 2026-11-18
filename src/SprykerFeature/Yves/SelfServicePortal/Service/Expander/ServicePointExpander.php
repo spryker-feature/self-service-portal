@@ -8,6 +8,7 @@
 namespace SprykerFeature\Yves\SelfServicePortal\Service\Expander;
 
 use Generated\Shared\Transfer\ItemTransfer;
+use Generated\Shared\Transfer\ProductOfferStorageTransfer;
 use Generated\Shared\Transfer\ServicePointTransfer;
 use Spryker\Client\ProductOfferStorage\ProductOfferStorageClientInterface;
 
@@ -51,18 +52,27 @@ class ServicePointExpander implements ServicePointExpanderInterface
             return $itemTransfer;
         }
 
+        $servicePointTransfer = $this->findServicePointByUuid($productOfferStorageTransfer, $servicePointUuid);
+
+        if ($servicePointTransfer === null) {
+            return $itemTransfer;
+        }
+
+        return $itemTransfer->setServicePoint($servicePointTransfer);
+    }
+
+    protected function findServicePointByUuid(ProductOfferStorageTransfer $productOfferStorageTransfer, mixed $servicePointUuid): ?ServicePointTransfer
+    {
         foreach ($productOfferStorageTransfer->getServices() as $serviceStorageTransfer) {
             if (!$serviceStorageTransfer->getServicePoint()) {
                 continue;
             }
 
             if ($serviceStorageTransfer->getServicePoint()->getUuid() === $servicePointUuid) {
-                $servicePointTransfer = (new ServicePointTransfer())->fromArray($serviceStorageTransfer->getServicePoint()->toArray(), true);
-
-                return $itemTransfer->setServicePoint($servicePointTransfer);
+                return (new ServicePointTransfer())->fromArray($serviceStorageTransfer->getServicePoint()->toArray(), true);
             }
         }
 
-        return $itemTransfer;
+        return null;
     }
 }

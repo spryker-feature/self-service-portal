@@ -23,41 +23,69 @@ class SspRequestValidator implements SspRequestValidatorInterface
     ): SspInquiryCollectionResponseTransfer {
         $sspInquiryCollectionResponseTransfer = new SspInquiryCollectionResponseTransfer();
 
-        if (!$restSspInquiriesAttributesTransfer->getType()) {
-            return $sspInquiryCollectionResponseTransfer
-                ->addError((new ErrorTransfer())->setMessage(SelfServicePortalConfig::GLOSSARY_KEY_INQUIRY_TYPE_REQUIRED));
-        }
+        $errorMessage = $this->findValidationErrorMessage($restSspInquiriesAttributesTransfer);
 
-        if (!$restSspInquiriesAttributesTransfer->getSubject()) {
+        if ($errorMessage !== null) {
             return $sspInquiryCollectionResponseTransfer
-                ->addError((new ErrorTransfer())->setMessage(SelfServicePortalConfig::GLOSSARY_KEY_INQUIRY_SUBJECT_REQUIRED));
-        }
-
-        if (!$restSspInquiriesAttributesTransfer->getDescription()) {
-            return $sspInquiryCollectionResponseTransfer
-                ->addError((new ErrorTransfer())->setMessage(SelfServicePortalConfig::GLOSSARY_KEY_INQUIRY_DESCRIPTION_REQUIRED));
-        }
-
-        if ($restSspInquiriesAttributesTransfer->getType() === $this->selfServicePortalConfig->getSspAssetInquiryType() && !$restSspInquiriesAttributesTransfer->getSspAssetReference()) {
-            return $sspInquiryCollectionResponseTransfer
-                ->addError((new ErrorTransfer())->setMessage(SelfServicePortalConfig::GLOSSARY_KEY_INQUIRY_SSP_ASSET_REFERENCE_REQUIRED));
-        }
-
-        if ($restSspInquiriesAttributesTransfer->getType() !== $this->selfServicePortalConfig->getSspAssetInquiryType() && $restSspInquiriesAttributesTransfer->getSspAssetReference()) {
-            return $sspInquiryCollectionResponseTransfer
-                ->addError((new ErrorTransfer())->setMessage(SelfServicePortalConfig::GLOSSARY_KEY_INQUIRY_SSP_ASSET_REFERENCE_NOT_ALLOWED));
-        }
-
-        if ($restSspInquiriesAttributesTransfer->getType() === $this->selfServicePortalConfig->getOrderInquiryType() && !$restSspInquiriesAttributesTransfer->getOrderReference()) {
-            return $sspInquiryCollectionResponseTransfer
-                ->addError((new ErrorTransfer())->setMessage(SelfServicePortalConfig::GLOSSARY_KEY_INQUIRY_ORDER_REFERENCE_REQUIRED));
-        }
-
-        if ($restSspInquiriesAttributesTransfer->getType() !== $this->selfServicePortalConfig->getOrderInquiryType() && $restSspInquiriesAttributesTransfer->getOrderReference()) {
-            return $sspInquiryCollectionResponseTransfer
-                ->addError((new ErrorTransfer())->setMessage(SelfServicePortalConfig::GLOSSARY_KEY_INQUIRY_ORDER_REFERENCE_NOT_ALLOWED));
+                ->addError((new ErrorTransfer())->setMessage($errorMessage));
         }
 
         return $sspInquiryCollectionResponseTransfer;
+    }
+
+    protected function findValidationErrorMessage(RestSspInquiriesAttributesTransfer $restSspInquiriesAttributesTransfer): ?string
+    {
+        return $this->findRequiredFieldErrorMessage($restSspInquiriesAttributesTransfer)
+            ?? $this->findSspAssetReferenceErrorMessage($restSspInquiriesAttributesTransfer)
+            ?? $this->findOrderReferenceErrorMessage($restSspInquiriesAttributesTransfer);
+    }
+
+    protected function findRequiredFieldErrorMessage(RestSspInquiriesAttributesTransfer $restSspInquiriesAttributesTransfer): ?string
+    {
+        if (!$restSspInquiriesAttributesTransfer->getType()) {
+            return SelfServicePortalConfig::GLOSSARY_KEY_INQUIRY_TYPE_REQUIRED;
+        }
+
+        if (!$restSspInquiriesAttributesTransfer->getSubject()) {
+            return SelfServicePortalConfig::GLOSSARY_KEY_INQUIRY_SUBJECT_REQUIRED;
+        }
+
+        if (!$restSspInquiriesAttributesTransfer->getDescription()) {
+            return SelfServicePortalConfig::GLOSSARY_KEY_INQUIRY_DESCRIPTION_REQUIRED;
+        }
+
+        return null;
+    }
+
+    protected function findSspAssetReferenceErrorMessage(RestSspInquiriesAttributesTransfer $restSspInquiriesAttributesTransfer): ?string
+    {
+        $isSspAssetInquiryType = $restSspInquiriesAttributesTransfer->getType() === $this->selfServicePortalConfig->getSspAssetInquiryType();
+        $hasSspAssetReference = (bool)$restSspInquiriesAttributesTransfer->getSspAssetReference();
+
+        if ($isSspAssetInquiryType && !$hasSspAssetReference) {
+            return SelfServicePortalConfig::GLOSSARY_KEY_INQUIRY_SSP_ASSET_REFERENCE_REQUIRED;
+        }
+
+        if (!$isSspAssetInquiryType && $hasSspAssetReference) {
+            return SelfServicePortalConfig::GLOSSARY_KEY_INQUIRY_SSP_ASSET_REFERENCE_NOT_ALLOWED;
+        }
+
+        return null;
+    }
+
+    protected function findOrderReferenceErrorMessage(RestSspInquiriesAttributesTransfer $restSspInquiriesAttributesTransfer): ?string
+    {
+        $isOrderInquiryType = $restSspInquiriesAttributesTransfer->getType() === $this->selfServicePortalConfig->getOrderInquiryType();
+        $hasOrderReference = (bool)$restSspInquiriesAttributesTransfer->getOrderReference();
+
+        if ($isOrderInquiryType && !$hasOrderReference) {
+            return SelfServicePortalConfig::GLOSSARY_KEY_INQUIRY_ORDER_REFERENCE_REQUIRED;
+        }
+
+        if (!$isOrderInquiryType && $hasOrderReference) {
+            return SelfServicePortalConfig::GLOSSARY_KEY_INQUIRY_ORDER_REFERENCE_NOT_ALLOWED;
+        }
+
+        return null;
     }
 }

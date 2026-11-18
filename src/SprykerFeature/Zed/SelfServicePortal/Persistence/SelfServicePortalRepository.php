@@ -14,8 +14,10 @@ use Generated\Shared\Transfer\FilterTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaginationTransfer;
 use Generated\Shared\Transfer\ProductClassCollectionTransfer;
+use Generated\Shared\Transfer\ProductClassConditionsTransfer;
 use Generated\Shared\Transfer\ProductClassCriteriaTransfer;
 use Generated\Shared\Transfer\SspAssetCollectionTransfer;
+use Generated\Shared\Transfer\SspAssetConditionsTransfer;
 use Generated\Shared\Transfer\SspAssetCriteriaTransfer;
 use Generated\Shared\Transfer\SspAssetTransfer;
 use Generated\Shared\Transfer\SspInquiryCollectionTransfer;
@@ -36,9 +38,9 @@ use Orm\Zed\Sales\Persistence\Map\SpySalesOrderTableMap;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 use Orm\Zed\SelfServicePortal\Persistence\Map\SpyProductShipmentTypeTableMap;
 use Orm\Zed\SelfServicePortal\Persistence\Map\SpySspAssetTableMap;
-use Orm\Zed\SelfServicePortal\Persistence\Map\SpySspInquirySspAssetTableMap;
 use Orm\Zed\SelfServicePortal\Persistence\Map\SpySspInquiryTableMap;
 use Orm\Zed\SelfServicePortal\Persistence\Map\SpySspModelToProductListTableMap;
+use Orm\Zed\SelfServicePortal\Persistence\SpyProductToProductClassQuery;
 use Orm\Zed\SelfServicePortal\Persistence\SpySspAssetQuery;
 use Orm\Zed\SelfServicePortal\Persistence\SpySspInquiryQuery;
 use Orm\Zed\SelfServicePortal\Persistence\SpySspModelQuery;
@@ -51,6 +53,9 @@ use Spryker\Zed\Synchronization\Persistence\Propel\Formatter\SynchronizationData
 
 /**
  * @method \SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalPersistenceFactory getFactory()
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class SelfServicePortalRepository extends AbstractRepository implements SelfServicePortalRepositoryInterface
 {
@@ -191,52 +196,21 @@ class SelfServicePortalRepository extends AbstractRepository implements SelfServ
                 ->mapProductClassEntitiesToProductClassCollectionTransfer($productClassEntities, $productClassCollectionTransfer);
         }
 
-        $productClassConditions = $productClassCriteriaTransfer->getProductClassConditions();
-        $keys = $productClassConditions->getKeys();
-        $productClassIds = $productClassConditions->getProductClassIds();
-        $skus = $productClassConditions->getSkus();
-        $productAbstractIds = $productClassConditions->getProductAbstractIds();
-        $productConcreteIds = $productClassConditions->getProductConcreteIds();
+        $productClassConditions = $productClassCriteriaTransfer->getProductClassConditionsOrFail();
 
-        if ($keys || $productClassIds) {
-            if (!$skus && !$productAbstractIds && !$productConcreteIds) {
-                return $this->getProductClassCollectionByDirectConditions($keys, $productClassIds, $productClassCollectionTransfer);
+        if (!$this->hasProductConditions($productClassConditions)) {
+            if ($productClassConditions->getKeys() || $productClassConditions->getProductClassIds()) {
+                return $this->getProductClassCollectionByDirectConditions(
+                    $productClassConditions->getKeys(),
+                    $productClassConditions->getProductClassIds(),
+                    $productClassCollectionTransfer,
+                );
             }
-        }
 
-        if (!$skus && !$productAbstractIds && !$productConcreteIds) {
             return $productClassCollectionTransfer;
         }
 
-        $productToProductClassQuery = $this->getFactory()
-            ->createProductToProductClassQuery()
-            ->joinWithProductClass();
-
-        $productQuery = $productToProductClassQuery->useProductQuery();
-
-        if ($skus) {
-            $productQuery->filterBySku_In($skus);
-        }
-
-        if ($productAbstractIds) {
-            $productQuery->filterByFkProductAbstract_In($productAbstractIds);
-        }
-
-        if ($productConcreteIds) {
-            $productQuery->filterByIdProduct_In($productConcreteIds);
-        }
-
-        $productQuery->endUse();
-
-        if ($keys) {
-            $productToProductClassQuery->useProductClassQuery()
-                ->filterByKey_In($keys)
-            ->endUse();
-        }
-
-        if ($productClassIds) {
-            $productToProductClassQuery->filterByFkProductClass_In($productClassIds);
-        }
+        $productToProductClassQuery = $this->createProductToProductClassQueryByConditions($productClassConditions);
 
         $productToProductClassEntities = $productToProductClassQuery->find();
 
@@ -250,6 +224,49 @@ class SelfServicePortalRepository extends AbstractRepository implements SelfServ
                 $productToProductClassEntities->getArrayCopy(),
                 $productClassCollectionTransfer,
             );
+    }
+
+    protected function hasProductConditions(ProductClassConditionsTransfer $productClassConditions): bool
+    {
+        return $productClassConditions->getSkus() !== []
+            || $productClassConditions->getProductAbstractIds() !== []
+            || $productClassConditions->getProductConcreteIds() !== [];
+    }
+
+    protected function createProductToProductClassQueryByConditions(
+        ProductClassConditionsTransfer $productClassConditions
+    ): SpyProductToProductClassQuery {
+        $productToProductClassQuery = $this->getFactory()
+            ->createProductToProductClassQuery()
+            ->joinWithProductClass();
+
+        $productQuery = $productToProductClassQuery->useProductQuery();
+
+        if ($productClassConditions->getSkus()) {
+            $productQuery->filterBySku_In($productClassConditions->getSkus());
+        }
+
+        if ($productClassConditions->getProductAbstractIds()) {
+            $productQuery->filterByFkProductAbstract_In($productClassConditions->getProductAbstractIds());
+        }
+
+        if ($productClassConditions->getProductConcreteIds()) {
+            $productQuery->filterByIdProduct_In($productClassConditions->getProductConcreteIds());
+        }
+
+        $productQuery->endUse();
+
+        if ($productClassConditions->getKeys()) {
+            $productToProductClassQuery->useProductClassQuery()
+                ->filterByKey_In($productClassConditions->getKeys())
+            ->endUse();
+        }
+
+        if ($productClassConditions->getProductClassIds()) {
+            $productToProductClassQuery->filterByFkProductClass_In($productClassConditions->getProductClassIds());
+        }
+
+        return $productToProductClassQuery;
     }
 
     /**
@@ -310,65 +327,7 @@ class SelfServicePortalRepository extends AbstractRepository implements SelfServ
 
     protected function applySspServiceFilters(SpySalesOrderItemQuery $query, SspServiceCriteriaTransfer $sspServiceCriteriaTransfer): SpySalesOrderItemQuery
     {
-        if (!$sspServiceCriteriaTransfer->getServiceConditions()) {
-            return $query;
-        }
-
-        $serviceConditionsTransfer = $sspServiceCriteriaTransfer->getServiceConditionsOrFail();
-
-        $productClassNameToFilter = $serviceConditionsTransfer->getProductClass() ?: $this->getFactory()->getConfig()->getServiceProductClassName();
-
-        if ($productClassNameToFilter) {
-            $query->useSpySalesOrderItemProductClassQuery()
-                ->useSpySalesProductClassQuery()
-                    ->filterByName($productClassNameToFilter)
-                ->endUse()
-            ->endUse();
-        }
-
-        if ($serviceConditionsTransfer->getServicesSearchCondition()) {
-            $servicesSearchCondition = $serviceConditionsTransfer->getServicesSearchCondition();
-
-            if ($servicesSearchCondition->getProductName()) {
-                $query->filterByName_Like(sprintf('%%%s%%', $servicesSearchCondition->getProductName()));
-            }
-
-            if ($servicesSearchCondition->getSku()) {
-                $query->filterBySku_Like(sprintf('%%%s%%', $servicesSearchCondition->getSku()));
-            }
-
-            if ($servicesSearchCondition->getOrderReference()) {
-                $query->useOrderQuery()
-                        ->filterByOrderReference_Like(sprintf('%%%s%%', $servicesSearchCondition->getOrderReference()))
-                    ->endUse();
-            }
-        }
-
-        if ($serviceConditionsTransfer->getCompanyBusinessUnitUuid()) {
-            $query->useOrderQuery()
-                ->filterByCompanyBusinessUnitUuid($serviceConditionsTransfer->getCompanyBusinessUnitUuid())
-                ->endUse();
-        }
-
-        if ($serviceConditionsTransfer->getCompanyUuid()) {
-            $query->useOrderQuery()
-                ->filterByCompanyUuid($serviceConditionsTransfer->getCompanyUuid())
-                ->endUse();
-        }
-
-        if ($serviceConditionsTransfer->getCustomerReference()) {
-            $query->useOrderQuery()
-                ->filterByCustomerReference($serviceConditionsTransfer->getCustomerReference())
-                ->endUse();
-        }
-
-        if ($serviceConditionsTransfer->getSspAssetReferences() !== []) {
-            $query->useSalesOrderItemSspAssetQuery()
-                ->filterByReference_In($serviceConditionsTransfer->getSspAssetReferences())
-                ->endUse();
-        }
-
-        return $query;
+        return $this->getFactory()->createSspServiceQueryBuilder()->applyFilters($query, $sspServiceCriteriaTransfer);
     }
 
     protected function applySspServiceSorting(SpySalesOrderItemQuery $query, SspServiceCriteriaTransfer $sspServiceCriteriaTransfer): SpySalesOrderItemQuery
@@ -532,98 +491,12 @@ class SelfServicePortalRepository extends AbstractRepository implements SelfServ
             return $sspInquiryQuery;
         }
 
-        if ($sspInquiryConditions->getSspInquiryIds() !== []) {
-             $sspInquiryQuery->filterByIdSspInquiry_In($sspInquiryConditions->getSspInquiryIds());
-        }
-
-        if ($sspInquiryConditions->getReferences() !== []) {
-             $sspInquiryQuery->filterByReference_In($sspInquiryConditions->getReferences());
-        }
-
-        if ($sspInquiryConditions->getType() !== null) {
-             $sspInquiryQuery->filterByType($sspInquiryConditions->getType());
-        }
-
-        if ($sspInquiryConditions->getStatus() !== null) {
-             $sspInquiryQuery
-                ->useStateMachineItemStateQuery()
-                    ->filterByName($sspInquiryConditions->getStatus())
-                ->endUse();
-        }
-
-        $this->applySspInquiryOwnerFilter($sspInquiryQuery, $sspInquiryConditions);
-
-        if ($sspInquiryConditions->getCreatedDateFrom() !== null) {
-             $sspInquiryQuery->filterByCreatedAt($sspInquiryConditions->getCreatedDateFrom(), ModelCriteria::GREATER_EQUAL);
-        }
-
-        if ($sspInquiryConditions->getCreatedDateTo() !== null) {
-             $sspInquiryQuery->filterByCreatedAt($sspInquiryConditions->getCreatedDateTo(), ModelCriteria::LESS_EQUAL);
-        }
-
-        if ($sspInquiryConditions->getSspAssetIds() !== []) {
-             $sspInquiryQuery
-                 ->joinSpySspInquirySspAsset()
-                 ->withColumn(SpySspInquirySspAssetTableMap::COL_FK_SSP_ASSET, SspAssetTransfer::ID_SSP_ASSET)
-                 ->useSpySspInquirySspAssetExistsQuery()
-                     ->filterByFkSspAsset_In($sspInquiryConditions->getSspAssetIds())
-                 ->endUse();
-        }
-
-        if ($sspInquiryConditions->getSspAssetReferences() !== []) {
-            $sspInquiryQuery
-                ->useSpySspInquirySspAssetExistsQuery()
-                    ->useSpySspAssetQuery()
-                        ->filterByReference_In($sspInquiryConditions->getSspAssetReferences())
-                    ->endUse()
-                ->endUse();
-        }
-
-        if ($sspInquiryConditions->getSearchString()) {
-            $searchText = '%' . $sspInquiryConditions->getSearchStringOrFail() . '%';
-            $sspInquiryQuery
-                ->filterBySubject_Like($searchText)
-                    ->_or()
-                ->filterByReference_Like($searchText);
-        }
-
-        return $sspInquiryQuery;
+        return $this->getFactory()->createSspInquiryQueryBuilder()->applyConditions($sspInquiryQuery, $sspInquiryConditions);
     }
 
     public function applySspInquiryOwnerFilter(SpySspInquiryQuery $sspInquiryQuery, SspInquiryConditionsTransfer $sspInquiryConditions): SpySspInquiryQuery
     {
-         $sspInquiryOwnerConditionGroup = $sspInquiryConditions->getSspInquiryOwnerConditionGroup();
-
-        if ($sspInquiryOwnerConditionGroup) {
-            $hasOwnerCondition = false;
-            $companyUserQuery = $sspInquiryQuery->useSpyCompanyUserQuery();
-
-            if ($sspInquiryOwnerConditionGroup->getCompanyUser()?->getIdCompanyUser()) {
-                $hasOwnerCondition = true;
-                $companyUserQuery->filterByIdCompanyUser($sspInquiryOwnerConditionGroup->getCompanyUser()->getIdCompanyUser());
-            }
-
-            if ($sspInquiryOwnerConditionGroup->getIdCompany()) {
-                if ($hasOwnerCondition) {
-                    $companyUserQuery->_or();
-                }
-
-                $hasOwnerCondition = true;
-                $companyUserQuery->filterByFkCompany($sspInquiryOwnerConditionGroup->getIdCompany());
-            }
-
-            if ($sspInquiryOwnerConditionGroup->getIdCompanyBusinessUnit()) {
-                if ($hasOwnerCondition) {
-                    $companyUserQuery->_or();
-                }
-
-                $companyUserQuery->filterByFkCompanyBusinessUnit($sspInquiryOwnerConditionGroup->getIdCompanyBusinessUnitOrFail());
-            }
-
-            $companyUserQuery->endUse();
-        }
-
-        return $sspInquiryQuery;
+        return $this->getFactory()->createSspInquiryQueryBuilder()->applyOwnerFilter($sspInquiryQuery, $sspInquiryConditions);
     }
 
     /**
@@ -740,33 +613,8 @@ class SelfServicePortalRepository extends AbstractRepository implements SelfServ
             return $sspAssetQuery;
         }
 
-        if ($sspAssetConditionsTransfer->getSspAssetIds()) {
-            $sspAssetQuery->filterByIdSspAsset_In($sspAssetConditionsTransfer->getSspAssetIds());
-        }
-
-        if ($sspAssetConditionsTransfer->getReferences()) {
-            $sspAssetQuery->filterByReference_In($sspAssetConditionsTransfer->getReferences());
-        }
-
-        if ($sspAssetConditionsTransfer->getStatus()) {
-            $sspAssetQuery->filterByStatus($sspAssetConditionsTransfer->getStatus());
-        }
-
-        if ($sspAssetConditionsTransfer->getAssignedBusinessUnitId()) {
-            $sspAssetQuery
-                ->useSpySspAssetToCompanyBusinessUnitExistsQuery()
-                    ->filterByFkCompanyBusinessUnit($sspAssetConditionsTransfer->getAssignedBusinessUnitId())
-                ->endUse();
-        }
-
-        if ($sspAssetConditionsTransfer->getAssignedBusinessUnitCompanyId()) {
-            $sspAssetQuery
-                ->useSpySspAssetToCompanyBusinessUnitExistsQuery()
-                    ->useSpyCompanyBusinessUnitQuery()
-                        ->filterByFkCompany($sspAssetConditionsTransfer->getAssignedBusinessUnitCompanyId())
-                    ->endUse()
-                ->endUse();
-        }
+        $this->applyAssetIdentityFilters($sspAssetQuery, $sspAssetConditionsTransfer);
+        $this->applyAssetBusinessUnitFilters($sspAssetQuery, $sspAssetConditionsTransfer);
 
         if ($sspAssetConditionsTransfer->getStatuses() !== []) {
             $sspAssetQuery->filterByStatus_In($sspAssetConditionsTransfer->getStatuses());
@@ -786,6 +634,40 @@ class SelfServicePortalRepository extends AbstractRepository implements SelfServ
         }
 
         return $sspAssetQuery;
+    }
+
+    protected function applyAssetIdentityFilters(SpySspAssetQuery $sspAssetQuery, SspAssetConditionsTransfer $sspAssetConditionsTransfer): void
+    {
+        if ($sspAssetConditionsTransfer->getSspAssetIds()) {
+            $sspAssetQuery->filterByIdSspAsset_In($sspAssetConditionsTransfer->getSspAssetIds());
+        }
+
+        if ($sspAssetConditionsTransfer->getReferences()) {
+            $sspAssetQuery->filterByReference_In($sspAssetConditionsTransfer->getReferences());
+        }
+
+        if ($sspAssetConditionsTransfer->getStatus()) {
+            $sspAssetQuery->filterByStatus($sspAssetConditionsTransfer->getStatus());
+        }
+    }
+
+    protected function applyAssetBusinessUnitFilters(SpySspAssetQuery $sspAssetQuery, SspAssetConditionsTransfer $sspAssetConditionsTransfer): void
+    {
+        if ($sspAssetConditionsTransfer->getAssignedBusinessUnitId()) {
+            $sspAssetQuery
+                ->useSpySspAssetToCompanyBusinessUnitExistsQuery()
+                    ->filterByFkCompanyBusinessUnit($sspAssetConditionsTransfer->getAssignedBusinessUnitId())
+                ->endUse();
+        }
+
+        if ($sspAssetConditionsTransfer->getAssignedBusinessUnitCompanyId()) {
+            $sspAssetQuery
+                ->useSpySspAssetToCompanyBusinessUnitExistsQuery()
+                    ->useSpyCompanyBusinessUnitQuery()
+                        ->filterByFkCompany($sspAssetConditionsTransfer->getAssignedBusinessUnitCompanyId())
+                    ->endUse()
+                ->endUse();
+        }
     }
 
     protected function applyAssetSorting(

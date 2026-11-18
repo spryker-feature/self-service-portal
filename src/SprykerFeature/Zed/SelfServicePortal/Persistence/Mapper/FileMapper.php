@@ -36,54 +36,93 @@ class FileMapper
     ): FileAttachmentCollectionTransfer {
         /** @var \Orm\Zed\FileManager\Persistence\SpyFile $fileEntity */
         foreach ($fileEntities as $fileEntity) {
-            $fileTransfer = $this->mapFileEntityToFileTransfer($fileEntity);
-            $fileTransfer = $this->addFileInfoTransfers($fileEntity, $fileTransfer);
-
-            $fileAttachmentTransfer = (new FileAttachmentTransfer())->setFile($fileTransfer);
-
-            $fileAttachmentTransfer = $this->initEmptyCollections($fileAttachmentTransfer);
-
-            if ($fileEntity->hasVirtualColumn(FileAttachmentQueryBuilder::SSP_ASSET_IDS_COLUMN)) {
-                foreach ($this->extractRelationIds($fileEntity->getVirtualColumn(FileAttachmentQueryBuilder::SSP_ASSET_IDS_COLUMN)) as $sspAssetId) {
-                    $fileAttachmentTransfer->getSspAssetCollectionOrFail()->addSspAsset(
-                        (new SspAssetTransfer())->setIdSspAsset((int)$sspAssetId),
-                    );
-                }
-            }
-            if ($fileEntity->hasVirtualColumn(FileAttachmentQueryBuilder::COMPANY_USER_IDS_COLUMN)) {
-                foreach ($this->extractRelationIds($fileEntity->getVirtualColumn(FileAttachmentQueryBuilder::COMPANY_USER_IDS_COLUMN)) as $companyUserId) {
-                    $fileAttachmentTransfer->getCompanyUserCollectionOrFail()->addCompanyUser(
-                        (new CompanyUserTransfer())->setIdCompanyUser((int)$companyUserId),
-                    );
-                }
-            }
-            if ($fileEntity->hasVirtualColumn(FileAttachmentQueryBuilder::BUSINESS_UNIT_IDS_COLUMN)) {
-                foreach ($this->extractRelationIds($fileEntity->getVirtualColumn(FileAttachmentQueryBuilder::BUSINESS_UNIT_IDS_COLUMN)) as $businessUnitId) {
-                    $fileAttachmentTransfer->getBusinessUnitCollectionOrFail()->addCompanyBusinessUnit(
-                        (new CompanyBusinessUnitTransfer())->setIdCompanyBusinessUnit((int)$businessUnitId),
-                    );
-                }
-            }
-            if ($fileEntity->hasVirtualColumn(FileAttachmentQueryBuilder::COMPANY_IDS_COLUMN)) {
-                foreach ($this->extractRelationIds($fileEntity->getVirtualColumn(FileAttachmentQueryBuilder::COMPANY_IDS_COLUMN)) as $companyId) {
-                    $fileAttachmentTransfer->getCompanyCollectionOrFail()->addCompany(
-                        (new CompanyTransfer())->setIdCompany((int)$companyId),
-                    );
-                }
-            }
-
-            if ($fileEntity->hasVirtualColumn(FileAttachmentQueryBuilder::SSP_MODEL_IDS_COLUMN)) {
-                foreach ($this->extractRelationIds($fileEntity->getVirtualColumn(FileAttachmentQueryBuilder::SSP_MODEL_IDS_COLUMN)) as $modelId) {
-                    $fileAttachmentTransfer->getSspModelCollectionOrFail()->addSspModel(
-                        (new SspModelTransfer())->setIdSspModel((int)$modelId),
-                    );
-                }
-            }
-
-            $fileCollectionTransfer->addFileAttachment($fileAttachmentTransfer);
+            $fileCollectionTransfer->addFileAttachment($this->mapFileEntityToFileAttachmentTransfer($fileEntity));
         }
 
         return $fileCollectionTransfer;
+    }
+
+    protected function mapFileEntityToFileAttachmentTransfer(SpyFile $fileEntity): FileAttachmentTransfer
+    {
+        $fileTransfer = $this->mapFileEntityToFileTransfer($fileEntity);
+        $fileTransfer = $this->addFileInfoTransfers($fileEntity, $fileTransfer);
+
+        $fileAttachmentTransfer = (new FileAttachmentTransfer())->setFile($fileTransfer);
+
+        $fileAttachmentTransfer = $this->initEmptyCollections($fileAttachmentTransfer);
+
+        $this->addSspAssets($fileEntity, $fileAttachmentTransfer);
+        $this->addCompanyUsers($fileEntity, $fileAttachmentTransfer);
+        $this->addBusinessUnits($fileEntity, $fileAttachmentTransfer);
+        $this->addCompanies($fileEntity, $fileAttachmentTransfer);
+        $this->addSspModels($fileEntity, $fileAttachmentTransfer);
+
+        return $fileAttachmentTransfer;
+    }
+
+    protected function addSspAssets(SpyFile $fileEntity, FileAttachmentTransfer $fileAttachmentTransfer): void
+    {
+        if (!$fileEntity->hasVirtualColumn(FileAttachmentQueryBuilder::SSP_ASSET_IDS_COLUMN)) {
+            return;
+        }
+
+        foreach ($this->extractRelationIds($fileEntity->getVirtualColumn(FileAttachmentQueryBuilder::SSP_ASSET_IDS_COLUMN)) as $sspAssetId) {
+            $fileAttachmentTransfer->getSspAssetCollectionOrFail()->addSspAsset(
+                (new SspAssetTransfer())->setIdSspAsset((int)$sspAssetId),
+            );
+        }
+    }
+
+    protected function addCompanyUsers(SpyFile $fileEntity, FileAttachmentTransfer $fileAttachmentTransfer): void
+    {
+        if (!$fileEntity->hasVirtualColumn(FileAttachmentQueryBuilder::COMPANY_USER_IDS_COLUMN)) {
+            return;
+        }
+
+        foreach ($this->extractRelationIds($fileEntity->getVirtualColumn(FileAttachmentQueryBuilder::COMPANY_USER_IDS_COLUMN)) as $companyUserId) {
+            $fileAttachmentTransfer->getCompanyUserCollectionOrFail()->addCompanyUser(
+                (new CompanyUserTransfer())->setIdCompanyUser((int)$companyUserId),
+            );
+        }
+    }
+
+    protected function addBusinessUnits(SpyFile $fileEntity, FileAttachmentTransfer $fileAttachmentTransfer): void
+    {
+        if (!$fileEntity->hasVirtualColumn(FileAttachmentQueryBuilder::BUSINESS_UNIT_IDS_COLUMN)) {
+            return;
+        }
+
+        foreach ($this->extractRelationIds($fileEntity->getVirtualColumn(FileAttachmentQueryBuilder::BUSINESS_UNIT_IDS_COLUMN)) as $businessUnitId) {
+            $fileAttachmentTransfer->getBusinessUnitCollectionOrFail()->addCompanyBusinessUnit(
+                (new CompanyBusinessUnitTransfer())->setIdCompanyBusinessUnit((int)$businessUnitId),
+            );
+        }
+    }
+
+    protected function addCompanies(SpyFile $fileEntity, FileAttachmentTransfer $fileAttachmentTransfer): void
+    {
+        if (!$fileEntity->hasVirtualColumn(FileAttachmentQueryBuilder::COMPANY_IDS_COLUMN)) {
+            return;
+        }
+
+        foreach ($this->extractRelationIds($fileEntity->getVirtualColumn(FileAttachmentQueryBuilder::COMPANY_IDS_COLUMN)) as $companyId) {
+            $fileAttachmentTransfer->getCompanyCollectionOrFail()->addCompany(
+                (new CompanyTransfer())->setIdCompany((int)$companyId),
+            );
+        }
+    }
+
+    protected function addSspModels(SpyFile $fileEntity, FileAttachmentTransfer $fileAttachmentTransfer): void
+    {
+        if (!$fileEntity->hasVirtualColumn(FileAttachmentQueryBuilder::SSP_MODEL_IDS_COLUMN)) {
+            return;
+        }
+
+        foreach ($this->extractRelationIds($fileEntity->getVirtualColumn(FileAttachmentQueryBuilder::SSP_MODEL_IDS_COLUMN)) as $modelId) {
+            $fileAttachmentTransfer->getSspModelCollectionOrFail()->addSspModel(
+                (new SspModelTransfer())->setIdSspModel((int)$modelId),
+            );
+        }
     }
 
     protected function mapFileEntityToFileTransfer(SpyFile $fileEntity): FileTransfer

@@ -35,6 +35,9 @@ use SprykerFeature\Zed\SelfServicePortal\Communication\CompanyFile\Formatter\Tim
 use SprykerFeature\Zed\SelfServicePortal\Communication\Controller\FileAbstractController;
 use SprykerFeature\Zed\SelfServicePortal\SelfServicePortalConfig;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class ViewFileDetailTable extends AbstractTable
 {
     protected const string HEADER_BUSINESS_ENTITY_NAME = 'Business entity name';
@@ -414,27 +417,27 @@ class ViewFileDetailTable extends AbstractTable
         $modelFileParams = [];
         $unionParts = [];
 
-        if (!$fileAttachmentViewDetailTableCriteriaTransfer->getEntityType() || $fileAttachmentViewDetailTableCriteriaTransfer->getEntityType() === SelfServicePortalConfig::ENTITY_TYPE_COMPANY) {
+        if ($this->isEntityTypeRequested($fileAttachmentViewDetailTableCriteriaTransfer, SelfServicePortalConfig::ENTITY_TYPE_COMPANY)) {
             $companyFileQuery = $this->prepareCompanyFileQuery($fileAttachmentViewDetailTableCriteriaTransfer);
             $unionParts[] = $companyFileQuery->createSelectSql($companyFileParams);
         }
 
-        if (!$fileAttachmentViewDetailTableCriteriaTransfer->getEntityType() || $fileAttachmentViewDetailTableCriteriaTransfer->getEntityType() === SelfServicePortalConfig::ENTITY_TYPE_COMPANY_BUSINESS_UNIT) {
+        if ($this->isEntityTypeRequested($fileAttachmentViewDetailTableCriteriaTransfer, SelfServicePortalConfig::ENTITY_TYPE_COMPANY_BUSINESS_UNIT)) {
             $companyBusinessUnitFileQuery = $this->prepareCompanyBusinessUnitFileQuery($fileAttachmentViewDetailTableCriteriaTransfer);
             $unionParts[] = $companyBusinessUnitFileQuery->createSelectSql($companyBusinessUnitFileParams);
         }
 
-        if (!$fileAttachmentViewDetailTableCriteriaTransfer->getEntityType() || $fileAttachmentViewDetailTableCriteriaTransfer->getEntityType() === SelfServicePortalConfig::ENTITY_TYPE_COMPANY_USER) {
+        if ($this->isEntityTypeRequested($fileAttachmentViewDetailTableCriteriaTransfer, SelfServicePortalConfig::ENTITY_TYPE_COMPANY_USER)) {
             $companyUserFileQuery = $this->prepareCompanyUserFileQuery($fileAttachmentViewDetailTableCriteriaTransfer);
             $unionParts[] = $companyUserFileQuery->createSelectSql($companyUserFileParams);
         }
 
-        if (!$fileAttachmentViewDetailTableCriteriaTransfer->getEntityType() || $fileAttachmentViewDetailTableCriteriaTransfer->getEntityType() === SelfServicePortalConfig::ENTITY_TYPE_SSP_ASSET) {
+        if ($this->isEntityTypeRequested($fileAttachmentViewDetailTableCriteriaTransfer, SelfServicePortalConfig::ENTITY_TYPE_SSP_ASSET)) {
             $assetFileQuery = $this->prepareAssetFileQuery($fileAttachmentViewDetailTableCriteriaTransfer);
             $unionParts[] = $assetFileQuery->createSelectSql($assetFileParams);
         }
 
-        if (!$fileAttachmentViewDetailTableCriteriaTransfer->getEntityType() || $fileAttachmentViewDetailTableCriteriaTransfer->getEntityType() === SelfServicePortalConfig::ENTITY_TYPE_SSP_MODEL) {
+        if ($this->isEntityTypeRequested($fileAttachmentViewDetailTableCriteriaTransfer, SelfServicePortalConfig::ENTITY_TYPE_SSP_MODEL)) {
             $modelFileQuery = $this->prepareModelFileQuery($fileAttachmentViewDetailTableCriteriaTransfer);
             $unionParts[] = $modelFileQuery->createSelectSql($modelFileParams);
         }
@@ -458,6 +461,13 @@ class ViewFileDetailTable extends AbstractTable
         return [
             $unionSql, [$companyFileParams, $companyBusinessUnitFileParams, $companyUserFileParams, $assetFileParams, $modelFileParams],
         ];
+    }
+
+    protected function isEntityTypeRequested(
+        FileAttachmentViewDetailTableCriteriaTransfer $fileAttachmentViewDetailTableCriteriaTransfer,
+        string $entityType
+    ): bool {
+        return !$fileAttachmentViewDetailTableCriteriaTransfer->getEntityType() || $fileAttachmentViewDetailTableCriteriaTransfer->getEntityType() === $entityType;
     }
 
     protected function prepareRawQuery(

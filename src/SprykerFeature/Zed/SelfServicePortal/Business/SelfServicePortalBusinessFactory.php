@@ -156,6 +156,8 @@ use SprykerFeature\Zed\SelfServicePortal\Business\Service\DataImport\Step\Produc
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\DataImport\Step\ProductToProductClassSkuToIdProductStep;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\DataImport\Step\ProductToProductClassWriterStep;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\DataImport\Step\ShipmentTypeKeyToIdShipmentTypeStep;
+use SprykerFeature\Zed\SelfServicePortal\Business\Service\Expander\DefaultShipmentTypeItemExpander;
+use SprykerFeature\Zed\SelfServicePortal\Business\Service\Expander\DefaultShipmentTypeItemExpanderInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Expander\OrderItemCancellableExpander;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Expander\OrderItemCancellableExpanderInterface;
 use SprykerFeature\Zed\SelfServicePortal\Business\Service\Expander\OrderItemProductClassExpander;
@@ -237,6 +239,9 @@ use SprykerFeature\Zed\SelfServicePortal\SelfServicePortalDependencyProvider;
  * @method \SprykerFeature\Zed\SelfServicePortal\SelfServicePortalConfig getConfig()
  * @method \SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalEntityManagerInterface getEntityManager()
  * @method \SprykerFeature\Zed\SelfServicePortal\Persistence\SelfServicePortalRepositoryInterface getRepository()
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ * @SuppressWarnings(PHPMD.ExcessiveClassLength)
  */
 class SelfServicePortalBusinessFactory extends AbstractBusinessFactory
 {
@@ -425,6 +430,13 @@ class SelfServicePortalBusinessFactory extends AbstractBusinessFactory
     {
         return new ShipmentTypeItemExpander(
             $this->createShipmentTypeReader(),
+            $this->createDefaultShipmentTypeItemExpander(),
+        );
+    }
+
+    public function createDefaultShipmentTypeItemExpander(): DefaultShipmentTypeItemExpanderInterface
+    {
+        return new DefaultShipmentTypeItemExpander(
             $this->getRepository(),
             $this->getProductOfferShipmentTypeFacade(),
         );

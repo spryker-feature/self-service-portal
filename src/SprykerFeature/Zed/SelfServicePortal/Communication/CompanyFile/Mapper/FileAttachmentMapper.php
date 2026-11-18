@@ -9,8 +9,6 @@ namespace SprykerFeature\Zed\SelfServicePortal\Communication\CompanyFile\Mapper;
 
 use Generated\Shared\Transfer\CompanyBusinessUnitCollectionTransfer;
 use Generated\Shared\Transfer\CompanyBusinessUnitTransfer;
-use Generated\Shared\Transfer\CompanyCollectionTransfer;
-use Generated\Shared\Transfer\CompanyTransfer;
 use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\FileAttachmentCollectionRequestTransfer;
@@ -72,37 +70,6 @@ class FileAttachmentMapper implements FileAttachmentMapperInterface
                 if ($idCompanyBusinessUnit) {
                     $fileAttachmentToDelete->getBusinessUnitCollectionOrFail()->addCompanyBusinessUnit(
                         (new CompanyBusinessUnitTransfer())->setIdCompanyBusinessUnit((int)$idCompanyBusinessUnit),
-                    );
-                }
-            }
-        }
-    }
-
-    /**
-     * @param array<mixed> $formData
-     */
-    protected function setCompanyFileAttachments(
-        array $formData,
-        FileAttachmentTransfer $fileAttachmentToAdd,
-        FileAttachmentTransfer $fileAttachmentToDelete
-    ): void {
-        if (isset($formData[AttachFileForm::FIELD_COMPANY_IDS_TO_BE_ATTACHED]) && !empty($formData[AttachFileForm::FIELD_COMPANY_IDS_TO_BE_ATTACHED])) {
-            $fileAttachmentToAdd->setCompanyCollection(new CompanyCollectionTransfer());
-            foreach ($formData[AttachFileForm::FIELD_COMPANY_IDS_TO_BE_ATTACHED] as $idCompany) {
-                if ($idCompany) {
-                    $fileAttachmentToAdd->getCompanyCollectionOrFail()->addCompany(
-                        (new CompanyTransfer())->setIdCompany((int)$idCompany),
-                    );
-                }
-            }
-        }
-
-        if (isset($formData[AttachFileForm::FIELD_COMPANY_IDS_TO_BE_UNATTACHED]) && !empty($formData[AttachFileForm::FIELD_COMPANY_IDS_TO_BE_UNATTACHED])) {
-            $fileAttachmentToDelete->setCompanyCollection(new CompanyCollectionTransfer());
-            foreach ($formData[AttachFileForm::FIELD_COMPANY_IDS_TO_BE_UNATTACHED] as $idCompany) {
-                if ($idCompany) {
-                    $fileAttachmentToDelete->getCompanyCollectionOrFail()->addCompany(
-                        (new CompanyTransfer())->setIdCompany((int)$idCompany),
                     );
                 }
             }

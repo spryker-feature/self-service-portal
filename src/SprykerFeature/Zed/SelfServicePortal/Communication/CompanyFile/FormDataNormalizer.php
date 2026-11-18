@@ -144,24 +144,7 @@ class FormDataNormalizer implements FormDataNormalizerInterface
         }
 
         if (!is_array($value)) {
-            if (is_numeric($value) && $value > 0) {
-                return [(int)$value];
-            }
-
-            if (is_string($value) && static::DELIMITER_COMMA !== '' && strpos($value, static::DELIMITER_COMMA) !== false) {
-                $parts = explode(static::DELIMITER_COMMA, $value);
-                $result = [];
-                foreach ($parts as $part) {
-                    $trimmed = trim($part);
-                    if (is_numeric($trimmed) && $trimmed > 0) {
-                        $result[] = (int)$trimmed;
-                    }
-                }
-
-                return $result;
-            }
-
-            return [];
+            return $this->normalizeScalarFormFieldValue($value);
         }
 
         $flattened = [];
@@ -170,6 +153,42 @@ class FormDataNormalizer implements FormDataNormalizerInterface
         return array_map('intval', array_filter($flattened, function ($item) {
             return is_numeric($item) && $item > 0;
         }));
+    }
+
+    /**
+     * @param mixed $value
+     *
+     * @return array<int>
+     */
+    protected function normalizeScalarFormFieldValue($value): array
+    {
+        if (is_numeric($value) && $value > 0) {
+            return [(int)$value];
+        }
+
+        if (is_string($value) && static::DELIMITER_COMMA !== '' && strpos($value, static::DELIMITER_COMMA) !== false) {
+            return $this->normalizeCommaSeparatedIds($value);
+        }
+
+        return [];
+    }
+
+    /**
+     * @return array<int>
+     */
+    protected function normalizeCommaSeparatedIds(string $value): array
+    {
+        $result = [];
+
+        foreach (explode(static::DELIMITER_COMMA, $value) as $part) {
+            $trimmed = trim($part);
+
+            if (is_numeric($trimmed) && $trimmed > 0) {
+                $result[] = (int)$trimmed;
+            }
+        }
+
+        return $result;
     }
 
     /**
